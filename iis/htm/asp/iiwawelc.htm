@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>Active Server Pages</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="包含链接的导航页，这些链接指向那些讨论 ASP 脚本环境（包括 ASP 新特性信息、如何连接到数据库以及如何维护复杂应用程序的状态）的主题。"><META HTTP-EQUIV="Content-Type" content="text/html; charset=gb2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><FONT FACE="宋体">
+
+<h1><a name="H1_37780812">Active Server Pages</a></h1>
+</span></font>
+
+<p>Microsoft Active Server Pages (ASP) 是服务器端脚本环境，可用来创建交互式 Web 页并建立强大的 Web 应用程序。当服务器收到对 ASP 文件的请求时，它处理包含在用于构建发送给浏览器的 Web 页文件中的服务器端脚本。除服务器端脚本外，ASP 文件也可以包含 HTML（包括相关的客户端脚本）和 COM 组件调用，上面谈及的这些组件可执行不同任务，如连接到数据库或处理商业逻辑。</p>
+
+<p>本节中的主题介绍 Active Server Pages，解释 Active Server Pages 脚本的基本概念，并讨论更复杂的应用程序问题，如维护状态。</p>
+
+<p>本节包括：</p>
+
+<ul>
+<li><strong><a href="iiwaaspw.htm">理解 Active Server Pages</a>：</strong>介绍 ASP，讲述本版本的新特性，并包含一个交互式教程。</li>
+<li><strong><a href="iiwauslw.htm">建立 ASP 页</a>：</strong>提供编写脚本所需的基本信息，并介绍从基本语法到创建事务脚本的一系列主题。</li>
+</ul>
+
+<p>本节不包含下列信息：</p>
+
+<ul>
+<li>关于更多高级主题，如设计和建立 Web 应用程序，请参阅 <a href="eadg8qpj.htm">Web 应用程序：概述</a>。</li>
+<li>内建的 ASP 对象的参考页；请参阅 <a href="vbob6zkv.htm">ASP 内建的对象</a>。</li>
+<li>ASP 附带组件的参考页；请参阅<a href="comp275c.htm"> 可安装的 ASP 组件</a>。</li>
+
+<li>示例脚本；请参阅 <a href="asps6hmb.htm">ASP 示例</a>。</li>
+</ul>
+
+<hr class="iis" size="1">
+<p align="center"><a href="/iishelp/common/colegal.htm">&copy; 1997-1999 Microsoft Corporation。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

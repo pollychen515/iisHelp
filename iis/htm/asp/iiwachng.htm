@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr>
+<head>
+<title>ASP 中的重要变化</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="该主题说明 ASP 的当前和前一版本的重要区别，如默认设置和行为等的更改。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=gb2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+
+<body bgcolor="#FFFFFF" text="#000000"><FONT FACE="宋体">
+
+<h1><a name="whatschanged">ASP 中的重要变化</a></h1>
+</span></font>
+
+<P>ASP 进行了多处重要更改和增强。如果您升级了上一版本的 ASP 应用程序，将会注意到这些更改。</P>
+
+<p><strong>注意</strong> 要学习新的 ASP 功能，请参阅 <A HREF="iiwanew.htm">ASP 的新增功能</A>。</p>
+
+<UL>
+
+<LI><strong>缓冲功能现在默认为启用</STRONG> 在 IIS 4.0 中，内容缓冲默认为禁用。在 IIS 5.0 中，除非脚本指定禁用缓冲，否则始终缓冲输出。这意味着最终输出将在处理完成或脚本调用 Response.Flush 方法时发送到客户端。详细信息，请参阅<A HREF="iiwacont.htm#buffcnt">将内容发送到浏览器</A>主题的“缓冲内容”部分。</LI><BR><BR>
+
+
+<LI><strong>Response.IsClientConnected</strong>  在 IIS 4.0 中，Response.IsClientConnected 仅当 ASP 文件将内容发送到浏览器时返回正确信息。在 IIS 5.0 中，ASP 文件可以在将内容发送到浏览器之前使用 IsClientConnected 属性。详细信息，请参阅 <A HREF="vbob1d0k.htm"><STRONG>IsClientConnected</STRONG></A>。</LI><BR><BR>
+
+
+<LI><strong>改进的包含文件安全</strong> 在 IIS 4.0 中，当包含文件驻留在映射到物理路径的虚拟根目录下时,ASP 不使用物理路径的安全身份验证处理文件。在 IIS 5.0 中处理包含文件时，ASP 使用物理路径的身份验证。（详细信息，请参阅<A HREF="iiwainc.htm">包含文件</A>。）</LI><BR><BR>
+
+<LI><strong>默认文档查询字符串行为</strong> 在 IIS 4.0 中，如果 .asp（或 .cdx）文件配置为默认文档，则现在可以接收未指定默认文档的 URL 中接收查询字符串。例如，URL <CODE>http://www.microsoft.com/default.asp?newuser=true</CODE> 和 <CODE>http://www.microsoft.com/?newuser=true</CODE> 都将向默认 .asp 文件发送查询字符串值。</LI><BR><BR>
+
+
+<LI><strong>事务标志</strong> IIS 4.0 使用 required、requires new 和 not supported 事务标志标明 ASP 开始了新的事务。在 IIS 4.0 中，该行为是不可更改的。不过，如果 .asp 文件使用新的 Server.Execute 或 Server.Transfer 方法执行事务，则事务标志状态将只保持到第二个 .asp 文件。如果第二个 .asp 文件的事务标志标明事务是支持的或需要的，则将使用现有事务，新事务将无法启动。</LI><BR><BR>
+
+<LI><strong>双模型对象行为</strong>  不支持自由线程 Marshaller 的双模型 COM 对象如果以应用程序状态存储，那么它将失败。双模型组件必须将自由线程 Marshaller 聚合以应用程序状态存储。</LI><BR><BR>
+
+<LI><strong>移动到配置数据库中的可配置项目</strong>  以下 IIS 4.0 注册表项现在位于配置数据库中：</LI>
+<UL>
+	<LI>ProcessorThreadMax</li>
+	<LI>ErrorsToNTLog</li>
+</UL>
+
+<P>对于 IIS 5.0，所有 ASP 的可配置参数都可通过配置数据库加以修改。详细信息，请参阅<A HREF="../core/iimbsovr.htm">关于配置数据库</A>。</P>
+
+<LI><strong>本地服务器 COM 对象的安全</strong>  IIS 使用称为“伪装”的 Windows COM 的新功能，使得由 .asp 文件实例化的本地服务器应用程序具有初始客户端的安全环境。在上一版本中，分配到本地服务器 COM 对象的标识由创建对象实例用户标识所决定。</LI><BR><BR>
+
+
+
+<LI><strong>提前释放的对象</strong>  在 IIS 4.0 中，COM 对象只在 ASP 结束页面处理之后进行释放。在 IIS 5.0 中，如果 COM 对象不使用 OnEndPage 方法，并且对象的引用计数为 0，那么对象将在处理完成之前释放。</LI><BR><BR>
+
+</UL><BR><BR>
+
+<hr class="iis" size="1">
+<p align="center"><a href="/iishelp/common/colegal.htm">&copy; 1997-1999 Microsoft Corporation。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

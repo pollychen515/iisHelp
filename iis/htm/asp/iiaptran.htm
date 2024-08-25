@@ -1,0 +1,205 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>理解事务</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="解释如何在事务中运行脚本，以便脚本出错时能够中止整个事务。"><META HTTP-EQUIV="Content-Type" content="text/html; charset=gb2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+
+<body bgcolor="#FFFFFF" text="#000000"><FONT FACE="宋体">
+
+<h1><a name="H1_37683987">理解事务</a></h1>
+</span></font>
+
+<p>商业应用程序经常需要在事务中运行脚本和组件。“事务”是一种服务器操作，它要么全部成功，要么全部失败，即使该操作包含许多步骤（例如订购、检查存货以及付帐等）也是如此。可以创建在事务内运行的服务器端脚本，如果脚本出错则整个事务将中止。</p>
+
+<p>ASP 事务进程基于“组件服务”事务环境，这是一种事务处理系统，用来开发、部署和管理高性能、可扩展、有活力的企业、Internet 和 intranet 服务器应用程序。该事务环境为开发基于组件的分布式应用程序定义应用程序编程模型。它还为部署和管理这些应用程序提供实时环境。</p>
+
+<p>创建事务脚本所需的功能将嵌入 Web 服务器。如果安装了“组件服务”，也可以将组件打包以便在事务中运行。</p>
+
+<h2><a name="H2_37685449">关于事务</a></h2>
+
+<p>“事务”是只能有成功或失败两种状态的整体操作。事务进程用于保证数据库更新的可靠性。当对数据库进行许多关联更改或同时更新多个数据库时，需要确保所有更改都准确执行。如果任何更改失败，则需要恢复到数据库表的原始状态。</p>
+
+<p>如果没有“组件服务”，必须编写脚本和组件以便手工跟踪请求的更改，如果任何更改失败，还要手工恢复数据。有了“组件服务”，只需声明脚本和组件即可要求事务并让“组件服务”处理事务间的协调。事务进程只适用于数据库访问，“组件服务”无法还原对文件系统或其他非事务资源的更改。应用程序所访问的数据库必须由“组件服务”支持。目前“组件服务”支持 SQL Server 和任何支持 X/Open 联盟 XA 协议的数据库。“组件服务”将在未来继续扩展对其他数据库的支持。</p>
+
+<p>通过使用 <A HREF="vbob9waa.htm"><STRONG>Server.Transfer</STRONG></A> 和 <A HREF="vbob9pid.htm"><STRONG>Server.Execute</STRONG></A> 方法，事务可以扩展到多个 ASP 页。如果脚本包含值为“Required”的 @TRANSACTION 命令，并且“Server.Transfer”或“Server.Execute”方法调用该脚本，则脚本将继续运行调用 .asp 文件的事务（如果调用 .asp 文件已被处理）。如果调用 .asp 文件未被处理，则被调用的 .asp 文件将自动创建新事务。</P>
+
+<P>例如，下面的脚本将初始化事务：</P>
+
+<pre>&lt;%@ TRANSACTION=Required %&gt;
+
+&lt;%
+  .
+  .
+  .
+'结束事务。
+Server.Transfer("/BookSales/EndTrans.asp")
+%&gt;</pre>
+
+<P>下面的脚本将调用也可用来初始化事务的其他脚本：</P>
+
+<pre>&lt;%@ TRANSACTION=Required%&gt;
+
+&lt;%
+'实例化自定义组件以关闭事务。
+Set objSale = Server.CreateObject("SalesTransacted.Complete")
+  .
+  .
+  .
+%&gt;
+</pre>
+
+<P>不过，两个脚本的交互只能形成一个单一事务。关于编写带有“Server.Transfer”和“Server.Execute”的脚本的信息，请参阅<A HREF="iiwacont.htm">将内容发送到浏览器</A>。</P>
+
+
+<h2><a name="H2_37686692">声明事务脚本</a></h2>
+
+<p>如果声明一个事务页，则该页中使用的任何脚本命令和对象都将在相同事务环境下运行。这些细节由“组件服务”处理，包括创建事务和确定事务成功（提交）或失败（中止）。要声明事务页，在页面顶部添加 <A HREF="dire5t0u.htm">&#64;TRANSACTION</A> 命令即可：</p>
+
+<pre>&lt;%@ TRANSACTION = <em>value</em> %&gt;</pre>
+
+<p>关于“value”变量的详细信息，请参阅 <A HREF="dire5t0u.htm">&#64;TRANSACTION</A> 指令参考。</p>
+
+<p>&#64;TRANSACTION 命令必须位于页中的第一行，否则会产生错误。必须为要在事务中运行的所有页添加命令。脚本处理完成后将结束当前事务。</p>
+
+<p>多数应用程序只对特定操作要求事务环境。例如，航空公司站点可以使用事务脚本来售票和分配座位。所有其他脚本都可以在没有事务环境的情况下安全运行。因为事务只适用于需要事务进程的页，所以不可将应用程序的 Global.asa 文件声明为事务。</p>
+
+<p>如果事务中止，“组件服务”将恢复对支持事务的资源所做的任何更改。目前只有数据库服务器完全支持事务，这是因为这些数据对企业应用来说是最重要的。“组件服务”无法恢复对硬盘文件、ASP 会话和应用程序变量或集合所做的更改。不过，可以编写脚本来恢复变量和集合，只需按本主题后面的说明编写事务事件即可。如果操作（如向文件写入数据）失败，脚本也可以显式提交或中止事务。</p>
+
+<h2><a name="H2_37689450">提交或中止脚本</a></h2>
+
+<p>因为“组件服务”跟踪事务进程，所以它将决定事务是成功还是失败。脚本可以显式声明它通过调用“ObjectContext.SetAbort”中止了事务。例如，脚本可能在下列情况下中止事务：脚本收到来自组件的错误、商业原则遭到破坏（例如，帐目余额降为负值）或者非事务操作（如读写文件）失败。如果事务完成前网页超时，则事务也将中止。</p>
+
+<h2><a name="H2_37690014">编写事务事件</a></h2>
+
+<p>脚本本身无法确定事务是成功还是失败。不过，可以编写在事务提交或中止时可供调用的事件。例如，假设有一个贷记银行帐户的脚本，需要根据事务状态向用户返回不同的页面。可以使用“OnTransactionCommit”和“OnTransactionAbort”事件来为用户写入不同的响应。</p>
+
+<pre>&lt;%@ TRANSACTION=Required %&gt;
+
+&lt;%
+'缓存输出以便显示不同的页。
+Response.Buffer = True
+%&gt;
+
+&lt;HTML&gt;
+&lt;BODY&gt;
+&lt;H1&gt;欢迎使用联机银行服务&lt;/H1&gt;
+
+
+  &lt;%
+Set BankAction = Server.CreateObject("MyExample.BankComponent")
+BankAction.Deposit(Request("AcctNum"))
+  %&gt;
+
+&lt;P&gt;谢谢。正在处理您的事务。&lt;/P&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+
+&lt;%
+'如果事务成功则显示该页。
+Sub OnTransactionCommit()
+%&gt;
+&lt;HTML&gt;
+&lt;BODY&gt;
+
+谢谢。您的帐号已获得信任。
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+
+&lt;%
+Response.Flush()
+End Sub
+%&gt;
+
+&lt;%
+'如果事务失败则显示该页。
+Sub OnTransactionAbort()
+Response.Clear()
+%&gt;
+&lt;HTML&gt;
+&lt;BODY&gt;
+
+无法完成您的事务。
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+&lt;%
+Response.Flush()
+End Sub
+%&gt;</pre>
+
+<h2><a name="H2_37691717">在组件服务管理器中注册组件</a></h2>
+
+<p>要参与事务，必须在 COM+ 应用程序中注册组件并将其配置为要求事务例如，如果脚本处理订单时要调用一个更新库存数据库的组件和一个更新支付数据库的组件，则需要在一个事务上下文中运行这两个组件。组件服务确保如果一个组件失败，将返回整个订单而不更新任何数据库。一些组件并不要求事务；例如，Ad Rotator 组件就不需要事务。</p>
+
+<p>可以使用组件服务管理器注册并配置事务处理组件。组件必须在 COM+ 应用程序中注册。不要将组件放在 IIS 进程内 COM+ 应用程序中；相反，应创建自己的 COM+ 应用程序。通常，应该将所有组件放在一个“库”应用程序中。“库”应用程序中的组件可用于多个 ASP 应用程序并在 ASP 应用程序进程中运行。</p>
+
+<p>也可以在“服务器”应用程序（通常在服务器的单独进程中运行的 COM+ 应用程序）中注册事务处理组件。如果要使用基于角色的安全性或允许远程计算机上的应用程序访问组件，可对事务处理组件使用“服务器”应用程序。</p>
+
+<p>必须安装组件服务才能使用组件服务管理器。</p>
+
+<h2><a name="H2_37693171">对象作用域</a></h2>
+
+<p>通常，不应该将由 COM 组件创建的对象存储到 ASP <strong> Application </strong> 或 <strong> Session </strong> 对象中。事务完成后 COM 对象变为不活动。因为 <strong> Session </strong> 和 <strong> Application </strong> 对象是为可用于多个 ASP 页的对象实例设计的，所以不能用它们保留那些将在事务结束时释放的对象。</p>
+
+<p>ASP 脚本是已声明事务的根或起点。事务处理 ASP 页使用的 COM 对象被当作是事务的一部分。事务完成后，页中使用的 COM 对象变为不活动，其中包括存储在 <strong>Session</strong> 或 <strong>Application</strong> 对象中的对象。随后从其他事务处理页调用会话作用域或应用程序作用域的对象的尝试将失败。</p>
+
+<h2><a name="queuingtransactions">队列事务</a></h2>
+
+<p>由于网络延迟或失败，对远程服务器上的数据库的更新可能会延迟或中止事务的完成。因为必须认可事务的所有部分，所以应用程序可能要等待来自远程服务器的认可或中止消息，或者可能因为不能发送数据库更新而中止事务。</p>
+
+<p>对于必须同时完成的更新，适当的做法是中止或延迟事务的完成，直到事务的所有参与者都能认可更新。例如，机票订购应用程序必须同时完成在客户的银行帐号扣除机票金额和在航空公司的银行帐号增加机票金额。如果一个更新是事务的一部分，但它可能出现在其他更新之后，则可以不让客户等到更新完成。例如，订购机票的事务可能也要发送对食品服务商的订餐请求或更新乘客的里程数。这些活动必须完成，但可以在以后完成。</p>
+
+<p>可以使用“消息队列”将一个或一组更新捆绑成事务处理消息，然后发送给远程服务器。“消息队列”保证将更新发送到远程服务器，即使网络现在不可用。应用程序接收到认可消息，可以继续事务。</p>
+
+
+<hr class="iis" size="1">
+<p align="center"><a href="/iishelp/common/colegal.htm">&copy; 1997-1999 Microsoft Corporation。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

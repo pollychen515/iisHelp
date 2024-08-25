@@ -1,0 +1,96 @@
+<html dir=ltr><head>
+
+<title>创建虚拟 Web 目录 (mkw3dir)</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+
+<meta name="description" content="本主题包含关于创建虚拟 Web 目录 (mkwebdir) 管理脚本的概念上和程序上的信息。">
+
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=gb2312">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="ZH-CN">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"> <font face="宋体">
+
+<h1 ALIGN="left">创建虚拟 Web 目录 (mkwebdir)</h1>
+
+<p><strong>概述：</strong></p>
+
+<p>创建新的 Web 服务器虚拟目录。</p>
+
+<p><strong>用法：</strong></p>
+
+<table cellspacing="2" cellpadding="5">
+<tr>
+	<td valign="TOP">mkwebdir</td>
+	<td>&lt;--computer|-c COMPUTER1,COMPUTER2,...&gt;<br> &lt;--website|-w WEBSITE&gt;<br> &lt;--virtualdir|-v NAME1,PATH1,NAME2,PATH2,...&gt;<br>[--help|-h]</td>
+</tr>
+</table>
+
+<p><strong>参数：</strong></p>
+
+<table cellspacing="2" cellpadding="5">
+
+<tr>
+<td valign="TOP">COMPUTER1, COMPUTER2,...</td>
+<td>计算机列表，在这些计算机上创建该站点。这将用于使用相同设置来配置多台计算机。如果没有指定计算机，则认为是 LocalHost。</td>
+</tr>
+
+<tr>
+<td valign="TOP">WEBSITE</td>
+<td>将要在上面创建目录的 Web 站点。名称可以按下列某个来指定，按优先级排列：<br>服务器编号（如 1、2、10）<br>服务器说明（我的服务器）<br>服务器主机名 (www.domain.com)<br> IP 地址 (172.16.0.0)</td>
+</tr>
+
+<tr>
+<td valign="TOP">NAME1,PATH1,NAME2,PATH2</td>
+<td>要创建的虚拟目录的名称和路径。</td>
+</tr>
+
+</table>
+
+<p><STRONG>示例：</STRONG></p>
+
+<pre><p>Mkwebdir -c LocalHost -w &quot;Default Web Site&quot; &#150;v CommonImages,D:\Images</p></pre>
+
+<hr class="iis" size="1">
+<p align="center"><a href="../../../common/colegal.htm">(C) 1997-1999 Microsoft Corporation。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=Windows-1252">
+<TITLE>Setting the Locale Identifier</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="Internet Information Services reference information">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="EN-US">
+<META NAME="MS-IT-LOC" Content="Internet Information Services"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_k2_setting_the_locale_identifier"></A><SUP></SUP>Setting the Locale Identifier</H2>
+
+<P>A <I>locale</I> is a set of user preference information related to the user's language. The locale determines how dates and times are formatted, how items are alphabetically sorted, and how strings are compared. The <I>locale identifier</I> (LCID) is a 32-bit value that uniquely defines a locale. ASP uses the default locale of the Web server unless you specify a different locale for a particular script.</P>
+
+<P>To set the locale identifier for an ASP page, use the @ LCID directive. For example, to set the locale to Japanese, use the following locale identifier:</P>
+
+<PRE><CODE>&lt;%@ LCID = 1041 %&gt;
+ </CODE></PRE>
+
+<P>The @ LCID directive tells ASP the locale in which the script was authored. If you need to change the locale for input to or output from the script, use the <B>Session.LCID</B> property.</P>
+
+<P>The following example demonstrates setting the locale to British English, and using the VBScript <B>FormatCurrency</B> method to display the value 125 as currency with the £ symbol:</P>
+
+<PRE><CODE>&lt;% 
+  Session.LCID = 2057
+  Dim curNumb
+  curNumb = FormatCurrency(125)
+  Response.Write (curNumb)
+%&gt;
+</CODE></PRE>
+
+<P>The <B>Session.LCID</B> property defaults to the @ LCID directive setting. Setting the value of <B>Session.LCID</B> in a script overrides the default setting.</P>
+
+<P>For more information on LCIDs see "International Features" in the "Windows Base Services" sectionof the Platform SDK.</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-1999 Microsoft Corporation. All rights reserved.</a></em></p>
+</BODY>
+</HTML>

@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>FTP 服务注册表项目</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="FTP 参考信息；包含有关 FTP 注册表项目的详细信息。">
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="H1_37744883">FTP 服务注册表项目</a></h1>
+
+<p>除了<a href="iiregssp.htm">服务特有的注册表项目</a>，FTP 服务还将保留下列参数。</p>
+
+<p>注册表路径：</p>
+
+<p>HKEY_LOCAL_MACHINE\SYSTEM<br>
+  \CurrentControlSet<br>
+    &nbsp;\Services<br>
+     &nbsp;&nbsp;\MSFTPSVC<br>
+         &nbsp;&nbsp;&nbsp;\Parameters</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td width=100% bgcolor="#C0C0C0"><strong>AnnotateDirectories </strong><br>REG_DWORD</td></tr>
+<tr><td width=100%><strong>范围：</strong> 0、1<br><strong>默认：</strong>0（禁用）</td></tr>
+<tr><td width=100%>FTP 服务支持使用自定义消息对目录注释。注释文本保存在被注释的目录中的一个名为 ~ftpsvc~.ckm 的专用文件中。如果该文件存在于更改目录 (CWD) FTP 操作中的目标目录中，那么服务响应此操作的文件的内容。这为管理员给考虑的目录添加自定义消息提供了一个方法。默认情况下，服务配置为不发送注释文本。如果选择添加自定义消息，也应该创建注释文件。同时，建议将注释文件设置为隐藏文件，这样文件就不会出现在目录列表中。</td></tr>
+</table>
+<p>&nbsp;</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td width=100% bgcolor="#C0C0C0"><strong> EnablePortAttack </strong><br>REG_DWORD</td></tr>
+<tr><td width=100%> <strong>范围：</strong> 0、1 <br> <strong>默认：</strong>0（禁用）</td></tr>
+<tr><td width=100%>该参数为默认设置，用来防止 FTP 协议规范中的安全问题。FTP 服务规范允许根据客户给的端口地址建立被动的连接。这将允许怀有恶意的用户执行 FTP 服务中的破坏性命令。当 FTP 服务使用一个不是 FTP 数据端口 (20) 的端口并且端口号小于 IP_PORT_RESERVED (1024) 的连接时，将出现这个问题。<STRONG>EnablePortAttack</STRONG> 控制是否应该允许这样的攻击。默认情况下，服务不建立任何到端口号小于 IP_PORT_RESERVED （20 除外）的连接。如果想要用户通过使用 FTP RFC 中指定的其他端口连接，应该启用该标记。</td></tr>
+</table>
+<p>&nbsp;</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td width=100% bgcolor="#C0C0C0"><strong>LowercaseFiles </strong><br>REG_DWORD</td></tr>
+<tr><td width=100%><strong>范围：</strong> 0、1 <br> <strong>默认：</strong>0（禁用）</td></tr>
+<tr><td width=100%>FTP 服务使用文件名的原来格式（即按照保存在文件系统中文件名的格式，保留原来的大小写）。但是，为了与区分大小写的文件系统进行精确比较，可能必须确保使用了正确的文件名。管理员可以添加该值以确保服务为这些比较使用小写字母。</td></tr>
+</table>
+
+
+<hr class="iis" size="1"><p align=center><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

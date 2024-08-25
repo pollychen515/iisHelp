@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>配置 CGI 应用程序</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="解释了在 Web 服务器上安装和配置 CGI 应用程序的方法。">
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="configuringcgiapplications">配置 CGI 应用程序</a></h1>
+
+<p>Internet 信息服务支持 CGI 应用程序。该主题给出了在 Web 服务器上安装和配置 CGI 应用程序的管理信息。关于编写 CGI 应用程序的一般信息，请参阅 Microsoft 的 <a href="http://msdn.microsoft.com/isapi/redir.dll?prd=msdn&ar=library&pver=6.0" target="_blank">MSDN 联机库</a>。</p>
+
+<p> CGI 程序在 Web 服务器接收到包含 CGI 程序名称和程序所需参数的 URL 后执行。要将 CGI 程序编译为可执行文件 (.exe)，必须提供包含程序执行权限的目录,以便用户运行程序。如果 CGI 程序以 Perl 脚本等脚本形式编写，则既可提供执行权限目录，也可提供脚本权限目录。要使用脚本权限，必须将脚本解释程序标记为脚本引擎。</p>
+
+<p>如要正在考虑开发新的 CGI 应用程序，Microsoft 可提供多种选择以供您去研究。要使执行速度更快，请考虑开发 ISAPI 扩充来替代。要便于开发，请考虑开发 ASP 应用程序。ASP 特别受编程和脚本编辑的初学者青睐，因为它可以处理许多编写 CGI 应用程序所需的传统工序，如解析 HTTP 头等。详细信息，请参阅 <a href="../asp/iiwawelc.htm">Active Server Pages</a>。</p>
+
+<big>安装和配置 CGI 应用程序：</big><br>
+
+<ol>
+<li>为 CGI 程序建立目录。为更加安全起见，应将 CGI 程序与内容文件分开。不要将目录命名为 Cgi-bin，虽然您可以这么做。请参阅<a href="iicodirv.htm">创建虚拟目录</a>。</li>
+
+<li>如果 CGI 程序是脚本，则应获取并安装相应的脚本解释程序。例如，要运行 Perl 脚本，必须得到 Perl 解释程序。</li>
+
+<p>Windows 操作系统不提供 Perl、SED 和 AWK 版本。解释程序可由第三方开发商处获得。</p>
+
+<li>如果 CGI 程序为 .exe 文件，应为目录提供执行权限。如果 CGI 程序为脚本，既可提供执行权限，也可提供脚本权限。请参阅<a href="iiaclsc.htm">访问控制</a>。</li>
+
+<p>如果选择了脚本权限，则必须在该目录的属性表中将脚本解释程序标记为脚本引擎。只有标记为脚本引擎的解释程序可以在该目录中执行。可执行文件（.dll 和 .exe 文件）无法直接执行，即浏览器请求无法通过在 URL 中包含程序名称启动 Web 服务器中的可执行文件。通过“脚本引擎”选项使用脚本权限可以安全地将内容文件（如 .htm 或 .gif 文件）作为 CGI 脚本置于相同的目录之下。内容文件将在浏览器中显示，同时执行脚本；但未授权的程序或脚本命令不会在浏览器中显示。 <!--</p>--><br>
+
+<p><strong><span style="color: #FF0000"><font color="#FF0000">警告</font> </span></strong> 如果将读取权限赋予包含可执行文件的目录，站点的访问者便可以下载并运行这些可执行文件。为安全起见，最好始终将可执行文件置于不具有读取权限的目录。 <br>
+
+<li>对于 CGI 脚本，应创建一个应用程序，在脚本文件扩展名和脚本解释程序间建立映射。</li>
+
+<p>Internet 信息服务可将文件扩展名映射到解释程序。例如，如果使用以 .pl 为扩展名的 Perl 脚本，应将 .pl 扩展名映射到运行 Perl 脚本的程序。应将 .bat 和 .cmd 文件映射到命令解释程序 (Cmd.exe)。请参阅<a href="iiwarndf.htm">设置应用程序映射</a>。<br>
+
+<li>设置 NTFS 权限。</li>
+<p>如果正在使用 NTFS 访问权限，请确保所有需要运行程序的用户具有对该目录的执行权限。如果 Web 站点接受匿名用户，请确保匿名用户（IUSR_computername 帐户）拥有执行权限。<br>
+
+</ol>
+
+<p>Internet 信息服务支持大多数标准服务器环境变量。 </p>
+
+<p>如果脚本访问映射到 Cmd.exe 的脚本，而 Cmd.exe 在远程服务器上运行，则默认的工作目录应设置为本地计算机上的 %SYSTEM32%。%SYSTEM32% 的默认值为 \Winnt\System32（在 Windows 2000 中）和 \Win95\System（在 Windows 95 或以上版本中）。</p>
+
+<p>为更加安全起见，Web 服务器不将命令解释程序的特殊字符传递给映射的 CGI 应用程序。默认情况下，以下字符无法包括在调用 CGI 应用程序的 URL 中。</p>
+
+<pre>| ( , ; % &lt; &gt;</pre>
+
+<p>尽管不推荐使用，但仍可通过更改注册表中“AllowSpecialCharsInShell”的值来使用某些特殊字符。详细信息，请参阅 <a href="iiregwww.htm">WWW 服务注册表项目</a>。</p>
+
+
+<hr class="iis" size="1"><p align="center"><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

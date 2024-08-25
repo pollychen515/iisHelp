@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=Windows-1252">
+<TITLE>@CODEPAGE</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="Internet Information Services reference information">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="EN-US">
+<META NAME="MS-IT-LOC" Content="Internet Information Services"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="__codepage"></A>@CODEPAGE</H2>
+
+<P>You can use the @CODEPAGE directive to set the code page to be used for the .asp file. A code page is a character set, which can include numbers, punctuation marks, and other glyphs. Different languages and locales may use different code pages. For example, ANSI code page 1252 is used for American English and most European languages; OEM code page 932 is used for Japanese Kanji.</P>
+
+<P>A code page can be represented in a table as a mapping of characters to single-byte values or multibyte values. Many code pages share the ASCII character set for characters in the range 0x00–0x7F.</P>
+
+<P>You can override the code page that has been set by the @CODEPAGE directive with the <A HREF="/iishelp/iis/htm/asp/vbob4ht1.htm">Session.CodePage</A> property. Doing so, however, only applies to script running within the scope of the session.</P>
+
+<H6>Syntax</H6>
+
+<P>&lt;%@&nbsp; CODEPAGE = <I>codepage</I>%&gt;</P>
+
+<P>&nbsp;</P>
+
+<H6>Parameters</H6>
+
+<DL>
+<DT><I>codepage</I></DT>
+
+<DD>An unsigned integer that represents a valid code page for the system that is running the ASP scripting engine.</DD>
+</DL>
+
+<H6>See Also</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/vbob4ht1.htm">Session.CodePage</A></P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-1999 Microsoft Corporation. All rights reserved.</a></em></p>
+</BODY>
+</HTML>

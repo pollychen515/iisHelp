@@ -1,0 +1,292 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=Windows-1252">
+<TITLE>MyInfo Component</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="Internet Information Services reference information">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="EN-US">
+<META NAME="MS-IT-LOC" Content="Internet Information Services"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_myinfo_component"></A>MyInfo Component</H1>
+
+<P>The MyInfo component creates a <B>MyInfo </B>object that keeps track of personal information, such as the site administrator's name, address, and display choices. Typically, the administrator types this information directly into the Web server interface. However, you can set the values of the properties directly using a script in an ASP page. </P>
+
+<P>Each property of a <B>MyInfo </B>object returns a string. If a <B>MyInfo </B>property has no value set, the property returns an empty string.</P>
+
+<P>The <B>MyInfo </B>object can have properties in addition to the ones documented here. The properties listed in the table below are implemented by Personal Web Server to keep track of information entered into the Personal Web Services interface. If you use <B>MyInfo</B> on IIS, these properties will not be implemented.</P>
+
+<P>You can create new <B>MyInfo </B>properties by simply assigning a string value to them. For example:</P>
+
+<PRE><CODE>&lt;% 
+  MyInfo.DogName = "Snoopy" 
+  MyInfo.DogBreed = "Beagle" 
+%&gt; 
+ </CODE></PRE>
+
+<P>creates the new properties <CODE>DogName</CODE> and <CODE>DogBreed</CODE>. These new properties are stored persistently along with the other <B>MyInfo</B> properties. </P>
+
+<P>Create new <B>MyInfo</B> properties for values that remain consistent throughout a site. </P>
+
+<P>The values of <B>MyInfo</B> properties are stored in a single text file, Myinfo.xml. MyInfo.xml is installed to the \winnt\system32 directory on Windows 2000, and to the root directory on Windows95 or later. </P>
+
+<H6>File Names</H6>
+
+<TABLE border=0 cellpadding=5 cols=2>
+
+<TR VALIGN="top">
+<TD width=21%>MyInfo.dll</TD>
+<TD width=79%>The MyInfo component.</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=21%>MyInfo.xml</TD>
+<TD width=79%>The file that stores the values of the <B>MyInfo</B> properties.</TD>
+</TR>
+</TABLE><BR>
+
+<H6>Syntax</H6>
+
+<P>Create a <B>MyInfo </B>object once in the Global.asa file by adding the following:</P>
+
+<PRE><B><CODE>&lt;OBJECT 
+RUNAT=Server 
+SCOPE=Session 
+ID=MyInfo 
+PROGID="MSWC.MyInfo"&gt; 
+&lt;/OBJECT&gt;
+ </CODE></B></PRE>
+
+<H6>Remarks</H6>
+
+<P>Only create one <B>MyInfo </B>object on your site. </P>
+
+<P>You can create a MyInfo object with Set <I>MyInfoObject</I> = Server.CreateObject('MSWC.MyInfo'). </P>
+
+<P><B><B>Note&nbsp;&nbsp;&nbsp;</B></B>For Personal Web Server for Windows<sup>&reg;</sup>&nbsp;95, the &lt;OBJECT&gt; declaration that creates <B>MyInfo </B>has already been included in the Global.asa file in the default virtual directory. You can work with <B>MyInfo</B> as if it were a built-in object. </P>
+
+<H6>Syntax</H6>
+
+<P><B>MyInfo.</B><I>property</I></P>
+
+<P><I>&nbsp;</I></P>
+
+<P>Properties Set by Personal Web Services:</P>
+
+<TABLE border=0 cellpadding=5 cols=2>
+
+<TR VALIGN="top">
+<TD width=47%><B>MyInfo.PageType</B></TD>
+<TD width=53%>Returns a number corresponding to the value in the "This site is ..." pop-up menu in the Personal Web Services control panel. These are the pop-up menu options with their corresponding numerical values:<BR>
+1 = About My Company<BR>
+2 = About My Life<BR>
+3 = About My School<BR>
+4 = About My Organization<BR>
+5 = About My Community</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%><B>MyInfo.PersonalName</B></TD>
+<TD width=53%>Returns the owner's name.</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%><B>MyInfo.PersonalAddress</B></TD>
+<TD width=53%>Returns the owner's address.</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%><B>MyInfo.PersonalPhone</B></TD>
+<TD width=53%>Returns the owner's phone number.</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%><B>MyInfo.PersonalMail</B></TD>
+<TD width=53%>Returns the owner's e-mail address.</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%><B>MyInfo.PersonalWords</B></TD>
+<TD width=53%>Returns additional text associated with the owner.</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%><B>MyInfo.CompanyName</B></TD>
+<TD width=53%>Returns the name of the owner's company.</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%><B>MyInfo.CompanyAddress</B></TD>
+<TD width=53%>Returns the address of the owner's company.</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%><B>MyInfo.CompanyPhone</B></TD>
+<TD width=53%>Returns the phone number of the owner's company.</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%><B>MyInfo.CompanyDepartment</B> </TD>
+<TD width=53%>Returns the owner's department name.</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%><B>MyInfo.CompanyWords</B></TD>
+<TD width=53%>Returns additional text associated with the owner's company.</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%><B>MyInfo.HomeOccupation</B></TD>
+<TD width=53%>Returns the owner's occupation.</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%><B>MyInfo.HomePeople</B></TD>
+<TD width=53%>Returns text listing the people the owner lives with.</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%><B>MyInfo.HomeWords</B></TD>
+<TD width=53%>Returns additional text associated with the owner.</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%><B>MyInfo.SchoolName</B> </TD>
+<TD width=53%>Returns the name of the owner's school.</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%><B>MyInfo.SchoolAddress</B> </TD>
+<TD width=53%>Returns the address of the owner's school.</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%><B>MyInfo.SchoolPhone</B> </TD>
+<TD width=53%>Returns the phone number of the owner's school.</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%><B>MyInfo.SchoolDepartment</B></TD>
+<TD width=53%>Returns the owner's department or class.</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%><B>MyInfo.SchoolWords</B> </TD>
+<TD width=53%>Returns text associated with the owner's school.</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%><B>MyInfo.OrganizationName</B></TD>
+<TD width=53%>Returns the name of the organization featured on the site.</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%><B>MyInfo.OrganizationAddress</B> </TD>
+<TD width=53%>Returns the address of the organization.</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%><B>MyInfo.OrganizationPhone</B> </TD>
+<TD width=53%>Returns the phone number of the organization.</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%><B>MyInfo.OrganizationWords</B> </TD>
+<TD width=53%>Returns text describing the organization.</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%><B>MyInfo.CommunityName</B> </TD>
+<TD width=53%>Returns the name of the community featured on the site.</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%><B>MyInfo.CommunityLocation</B> </TD>
+<TD width=53%>Returns the location of the community.</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%><B>MyInfo.CommunityPopulation</B> </TD>
+<TD width=53%>Returns the population of the community.</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%><B>MyInfo.CommunityWords</B></TD>
+<TD width=53%>Returns text describing the community.</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%><B>MyInfo.URL(</B><I>n</I><B>)</B></TD>
+<TD width=53%>Returns the nth user-defined URL. Corresponds to the nth link description in <B>MyInfo.URLWords</B>.</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%><B>MyInfo.URLWords(</B><I>n</I><B>)</B></TD>
+<TD width=53%>Returns a string containing the nth user-defined description of a link. Corresponds to the nth URL in <B>MyInfo.URL</B>.</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%><B>MyInfo.Style</B></TD>
+<TD width=53%>Returns the relative URL (starting with '/') of a style sheet.</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%><B>MyInfo.Background</B></TD>
+<TD width=53%>Returns the background for the site.</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%><B>MyInfo.Title</B></TD>
+<TD width=53%>Returns the user-defined title for the home page.</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%><B>MyInfo.Guestbook</B></TD>
+<TD width=53%>Returns –1 if the guest book should be available on the site. Otherwise, returns 0. The default value is "".</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%><B>MyInfo.Messages</B></TD>
+<TD width=53%>Returns –1 if the private message form should be available on the site. Otherwise, returns 0. The default value is "".</TD>
+</TR>
+</TABLE><BR>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-1999 Microsoft Corporation. All rights reserved.</a></em></p>
+</BODY>
+</HTML>

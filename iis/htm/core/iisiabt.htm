@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>关于服务器端包含</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+
+<META NAME="DESCRIPTION" CONTENT="关于服务器端包括功能的概念性概述。">
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+
+<h1><a name="H1_37751888">关于服务器端包含</a></h1>
+
+<p>可以使用服务器端包括 (SSI) 命令在把内容发送到浏览器之前将文本、图形或应用程序信息包括到 Web 页中。例如，可以使用 SSI 包含时间/日期标记、版权声明或供客户填写和返回的表单。包含文件是将文本或图形重复并入多个文件的一种简便方法。可以使用简单语句指示 Web 服务器插入文件，而不必在每个文件中键入信息。</p>
+
+<p>因为包含 SSI 命令的文件要求特殊处理，所以必须赋予所有 SSI 文件以 SSI 文件扩展名。默认扩展名是 .stm、.shtm 和 .shtml。可以将另外的扩展名添加到 Web 服务器可识别的列表中；请参阅<a href="iiwarndf.htm">设置应用程序映射</a> 。</p>
+
+<p>Web 服务器在处理 Web 页的同时处理 SSI 命令。当其处理到 SSI 命令时，将把被包含文件的内容直接插入到 HTML 页中。如果被包含文件也包含 SSI 命令，该命令包含的文件也将被插入。</p>
+
+<p>除用于包含文件的基本命令外，还可以使用 SSI 命令插入有关文件的信息（如文件的大小）或运行应用程序和外壳命令。</p>
+
+<P>详细信息，请参阅<a href="iisiref.htm">服务器端包含参考</a>。</P>
+
+<hr class="iis" size="1">
+<p align="center"><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

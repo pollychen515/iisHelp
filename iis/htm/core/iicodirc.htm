@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>使用内容分级</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="description" CONTENT="有关如何使用 Web 服务器上的内容分级功能帮助用户识别 Web 站点提供内容类型的步骤。">
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="H1_37692038">使用内容分级</a></h1>
+
+<p>可以配置 Web 服务器的内容分级功能，将说明性标签嵌入到 Web 页的 HTTP 头中。某些 Web 浏览器（如 Microsoft Internet Explorer 4.0 或更高版本）可以检测到这些内容标签并帮助用户识别潜在的、令人反感的 Web 内容。Web 服务器默认的基于分级系统的 Internet 内容选择平台 (PICS) 使用由娱乐软件咨询理事会 (RSAC) 开发的系统，该系统根据暴力、暴露、色情及侵犯性语言的级别来对内容进行分级。在设置 Web 内容分级之前，您应该填写 RSAC 问卷以获取指定的 Web 内容建议的内容等级。</p>
+
+<big>对内容进行分级</big><br>
+
+<ol>
+
+<li>在 <a href="javascript://" onclick="Activate(); return false">Internet 信息服务管理单元</a>中，<script language="javascript">
+<!--
+function Activate() {
+if (navigator.appName == "Microsoft Internet Explorer"){
+	window.open("iisnapin.htm", "NewWin", 'toolbar=no, left=200, top=200, scrollbars=no, resizeable=no,  width=350, height=350');
+	}
+	else if (navigator.appName == "Netscape") {
+		window.open("iisnapin.htm", "NewWin",  'toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=yes,resizable=0,width=350,height=350,top=200,left=200');
+	}
+}
+//-->
+</script>选择 Web 站点、目录或文件，并打开其属性表。</li>
+<li>单击“HTTP 头”选项卡，然后单击“内容分级”下的“编辑分级”。</li>
+<li>在“分级服务”属性页中，在“RSAC 注册”下，单击“分级问卷”。根据 RSAC 提供的指示进行操作。</li>
+<li>单击“确定”。</li>
+</ol>
+
+<p class="bigfix">&nbsp;</p>
+
+<big>设置内容分级</big><br>
+
+<ol>
+
+<li>在 <a href="javascript://" onclick="Activate(); return false">Internet 信息服务管理单元</a>中，<script language="javascript">
+<!--
+function Activate() {
+if (navigator.appName == "Microsoft Internet Explorer"){
+	window.open("iisnapin.htm", "NewWin", 'toolbar=no, left=200, top=200, scrollbars=no, resizeable=no,  width=350, height=350');
+	}
+	else if (navigator.appName == "Netscape") {
+		window.open("iisnapin.htm", "NewWin",  'toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=yes,resizable=0,width=350,height=350,top=200,left=200');
+	}
+}
+//-->
+</script>选择 Web 站点、目录或文件，并打开其属性表。</li>
+<li>单击“HTTP 头”选项卡，然后单击“内容分级”下的“编辑分级”。</li>
+<li>在“分级”属性页中，选中“此资源使用分级”复选框。</li>
+<li>在“类别”框中，单击分级类别。使用分级标尺为类别中潜在的、令人反感的资料设置级别。每项设置都显示有所分等级的说明。</li>
+<li>在“对此内容分级人员的电子邮件名”中，键入对内容进行分级的人的电子邮件名，然后选择“到期于”列表并从日历中选择一个分级期满日期。</li>
+<li>单击“确定”。</li>
+</ol>
+
+<hr class="iis" size="1"><p align=center><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

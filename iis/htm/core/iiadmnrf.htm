@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>管理员参考</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+
+<META NAME="DESCRIPTION" CONTENT="主题导航页，其中包含有关注册表和 Metabase 配置属性以及 Windows 中 IIS 事件的详细参考信息。">
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="iisadminref">管理员参考</a></h1>
+
+<p>欢迎使用“管理员参考”主题部分。这部分提供有关注册表配置属性、Metabase、Windows 中的 IIS 事件、计数器、超时和登录属性等的详细信息。旨在为管理任务提供参考。</p>
+
+<p>本节包括：</p>
+
+<ul>
+<li><strong><A HREF="iiregtop.htm">注册表</A>：</strong>IIS 注册表键的配置属性。</li>
+<li><strong><A HREF="iimbstop.htm">Metabase</A>：</strong>Metabase 配置属性。</li>
+<li><strong><A HREF="iievents.htm">IIS 的 Windows 事件</A>：</strong>IIS 记录到 Windows 事件日志中的事件列表。</li>
+<li><strong>其他参考：</strong> 有关计数器信息、超时和登录属性默认设置的参考</li>。
+</ul>
+
+<p>本节<b>不</b>包含：</p>
+
+<ul>
+<li>例行服务器管理；请参阅<a href="iisvadm.htm">服务器管理</a>。</li>
+<li>IIS 管理对象，请参阅<a href="../asp/aogu2wab.htm">使用 IIS 管理对象</a>。</li>
+<li>管理脚本，请参阅<a href="../adminsamples/default.htm">管理脚本</a>。</li>
+</ul>
+
+
+<hr class="iis" size="1"><p align=center><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+<span style="display:none"><LAYER VISIBILITY=HIDE> （以下文字用于搜索，并不在页面中显示。）引用、参考、页、列表、表、属性、配置、metabase、注册表、默认、默认值、主键、路径、事件、日志、日志文件、日志记录、输入项、子键、regedt32.exe、注册表、编辑器、全局、变量、ftp、nt、计数器、计数器、超时、超时值、重定向、指定服务、语法、设置、关键字 </layer></span> </font>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>指定 Web 站点操作员</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="关于指派 Web 站点操作员的过程信息，操作员对于被指派的 Web 站点具有有限的管理权限。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=gb2312">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="ZH-CN">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="H1_37781092"></a>指定 Web 站点操作员</a></h1>
+
+<p>Web 站点管理员是对 Web 站点具有有限管理权限的 Windows 用户帐号。</p>
+
+<big>添加操作员</big><!--</p>--><br>
+
+<ol>
+<li>在 <a href="javascript://" onclick="Activate(); return false">Internet 信息服务管理单元中</a> 选择 Web 站点并打开它的属性表。</li>
+<li>在“操作员”属性表的“Web 站点操作员”下，单击“添加”按钮。将打开“添加用户和组”窗口。</li>
+<li>从“名称”列表中选择用户或组，或者从“列出的名称来自”框中选择其他名称列表。</li>
+<li>要从用户组中选择成员，可单击“成员”按钮并从窗口中选择成员。</li>
+<li>要搜寻网络中的用户或组，可单击“搜索”按钮。</li>
+</ol>
+
+
+
+<big>删除操作员</big><!--</p>--><br>
+
+<ol>
+<li>在 <a href="javascript://" onclick="Activate(); return false">Internet 信息服务管理单元中</a> 选择 Web 站点并单击“属性”按钮以显示它的属性表。</li>
+<li>在“操作员”属性表的“Web 站点操作员”下，选择用户或组，并单击“删除”按钮。</li>
+</ol>
+
+<p><strong>注意</strong>  Web 站点操作员帐号可以不是 Windows 管理员组的成员。</p>
+
+<p><strong>相关主题</strong></p>
+
+<ul>
+<li>关于设置操作员限制的详细信息，请参阅“关于 Web 和 FTP 站点”中的 <a href="iivsovr.htm#websiteoperators">Web 站点操作员</a>。</li>
+</ul>
+
+<hr class="iis" size="1"><p align=center><a href="../../../common/colegal.htm">(C) 1997-1999 Microsoft Corporation。保留所有权利。</a></p>
+
+<script language="javascript">
+<!--
+function Activate() {
+if (navigator.appName == "Microsoft Internet Explorer"){
+	window.open("iisnapin.htm", "NewWin", 'toolbar=no, left=200, top=200, scrollbars=no, resizeable=no,  width=350, height=350');
+	}
+	else if (navigator.appName == "Netscape") {
+		window.open("iisnapin.htm", "NewWin",  'toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=yes,resizable=0,width=350,height=350,top=200,left=200');
+	}
+}
+//-->
+</script>
+
+</font>
+</body>
+</html>

@@ -1,0 +1,268 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>关于验证</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="description" CONTENT="本主题是对 Web 服务器验证安全功能的概述。验证用于在与受限制内容建立连接之前确认用户的身份。">
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="H1_37675702">关于验证</a></h1>
+
+<p>可以要求用户在访问服务器上的信息之前，提供有效的 Windows 用户帐户、用户名和密码。此识别过程通常称为“验证”。如同 IIS 中的许多功能一样，验证可以在 Web 站点、目录或文件级别上设置。IIS 为控制对服务器内容的访问提供了以下验证方法：</p>
+
+<H3>WWW 方法</H3>
+	<ul>
+		<li><a href="#Anonymous">匿名验证</a></li>
+		<li><a href="#basic">基本验证</a></li>
+		<li><a href="#digest">摘要式身份验证</a></li>
+		<li><a href="#challenge">集成 Windows 身份验证</a></li>
+		<li><a href="#ssl">证书验证</a></li>
+	</ul>
+
+<H3>FTP 方法</H3>
+	<ul>
+		<li><a href="#ftp_anon">匿名 FTP 验证</a></li>
+		<li><a href="#ftp_nonanon">基本 FTP 验证</a></li>
+	</ul>
+
+<p>关于设置验证的信息，请参阅<a href="iiauths.htm">启用和配置验证</a>。</p>
+
+<br><br>
+<center><strong>验证方法概述</strong></center><br>
+<table width="100%" cellspacing="2" cellpadding="2" bordercolor="#000000" frame="BORDER">
+<tr align="CENTER" bgcolor="#C0C0C0" bordercolor="#000000">
+<td><strong>方法</strong></td>
+<td><strong>安全级别</strong></td>
+<td><strong>对服务器的要求</strong></td>
+<td><strong>对客户的要求</strong></td>
+<td><strong>注释</strong></td>
+</tr>
+<tr>
+<td><a href="#Anonymous">匿名</a></td>
+<td>无</td>
+<td>IUSR_computername 帐户</td>
+<td>任何浏览器</td>
+<td>用于 Internet 站点的公共区域</td>
+</tr>
+<tr>
+<td><a href="#basic">基本</a></td>
+<td>低</td>
+<td>有效帐户</td>
+<td>输入用户名和密码</td>
+<TD BGCOLOR="#FFC4C4">发送未加密的密码</td>
+</tr>
+<tr>
+<td><a href="#digest">摘要式</a></td>
+<td>高</td>
+<td>所有密码的纯文本复件。有效帐户。</td>
+<td>兼容性</td>
+<td>可跨代理服务器和其他防火墙使用。</td>
+</tr>
+<tr>
+<td><a href="#challenge">集成 Windows</a></td>
+<td>高</td>
+<td>有效帐户</td>
+<td>浏览器支持</td>
+<td>用于企业内部网的专用区域。</td>
+</tr>
+<tr>
+<td><a href="#ssl">证书</a></td>
+<td>高</td>
+<td>获取服务器证书。配置证书信任列表 (CTL)（仅用于初次使用）。</td>
+<td>浏览器支持</td>
+<td>广泛用于 Internet 上的安全交易。</td>
+</tr>
+<tr>
+<td><a href="#ftp_anon">匿名 FTP</a></td>
+<td>无</td>
+<td>IUSR_computername 帐户</td>
+<td>无</td>
+<td>用于 FTP 站点的公共区域。</td>
+</tr>
+<tr>
+<td><a href="#ftp_nonanon">基本 FTP</a></td>
+<td>低</td>
+<td>有效帐户</td>
+<td>输入用户名和密码</td>
+<TD BGCOLOR="#FFC4C4">发送未加密的密码</td>
+</tr>
+</table><br><br>
+
+
+<h2><a name="Anonymous">匿名验证</a></h2>
+<p>匿名验证使用户无需输入用户名或密码便可以访问 Web 或 FTP 站点的公共区域。当用户试图连接到公共 Web 或 FTP 站点时，Web 服务器将用户分配到名为 IUSR_<em>computername</em> 的 Windows 用户帐户，此处 <em>computername</em> 是运行 IIS 的服务器名称。</p>
+
+<p>默认情况下，IUSR_computername 帐户包含在 Windows 用户组 Guests 中。该组具有安全限制，由 NTFS 权限强制使用，它指出了访问级别和可用于公共用户的内容类型。</p>
+
+<p>如果服务器上有多个站点，或站点上的区域要求不同的访问权限，就可以创建多个匿名帐户，分别用于 Web 或 FTP 站点、目录或文件。通过赋予这些帐户不同的访问权限，或将这些帐户分配到不同的 Windows 用户组，便可准许用户对公共 Web 和 FTP 内容的不同区域进行匿名访问。</p>
+
+<p>IIS 以下列方式使用 IUSR_<em>computername</em> 帐户：</p>
+
+	<ol>
+	<li>IUSR_<em>computername</em> 帐户将添加到计算机上的 Guests 组。</li>
+	<li>收到请求时，IIS 将在执行代码或访问文件之前模拟	IUSR_<em>computername</em>	帐户。IIS 可以模拟 IUSR_<em>computername</em> 	帐户，因为 IIS 知道该帐户的用户名和密码。</li>
+	<li>在将页面返回到客户端之前，IIS 检查 NTFS 文件和目录权限，查看是否允许 IUSR_<em>computername</em> 帐户访问该文件。
+	<li>如果允许访问，验证完成后用户便可以得到这些资源。
+	<li>如果不允许访问，IIS 将尝试使用其他验证方法。如果没有作出任何选择，IIS 则向浏览器返回“HTTP 403 访问被拒绝”错误消息。</li>
+	</ol>
+
+<P><STRONG>注意</STRONG></p>
+<ul>
+<li>如果启用了匿名验证，IIS 首先使用它进行验证，即使还启用了其他方法。</li>
+<li>在有些情况下，浏览器将提示用户输入用户名和密码。</li>
+</ul>
+
+<p>可以更改用于 Internet 信息服务管理单元中匿名验证的帐户，无论是在 Web 服务器的服务级，还是单独的虚拟目录和文件级。匿名帐户必须具有本地登录的用户权限。如果帐户没有本地登录的权限，IIS 将无法为任何匿名请求提供服务。IIS 安装特别授予 IUSR_<em>computername</em> 帐户“本地登录”权限。默认情况下，不为域控制器上的 IUSR_<em>computername</em> 帐户授予 Guests 权限，要允许匿名登录，必须更改为“本地登录”。</p>
+
+<P><STRONG>注意</STRONG>：可以通过使用活动目录服务接口 (ADSI) 来更改本地登录权限的必要条件。有关信息，请参阅“Active Server Pages 指南”中的<A HREF="../asp/apro1zms.htm">登录方法</A>。</P>
+
+<p>也可以通过使用 MMC 的组策略管理器管理单元来更改 Windows 中的 IUSR_<em>computername</em> 帐户。但是，如果匿名用户帐户不具有特定文件或资源的访问权限，Web 服务器将拒绝建立与该资源的匿名连接。详细信息，请参阅<a href="iiwspsc.htm">设置 Web 服务器权限</a>。</p>
+
+<p><FONT COLOR="#0000ff"><strong>要点</strong></FONT> 如果更改 IUSR_<em>computername</em> 帐户，将影响 Web 服务器服务的各个匿名 HTTP 请求。如果要修改该账号，请使用警告。</p>
+
+
+
+<h2><a name="basic">基本验证</a></h2>
+
+<p>基本验证方法是广泛使用的工业标准方法，用于收集用户名和密码等信息。基本验证过程为：</p>
+
+	<ol>
+	<li>用户的 Web 浏览器显示一个对话框，用户可以在此输入先前分配给他们的 Windows 2000 帐户用户名和密码。</li>
+	<li>然后 Web 浏览器尝试使用这些信息建立连接。（密码在通过网络发送之前以 Base64 编码）。</li>
+	<li>如果服务器拒绝该信息，Web 浏览器将反复显示该对话框，直到用户输入有效的用户名和密码或关闭此对话框。</li>
+	<li>如果 Web 服务器证实用户名和密码符合有效的 Windows 用户帐户，则将建立连接。</li>
+	</ol>
+
+<p>有关设置基本验证的信息，请参阅<a href="iiauths.htm">启用和配置验证</a>。</p>
+
+<p>基本验证的优点在于它是 HTTP 规范的一部分，并且被大多数浏览器所支持。缺点是 Web 浏览器使用基本验证是以未加密的形式传输密码的。通过监视网络通讯，某些人可以很容易地使用某些通用工具截取和破解密码。因此，一般不建议使用基本验证，除非确信用户和 Web 服务器之间的连接是安全的，如直接电缆或专线连接。详细信息，请参阅<a href="iiencsc.htm">加密</a>。</p>
+
+<p><strong>注意</strong> 集成 Windows 验证优先于基本验证。浏览器将选择集成 Windows 验证，并且在提示用户输入用户名和密码之前，尝试使用当前的 Windows 登录信息。目前只有 Internet Explorer 2.0 及其更高版本支持集成 Windows 验证。</p>
+
+
+
+<h2><a name="digest">摘要式身份验证</a></h2>
+
+<p>摘要式验证是 IIS 5.0 的一个新功能，它提供了与基本验证相同的功能，但在传送验证信息时使用了不同方法。验证凭据通过单向过程传送，通常被称为“散列算法”。这个过程的结果称为“散列”或“消息摘要”，并且不可能将它破译出来。也就是说，原始文本不可能从散列中破解。</p>
+
+<p>摘要式验证的过程为：</p>
+
+<ol>
+	<li>服务器向浏览器发送一些将用于验证过程的信息。</li>
+	<li>浏览器将这些信息与其用户名和密码以及某些其他信息进行混合，执行散列算法。附加的信息可防止他人复制散列值并再次使用。</li>
+	<li>散列算法的结果和附加信息一起以明文文本通过网络发送到服务器。</li>
+	<li>服务器随后将附加信息加入其所具有的客户端密码的纯文本复件，并对所有信息执行散列算法。</li>
+	<li>然后，服务器将收到的散列值与它的计算结果相比较。</li>
+	<li>只有这两个数字完全相同时才允许访问。</li>
+</ol>
+
+<p>在散列算法之前将附加信息添加到密码，这样便无人可捕获密码散列并使用它模拟真正的客户。添加的值用来帮助识别客户、客户计算机以及成员域或客户所属的域。同时还将添加时间标志以防止客户使用已经废弃的密码。</p>
+
+<p>与密码可以被未授权的人员截取和使用的基本验证相比，这是一个明显的优点。摘要式验证可以越过代理服务器和其他防火墙应用程序，并可用于 Web 分布式创作与版本管理 (WebDAV)。因为摘要式验证是 HTTP 1.1 的一项新功能，并非所有浏览器都支持它。如果不兼容的浏览器对服务器请求摘要式验证，服务器将拒绝请求并向客户端发送错误消息。摘要式验证仅在使用 Windows 2000 域控制器的域中得到支持。</p>
+
+<p><FONT COLOR="#0000ff"><strong>要点</strong></FONT> 摘要式验证完成的前提是，请求的域服务器具有请求用户的明文密码文本副本。因为域控制器具有密码的明文文本副本，必须保护它免受物理和网络攻击。有关保护域控制器的详细信息，请参阅 Microsoft Windows 2000 Server Resource Kit。</p>
+
+<p><strong>注意</strong> 散列值由少量二进制数据组成，通常不超过 160 位。该值由“散列算法”生成。不论使用何种运算法则，所有散列值均有以下属性：</p>
+
+<ul>
+<li><STRONG>散列长度</STRONG> 散列值的长度取决于使用的运算法则类型，它的长度不随消息的大小而改变。消息可以是几千字节或几千兆字节，这个影响不大。最常见的散列值长度为 128 或 160 位。</li>
+
+<li><STRONG>不可发现性</STRONG> 每一对不同的消息将转换为完全不同的散列值，即使两个消息仅有一位不同也是如此。当今的技术还不可能发现转换为相同散列值的一对消息。</li>
+
+<li><STRONG>可重复性</STRONG> 每次使用相同的算法对一个特别的消息进行散列处理时，都将生成完全相同的散列值。</li>
+
+<li><STRONG>不可逆性</STRONG> 所有的散列算法都是单向的。给出散列值，即使再给出散列算法，也无法恢复原来的消息。事实上，只给出散列值并不能确定原始消息的任何属性。</li>
+</ul>
+
+
+<h2><a name="challenge">集成 Windows 身份验证</a></h2>
+
+<p>集成 Windows 验证（以前称 NTLM 或 Windows NT 质询/响应验证）是一种安全的验证形式，因为用户名和密码不通过网络发送。当启用集成 Windows 验证时，用户的浏览器通过与 Web 服务器进行密码交换，包括散列，来证明其知晓密码。</p>
+
+<p>集成 Windows 验证既可以使用 Kerberos v5 验证协议，还可以使用自己的质询/响应验证协议。如果服务器上已安装了目录服务，并且浏览器与 Kerberos v5 验证协议兼容，则使用 Kerberos v5 协议和质询/响应协议；否则仅使用质询/响应协议。</p>
+<p>Kerberos v5 验证协议是 Windows 2000 分布式服务架构的一个特性。为成功地进行 Kerberos v5 验证，客户端和服务器都必须可靠地连接到密钥分配中心 (KDC)，并且必须兼容目录服务。有关协议的详细信息，请参阅 Windows 文档。</p>
+
+
+<p>集成 Windows 验证的过程为：</p>
+
+<ol>
+	<li>与基本验证不同，它并不首先提示用户输入用户名和密码。客户端计算机上的当前 Windows 用户信息用于集成 Windows 验证。</li>
+
+<P><STRONG>注意</STRONG> 如有必要，Internet Explorer 4.0 及其更高版本可以配置为在开始提示输入用户信息。详细信息，请参阅 Internet Explorer 文档。</P>
+
+	<li>但是，如果开始的验证交换未能识别用户，浏览器将提示用户输入 Windows 用户帐户用户名和密码，并使用集成 Windows 验证进行处理。</li>
+	<li>Internet Explorer 将继续提示用户，直到用户输入有效的用户名和密码，或者关闭提示对话框。</li>
+</ol>
+
+<p>尽管集成 Windows 验证非常安全，它仍然有两个限制。</p>
+<OL>
+<LI>只有 Microsoft Internet Explorer 2.0 或更高版本支持该验证方法。</li>
+<LI>在通过 HTTP 代理连接时，集成 Windows 验证不起作用。</li>
+</OL>
+<p>因此，集成 Windows 验证最适合企业 Intranet 环境，这时用户和 Web 服务器计算机在同一域中，管理员可以确保每个用户都使用 Microsoft Internet Explorer 2.0 或更高版本。</p>
+
+
+<h2><a name="ssl">证书验证</a></h2>
+
+<p>也可以对两种类型的验证使用 Web 服务器的安全套接字层 (SSL) 安全功能。此外还可以使用“服务器证书”，允许用户在传送个人信息（如信用卡号码）之前验证 Web 站点。同样，也可以使用“客户证书”验证 Web 站点上的用户请求信息。通过检查登录过程中用户 Web 浏览器提交的加密数字标识的内容，可进行 SSL 验证。（用户从一个互相信任的第三方机构获取客户证书）。服务器证书通常包含关于您的公司以及发证机构的信息。客户证书通常包含关于用户和发证机构的识别信息。详细信息，请参阅<a href="iiabcsc.htm">关于证书</a>。</p>
+
+<h3><a name="H4_37683048">客户证书映射</a></h3>
+<p>可以将客户证书关联或“映射”到 Web 服务器上的 Windows 用户帐户。创建并启用证书映射后，每次用户使用客户证书登录，Web 服务器自动将用户与相应的 Windows 用户帐户相联系。这样，就可以自动验证使用客户证书登录的的用户，而不必请求使用基本验证、摘要式验证或集成 Windows 验证。可以将一份客户证书映射到一个 Windows 用户帐户或将多份客户证书映射到一个帐户。例如，如果在服务器上有几个不同的部门或业务，每一个都有自己的 Web 站点，就可以使用多对一映射将每个部门或公司的的所有客户证书映射到自己的 Web 站点。这样每个站点仅对自己的客户提供访问。详细信息，请参阅<a href="iimapsc.htm">将客户证书映射到用户帐户</a>。</p>
+
+
+<h2><a name="ftp_anon">FTP 验证</a></h2>
+
+<H3>匿名 FTP 验证</H3>
+
+<P>可以配置 FTP 服务器以允许对 FTP 资源进行匿名访问。如果启用了匿名验证，IIS 将优先使用它，即使已经启用了基本验证。如果为某一资源选择了匿名验证，那么对资源的所有请求都不会提示用户输入用户名或密码。这是可能的，因为 IIS 将自动创建名为 IUSR_<em>computername</em> 的 Windows 用户帐户，其中 <em>computername</em> 是正在运行 IIS 的服务器名称。这和基于 Web 的匿名验证非常相似。详细信息，请参阅<A HREF="#Anonymous">匿名验证</A>。</P>
+
+
+<H3><a name="ftp_nonanon">基本 FTP 验证</a></H3>
+<p>要通过使用基本验证建立与 Web 服务器的 FTP 连接，用户必须使用与有效 Windows 用户帐户相对应的用户名和密码登录。如果 FTP 服务器不能证实用户的身份，服务器将返回错误消息。FTP 验证不十分安全，因为用户是以未加密的形式通过网络传送密码和用户名的。详细信息，请参阅<a href="iiacnsc.htm">关于访问控制</a>。</p>
+
+<hr class="iis" size="1"><p align="center"><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>设置 Web 服务器权限</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="description" CONTENT="关于如何设置 Web 服务器权限以便控制用户访问和与特定 FTP 以及 Web 站点、目录或文件进行交互的方法程序上的信息。还包含有关分布式创作与版本管理 (WebDAV) 的信息。">
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="H1_37784235">设置 Web 服务器权限</a></h1>
+
+<p>了解 Web 服务器权限和 NTFS 权限之间的差别是非常重要的。与 NTFS 不同，Web 服务器权限应用于所有访问 Web 和 FTP 站点的用户。NTFS 权限只应用于拥有有效 Windows 帐户的特定用户或用户组。NTFS 控制对服务器物理目录的访问，而 Web 和 FTP 权限控制对 Web 或 FTP 站点虚拟目录的访问。有关详细信息，请参阅 <a href="iivrtsv.htm">Web 和 FTP 站点</a>。</p>
+
+<p>默认情况下，Web 和 FTP 访问权限使用 Windows 帐户 IUSR_<em>computername</em>。当用户使用匿名验证访问站点时，他们将使用该帐户。默认情况下，IIS 将针对包含 Web 或 FTP 站点的实际文件夹赋予 IUSR_<em>computername</em> NTFS 权限。然而，您可以更改站点中任何文件夹或文件的这些权限。例如，可以使用 Web 服务器权限控制是否允许正在访问您的 Web 站点的用户查看某一特殊页、上载信息或运行站点上的脚本。详细信息，请参阅<a href="iiacnsc.htm">关于访问控制</a>。</p>
+
+<p><strong><font color="#0000FF">要点</font></strong></p>
+
+<ul>
+<li>如果针对目录或文件的 Web 和 NTFS 权限不同，则将使用更严格的设置。</li>
+
+<li>尝试设置 Web 站点或虚拟目录的安全属性时，Web 服务器将提示用户是否具有重新设置单独的目录和文件属性的权限。如果选择重新设置这些属性，先前设置的安全属性将由新的设置所替代。关于设置属性的详细信息，请参阅<a href="iivsovr.htm">关于 Web 和 FTP 站点</a>中的“站点属性和属性继承”部分。</li>
+
+<li>分布式创作与版本管理 (WebDAV) 是 HTTP 1.1 标准的扩充，用于在 HTTP 连接上暴露任何存储媒体，如文件系统。使用 WebDAV 的 IIS 5.0 执行，可以允许远程作者创建、移动、搜索或删除服务器上的文件和目录。由于 WebDAV 是 HTTP 1.1 提议草案的实现，故它对于非 HTTP 服务（如 FTP 站点）不可用。 详细信息，请参阅 <a href="wcwbdav.htm">WebDAV 发布</A>。</li>
+</ul>
+
+<p class="bigfix">&nbsp;</p>
+
+<big>为 Web 内容（包括 WebDAV）设置 Web 服务器权限</big><!--</p>--><br>
+
+<ol>
+<li>在 Internet 信息服务器管理单元中，选择 Web 站点、虚拟目录或文件，并打开其属性表。</li>
+<li>在“主目录”、“虚拟目录”或“文件”属性页中，选择或清除下面的任意一个复选框（如果有的话）：</li>
+
+<ul>
+	<li><strong>读取</strong> （默认选中） 用户可以查看目录或文件的内容及属性。</li>
+	<li><strong>写入</strong>  用户可以更改目录或文件的内容及属性。</li>
+	<li><strong>脚本资源访问</strong>  用户可以访问资源文件。如果选中“读取”，则可以读取原始资料，如果选中“写入”，则可以在原始资料中写入内容。脚本资源访问包括脚本的源代码，诸如 ASP 应用程序中的脚本。如果读取和写入都没有被选中，则该选项不可用。</li>
+	<li><strong>目录浏览</strong> 用户可以查看文件列表和集合。</li>
+	<li><strong>日志访问</strong> 为每次对 Web 站点的访问创建日志项目。</li>
+	<li><strong>索引此资源</strong>  允许索引服务索引该资源，以便对资源执行搜索功能。</li>
+</ul>
+
+<LI>在“执行许可”下，选择脚本执行的适当级别：</LI>
+<UL>
+<li><STRONG>无</STRONG>  不要在服务器上运行脚本（如 ASP 应用程序）或可执行程序。</li>
+<li><STRONG>纯脚本</STRONG>  在服务器上只运行脚本，如 ASP 应用程序。</li>
+<li><STRONG>脚本和可执行程序</STRONG>  在服务器上同时运行脚本（如 ASP 应用程序）和可执行程序。</li>
+</UL>
+
+<li>单击“确定”。</li>
+
+<p><strong>注意</strong></p>
+
+<ul>
+<li>禁用 Web 服务器权限（如读取）将限制所有用户查看文件，而不论用于那些用户帐户的 NTFS 权限。然而，启用权限则允许所有的用户查看文件，除非应用了限制访问的 NTFS 权限。</li>
+<li>如果同时设置了 Web 服务器和 NTFS 权限，则明确拒绝访问的权限将优于授权访问的权限。</li>
+</ul>
+</ol>
+
+
+<p><strong><font color="#FF0000">警告</font></strong> 当选择“脚本资源访问”时，用户将可以从 ASP 应用程序的脚本中查看敏感信息，如用户名和口令。还可以更改在服务器上运行并对服务器安全和性能具有重要影响的源代码。可以通过单独 Windows 帐户和高级别验证（诸如摘要式或集成 Windows 验证）最好地利用对这些类型信息和功能的访问。</p>
+
+
+<big>为 FTP 内容设置 Web 服务器权限</big><!--</p>--><br>
+
+<ol>
+<li>在 Internet 信息服务器管理单元中，选择 Web 站点、虚拟目录或文件，并打开其属性表。</li>
+<li>在“主目录”、“虚拟目录”或“文件”属性页中，选中或清除下列任何一个复选框选项：</li>
+
+<ul>
+<li><strong>读取</strong> 用户可以查看文件内容。</li>
+<li><strong>写入</strong> 用户可以更改文件内容。</li>
+<li><strong>日志访问</strong> 用户可以查看日志文件的内容。</li>
+</ul>
+</ol>
+
+<p>有关这些属性页的详细信息，请单击相应属性页中的“帮助”。</p>
+
+
+<hr class="iis" size="1"><p align="center"><a href="/iishelp/common/colegal.htm">(C)1997-1999 Microsoft Corporation。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

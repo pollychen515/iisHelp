@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>关于内存管理</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="关于内存的使用、如何监视内存以及何时需要添加内存来提高性能的概述。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=gb2312">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="ZH-CN">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="memorymanagement">关于内存管理</a></h1>
+
+<p>本主题讲述影响 Web 或 FTP 站点有效运行所需内存数量的各种因素，以及评估内存需求情况的计数器。本主题包含以下各节：</p>
+
+<ul>
+<li><a href="#RAMUsage">RAM 使用情况</a></li>
+<li><a href="#BalancingMemoryUse">平衡内存使用与响应速度</a></li>
+</ul>
+
+
+<h2><a name="RAMUsage">RAM 使用情况</a></h2>
+
+<p>RAM 是程序运行时使用的内存空间。通常情况下，启动应用程序时，计算机将必要的应用程序文件从硬盘复制到 RAM，然后从 RAM 中运行应用程序。访问 RAM 比访问硬盘速度快得多，所以计算机对硬盘的访问越少，应用程序执行速度就越快。IIS 运行时将使用部分 RAM，数量多少取决于许多其他因素，包括：</p>
+
+<ul>
+<li>用作缓存的 RAM 数量</li>
+<li>转换文件的大小</li>
+<li>可用磁盘空间的数量</li>
+<li>正在运行的服务数量</li>
+<li>处理器类型</li>
+<li>内容文件的大小</li>
+<li>内容文件的数量</li>
+<li>当前打开的连接数量</li>
+<li>其他需要 RAM 的活动应用程序</li>
+</ul>
+
+<p>IIS 收到关于静态文件的请求时，将文件句柄缓存到 RAM 中，同时由 Windows 2000 缓存文件。当后续请求要求同一文件时，IIS 使用 RAM 中缓存的副本（而不是回到硬盘）再次检索该文件。这样可减少 IIS 完成请求所需的时间，从而加快了访问者的访问速度。不过，文件在缓存中保留的时间取决于许多其他因素。</p>
+
+<p>向 IIS 请求其他文件时，缓存的旧文件将被清除，以便为新文件释放空间。这意味着，如果通过 IIS 请求了大量可用的文件但 RAM 很少，则访问速度可能会减慢，这是因为 IIS 必须从硬盘检索许多文件。如果计算机中还使用了其他需要 RAM 的应用程序，缓存的文件副本将被挤出 RAM 以便为新文件释放空间。IIS 可能无法维护 RAM 中缓存的文件。同样地，因为需要从硬盘读取文件而降低了 IIS 访问速度。</p>
+
+<p>ASP 文件也缓存在 RAM 中，除非设置了缓存文件的数目限制，否则它不会被废止。关于如何设置缓存中 ASP 页数目限制的详细信息，请参阅<a href="iipoolc.htm">缓存应用程序</a>。</p>
+
+<p>因为大文件会比小文件占据更多的 RAM 空间，所以当可用 RAM 数量很小时请求较大的文件（如音频或视频文件）可能导致更多的缓存文件更新如果要发布的文档很大，并且数量很多，或者在 IIS 主机上还运行着 RAM 占用量很大的其他应用程序，则可以通过添加 RAM 来提高系统性能。然而，如果要发布的文件很少并且文件相对很小，则添加 RAM 不会提高计算机性能。</p>
+
+<p>通过调整 Windows 2000 分配给文件缓存的内存数量也可以改善性能。如果服务器主要是用作 Web 服务器，则应配置为应用程序服务器，而不是默认的文件服务器设置。
+<ol>
+<li>在桌面上，打开“我的电脑”并选择“网络和拨号连接”。</li>
+<li>右键单击“本地区域连接”并打开其属性页。</li>
+<li>选择“Microsoft 网络文件及打印共享”，然后选择“属性”。</li>
+<li>在“服务器优化”属性页中，选择“最大化网络应用程序数据吞吐量”。
+</ol>
+</p>
+
+<p>下列计数器可以用来查看缓存活动。选定性能对象后，选择“Internet 信息服务全局”。</p>
+<ul>
+<li>Cache Flushes</li>
+<li>Cache Hits</li>
+<li>Cache Hits &#37</li>
+<li>Cache Misses</li>
+<li>Cached File Handles</li>
+<li>Directory Listings</li>
+<li>Objects</li>
+</ul>
+
+<p>“Cache Hits &#37”值应尽可能的大。如果值较小，特别是当磁盘对象“&#37 磁盘时间”计数器的值很大时，表明服务器无法从缓存获得足够的文件。导致此情况的原因是：请求的文件过多，或缓存太小需要增加缓存。关于缓存应用程序的详细信息，请参阅<a href="iiwarndb.htm">配置应用程序</a>。</p>
+
+<h2><a name="BalancingMemoryUse">平衡内存使用与响应速度</a></h2>
+
+<p>通常，要提高请求响应速度必须将大量内存或处理器资源用于单独的连接，从而减少了当没有请求时可用于其他应用程序的资源。可以为服务器上运行的所有应用程序最大化内存性能，但可能会略微降低站点访问用户的请求响应速度，这是因为内存和处理器资源不能在收到请求后立即可用。</p>
+
+<p>IIS 要求您设置 24 小时内预计的请求数量，以便自动调整内存使用与响应时间之间的平衡。如果更改该预计值，IIS 将更改用于接听新请求的套接字数量。如果该值仅略大于实际连接数目，则连接速度会更快。然而，如果该值远大于实际连接数目，则会浪费内存。关于如何设置连接预计值的说明，请参阅<a href="iiesttr.htm">预计通讯量</a>。</p>
+
+<p>在 IIS 5.0 中，站点具有不同的 IP 地址，但是相同端口共享相同的套接字。因此，使用不同 IP 地址（但都使用端口 80）创建多个站点不会显著增加 IIS 非页面内存损耗。IIS 在所有这些站点间灵活使用这些套接字，从而降低资源损耗。该套接字缓冲池使得 IIS 5.0 比 IIS 4.0 具有更强的能力，能够在相同硬件上维护更多的站点。</p>
+
+<p>然而，套接字缓冲将使 IIS 接听所有的 IP 地址，这可能为由多个网络组成的安全域造成安全危险。同样，带宽限制和性能调整会应用于端口号相同的所有 Web 站点。如果要对单个站点使用带宽限制或进行其他性能调整，必须对要限制的站点禁用套接字缓冲。</p>
+
+<p>IIS 默认设置为启用套接字缓冲，通常不需要修改。然而，对于具有关键性任务并且需要专用套接字缓冲的站点，可以在 /LM/W3SVC/<em>X</em>（其中 <em>X</em> 是站点编号）设置配置数据库条目 (MD_DISABLE_SOCKET_POOLING) 以便转换为 IIS 4.0 行为。应只在站点级禁用套接字缓冲，以便其他非关键性站点仍能利用这一新功能。该属性只能通过脚本设置，并且在 IIS 管理单元中不可用。详细信息，请参阅 <a href="../asp/adsi5ga8.htm">IIS 5.0 中 ADSI 的变化</a>。</p>
+
+
+<hr class="iis" size="1"><p align=center><a href="../../../common/colegal.htm">(C) 1997-1999 Microsoft Corporation。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>关于性能调整</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="关于使用 Windows 2000 中的工具监视 Web 服务器性能的概述。其中包含如何实现有效的监视策略以及在特定情况使用何种工具的建议。">
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="H1_37678224">关于性能调整</a></h1>
+
+<p>要使用户感到满意，就必须确保服务器性能达到最佳。硬件要求根据提供的服务而有所不同。例如，FTP 服务比 Web 服务使用的内存空间要小。另外，Active Server Pages (ASP) 应用程序、公共网关接口 (CGI) 脚本、数据库查询和视频文件对处理器的要求比静态 HTML 页更高。当通信量和站点内容发生变化后，性能也会变化。要有效地调整性能，服务器管理员必须制定一个运用多种工具的监视策略。</p>
+
+<p>此主题包括下列部分：</p>
+
+<ul>
+<li><a href="#TestingandTuning">测试和调整的循环特性</a></li>
+<li><a href="#PerformanceTuning">用于监视性能的工具</a></li>
+<li><a href="#DiskOptimization">磁盘优化</a></li>
+</ul>
+
+<h2><a name="TestingandTuning">测试和调整的循环特性</a></h2>
+<p>性能测试和调整是一个正在进行的过程。要有效地测试和调整，首先必须详细计划评估策略。第一步是测量当前的性能级别。由于服务器的性能在不同时间可能有很大的差异，请确认进行了足够时间的监视以获得服务器真实的活动图。</p>
+
+<p>要改善服务器的性能，请检查整个系统各部分潜在的瓶颈问题。瓶颈可能由不正确或不完善的硬件配置引起，也可能是 IIS 或 Windows 2000 中软件设置引起的。一个好的监视计划应该检查所有情况下的性能状况。</p>
+
+<p>一旦了解服务器如何执行任务，便可以着手进行性能的改善。应该每次进行一项修改，否则很难看出每一项修改的效果。</p>
+
+<p>每次修改完成后，请继续监视，看看修改是取得了满意的效果，还是带来了负面影响。更改一项资源可能导致在其他地方出现瓶颈，因此进行更改后检查所有资源的性能是十分重要的。一旦您评价了修改的效果，就可以确定是否需要做进一步的修改。</p>
+
+<h2><a name="PerformanceTuning">用于监视性能的工具</a></h2>
+
+<p>监视服务器是服务器管理中一项关键性的任务。通过使用适当的监视工具，可以检测服务器问题，评估对 Web 站点内容更改的结果及方便用户对您站点访问的升级计划。</p>
+
+<p>根据您需要的信息选择监视工具和监视方法。例如，如果需要测量您的 Web 服务器的总负荷，可以使用“系统监视器”提供一周的监视结果，显示诸如计算机连接的数量和文件的传输等信息。还例如，如果发现服务器性能下降，可以在“事件查看器”中检查错误，“事件查看器”是由 Windows 2000 生成的用于查看日志的工具。</p>
+
+<p>也可以检查由 IIS 生成的日志来监视服务器。这些日志已经超出了 Windows 2000 生成日志的范围。有关日志记录的详细信息，请参阅<a href="iilogsa.htm">记录站点活动</a>中列出的标题。</p>
+
+<p>除了 Windows 2000 内置的工具，还可以使用其他性能监视工具。详细信息，请参阅<a href="../asp/perf1w13.htm">性能和可升级性测试</a>。</p>
+
+<p>在 Windows 2000 中提供了下列监视工具，这些工具既可以提供实时信息，也可以提供摘要信息：</p>
+
+<ul>
+<li><a href="#Sysmon">系统监视器</a></li>
+<li><a href="#eventviewer">事件查看器</a></li>
+<li><a href="#Taskman">任务管理器</a></li>
+<li><a href="#Netmon">网络监视器</a></li>
+</ul>
+
+<h3><a name="Sysmon">系统监视器</a></h3>
+
+<p>“系统监视器”是一个功能强大的工具，可以用来监视服务器活动或监视所选时间段内服务器的性能。使用此工具，您可以在实时图表或报告中显示性能数据、在文件中收集数据及在关键事件发生时生成警告。“系统监视器”检查用于监视特定“对象”（即特定的控制服务器资源的服务或机制）活动的“计数器”的输出。例如，如果查看调用 Web 服务的对象，您可以看见监视每秒接收的字节数和每秒试图连接次数的计数器。</p>
+
+<p>Windows 2000 已经包括了许多计数器，同时您还可以使用 Windows 2000 Resource Kit 中的实用程序添加磁盘使用率计数器和 TCP 活动计数器对其进行补充（详细信息，请参阅 Resource Kit 文档）。另外，IIS 安装了特殊的计数器，包括 Web 服务计数器、FTP 服务计数器、“Active Server Pages”应用程序计数器和“Internet 信息服务”全局计数器。Web 和 FTP 服务计数器与“Active Server Pages”应用程序计数器监视连接活动，“Internet 信息服务”全局计数器为所有 IIS 服务监视带宽使用和高速缓存活动。</p>
+
+<p>“系统监视器”用来提供有关服务器和站点的负载的短期和长期信息。下表列出了对监视服务器很有用的“系统监视器”计数器，并给每个计数器提供了一个理想的值。由于空间限制，忽略了每个对象和计数器前面的计算机名。</p>
+
+<table border=1 width=95% cellpadding=1 cellspacing=1>
+<caption align=top></caption>
+<tr><th>对象\计数器</th><th>理想值</th></tr>
+<tr><td>内存\页数/秒</td><td>00&#150;20（如果大于 80，表示有问题）。</td></tr>
+<tr><td>内存\可用字节数</td><td>最少 4 MB。</td></tr>
+<tr><td>内存\提交的字节数</td><td>不超过物理内存的 75%。</td></tr>
+<tr><td>内存\未分页的字节池</td><td>固定的（缓慢的增长表示存在内存泄露问题）。</td></tr>
+<tr><td>处理器\% 处理器时间</td><td>小于 75%。</td></tr>
+<tr><td>处理器\中断次数/秒</td><td>与处理器有关。486/66 处理器最大为 1,000；P90 为 3,500；P200 大于 7,000。越低越好。 </td></tr>
+<tr><td>处理器\系统处理器队列长度</td><td>小于 2。</td></tr>
+<tr><td>磁盘（逻辑磁盘或物理磁盘）\% 磁盘时间</td><td>尽可能低。</td></tr>
+<tr><td>磁盘（逻辑磁盘或物理磁盘）\队列长度</td><td>小于 2。</td></tr>
+<tr><td>磁盘（逻辑磁盘或物理磁盘）\平均磁盘字节/传输</td><td>尽可能高。</td></tr>
+<tr><td>全局 Internet 信息服务\高速缓存命中数 %</td><td>尽可能高。</td></tr>
+<tr><td>Web 服务\每秒总字节数</td><td>尽可能高。</td></tr>
+<tr><td>Active Server Pages\请求等待时间</td><td>尽可能低。</td></tr>
+<tr><td>Active Server Pages\已排队的请求</td><td>零。</td></tr>
+<tr><td>Active Server Pages\事务数/秒</td><td>尽可能高。</td></tr></table>
+
+<p>有关使用“系统监视器”的详细信息，请参阅 Windows 2000 文档。关于 IIS 提供的计数器列表，请参阅<a href="iicntpm.htm">计数器参考</a>。</p>
+
+<h3><a name="eventviewer">事件查看器</a></h3>
+
+<p>Windows 2000 包括事件日志记录服务，记录诸如错误或成功启动服务这样的事件。这些事件日志可以用“事件查看器”来查看。可以使用“事件查看器”监视“系统”、“安全”和“应用程序”事件日志。通过这些信息，您可以更好地理解导致特殊性能问题的顺序和事件类型。有关使用“事件查看器”的详细信息，请参阅 Windows 2000 文档。</p>
+
+<h3><a name="Taskman">任务管理器</a></h3>
+<p>可以使用“任务管理器”查看正在进行的任务和线程。也可以用于更改给进程分配的优先权。一旦进程完成，新的优先权设置将丢失。可以实时查看 CPU 和内存的使用率，但是随着时间的消逝，信息不能保存。有关使用“任务管理器”的详细资料，请参阅 Windows 2000 文档。</p>
+
+<h3><a name="Netmon">网络监视器</a></h3>
+
+<p>“网络监视器”捕获进出计算机通信量的信息，并给出正在发送及接收帧的详细信息。此工具可以帮助您分析复杂的网络通信模式。通过它，可以查看包含在到您服务器的 HTTP 和 FTP 请求的标题信息。通常需要由您来设计“捕获筛选器”，它的功能与数据库查询类似，独立于正在传输的帧。也可以使用“捕获触发器”，通过初始化一个动作来响应计算机网络的事件，如启动一个可执行文件。有关“网络监视器”的详细信息，请参阅 Windows 2000 文档，包括 Windows 2000 Resource Kit。</p>
+
+<h2><a name="DiskOptimization">磁盘优化</a></h2>
+
+<p>硬盘瓶颈在那些带有大量可随机访问文件集的站点时经常发生。IIS 访问硬盘的频率与内存的数量和请求文件的数量和大小直接相关。如果内存数量不足，或者正在请求大量不同的文件，或者被请求文件的大小过大，IIS 无法在内存中为加快访问速度而保留文件的副本。在这种情况下，IIS 必须从硬盘访问文件。访问的速度和硬盘的大小决定了 IIS 查找请求文件的速度。</p>
+
+<p>要监视硬盘驱动器，使用“系统监视器”记录 CPU 使用百分率，网卡饱和度及“物理磁盘”对象的 &#37; “磁盘时间”计数器。如果 &#37; “磁盘时间”计数器很高，但 CPU 和网卡均没有饱和，磁盘驱动器就造成了瓶颈。有关“物理磁盘” &#37 “磁盘时间”的详细资料，请参阅 Windows 2000 文档。</p>
+
+<p>要改善磁盘访问情况，请使用冗余磁盘阵列 (RAID) 和带区磁盘集。如果您的服务器承担很沉重的数据库工作，您需要几个 GB 的内存，或者带有大量 RAM 高速缓存的磁盘控制器，才能够减小访问的延时。您还需要保留一定的冗余度，这样当某一驱动器失效时，不用立即从备份副本中还原。许多更新的控制器允许“热交换”，这样当驱动器出错时，可以在不强制关闭服务器的情况下对其进行替换。即使这样，保留适当的备份不失为一个好主意，并且在站点以外的位置保留一个副本。</p>
+
+
+<hr class="iis" size="1"><p align="center"><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

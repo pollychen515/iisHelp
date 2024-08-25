@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=Windows-1252">
+<TITLE>Execute</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="Internet Information Services reference information">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="EN-US">
+<META NAME="MS-IT-LOC" Content="Internet Information Services"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H4><A NAME="_execute"></A><SUP></SUP>Execute</H4>
+
+<P>The <B>Execute</B> method calls an .asp file and processes it as if it were part of the calling ASP script. The <B>Execute</B> method is similar to a procedure call in many programming languages. </P>
+
+<H6>Syntax</H6>
+
+<P><B>Server.Execute( </B><I>Path </I><B>)</B></P>
+
+<P>&nbsp;</P>
+
+<H6>Parameters</H6>
+
+<DL>
+<DT><I>Path</I></DT>
+
+<DD>A string specifying the location of the .asp file to execute. If an absolute path is specified for this parameter then it must be for an .asp file within the same application space.</DD>
+</DL>
+
+<H6>Remarks</H6>
+
+<P>The <B>Server.Execute</B> method provides a way of dividing a complex application into individual modules. By employing the <B>Server.Execute</B> method, you can develop a library of .asp files that you can call as needed. This approach is an alternative to server-side includes.</P>
+
+<P>After IIS processes the .asp file specified in the input parameter to <B>Server.Execute</B>, the response is returned to the calling ASP script. The executed .asp file may modify HTTP headers. However, as with any .asp file, if the executed .asp file attempts to modify HTTP headers after it sends a response to the client, it will generate an error.</P>
+
+<P>The path parameter may be for either an absolute or a relative path. If the path is absolute, it must map to an ASP script in the same application as the calling .asp file.</P>
+
+<P>The path parameter may contain a query string.</P>
+
+<P>If either the calling or called .asp file contains a transaction directive, the status of the transaction will apply to the .asp file which contains the directive. For example, if ASP1 below calls ASP2 and the transaction is aborted while ASP2 is being processed, ASP2's <B>OnTransactionAbort</B> (if present) will be called. After ASP2 completes processing, ASP1's <B>OnTransactionAbort</B> (if present) will be called.</P>
+
+<PRE><CODE>ASP1:
+&lt;%@ Transaction=Required%&gt;
+&lt;% 
+  Server.Execute ("Page22.asp") 
+
+  Sub OnTransactionAbort
+
+  Sub OnTransactionCommit
+%&gt;
+
+Asp2.asp:
+&lt;%@ 
+  Transaction=Required
+
+  Sub OnTransactionAbort
+
+  Sub OnTransactionCommit
+%&gt;
+</CODE></PRE>
+
+<H6>Example</H6>
+
+<P>The following example demonstrates executing an .asp file that returns some text. The output from these two scripts is:</P>
+
+<P>I am going to ASP2</P>
+
+<P>Here I am</P>
+
+<P><B><CODE>ASP1</CODE></B></P>
+
+<PRE><CODE>&lt;HTML&gt;&lt;BODY&gt;&lt;%  Response.Write("I am going to execute ASP2 &lt;BR&gt;")
+  Server.Execute("/myasps/asp2.asp")
+%&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</CODE></PRE>
+
+<P><B>ASP2</B></P>
+
+<PRE><CODE>&lt;HTML&gt;&lt;BODY&gt;&lt;% Response.Write("Here I am")%&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+</CODE></PRE>
+
+<H6>Applies to</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/vbob7838.htm"><B>Server</B> Object</A></P>
+
+<H6>See Also</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/vbob9waa.htm"><B>Transfer</B></A>, <A HREF="/iishelp/iis/htm/asp/vbob7z78.htm"><B>OnTransactionAbort</B></A>, <A HREF="/iishelp/iis/htm/asp/vbob1n04.htm"><B>OnTransactionCommit</B></A></P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-1999 Microsoft Corporation. All rights reserved.</a></em></p>
+</BODY>
+</HTML>

@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>关于安全性</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="description" CONTENT="Web 服务器安全特征和向导信息主题概述，可以用来验证用户、控制访问、加密通信、审核活动和使用证书。">
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="H1_37678347">关于安全性</a></h1>
+
+<p>本主题包括 Internet 信息服务 5.0 版提供的五个主要的安全元素的概述：验证、访问控制、加密、审核和证书。本节还包含如何配置 Web 服务器安全的信息、IIS 中新的任务向导介绍和 IIS 安全标准支持的注释。下面的主题包括：</p>
+
+<UL>
+<li><A href="#wizards">新任务向导</A></li>
+<li><A HREF="#authenticationbasics">验证</A></li>
+<li><A HREF="#accesscontrolbasics">访问控制</A></li>
+<li><A HREF="#certificatesbasics">证书</A></li>
+<li><A HREF="#encryptionbasics">加密</A></li>
+<li><A HREF="#auditingbasics">审核</A></li>
+<li><A HREF="#standardsused">执行的标准</A></li>
+<li><A HREF="#getstarted">设置安全性</A></li>
+</UL>
+
+
+<h2><A NAME="wizards"></A>新任务向导</h2>
+<p>IIS 5.0 包括三个新安全任务向导。“证书”向导使得获取和管理服务器证书更容易。“CTL 向导”使得创建和管理证书信任列表更容易。这两个向导代替了以前 IIS 中用于这些任务的程序。“权限向导”使得设置目录和文件的权限更容易。（权限也可以由在 NTFS 中和先前版本的 IIS 中使用的程序来设置。）详细信息，请参阅<a href="iikeysc.htm">使用新的安全任务向导</a>。</p>
+
+<h2><a name="authenticationbasics">验证概述</a></h2>
+<p>Internet 信息服务提供与 Windows 完全集成的安全功能。支持五种验证的方法，这样您可以确认请求访问您的 Web 站点用户的身份：</p>
+
+<ul>
+<li><strong>匿名验证</strong>允许任意用户进行访问，不询问用户名和密码。</li>
+<li><strong>基本验证</strong>将提示用户输入用户名和密码，通过网络“非加密”发送。</li>
+<li><strong>摘要式验证</strong>是一个新特性，操作与基本验证类似，但密码作为“散列”的值发送。散列值是源自文本消息（如密码）的数字，通过它要解密原始文本是不可行的。摘要式验证仅用于 Windows 2000 域控制器的域。</li>
+<li><strong>集成 Windows 验证</strong>使用散列技术鉴定用户，而不通过网络实际发送密码。</li>
+<li><strong>证书</strong>是可以用来建立安全套接字层 (SSL) 连接的数字验证凭据。它们也可以用于验证。</li>
+</ul>
+
+<p>可以使用这些方法授权用户访问您站点上的公共区域，而阻止未授权用户访问您的私人文件和目录。要学习各种在您的 Web 服务器中使用验证方法的详细信息，请参阅<A HREF="iiathsc.htm">验证</A>。</p>
+
+
+<h2><A NAME="accesscontrolbasics"></A>访问控制概述</h2>
+<p>使用 NTFS 访问权限和 Web 服务器的安全基础，您可以定义授予 Windows 用户和组文件和目录访问的级别。例如，如果一个企业决定在您的 Web 服务器上公布它的目录，您需要为这个企业创建一个 Windows 用户帐户，然后配置特定 Web 站点、目录或文件的权限。权限配置应该只允许服务器管理员和企业的所有人更新 Web 站点的内容。允许公共用户浏览 Web 站点，但是不能更改站点内容。有关设置 NTFS 权限的详细信息，请参阅<A HREF="iidfpsc.htm">设置目录或文件的 NTFS 权限</A>。</p>
+
+<p>WebDAV 是 HTTP 1.1 协议的扩展,促进了基于 HTTP 连接的文件和目录管理。尽管使用 WebDAV“动词”或命令，属性还是可以添加到文件和目录，或者从文件和目录读取。文件和目录可以远程编辑、创建、删除、移动或复制。可以通过 Web 服务器权限或 NTFS 权限配置附加的访问控制。详细信息，请参阅<a href="iiacnsc.htm">关于访问控制</a>或 <A href="wcwbdav.htm">WebDAV 发布</A>。</p>
+
+<h2><A NAME="certificatesbasics"></A>证书概述</h2>
+<p>证书是允许服务器和客户彼此验证的数字标识文档。他们请求在服务器和客户端浏览器建立 SSL 连接，通过此连接可以发送加密信息。IIS 中基于证书的 SSL 特性由服务器证书、客户端证书和不同的数字密钥组成。可以使用 Microsoft Certificate Services 创建这些证书或者从可相互信任的第三方机构获得，该机构称为证书颁发机构 (CA)。有关如何设置证书和密钥的详细信息，请参阅<a href="iisslsc.htm">设置服务器上的 SSL</a>。</p>
+
+<h3>服务器证书</h3>
+<p>服务器证书给用户提供了一种确认您的 Web 站点身份的方法。服务器证书包含详细的标识信息，如与服务器内容相关机构的名称，签发证书机构的名称和用于建立加密连接的“公用密钥”。此信息用于向用户保证 Web 服务器内容的真实性和安全的 HTTP 连接的完整性详细信息，请参阅<a href="iiabcsc.htm">关于证书</a>。</p>
+
+<h3>客户证书</h3>
+<p>使用 SSL，您的 Web 服务器还有通过检查客户证书内容验证用户的选项。典型的客户证书包含关于用户和签发证书及“公用密钥”的机构的详细信息。可以使用客户证书验证连同 SSL 加密技术来执行一个较高安全的方法，以检验用户的身份。详细信息，请参阅<a href="iiabcsc.htm">关于证书</a>。</p>
+
+<h2><A NAME="encryptionbasics"></A>加密概述</h2>
+<P>您可以允许用户以一种安全的方法（使用加密）与您的服务器交换个人信息，如信用卡号或电话号码。信息在发送前由加密对其进行“编码”，接收后由解密进行“解码”。IIS 中这种加密的基础是 SSL 3.0 协议，提供了与用户建立加密通讯链接的安全方法。SSL 确认您的 Web 站点的真实性同时可有选择地确认正在访问受限制 Web 站点用户的身份。</P>
+
+<p> 证书包括用于建立 SSL 安全链接的“密钥”。“密钥”是在建立 SSL 连接时验证服务器和客户机的唯一值。“公钥”和“私钥”组成 SSL 的“密钥对”。Web 服务器使用密钥对协商与用户 Web 浏览器的安全连接，确定保护通讯所需的加密级别。</p>
+
+<p>对于此类型的连接，Web 服务器和用户浏览器都应该具有一致的加密、解密能力。在交换过程加密过程中，或者“会话”，密钥被创建。您的服务器和 Web 浏览器都使用会话密钥加密、解密传输信息。会话密钥的加密程度或“强度”，使用"位"来测量。最大的位号由会话密钥、加密和安全的最大级组成。尽管这些最大加密密钥强度提供了最大的安全性，他们还是需要更多的服务器资源去实现。通常 Web 服务器的会话密钥长度为 40 位，但是根据所需的安全等级也可以是 128 位。详细信息，请参阅<a href="iiencsc.htm">加密</a>。</p>
+
+<H4>Server-Gated Cryptography</H4>
+<P>Server-Gated Cryptography (SGC) 是 SSL 的扩充，允许使用 IIS 出口版本的金融机构使用加强 （128 位） 加密。虽然 IIS 5.0 中已内置了 SGC 功能，但使用 SGC 时仍然需要特殊的 SGC 证书。详细信息，请参阅<a href="iistesc.htm">设置加密强度</a>。</P>
+
+
+<h2><A NAME="auditingbasics"></A>审核概述</h2>
+<P>可以使用安全审核技术监视大范围的用户和 Web 服务器的安全活动。推荐定期审核您的服务器配置，检测可能被未授权访问影响和篡改资源的区域。可以使用集成的 Windows 实用程序、IIS 5.0 内置的日志记录特性或 Active Server Pages (ASP) 应用程序创建自己的审核日志。详细信息，请参阅<a href="iiaudsc.htm">审核</a>。 </P>
+
+
+<h2><A NAME="standardsused"></A>执行的标准</h2>
+<p>IIS 中许多安全功能执行 Internet 通讯标准。这些标准有助于应用程序和信息的一致与跨平台使用。Microsoft 承诺配合 Internet 与计算机委员会，一起协助构建良好的标准，同时自己执行这些标准。有关 IIS 安全功能执行标准的详细信息，请参考下面列出的相应链接：</p>
+
+<p><a href="http://www.armadillo.huntsville.al.us/" target="_blank">Fortezza</a> (http://www.armadillo.huntsville.al.us/)  美国政府安全标准，通常称作 Fortezza，IIS 5.0 中支持此标准。此标准满足防御消息系统 (Defense Message System) 安全体系结构，使用密码机制提供消息的机密性、完整性、验证和对消息、组件及系统访问控制。服务器和浏览器软件以及 PCMCIA 卡硬件均执行这些特性。Fortezza 在美国政府内是一个使用很广的机制。</p>
+
+<p><a href="http://home.netscape.com/eng/ssl3/index.html" target="_blank">安全套接字层 (SSL 3.0)</a> (http://home.netscape.com/eng/ssl3/index.html) 是一个基于公钥的安全协议，由安全通道 (Schannel) 安全提供者执行。SSL 安全协议在 Internet 浏览器和服务器的验证、信息的完整性和机密性中广泛使用。</p>
+
+<p><a href="http://www.w3.org/" target="_blank">基本验证</a> (http://www.w3.org/) 是 HTTP 1.0 规范的一部分，使用 Base64 编码格式在网络上发送密码。大多数浏览器都支持此规范。</p>
+
+<p><a href="http://www.ics.uci.edu/pub/ietf/http/rfc2069.txt" target="_blank">摘要式验证</a> (http://www.ics.uci.edu/pub/ietf/http/rfc2069.txt) 是 IIS 5.0 的新特性，按”散列“在网络上发送验证信息，与代理服务器兼容。</p>
+
+<p><a href="http://www.rsa.com/standards/" target="_blank">PKCS&nbsp;#7</a> (http://www.rsa.com/standards/) 描述加密数据的格式，如安全包含信息的数字签名和数字信封。所有这些都包含在 IIS 的验证特性中。</p>
+
+<p><a href="http://www.rsa.com/standards/" target="_blank">PKCS&nbsp;#10</a> (http://www.rsa.com/standards/) 描述申请证书的格式，将提交到证书颁发机构。</p>
+
+<p>有关 Windows 和网络安全的其他问题，请访问 Microsoft 安全 Web 站点 <a href="http://www.microsoft.com/isapi/redir.dll?prd=ie&ar=security" target="_blank">http://www.microsoft.com/security/</a> 或 Windows 安全站点 <a href="http://www.microsoft.com/isapi/redir.dll?prd=win2000&ar=security&sbp=Server&pver=5.0&os=Win2000" target="_blank">http://www.microsoft.com/ntserver/security/</a>。</p>
+
+<h2><a name="getstarted">设置安全性</a></h2>
+<p>在配置 Web 服务器安全之前，请首先确定保护 Web 和 FTP 站点所需的安全级别。例如，如果需要创建一个允许特定用户访问个人信息（如财务和健康记录）的 Web 站点，那么就需要一个坚固的安全配置。此配置应该可以可靠地验证指定的用户并仅限于这些用户进行访问。</p>
+
+<p> 大多数的 Web 服务器安全依赖于 Windows 安全配置。如果没有正确地配置 Windows 安全功能，就不可能保护您的 Web 服务器。</p>
+
+<p>如果没有这样作过，请执行下面的步骤：</p>
+
+<ul>
+<li>配置 Windows 管理员帐户。</li>
+<li>创建并管理用户帐户。</li>
+<li>创建并管理组。</li>
+<li>定义 Windows 安全策略。</li>
+</ul>
+
+<p>详细信息，请参考 Windows 文档。Microsoft Windows 2000 Server Resource Kit 中也包含许多安全信息。</p>
+
+<p>作为安全配置的一部分，您应该将您硬盘的分区转换为 NTFS 分区。NTFS 硬盘分区提供精确的文件和目录访问控制，在保存文件时比文件分配表 (FAT) 分区更有效。可以使用 Windows 转换工具将硬盘分区转换成 NTFS 格式。详细信息，请参阅 Windows 文档。</p>
+
+<p>下一步，确定用户在访问您的 Web 和 FTP 站点时哪些文件和目录是公用的。将公用内容和受限内容放置在不同的目录中。</p>
+
+<p>要开始配置您的 Web 服务器的安全，请参阅<a href="iiacnsc.htm">关于访问控制</a>取得正确配置匿名 Web 服务器访问的信息。</p>
+
+
+<hr class="iis" size="1"><p align=center><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+</body>
+</html>

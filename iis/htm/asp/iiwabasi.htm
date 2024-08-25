@@ -1,0 +1,242 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>创建 ASP 页</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="说明如何创建 .asp 文件并在文件中插入脚本命令。"><META HTTP-EQUIV="Content-Type" content="text/html; charset=gb2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+
+<body bgcolor="#FFFFFF" text="#000000"><FONT FACE="宋体">
+
+
+<h1><a name="H1_37765342">创建 ASP 页</a></h1>
+</span></font>
+
+<p>Active Server Pages (ASP) 文件是带有 .asp 扩展名的文本文件，它由以下内容组合而成：</p>
+
+<ul>
+<li>文本</li>
+<li>HTML 标记</li>
+<li>服务器端脚本</li>
+</ul>
+
+<p>使用 .asp 扩展名重命名现有的 .htm 或 .html 文件可以快速创建 .asp 文件。如果文件不包含任何 ASP 功能，则服务器不进行 ASP 脚本处理，并很快将文件发送到客户端。这为 Web 开发人员提供了极大的灵活性，因为即使目前不希望对文件添加 ASP 功能，也可以使用 .asp 作为扩展名。</p>
+
+<p>要在 Web 上发布 .asp 文件，请将新文件保存到 Web 站点上的虚拟目录（保证目录启用了“脚本”或“执行”权限）。下一步，使用浏览器输入文件的 URL 来请求文件。（请记住，ASP 页必须接受处理，因此您无法通过输入其物理路径请求 .asp 文件。）文件装入浏览器后，可以发现服务器返回了 HTML 页。这看起来有些奇怪，但要记住服务器解析并执行所有 ASP 服务器端脚本先于发送文件。用户将始终接收到标准的 HTML。</p>
+
+<p>可以使用任何文本编辑器创建 .asp 文件。随着您的进步，您将发现使用带有更多 ASP 支持的编辑器（如 Microsoft Visual InterDev 等）效率更高。（详细信息，请访问 Microsoft Visual InterDev Web 站点 <A HREF="http://msdn.microsoft.com/isapi/redir.dll?prd=vinterdev&ar=home&pver=6.0" target="_blank">http://msdn.microsoft.com/vinterdev/</A>。） </P>
+
+<h2><a name="whatisascript">添加服务器端脚本命令</a></h2>
+
+<p>服务器端脚本是一系列指令，用于向 Web 服务器连续发出命令。（如果您以前开发过 Web 站点，可能对运行在 Web 浏览器的客户端脚本较为熟悉。）在 .asp 文件中，脚本通过分隔符与文本和 HTML 标记区分开来。“分隔符”是一个或一组字符，用来标明单元的起始和结束。HTML 的分隔符是小于 (&lt;) 和大于 (&gt;) 号，中间包含着 HTML 标记。</p>
+
+<p>ASP 使用分隔符 &lt;% 和 %&gt; 来包括脚本命令。在分隔符之间，可以包括任何符合所用脚本语言规范的命令。下面将给出包含脚本命令的 HTML 页示例：</p>
+
+<pre>&lt;HTML&gt;
+&lt;BODY&gt;
+该页上次刷新于 &lt;%= Now() %&gt;。
+&lt;/BODY&gt;
+&lt;/HTML&gt;</pre>
+
+<p>VBScript 函数“Now()”返回当前的日期和时间。Web 服务器处理该页时，将 <code>&lt;%= Now() %&gt;</code> 替换为当前日期和时间，并将该页的下列结果返回到浏览器：</p>
+
+<pre>该页上次刷新于 01/29/99 2:20:00 PM。</pre>
+
+<p>由分隔符括起的命令称为“主要脚本命令”。这些命令使用主要脚本语言进行处理。脚本分隔符内使用的任何命令必须符合主要脚本语言的规定。默认情况下，主要脚本语言为 VBScript。也可以设置其他默认语言。请参阅<a href="iiwascln.htm">使用脚本语言</a>。</p>
+
+<p>如果已经对客户端脚本较为熟悉，那么一定了解用于界定脚本命令和脚本语言的 HTML &lt;SCRIPT&gt; 标记。当需要定义 .asp 文件中以多种语言编写的程序时，也可以对服务器端脚本使用 &lt;SCRIPT&gt; 标记。详细信息，请参阅<a href="iiwascln.htm">使用脚本语言</a>。</p>
+
+<h2><a name="singleexpressions">混合 HTML 和脚本命令</a></h2>
+
+<p>可以在 ASP 分隔符内包括主脚本语言所允许的任何语句、表达式、程序或操作符。VBScript 和其他脚本语言中的“语句”是在语法上完全独立的单元，用来表示某种动作、声明或定义。下面给出的条件语句“If...Then...Else”便是常用的 VBScript 语句。</p>
+
+<pre>&lt;%
+Dim dtmHour
+
+dtmHour = Hour(Now())
+
+If dtmHour &lt; 12 Then
+strGreeting = "早上好！"
+Else
+strGreeting = "您好！"
+End If
+%&gt;
+
+&lt;%= strGreeting %&gt;</pre>
+
+<p>在不同的时间内，该脚本将值“早上好！”或值“您好！”分配给字符串变量 <code>strGreeting</code>。<code>&lt;%= strGreeting %&gt;</code> 语句则将变量的当前值发送到浏览器。</p>
+
+<p>这样，如果用户在中午 12:00（以 Web 服务器所在时区为准）之前查看该脚本，将看到如下文字：</p>
+
+<pre>早上好！</pre>
+
+<p>如果在中午 12:00 之后查看该脚本，则文字变为：</p>
+
+<pre>您好！</pre>
+
+<p>可以将 HTML 文本包括在语句之间。例如以下脚本将 HTML 文本夹在“If...Then...Else”语句之中，所得到的结果与上例相同：</p>
+
+<pre>&lt;%
+Dim dtmHour
+
+dtmHour = Hour(Now())
+
+If dtmHour &lt; 12 Then
+%&gt;
+早上好！
+&lt;% Else %&gt;
+您好！
+&lt;% End If %&gt;</pre>
+
+<p>如果条件为真，即如果时间在中午之前，Web 服务器将条件之后的 HTML 文本 (早上好) 发送到浏览器，否则向浏览器发送“Else”之后的 HTML 文本。这种将 HTML 和脚本命令相混合的方法对于将多行 HTML 文本嵌入“If...Then...Else”语句十分方便。如果想在 Web 页中的多个地方显示问候语，上面的示例是很有帮助的。只需设置一次变量值，便可重复用于显示。</p>
+
+<p>如果不想将 HTML 文本置于脚本命令之间，也可以从脚本命令内将 HTML 文本返回浏览器。要将文本返回浏览器，可使用 ASP 内建的对象“Response”。以下示例程序与上面两个脚本结果相同：</p>
+
+<pre>&lt;%
+Dim dtmHour
+
+dtmHour = Hour(Now())
+
+If dtmHour &lt; 12 Then
+Response.Write "早上好！"
+Else
+Response.Write "您好！"
+End If
+%&gt;
+</pre>
+
+<p>“Response.Write”将其后面的文本发送到浏览器。如果希望动态创建返回到浏览器的文本，请在语句中使用“Response.Write”。例如，可以建立包含多个变量值的字符串。如希望详细学习 Response 对象以及其他常用对象，请参阅<a href="iiwacomu.htm">使用组件和对象</a>以及<a href="iiwacont.htm">将内容发送到浏览器</a>。而现在只需要了解将脚本命令插入 HTML 页存在多种方法。</p>
+
+<p>可以将使用默认主脚本语言编写的程序包括在 ASP 分隔符之内。详细信息，请参阅<a href="iiwascln.htm">使用脚本语言</a>。</p>
+
+<p>如果您在使用 JScript 命令，可以将作为语句块标志花括号直接插入 ASP 命令，即使它们是分散的 HTML 标记和文本。例如：</p>
+
+<pre>&lt;%
+if (screenresolution == "low")
+  {
+%&gt;
+这是页面的文本版本。
+&lt;%
+  }
+else
+  {
+%&gt;
+这是页面的多媒体版本。
+&lt;%
+  }
+%&gt;</pre>
+
+<p>--或--</p>
+
+<pre>&lt;%
+if (screenresolution == "low")
+  {
+Response.Write("这是页面的文本版本。")
+  }
+else
+  {
+Response.Write("这是页面的多媒体版本。")
+  }
+%&gt;</pre>
+
+
+
+<h2><a name="aspdirectives">使用 ASP 指令</a></h2>
+
+<p>ASP 提供了您所使用的脚本语言中未包括的指令。这些指令为输出指令和处理指令。</p>
+
+<p>ASP 的输出指令 <code>&lt;%=  表达式 %&gt;</code> 显示了表达式的值。该输出指令与使用“Response.Write”所显示的信息相同。例如，输出表达式 <code>&lt;%= city %&gt;</code> 将在浏览器上显示单词 <code>Baltimore</code>（变量的当前值）。</p>
+
+<p>ASP 的“处理指令” <code>&lt;%@ 关键字 %&gt;</code> 给出 ASP 处理 .asp 文件所需的信息。例如，以下指令将 VBScript 设置为页面的主脚本语言：</p>
+
+<pre>&lt;%@ LANGUAGE=VBScript %&gt;</pre>
+
+<p>处理指令必须位于 .asp 文件的首行。要在页面中添加多条指令，这些指令必须位于相同的分隔符内。请勿将处理指令置于由“#include”语句包括的文件内。（详细信息，请参阅<a href="iiwainc.htm">包含文件</a>。）必须在符号 @ 和关键字之间加入空格。处理指令具有以下关键字：</p>
+
+<ul>
+<li><A HREF="dire0bz9.htm">LANGUAGE</A> 关键字设置用于 .asp 文件的脚本语言。请参阅<a href="iiwascln.htm">使用脚本语言</a>。</li>
+<li><A HREF="dire92zp.htm">ENABLESESSIONSTATE</A> 关键字指定 .asp 文件是否使用会话语句。请参阅<a href="iiapsess.htm">管理会话</a>。</li>
+<li><A HREF="dire7ixx.htm">CODEPAGE</A> 关键字设置 .asp 文件的代码页（字符编码）。</li>
+<li><A HREF="dire8dr8.htm">LCID</A> 关键字设置文件的位置表示符。</li>
+<li><A HREF="dire5t0u.htm">TRANSACTION</A> 关键字指定 .asp 文件将在事务环境下运行。请参阅<a href="iiaptran.htm">了解事务</a>。</li>
+</ul>
+
+<p><strong>要点</strong> 可以在一条指令中包含多个关键字。关键字/值对必须由空格分开。等号两边不要留有空格。</p>
+
+<p>以下示例既设置了脚本语言也设置了代码页：</p>
+
+<pre>&lt;%@ LANGUAGE="JScript" CODEPAGE="932" %&gt;</pre>
+
+<h2><a name="H2_37775911">脚本中的白空格</a></h2>
+
+<p>如果主脚本语言是 VBScript 或 JScript，ASP 将从命令中删除白空格。对于所有其他脚本语言，ASP 将保留白空格，以便这些对书写位置或缩进有所要求的语言能被正确解释。白空格包括空格、制表符、回车符和行缩进等。</p>
+
+<p>对于 VBScript 和 JScript，可以在起始分隔符和结束分隔符之间使用白空格，以使命令简单易读。以下语句均为有效：</p>
+
+<pre>&lt;% Color = "Green" %&gt;
+
+&lt;%Color="Green"%&gt;
+
+&lt;%
+Color = "Green"
+%&gt;</pre>
+
+<p>ASP 将删除结束分隔符和语句起始分隔符之间的白空格。不过，使用空格来增强可读性倒是一个良好的习惯。如果需要保留两个语句间的白空格（如显示语句中变量的值时），请使用 HTML 不间断空格符 (&amp;nbsp;)。例如：</p>
+
+<pre>&lt;%
+'使用字符串值定义两个变量。
+strFirstName = "Jeff"
+strLastName = "Smith"
+%&gt;
+
+&lt;P&gt;该 Web 页自定义为 &lt;%= strFirstName %&gt;&amp;nbsp;&lt;%= strLastName %&gt;。&lt;/P&gt;</pre>
+
+
+<hr class="iis" size="1">
+<p align="center"><a href="/iishelp/common/colegal.htm">&copy; 1997-1999 Microsoft Corporation。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

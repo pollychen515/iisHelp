@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>重新启动 IIS</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="重新启动 IIS 服务">
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="restart">重新启动 IIS</a></h1>
+
+<p>在 IIS 5.0 中，可以停止并重新启动所有 IIS 管理单元中的 Internet 服务，这使得在应用程序运行不正常或变得不可用时无需重新启动计算机。 </p>
+
+
+<big>重新启动 IIS</big><br>
+
+<ol>
+<li>在 <a href="javascript://" onclick="Activate(); return false">Internet 信息服务管理单元</a>中，选择内容窗格中的“计算机”图标，然后单击“动作”按钮。</li>
+<li>单击“动作”按钮并选择“重新启动 IIS”。</li>
+<li> 从下拉菜单中，选择“重新启动 Internet 服务”、“停止 Internet 服务”、“启动 Internet 服务”或“重新启动 <em>计算机名称</em>”。</li>
+</ol>
+
+<p><strong><span style="color: #0000FF"><font color="#0000FF">要点</font></span></strong> 重新启动将停止所有的 Drwtsn32.exe、Mtx.exe 和 Dllhost.exe 进程，目的是重新启动 Internet 服务。 无法使用基于浏览器的 Internet 服务管理器 (HTML) 来重新启动 IIS。</p>
+
+<p><strong>注意</strong> 重新启动 Internet 服务必须使用上述方法，而不用 Windows 2000 服务管理单元。由于多个 Internet 服务在一个进程中运行，因此 Internet 服务的关闭和重新启动与其他 Windows 服务有所不同。为了按计划重启，或与第三方或自定义工具集成，这里提供了命令行方式的 <a href="javascript://" onclick="Activate(); return false">IIS 管理单元</a> 重新启动功能：Iisreset.exe。请参阅以下命令行用法和参数。</p>
+
+<font face="courier">
+<table border="0" cellpadding="4" cellspacing="1" width="95%">
+
+<tr>
+<td align="Left" valign="top" colspan="2"><a name="timeout"><strong>iisreset [computername]</strong><br>&nbsp;</a></td>
+</tr>
+
+<tr>
+<td valign="Top">/RESTART</td>
+<td valign="Top">停止并重新启动所有 Internet 服务。</td>
+</tr>
+
+<tr>
+<td valign="Top">/START </td>
+<td valign="Top">启动所有 Internet 服务。</td>
+</tr>
+
+<tr>
+<td valign="Top">/STOP</td>
+<td valign="Top">停止所有 Internet 服务。</td>
+</tr>
+
+<tr>
+<td valign="Top">/REBOOT </td>
+<td valign="Top">重新启动计算机。</td>
+</tr>
+
+<tr>
+<td valign="Top">/REBOOTONERROR</td>
+<td valign="Top">如果在启动、停止或重新启动 Internet 服务的过程中发生错误，请重新启动计算机。</td>
+</tr>
+
+<tr>
+<td valign="Top">/NOFORCE</td>
+<td valign="Top">如果尝试平稳停止 Internet 服务时失败，请不要强行终止。</td>
+</tr>
+
+<tr>
+<td valign="Top">/TIMEOUT:val</td>
+<td valign="Top">指定<a href="iitime.htm#timetable">超时值</a> （以秒为单位），等待成功停止 Internet 服务。如果指定了 /REBOOTONERROR 参数，超时到期时计算机将重新启动。默认值为 20 秒后重启，60 秒后停止， 0 秒重新启动计算机。</td>
+</tr>
+
+<tr>
+<td valign="Top">/STATUS</td>
+<td valign="Top">显示所有 Internet 服务的状态。</td>
+</tr>
+
+<tr>
+<td valign="Top">/ENABLE </td>
+<td valign="Top">启用重新启动本地系统上的 Internet 服务。</td>
+</tr>
+
+<tr>
+<td valign="Top">/DISABLE</td>
+<td valign="Top">禁用重新启动本地系统上的 Internet 服务。</td>
+</tr>
+
+</table> </font>
+
+<p><strong>相关主题</strong></p>
+<ul>
+<li>有关启动和停止单个 Web 和 FTP 站点的信息，请参阅<a href="iiststp.htm">启动和停止站点</a>。</li>
+</ul>
+
+<hr class="iis" size="1"><p align="center"><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+<script language="javascript">
+<!--
+function Activate() {
+if (navigator.appName == "Microsoft Internet Explorer"){
+	window.open("iisnapin.htm", "NewWin", 'toolbar=no, left=200, top=200, scrollbars=no, resizeable=no,  width=350, height=350');
+	}
+	else if (navigator.appName == "Netscape") {
+		window.open("iisnapin.htm", "NewWin",  'toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=yes,resizable=0,width=350,height=350,top=200,left=200');
+	}
+}
+//-->
+</script>
+
+</font>
+</body>
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>常见问题</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="有关设置站点、发布内容、使用新功能、常见问题疑难解答以及获得技术支持等问题的快速解答。">
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="faq">常见问题</a></h1>
+
+<ol>
+<li><strong><a href="#pub">如何发布文档或 Web 页？</a></strong></li>
+<li><strong><a href="#vdir">如何在 Web 或 FTP 站点上创建虚拟目录？</a></strong></li>
+<li><strong><a href="#website">如何创建 Web 站点？</a></strong></li>
+<li><strong><a href="#multisite">如何创建多个 Web 站点？</a></strong></li>
+<li><strong><a href="#replicate">如何复制 Web 内容？</a></strong></li>
+<li><strong><a href="#iisreset">如何停止和重新启动 Internet 服务？</a></strong></li>
+<li><strong><a href="#browscap">为什么站点的一些访问者不能获得专门为他们的浏览器设计的 Web 页？</a></strong></li>
+<li><strong><a href="#acessability">在哪里可找到为残障用户提供的辅助特性的信息？</a></strong></li>
+<li><strong><a href="#techsupport">如何获得 IIS 的技术支持？ </a></strong></li>
+<li><strong><a href="#namechange">是否可以更改 Web 站点的名称并将对旧站点的请求重新定向到新站点？</a></strong></li> <li><strong><a href="#hostheader">如何支持在 HTTP 请求头中不传递主机名的老式浏览器？</a></strong></li> <li><strong><a href="#mmc">是否可以使用 MMC 中的 Internet 信息服务管理单元通过代理服务器远程管理我的站点？</a></strong></li>
+<li><strong><a href="#remote">试图使用基于浏览器的 Internet Service Manager (HTML) 来远程管理服务器时，为什么某些 Web 站点并不出现？在运行 IIS 的计算机上运行 Internet 服务管理器 (HTML) 时，列出了所有  Web 站点。 </a></strong></li>
+<li><strong><a href="#ntfs1">如何才能知道驱动器是否设置为使用 NTFS？</a></strong></li>
+<li><strong><a href="#ntfs2">如何将格式化为文件分配表 (FAT) 文件系统的驱动器或分区转换为 NTFS？</a></strong></li>
+<li><strong><a href="#ftpaccess">是否可以设置 FTP 站点使不同用户拥有不同级别的访问权限？ </a></strong></li>
+<li><strong><a href="#cert1">如何确认服务器证书是否已被附加到特定的 Web 站点？</a></strong></li>
+<li><strong><a href="#cert2">是否可将多个服务器证书附加到一个 Web 站点？</a></strong></li>
+<li><strong><a href="#cert3">是否可将同一服务器证书附加到多个站点？</a></strong></li>
+<li><strong><a href="#cert4">是否可将服务器证书附加到一个 FTP 站点？</a></strong></li>
+<li><strong><a href="#cert5">是否应该创建服务器证书的副本？</a></strong></li>
+<li><strong><a href="#currentconn">如何知道有多少用户与我的 FTP 服务相连？</a></strong></li>
+</ol>
+
+<hr>
+<ol>
+
+<li><strong><a name="pub">如何发布文档或 Web 页？</a></strong></li>
+
+<p> 要发布文档，请将文件移到 \inetpub\wwwroot 目录。接着再在浏览器的地址栏中键入 http://服务器名/文件名，查看已发布的文件。详细信息，请参阅<a href="iitstart.htm">使用 IIS 快速进行站点设置</a>。 </p>
+
+<p><a href="#faq"><IMG SRC="../../../common/up.gif" ALT="返回页首" ALIGN="TOP" border="0"></a></p>
+
+<li><strong><a name="vdir">如何在 Web 或 FTP 站点上创建虚拟目录？</a></strong></li>
+
+<p>可以使用 <a href="javascript://" onclick="Activate(); return false">Internet 信息服务管理单元</a>在 Web 站点上创建虚拟目录。主题<a href="iicodirv.htm">创建虚拟目录</a>包含关于如何完成此任务的过程信息。 </p>
+
+<p><a href="#faq"><IMG SRC="../../../common/up.gif" ALT="返回页首" ALIGN="TOP" border="0"></a></p>
+
+<li><strong><a name="website">如何创建 Web 站点？</a></strong></li>
+
+<p>在 Microsoft&reg Windows 2000 上安装 IIS 时，已经为您设置了一个默认的 Web 站点。可以立即在默认发布地点发布您的内容。详细信息，请参阅<a href="iiaddvs.htm">添加站点</a>。 </p>
+
+<p><a href="#faq"><IMG SRC="../../../common/up.gif" ALT="返回页首" ALIGN="TOP" border="0"></a></p>
+
+<li><strong><a name="multisite">如何创建多个 Web 站点？</a></strong></li>
+
+<p>要创建多个 Web 站点，必须首先确保每个站点都有唯一的标识。为此，需要与网络管理员联系，获得多个 IP 地址或者分配多个主机头名。详细信息，请参阅<a href="iinmres.htm">关于名称解析</a>。</p>
+
+
+
+<p><a href="#faq"><IMG SRC="../../../common/up.gif" ALT="返回页首" ALIGN="TOP" border="0"></a></p>
+
+<li><strong><a name="replicate">如何复制 Web 内容？</a></strong></li>
+
+<p> 可以使用“内容部署”服务（以前称为“内容复制系统”，即 CRS）在 Web 群集的计算机之间复制内容和设置。“内容部署” Microsoft&reg 站点服务器的一个特征。关于“内容部署”服务的详细信息，请参阅 Site Server 文档。关于群集的详细信息，请参阅<a href="iicluswl.htm">复制和群集</a>。</p>
+
+<p><a href="#faq"><IMG SRC="../../../common/up.gif" ALT="返回页首" ALIGN="TOP" border="0"></a></p>
+<li><strong><a name="iisreset">如何停止和重新启动 Internet 服务？</a></strong></li>
+
+<p> 几个 Internet 服务可能在单一进程中运行，并且 Internet 服务通常由其他进程组成。为此，Internet 服务与其他 Windows 服务不同，可以高效地关闭和重新启动。关于使用 IISReset.exe 的详细信息，请参阅<a href="iicodira.htm">重新启动 IIS</a>。</p>
+
+<p><a href="#faq"><IMG SRC="../../../common/up.gif" ALT="To Top" ALIGN="TOP" border="0"></a></p>
+
+<li><strong><a name="browscap">为什么站点的一些访问者不能获得专门为他们的浏览器设计的 Web  页？</a></strong></li>
+
+<p>如果使用<a href="../asp/comp3xx0.htm">浏览器性能组件</a>来决定客户查看能力，当更新版本的浏览器发布之后，就应该周期性地更新服务器上的文件 Browscap.ini。既可以从 Windows 2000 CD 盘中获得更新后的 Browscap.ini，也可以从以下站点 <a href="http://www.microsoft.com/isapi/redir.dll?prd=msft&ar=home" target="_blank">http://www.microsoft.com</a> 下载。</p>
+
+<p><a href="#faq"><IMG SRC="../../../common/up.gif" ALT="返回页首" ALIGN="TOP" border="0"></a></p>
+
+<li><strong><a name="acessability">在哪里可找到为残障用户提供的辅助特性的信息？</a></strong></li>
+
+<p>关于 Windows 辅助功能的常规信息，请参阅 Windows 文档。关于与 IIS 相关的辅助功能信息，请参阅 <a href="iiacess.htm">IIS 的辅助功能</a>。</p>
+
+<p><a href="#faq"><IMG SRC="../../../common/up.gif" ALT="返回页首" ALIGN="TOP" border="0"></a></p>
+
+<li><strong><a name="techsupport">如何获得有关 IIS 的技术支持？</a></strong></li>
+
+<p>对于技术支持，如果是以初始设备制造商 (OEM) 软件包的部件形式预安装了本软件，或者本软件已被预先包含在购买的个人计算机上，则必须与 PC 或服务器制造商联系以获得支持。请查阅 PC 或服务器随带文档，获取制造商的电话号码。 </p>
+
+<p> 如果以零售形式获得本产品，并且遇到的技术问题联机文档无法解答，请访问 Web 上的 <A HREF="http://www.microsoft.com/isapi/redir.dll?prd=support&sbp=portal" TARGET="_new">Microsoft 产品支持服务</A>。</p>
+
+
+<p><a href="#faq"><IMG SRC="../../../common/up.gif" ALT="返回页首" ALIGN="TOP" border="0"></a></p>
+
+<li><strong><a name="namechange">是否可以更改 Web 站点的名称并将对旧站点的请求重新定向到新站点？</a></strong></li>
+
+<p>可以正确配置 Web 站点，使其对旧名称和新名称均作出相应，假定网络能够正确地将两种请求指向您的计算机。这样，访问者使用旧名称也可以访问您的站点，而且还会告之新的名称。有关如何分配名称的说明，请参阅<a href="iinamvs.htm">命名 Web 站点</a>。</p>
+
+<p><a href="#faq"><IMG SRC="../../../common/up.gif" ALT="返回页首" ALIGN="TOP" border="0"></a></p>
+
+
+<li><strong><a name="hostheader">如何支持在 HTTP 请求头中不传递主机名的老式浏览器？ </a></strong></li>
+
+<p>可以向默认主页添加脚本，将旧的浏览器重新定向到正确的站点或者建议升级浏览器的网页（如果浏览器不接收 cookies）。关于如何检测浏览器类型以及如何相应进行重定向的指令，请参阅<a href="iisuphh.htm">支持旧浏览器中的主机头名</a>。</p>
+
+<p><a href="#faq"><IMG SRC="../../../common/up.gif" ALT="返回页首" ALIGN="TOP" border="0"></a></p> 
+
+
+<li><strong><a name="mmc">是否可以使用 MMC 中的</a> <a href="javascript://" onclick="Activate(); return false">Internet 信息服务管理单元</a>通过代理服务器远程管理站点？</strong></li>
+
+<p>MMC 中的 IIS 管理单元专门用于本地管理正在运行 IIS 的计算机，或者管理 Intranet中的另一个 IIS 站点。要远程使用 IIS 管理单元，可以使用<a href="iivsovr.htm#ts">终端服务</a>。</p>
+
+<p>要想通过 Internet 或代理服务器实现远程管理任务，可以使用基于浏览器的 Internet 服务管理器 (HTML)。详细信息，请参阅<a href="iiahttp.htm">远程管理</a>。</p>
+
+<p><a href="#faq"><IMG SRC="../../../common/up.gif" ALT="返回页首" ALIGN="TOP" border="0"></a></p>
+
+<li><strong><a name="remote">试图使用基于浏览器的 Internet Service Manager (HTML) 来远程管理服务器时，为什么某些 Web 站点并不出现？在运行 IIS 的计算机上运行 Internet 服务管理器 (HTML) 时，列出了所有 Web 站点。</a></strong></li>
+
+<p>您可以作为“操作者”而非“管理员”连接。另外，请确保您已经将正确端口号附加到管理站点。详细信息，请参阅<a href="iiahttp.htm">远程管理</a>。</p>
+
+<p><a href="#faq"><IMG SRC="../../../common/up.gif" ALT="返回页首" ALIGN="TOP" border="0"></a></p>
+
+
+
+<li><strong><a name="ntfs1">如何才能知道驱动器是否设置为使用 NTFS？</a></strong></li>
+
+<p>在“Windows 资源管理器”中，选择驱动器并其打开属性页。在“常规”选项卡上，列出了文件系统类型。 </p>
+
+<p><a href="#faq"><IMG SRC="../../../common/up.gif" ALT="返回页首" ALIGN="TOP" border="0"></a></p>
+
+<li><strong><a name="ntfs2">如何将格式化为文件分配表 (FAT) 文件系统的驱动器或分区转换为 NTFS？</a></strong></li>
+
+<p>在命令行下，键入 <strong>convert <em>drive letter:</em>/FS:NTFS</strong>.NTFS 驱动器不能转换回 FAT 类型。详细信息，请参阅 Windows 文档。 </p>
+
+<p><a href="#faq"><IMG SRC="../../../common/up.gif" ALT="返回页首" ALIGN="TOP" border="0"></a></p>
+
+<li><strong><a name="ftpaccess">是否可以设置 FTP 站点使不同用户拥有不同级别的访问权限？ </a></strong></li>
+
+<p>为了使访问仅限于某些计算机，请选择 IIS 管理单元中的一个站点，打开其属性页，选择“目录安全性”选项卡，然后再单击“IP 地址及域名限制”段内的“编辑”按钮。可以允许和拒绝访问除指定的计算机或子网以外的所有计算机和子网。 </p>
+<p>在 NTFS 文件系统中，也可以使用单个虚拟目录并设置 NTFS 权限，以便允许或拒绝不同 Windows 用户帐户进行各种不同的访问。</p>
+
+
+
+<p><a href="#faq"><IMG SRC="../../../common/up.gif" ALT="返回页首" ALIGN="TOP" border="0"></a></p>
+
+<li><strong><a name="cert1">如何确认服务器证书是否已被附加到特定的 Web 站点？</a></strong></li>
+
+<p> 选择站点并打开其属性页。在“目录安全性”属性页中，“安全通讯”下有一个“编辑”按钮。如果此按钮已启用，表明已有证书与 Web 站点关联。如果此按钮变暗，则表明需要将服务器证书与站点关联才能使用安全套接字协议层 (SSL) 功能。</p>
+
+<p><a href="#faq"><IMG SRC="../../../common/up.gif" ALT="返回页首" ALIGN="TOP" border="0"></a></p>
+
+<li><strong><a name="cert2">是否可将多个服务器证书附加到一个 Web 站点？</a></strong></li>
+
+<p> 否。每个 Web 站点只能与一个服务器证书关联。</p>
+
+<p><a href="#faq"><IMG SRC="../../../common/up.gif" ALT="返回页首" ALIGN="TOP" border="0"></a></p>
+
+<li><strong><a name="cert3">是否可将同一服务器证书附加到多个站点？</a></strong></li>
+
+<p> 是。但一个服务器证书则可与任意 Web 站点关联。</p>
+
+<p><a href="#faq"><IMG SRC="../../../common/up.gif" ALT="返回页首" ALIGN="TOP" border="0"></a></p>
+
+<li><strong><a name="cert4">是否可将服务器证书附加到一个 FTP 站点？</a></strong></li>
+
+<p>否。FTP 站点不支持 SSL 功能。</p>
+
+<p><a href="#faq"><IMG SRC="../../../common/up.gif" ALT="返回页首" ALIGN="TOP" border="0"></a></p>
+
+<li><strong><a name="cert5">是否应该创建服务器证书的副本？</a></strong></li>
+
+<p>是。服务器证书非常有用，它是服务器 SSL 功能的核心。要创建服务器证书的备份，请将整个证书复制到一张软盘上，然后再放到安全的地方。 </p>
+
+<p><a href="#faq"><IMG SRC="../../../common/up.gif" ALT="返回页首" ALIGN="TOP" border="0"></a></p>
+
+<li><strong><a name="currentconn">如何知道有多少用户与我的 FTP 服务相连？</a></strong></li>
+
+<p>在 <a href="javascript://" onclick="Activate(); return false">IIS 管理单元</a>中，选择一个 FTP站点，打开其属性页，然后再单击“当前会话”按钮。详细信息，请参阅<a href="iiptnov.htm">性能调整</a>。</p>
+
+<p><a href="#faq"><IMG SRC="../../../common/up.gif" ALT="返回页首" ALIGN="TOP" border="0"></a></p>
+
+</ol>
+
+<hr class="iis" size="1"><p align="center"><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+<script language="javascript">
+<!--
+function Activate() {
+if (navigator.appName == "Microsoft Internet Explorer"){
+	window.open("iisnapin.htm", "NewWin", 'toolbar=no, left=200, top=200, scrollbars=no, resizeable=no,  width=350, height=350');
+	}
+	else if (navigator.appName == "Netscape") {
+		window.open("iisnapin.htm", "NewWin",  'toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=yes,resizable=0,width=350,height=350,top=200,left=200');
+	}
+}
+//-->
+</script>
+
+<SPAN STYLE="display:none"><LAYER VISIBILITY=HIDE> (以下词汇用于搜索；不会在网页上显示。) 故障、疑难解答、修复、修理、快速、快速启动、容易、快捷方式、基础、简介、介绍、概述、初级、开始、启动、初学者、中级、常见问题、发布、网页、创建、虚拟目录、新建、添加、主机、网站、web 站点、多个、许多、一些、浏览器、兼容性、兼容的、浏览器、不同版本、设计、禁用、辅助功能、残疾人士、视力有障碍者、肢残人士、 诵读有困难者、声音、残障人士、技术支持、产品支持、电话支持、帮助、重定向、更改、站点名、较早的浏览器、版本、主机头名、http、请求、远程、htmla、mmc、代理服务器、基于浏览器的、admi、通过网络、通过 internet、internet 服务管理程序、ism、 html、ntfs、 ntlm、fat、转换、分区、ftp、安全性、服务器证书、证书、自述文件、版本发布说明、摘要、公用、通常、最新、最近、其他、附录、附录、增补、补遗、新、较新、最新、文档、修订、存档、未存档、已知问题、问题、帮助、获得帮助、支持、技术支持、技术-支援、产品支持、故障、障碍诊断、疑难解答、错误、崩溃、中断、不能工作、失败、新建、升级、旧的、坏的、xml、可扩展的标记语言、流媒体、音频、视频、网络停止 w3svc、网络停止 iisadmin、网络启动 w3svc、网络启动 iisadmin、重新启动 IIS、IISReset.exe、IISReset </LAYER></SPAN>
+
+</font>
+</body>
+</html>

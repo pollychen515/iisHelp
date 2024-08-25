@@ -1,0 +1,104 @@
+<!doctype html public "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>创建虚拟目录</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META name="DESCRIPTION" content="关于如何在 Web 或 FTP 站点上创建新的虚拟目录的步骤。">
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="creatingvirtualdirectories">创建虚拟目录</a></h1>
+
+<p>如果 Web 站点包含的文件位于其他主目录的驱动器上，或在其他计算机上，就必须创建虚拟目录将这些文件包含到您的 Web 站点中。要使用其他计算机上的目录，您必须指定该目录的通用命名约定 (UNC) 名称并提供用户名和密码用作访问权限。</p>
+
+<big>创建虚拟目录</big><br>
+
+<ol>
+
+<li>在 <a href="javascript://" onclick="Activate(); return false">Internet 信息服务管理单元</a>中，<script language="javascript">
+<!--
+function Activate() {
+if (navigator.appName == "Microsoft Internet Explorer"){
+	window.open("iisnapin.htm", "NewWin", 'toolbar=no, left=200, top=200, scrollbars=no, resizeable=no,  width=350, height=350');
+	}
+	else if (navigator.appName == "Netscape") {
+		window.open("iisnapin.htm", "NewWin",  'toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=yes,resizable=0,width=350,height=350,top=200,left=200');
+	}
+}
+//-->
+</script>选中要添加目录的 Web 站点或 FTP 站点。</li>
+<li>单击“动作”按钮，然后指向“新建”，并选择“虚拟目录”。</li>
+<li>使用“新建虚拟目录”向导完成此任务。</li>
+</ol>
+
+<p><strong>提示</strong> 如果使用 NTFS，还可以通过在 Windows 资源管理器中右键单击某个目录创建虚拟目录，单击“共享”，然后选择“Web 共享”属性页。</p>
+
+
+
+<big>删除虚拟目录</big><br>
+
+<ol>
+
+<li>在 <a href="javascript://" onclick="Activate(); return false">Internet 信息服务管理单元</a>中，<script language="javascript">
+<!--
+function Activate() {
+if (navigator.appName == "Microsoft Internet Explorer"){
+	window.open("iisnapin.htm", "NewWin", 'toolbar=no, left=200, top=200, scrollbars=no, resizeable=no,  width=350, height=350');
+	}
+	else if (navigator.appName == "Netscape") {
+		window.open("iisnapin.htm", "NewWin",  'toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=yes,resizable=0,width=350,height=350,top=200,left=200');
+	}
+}
+//-->
+</script>选中要删除的虚拟目录。</li>
+<li>单击“动作”按钮。然后选择“删除”。删除虚拟目录将不删除相应的物理目录或文件。</li>
+</ol>
+
+ <p><strong>注意</strong> 在 IIS 3.0 中，所有未与指定 IP 地址相关联的虚拟目录都可以从服务器上的“所有” Web 站点进行访问。在 IIS 4.0 和 5.0 中，这种现象得到了改进，这样可以使用多个 IP 地址从多个 Web 站点访问虚拟目录。要使用多个 IP 地址从多个 Web 站点访问虚拟目录，必须将虚拟目录添加到“每个”站点中。</p> 
+
+<hr class="iis" size="1"><p align="center"><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

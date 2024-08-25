@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=Windows-1252">
+<TITLE>Accommodating International Clients</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="Internet Information Services reference information">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="EN-US">
+<META NAME="MS-IT-LOC" Content="Internet Information Services"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_k2_accommodating_international_clients"></A><SUP></SUP>Accommodating International Clients</H1>
+
+<P>One of the advantages of distributing information over the Internet or an intranet is that you can create international Web sites that users can access from different countries. Users can request pages that have been localized into their own language, which they read in localized browser versions.</P>
+
+<P>When you create a Web site that contains pages in different languages, you may need to convert strings that are passed between the browser and the Web server, or between an ASP script and a COM component. If all pages on the Web site are written in the default character set used by the Web server, ASP does the conversion automatically. If you author pages in different character sets, however, you need to use ASP commands that specify how the strings should be converted. For example, if your site contains some pages in one of the Japanese character sets and others in one of the Chinese character sets, you need to specify which character set ASP should use while processing strings for a particular page.</P>
+
+<P>ASP also provides commands that support the cultural conventions for different locales, such as the format used for currency, time, and date. As with the string conversion commands, you need to use the locale commands only if your scripts do not use the default locale for the Web server. For more information, see the following topics.
+
+<UL type=disc>
+	<LI><A HREF="/iishelp/iis/htm/asp/eadg6e7n.htm">Setting the Code Page for String Conversions</A>: Includes sample code for converting strings used by ASP.</li>
+
+	<LI><A HREF="/iishelp/iis/htm/asp/eadg9s8i.htm">Setting the Locale Identifier</A>: Describes how to change the format used for currency, time, and date.</li>
+</UL>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-1999 Microsoft Corporation. All rights reserved.</a></em></p>
+</BODY>
+</HTML>

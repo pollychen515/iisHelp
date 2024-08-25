@@ -1,0 +1,182 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>调试 ASP 脚本</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="本主题描述如何使用 Microsoft 脚本调试程序查找并改正 ASP 脚本错误。"><META HTTP-EQUIV="Content-Type" content="text/html; charset=gb2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><FONT FACE="宋体">
+
+
+<h1><a name="debuggingaspscripts">调试 ASP 脚本</a></h1>
+</span></font>
+
+<p>无论是否有经验，您都可能会遇到程序错误，或叫“bug”，这将影响服务器端脚本正常工作。因此，对于开发成功和强大的 ASP 应用程序，特别是当应用程序变得越来越复杂时，调试（即发现和改正脚本错误的过程）就显得极其重要了。</p>
+
+<h2><a name="themicrosoftscriptdebuggertool">Microsoft 脚本调试程序工具</a></h2>
+
+<p>Microsoft 脚本调试程序工具是一个强大的调试工具，可以帮助您快速定位错误并可以交互式地测试服务器端脚本。使用脚本调试程序，也可以与 Windows Internet Explorer 3.0 或更高版本一起使用，您可以：</p>
+
+<ul>
+<li>每次运行一行服务器端脚本。</li>
+<li>在执行服务器端脚本期间，打开命令窗口以监视变量、属性或数组元素的值。</li>
+<li>在脚本的指定行，（使用调试程序或脚本命令）设置断点以暂停执行服务器端脚本。</li>
+<li>运行服务器端脚本时跟踪过程。</li>
+</ul>
+
+<p><strong>注意</strong>  可以使用调试程序查看脚本和定位错误，但不能直接编辑脚本。要改正错误，必须使用编辑程序来编辑脚本，保存更改，然后再次运行该脚本。</p>
+
+<h2><a name="enablingdebugging">启用调试</a></h2>
+
+<p>在开始调试服务器端脚本之前，首先必须将 Web 服务器配置为支持 ASP 调试。有关说明和信息，请参阅<a href="../core/iiwarndd.htm">启用 ASP 调试</a>。</p>
+
+<p>启用 Web 服务器调试后，您可以使用下面任意一种方法调试脚本：</p>
+
+<ul>
+<li>手工打开脚本调试程序以调试 ASP 服务器端脚本。</li>
+<li>使用 Internet Explorer 请求 .asp 文件。如果文件包含错误或故意用来中断执行的语句，脚本调试程序将自动启动，显示脚本并标出错误的来源。</li>
+</ul>
+
+<h2><a name="scriptingerrors">脚本错误</a></h2>
+
+<p>调试服务器端脚本的过程中，可能遇见几种类型的错误。有些错误可能导致脚本执行错误、中断程序的执行或返回错误的结果。</p>
+
+<h3><a name="syntaxerrors">语法错误</a></h3>
+
+<p>“语法”错误是一种经常遇到的错误，它是由错误的脚本语法引起的。例如，命令拼写错误或传递给函数的参数值错误都可能产生错误。语法错误可以阻止脚本运行。</p>
+
+<h3><a name="runtimeerrors">运行时错误</a></h3>
+
+<p>“运行时”错误发生在脚本开始执行之后，它是由试图执行不可能的操作的脚本指令所引起的。例如，下面的脚本包含一个函数，该函数以 0 作为变量的除数（非法数学操作），产生运行时错误：</p>
+
+<pre>&lt;SCRIPT LANGUAGE=VBScript RUNAT=SERVER&gt;
+Result = Findanswer(15)
+Document.Write ("结果是 " &Result)
+
+Function Findanswer(x)
+'这条语句产生运行时错误。
+Findanswer = x/0
+End Function
+&lt;/SCRIPT&gt;</pre>
+
+<p>运行时错误必须改正，脚本才会不中断地执行。</p>
+
+<h3><a name="logicalerrors">逻辑错误</a></h3>
+
+<p>逻辑错误是最难以发现的错误。逻辑错误是由键入错误或程序逻辑上的缺陷引起的，脚本运行没问题，但产生的结果不正确。例如，如果服务器端脚本将对列表中的值进行排序，但在脚本中本该使用 &lt; 符号（小于号）的地方错误地使用了 &gt; 符号（大于号），将导致排序结果不正确。</p>
+
+<h2><a name="errordebuggingtechniques">错误调试技术</a></h2>
+
+<p>您可以使用几种不同的调试技术定位错误源并测试应用程序。</p>
+
+<h3><a name="justintimedebugging">实时（JIT）调试</a></h3>
+
+<p>当运行时错误中断了服务器端脚本执行时，Microsoft 脚本调试程序自动启动，显示 .asp 文件，将语句指针指向导致错误的行，并生成错误消息。使用这种类型的调试，也叫“实时调试”，计算机将暂停进一步执行程序。必须使用编辑程序改正错误并保存所作更改，然后才能继续运行脚本。</p>
+
+<h3><a name="breakpointdebugging">断点调试</a></h3>
+
+<p>当发生错误但无法轻松地找到错误源的时候，预先设置“断点”有时会很有用。断点在指定的脚本行暂停执行脚本。可以在可疑的行前面设置一个或多个不同的断点，然后使用调试程序检查脚本中设置的变量或属性的值。改正错误后，可以清除断点，这样脚本就可以不间断地运行了。</p>
+
+<p>要设置断点，使用脚本调试程序打开脚本，选择脚本中想要中断执行的行，然后从“调试”菜单中选择“切换断点”。然后使用 Web 浏览器重新请求脚本。执行到设置了断点的脚本行后，计算机启动脚本调试程序，显示脚本，并且语句指针指向设置了断点的行。</p>
+
+<h4>在下一条语句中断</h4>
+
+<p>在某些情况下，如果下一条语句不是运行在您所工作的 .asp 文件中，您可能想要启用脚本调试程序的“在下一条语句中断”。例如，如果对驻留在名为 Sales 的应用程序中的 .asp 文件设置了“在下一条语句中断”，则当运行 Sales 应用程序（或已经启用了调试的应用程序）的任何文件中的脚本时都将启动调试程序。有鉴于此，当设置“在下一条语句中断”时，需要注意无论下一条运行的是何种脚本语句，都将启动调试程序。</p>
+
+
+<h3><a name="vbscriptstopstatementdebugging">VBScript 的 Stop 语句调试</a></h3>
+
+<p>也可以添加断点到用 VBScript 编写的服务器端脚本中，方法是在服务器端脚本的可疑部分之前的某个位置插入一条“Stop”语句。例如，下面的服务器端脚本包含一条“Stop”语句，该语句将在脚本调用自定义函数之前暂停执行脚本：</p>
+
+<pre>&lt;%
+intDay = Day(Now())
+lngAccount = Request.Form("AccountNumber")
+dtmExpires = Request.Form("ExpirationDate")
+
+strCustomerID  =  "RETAIL" & intDay & lngAccount & dtmExpires
+
+'在此设置断点
+Stop
+
+'调用注册组件。
+RegisterUser(strCustomerID)
+%&gt;</pre>
+
+<p>请求该脚本时，调试程序启动并自动显示 .asp 文件，并且用语句指针指示出“Stop”语句的位置。在该断点处，您可以选择检查在将变量传递给组件之前赋给变量的值。</p>
+
+<p><strong><FONT COLOR="#0000FF">要点</FONT></strong>  必须将“Stop”语句从生成的 .asp 文件中删除。</p>
+
+<h3><a name="jscriptdebuggerstatementdebugging">JScript 的 Debugger 语句调试</a></h3>
+
+<p>要添加断点到用 VBScript 编写的服务器端脚本中，请在脚本的可疑行之前插入“debugger”语句。例如，下面的脚本中包含“debugger”语句，它用来中断执行，并在每次脚本循环通过一个新值时自动启动脚本调试程序。</p>
+
+<pre>&lt;%@ LANGUAGE=JScript %&gt;
+&lt;%
+for (var count = 1; count &lt;= 10; count++)
+  {
+var eventest = count%2
+//设置断点，使用户可以单步执行脚本。
+debugger
+if (eventest == 0)
+Response.Write("Even value is " + count + "&lt;br&gt;")
+   }
+%&gt;</pre>
+
+<p>必须将“debugger”语句从生成的 .asp 文件中删除。</p>
+
+<p><strong>注意</strong>  不要将“debugger”语句与 JScript 的“break”语句混淆。“break”语句用于退出执行期间当前正在运行的循环，并不激活 Microsoft 脚本调试程序，也不暂停执行。</p>
+
+<h2><a name="tipsfordebuggingscripts">调试脚本的技巧</a></h2>
+
+<p>除了脚本调试程序，一套优秀的调试技巧可以大大减少花费在研究脚本错误源上的时间。虽然大多数错误有明显的来源，如命令拼写错误或缺少变量，但还有某些类型的逻辑和执行错误很难发现。</p>
+
+<p></P>关于 Microsoft 脚本调试程序的详细信息，请参阅位于 <A HREF="http://msdn.microsoft.com/isapi/redir.dll?prd=scripting&ar=home&pver=4.0" target="_blank">http://msdn.microsoft.com/scripting/</A> 的 Microsoft 脚本技术站点。</p>
+
+<hr class="iis" size="1">
+<p align="center"><a href="/iishelp/common/colegal.htm">&copy; 1997-1999 Microsoft Corporation。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

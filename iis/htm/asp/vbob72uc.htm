@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=Windows-1252">
+<TITLE>LCID</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="Internet Information Services reference information">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="EN-US">
+<META NAME="MS-IT-LOC" Content="Internet Information Services"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H4><A NAME="_lcid"></A>LCID</H4>
+
+<P>The<B> LCID</B> property determines the location identifier that will be used to display dynamic content. </P>
+
+<H6>Syntax</H6>
+
+<P><B>Session.LCID</B>(=<I>LCID</I>)</P>
+
+<P>&nbsp;</P>
+
+<H6>Parameters</H6>
+
+<DL>
+<DT><I>LCID</I></DT>
+
+<DD>A valid locale identifier.</DD>
+</DL>
+
+<H6>Remarks</H6>
+
+<P>An <B>LCID</B> specifies the locale identifier, which is a standard international abbreviation that uniquely identifies one of the system-defined locales. If an LCID has been set using the <A HREF="/iishelp/iis/htm/asp/dire8dr8.htm">@LCID</A> directive <B>Session.LCID</B> will override the value set by the directive. </P>
+
+<H6>Example</H6>
+
+<P>The following example demonstrates setting the locale to British English and using the VBScript FormatCurrency method to display the value 125 as currency with the £ symbol:</P>
+
+<P><CODE>&lt;% </CODE></P>
+
+<P><CODE>&nbsp;&nbsp;Session.LCID = 2057</CODE></P>
+
+<P><CODE>&nbsp;&nbsp;Dim curNumb</CODE></P>
+
+<P><CODE>&nbsp;&nbsp;curNumb = FormatCurrency(125)</CODE></P>
+
+<P><CODE>&nbsp;&nbsp;Response.Write (curNumb)</CODE></P>
+
+<P><CODE>%&gt;</CODE></P>
+
+<PRE></PRE>
+
+<H6>Applies To</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/vbob12d0.htm"><B>Session</B> Object</A> </P>
+
+<P>For more information, see <A HREF="/iishelp/iis/htm/asp/eadg4o37.htm">Accommodating International Clients</A>.</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-1999 Microsoft Corporation. All rights reserved.</a></em></p>
+</BODY>
+</HTML>

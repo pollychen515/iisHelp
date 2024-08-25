@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>关于 Windows 事件</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="关于记录 Windows 事件的总体信息。简述对 IIS 事件日志记录有效的选项。">
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="About Windows NT Events">关于 Windows 事件</a></h1>
+
+<P>只要 Windows 启动，在“系统”、“安全性”和“应用程序”日志中自动开始日志记录。对于每种日志，可以筛选要查看的事件，指定要查看的项目数，决定储存项目的周期以及确定日志充满之后是否自动覆盖现有事件。</P>
+
+<h2><a name="aspevents">ASP 错误和 Windows 事件记录。</a></h2>
+
+<p>如果选中“进程选项”属性页上的“不成功的客户请求写入事件日志”复选框，ASP 错误就会被发送给 Windows 事件日志（在“应用程序日志”中）。此复选框对应于 metabase 属性 <a href="../asp/apro2qur.htm">AspLogErrorRequests</a>；也就是说，如果选中该复选框，AspLogErrorRequests 值就为 TRUE。如果不选中该复选框，AspLogErrorRequests 值就为 FALSE。</p>
+
+<p>另一个 metabase 属性，即 <a href="../asp/apro9zfr.htm">AspErrorsToNTLog</a>，决定向 Windows 事件日志发送哪个 ASP 错误AspErrorsToNTLog 的默认值为 FALSE。这意味着只有 ASP 错误的某个子集才被发送给 Windows 事件日志。如果 AspErrorsToNTLog 值为 TRUE，则所有 ASP 错误都被发送给 Windows 事件日志。</p>
+
+<p>如果选中了“进程选项”属性页上的“不成功的客户请求写入事件日志”复选框，而且由于错误比较严重而导致 AspErrorsToNTLog 值为 FALSE，因此，就会将 ASP 错误发送给 Windows 事件日志：</p>
+
+
+<p>100、101、102、103、104、105、106、107、115、190、191、192、193、194、240、241、242。</p>
+
+<p>关于这些错误的描述，请参阅 <a href="iievtasp.htm">Active Server Pages 事件</a>。</p>
+
+<p>不能通过 IIS 管理单元设置 AspErrorsToNTLog 值，而必须采取程序方式设置该属性。关于 metabase 以及采用程序方式管理 IIS 的详细信息，请参阅<a href="../asp/aint7e9l.htm">采取程序方式管理 IIS</a>。 </p>
+
+<p><strong>注意</strong> 如果将 ASP 错误记录到 IIS 日志文件时出现错误，这些错误将被发送给 Windows 事件日志。</p>
+
+<hr class="iis" size="1"><p align=center><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

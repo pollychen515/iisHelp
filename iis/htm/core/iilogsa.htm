@@ -1,0 +1,76 @@
+<!doctype html public "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>记录站点活动</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<meta name="DESCRIPTION" content="包含链接的导航页，这些链接指向关于记录站点活动的主题。可以使用 IIS 中的日志来收集关于 Web 站点上用户活动的信息。">
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="H1_37708915">记录站点活动</a></h1>
+
+<p>启用 Web 站点日志可以收集有关用户活动的信息。信息存储在 ASCII 文件或 ODBC 相容数据库中。IIS 的记录信息日志功能不在 Windows 2000 的事件日志或性能监视功能之列。日志中的信息包括站点的访问者、访问者查看的内容以及最后一次查看信息的时间等。可以使用日志来评估内容受欢迎程度或识别信息瓶颈。</p>
+
+<p>本节包括：</p>
+
+<ul>
+<li><strong><a href="iiabtlg.htm">关于记录站点活动</a>：</strong>关于日志、日志格式的描述、日志文件大小的讨论和创建新的日志文件的概述。</li>
+<li><strong><a href="iienblg.htm">启用日志记录</a>：</strong>启用或禁用 Web 或 FTP 站点或目录的日志。</li> <li><strong><a href="iispllg.htm">跟踪处理器使用</a>：</strong>设置进程帐户以确定进程外应用程序对 CPU 的使用情况。</li>
+<li><strong><a href="iiconlg.htm">自定义 W3C 扩充日志记录</a>：</strong>指定 W3C 扩充日志文件中所包括的字段。</li>
+<li><strong><a href="iinamlg.htm">保存日志文件</a>：</strong>指定日志文件目录和用于创建新日志文件的选项。</li>
+<li><strong><a href="iicnvlg.htm">将日志文件转换为 NCSA 格式</a>：</strong>使用命令行实用程序 Convlog.exe 将日志转换为 NCSA 通用日志文件格式。</li>
+</ul>
+
+<p>本节<b>不</b>包括：</p>
+
+<ul>
+<li>要使用监视工具而不使用日志，请参阅<a href="iiptnov.htm">性能调整</a>。</li>
+<li>要生成、查看或了解安全日志（审核），请参阅<a href="iisecsa.htm">安全</a>。</li>
+</ul>
+
+<hr class="iis" size="1"><p align=center><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+<span style="display:none"><LAYER VISIBILITY=HIDE> (The following words are used by Search; they are not intended to be displayed on the page.) log, logs, logging, track, tracking, feedback, pattern, flow, gridlock, unavailable, too busy, bulge, rush, simultaneous, large, fast, quick, improve, improvement, improvements, analyze, tune, fine-tune, chart, graph, table, stats, collect, hits, hit count, statistics, report, reports, server activity, record, recording, records, odbc, database, event, events, perform, performance, visits, visitors, usage, traffic, load, busy, busier, busiest, heavy, light, processor, use, handle, handling, monitor, view, total, hour, hours, hourly, day, days, daily, week, weeks, weekly, month, months, monthly, midnight, noon, greenwich, gmt, local time, locale, locality, date, time, date/time, time/date, bottleneck, bottlenecks, process accounting, per site, processor, cpu, utilization, resources, scripts, cgi, malfunction, malfunctioning, slow, poor, disproportionate, bandwidth, out of process, out-of-process, oop, out-of-proc, app, apps, application, applications, programs, logfile, logfiles, files, directory, directories, create, rollover, roll over, cycle, new, ncsa, common, format, formats, iis, w3c, extended, convlog, convlog.exe, convert, links, more information </layer></span> </font>
+</body>
+</html>

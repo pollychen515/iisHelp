@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>使用服务器端包含指令</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+
+<META NAME="DESCRIPTION" CONTENT="关于如何将 SSI 命令插入到 HTML 文件中的过程信息。">
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+
+<h1><a name="H1_37754921">使用服务器端包含指令</a></h1>
+
+<p>使用服务器端包含 (SSI) 命令指示 Web 服务器在将页发送给用户之前把文本、图形或应用程序信息添加到 Web 页中。SSI 提供特殊处理命令以便可以获得有关文件的信息或显示 CGI 变量的值。SSI 还提供可用来将应用程序或外壳命令的输出插入到 Web 页中的命令。</p>
+
+<h2><a name="includingfiles">包含文件</a></h2>
+
+<p>要包含文件，请使用 <a href="iisiinc.htm"><strong>#include</strong></a> 命令。例如，要在请求 Web 页时将名为 Copyright.inc 的文件插入页中，请在 Web 页中使用以下命令：</p>
+
+<pre>&lt;!-- #include file="copyright.inc" --&gt;</pre>
+
+<p>在该示例中，Copyright.inc 文件必须与包含文件处于同一目录中。包含 <strong>#include</strong> 命令的文件必须是 Web 站点中的已发布文件。被包含文件不要求特殊的文件扩展名；然而，赋予被包含文件 .inc 扩展名被认为是一个好的编程习惯，因为这样可将它们与其他类型的文件区分开来。</p>
+
+<p>要通过指定相对于当前目录的路径定位被包含文件，请使用 <strong>file</strong> 参数。例如，如果包含文件位于名为 Documents 的目录中，而被包含文件位于名为 Documents\Common 的子目录中，请使用以下命令：</p>
+
+<pre>&lt;!-- #include file="common.inc" --&gt;</pre>
+
+<p>当在 Web 站点中使用文档工作时，可能希望将共享文件保存在特殊的虚拟目录中。要通过指定文件的完整虚拟路径来定位被包含文件，请使用 <strong>virtual</strong> 参数。例如，要包含来自 /Common 虚拟目录的文件，请使用以下命令：</p>
+
+<pre>&lt;!-- #include virtual="/common/copyright.inc" -&gt;</pre>
+
+<p><strong><font color="#0000FF">要点</strong></font>  在编译时间而不是运行时间处理 #include 语句。因此不能将该语句包含在客户端程序的逻辑中。</p>
+
+
+
+<h2><a name="H2_37756964"> 包含应用程序的输出</a></h2>
+
+<p>除简单包含文件内容外，可通过使用 SSI 命令运行应用程序或外壳命令并将输出包含在 Web 页中。要运行应用程序或外壳命令，请使用 <a href="iisiexc.htm"><strong>#exec</strong></a> 命令。应用程序可以是 CGI 程序、ASP 应用程序或 ISAPI 扩展名。例如：</p>
+
+<pre>&lt;!-- #exec cgi=/scripts/guestbook.exe?FirstName+LastName&gt;</pre>
+
+<p>应用程序的路径必须是完整虚拟路径或 URL。可以通过在应用程序文件名后跟随问号 (?) 和加号 (+) 连接的参数列表，将参数传递给应用程序。</p>
+
+<p><strong><span style="color: #FF0000"><font color="#FF0000">警告</font></span></strong>允许普通 Web 文件运行应用程序将带来安全问题。可以在仍允许 Web 页使用其他 SSI 命令的同时禁用 <strong>#exec</strong> 命令。详细信息，请参阅<a href="iisiref.htm">服务器端包含参考</a>。</p>
+
+<hr class="iis" size="1">
+<p align="center"><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+
+</font>
+</body>
+</html>

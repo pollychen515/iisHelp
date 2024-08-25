@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>使用新的安全任务向导</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="新安全任务向导的概述和步骤信息。其中包括“Web 服务器证书向导”、“CTL 向导”和“权限向导”等信息。">
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="managingkeypairs">使用新的安全任务向导</a></h1>
+
+<p>Internet 信息服务现在具有了三个新的安全任务向导，可以简化大多数维护 Web 站点的安全所需的安全任务。可以使用“Web 服务器证书向导”管理 IIS 和服务器证书中的安全套接字层 (SSL)。证书用于确认服务器和用户的浏览器之间的安全链接。可以使用“CTL 向导”管理证书信任列表 (CTL)。证书信任列表列出了每个 Web 站点或虚拟目录的信任证书颁发机构。可以使用“权限向导”分配 Web 和 NTFS 访问权限给 Web 站点、虚拟目录以及服务器上文件。</p>
+
+<ul>
+<li><a href="#aboutwizard">关于向导</a></li>
+<li><a href="#accesswizard">使用向导</a></li>
+</ul>
+
+<a name="aboutwizard"></a>
+<H2><A NAME="H2_448403304"></A>关于向导</H2>
+<P>证书、CTL 和权限向导执行了许多以前 Internet 信息服务管理单元执行的任务。除了“权限向导”外，这些功能在 Internet 信息服务<nobr>管理单元</nobr>中已经不再存在。</P>
+
+<H3>Web 服务器证书向导</H3>
+<P>获得、配置和更新服务器证书现在可以在“Web 服务器证书向导”的一个界面中完成。向导可以监测是否已经安装了服务器证书以及证书是否期满失效。可以使用向导将服务器证书替换为从证书颁发机构 (CA)、联机 CA（如 Microsoft Certificate Services）或者以前从密钥管理器中获得的文件中另外获得的证书。也可以将证书从一个 Web 站点重新指定到另一个 Web 站点。另外，还可以使用向导查看证书。</P>
+
+<p><strong>注意</strong> 服务器证书的联机请求只能用于企业证书服务。IIS Web 服务器证书向导不承认同一计算机上的单机证书服务。使用脱机证书请求将请求保存到文件之中，然后再将其作为脱机请求进行处理（请参阅证书服务文档）。使用本地企业证书服务的联机注册不受影响。</p>
+
+<P><STRONG>注意</STRONG> 如果未使用联机证书颁发机构，需要将由“Web 服务器证书向导”生成的请求文件保存到磁盘，并将其发送到 CA。收到响应时，可以启动向导并从上次中止处开始。如果替换证书，IIS 将使用旧证书，直到完成新的申请。有关支持 Internet 信息服务的证书颁发机构的列表，请参阅<a href="iiocrsc.htm">获取服务证书</a>。</P>
+
+<H3>CTL 向导</H3>
+<P>可以使用“CTL 向导”创建和配置证书信任列表 (CTL)。CTL 是特定 Web 站点的可信的证书颁发机构 (CA) 的列表。通过配置 CTL，可以允许使用某个 CA 发布的证书，同时禁止使用其他 CA 发布的证书。CTL 对下面那种 Internet 服务提供商 (ISP) 特别有用，它们在服务器上拥有多个 Web 站点，并且对每个站点需要不同的已认可证书颁发机构列表。CTL 只能用于 Web 站点级，不能用于 FTP 站点。</P>
+
+<H3>权限向导</H3>
+<P>权限向导所采取的方案为建立 Web 和 FTP 权限、NTFS 访问权限以及验证方案提供了捷径。无需为每个区域分别建立用户接口，只需选择与站点需求最为接近的方案，并由向导建立所有的访问权限和验证方案。这样做的一个优点是向导可以确保 Web（或 FTP) 和 NTFS 权限恰好相同，并使用正确的验证方案。所有设置仍可在 IIS 管理单元中进行更改。方案为：</P>
+
+<OL>
+<LI><STRONG>公共 Web 站点</STRONG>。这是最为常用的配置，其中站点上的信息可以通过 Internet 公开使用。它使用匿名验证，并允许用户查看所有文件和访问 Web 服务器上的 Active Server Pages 应用程序。并且授予管理员管理该站点的完全控制权。</LI>
+
+<LI><STRONG>保护 Web 站点</STRONG>。该配置用于企业外联网，它是通过 Internet 进行访问的内部网。使用该站点上的信息将受到限制。它使用基本验证、摘要式验证或集成 Windows 验证。仅允许授权用户查看所有文件并访问 Web 服务器上的 Active Server Pages 应用程序。并且授予管理员管理该站点的完全控制权。</LI>
+</OL>
+
+
+
+<a name="accesswizard"></a><h2><A NAME="H2_448406908">使用向导</A></h2>
+<p>要使用 Internet 信息服务管理单元中的 Web 服务器证书向导和 CTL 向导：</p>
+<ol>
+<li>在“目录安全性”属性页的“安全通信”下单击“服务器证书”，可利用 Web 服务器证书向导并更改有关证书的设置。</li>
+<li>在“目录安全性”或“文件安全性”属性页的“安全通信”下单击“编辑”。在“启用证书信任列表”下，单击“新建”或“编辑”可以利用 CTL 向导并更改与证书信任列表有关的设置。
+</ol>
+
+<p><strong>注意</strong></p>
+<ul>
+<li>要使用 Web 服务器证书向导或 CTL 向导，必须安装有服务器证书。</li>
+<li>要使用“新建”和“编辑”按钮，必须启用证书信任列表。</li>
+</ul>
+
+<p>要使用 Internet 信息服务管理单元中的权限向导：</p>
+<ol>
+<li>选择 Web 或 FTP 站点，然后单击“动作”菜单。</li>
+<li>在列表中，指向“任务”，然后单击“权限向导”。</li>
+</ol>
+
+<p><strong>注意</strong>  在向服务器证书分配 IP 地址、Web 站点和 SSL 端口时，请参阅以下原则：</p>
+
+<ul>
+	<li>不能为每个 Web 站点分配多个服务器证书。</li>
+	<li> 可以将一个证书分配到多个 Web 站点。
+	<li>可以为每个 Web 站点分配多个 IP 地址。</li>
+	<li>可以为每个 Web 站点分配多个 SSL 端口。</li>
+</ul>
+
+
+<hr class="iis" size="1">
+<p align="center"><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

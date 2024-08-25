@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>关于处理器的利用</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="关于监测处理器使用率、建议如何提高处理器性能以及解释处理器限制的概述。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=gb2312">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="ZH-CN">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务"></head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="procutilization">关于处理器的利用</a></h1>
+
+<p>本主题讨论与处理器或“中央处理单元” (CPU) 相关的性能问题。包括下列小节：</p>
+
+<ul>
+<li><a href="#IdentifyingProcessorBottlenecks">标识处理器瓶颈</a></li>
+<li><a href="#ThrottlingUseoftheCPU">限制使用处理器</a></li>
+</ul>
+
+<h2><a name="IdentifyingProcessorBottlenecks">标识处理器瓶颈</a></h2>
+
+<p>CPU 将实际处理计算机收到的指令。信息在计算机不同组件间移动，如 CPU、硬盘和 RAM，这取决于用来移动信息的 CPU 时钟速度和数据总线大小。时钟速度越快，则相同时间间隔内数据总线往返传送的信息就越多。时钟速度通常以 MHz 为单位。数据总线每次可以携带 16、32 或 64 位数据，这取决于总线大小。（携带多少数据也与操作系统以及应用程序基于的传送速率有关。）</p>
+
+<p>处理器瓶颈表现为“CPU % Utilization”值很高，而网络适配卡仍远低于容量。如果“CPU % Utilization”很高，可以：</p>
+
+<ul>
+<li>升级 CPU。</li>
+<li>在同一计算机中添加其他 CPU。</li>
+<li>将站点复制到其他计算机上，由两台计算机间分担通讯量。</li>
+<li>将大量占用处理器的应用程序（如数据库应用程序）移到其他计算机上。</li>
+</ul>
+
+<h2><a name="ThrottlingUseoftheCPU">限制使用处理器</a></h2>
+
+<p>可以启用进程限制，对 CPU 为处理单独 Web 站点的进程外 WAM、ISAPI 以及 CGI 应用程序而花费的时间进行限制。如果一台计算机上有多个站点，并且关心一个站点的进程外应用程序占用 CPU 全部容量，则限制对 CPU 的访问将非常有用，从而防止其他站点使用 CPU。</p>
+
+<p>如果受限制站点的进程外应用程序在指定时间间隔内使用处理器的时间超过指定百分比，则将该事件记入日志，并根据超出指定百分比的溢出量产生一系列结果。这些结果包括：</p>
+
+<ul>
+<li>“Level 1”，如果在指定时间间隔内全部处理器使用超出限制，则事件写入 Windows 2000 事件日志。</li>
+<li>“Level 2”，如果处理器使用超出限制的 150%，则事件写入事件日志，并且将 Web 站点上所有进程外应用程序的 CPU 优先级设置为“空闲”。</li>
+<li>“Level 3”，如果处理器使用超出限制的 200%，则事件记入事件日志，并且停止 Web 站点上的所有进程外应用程序。</li>
+</ul>
+
+<p>一旦站点达到 Level 2 或 Level 3 结果，则该结果在下一时间间隔到来之前始终有效。例如，如果站点的进程外应用程序占用 CPU 的时间在 24 小时间隔内不得超过 10%，则站点应用程序占用 CPU 的时间只能是 24 小时中的 2.4 个小时。如果站点使用 CPU 时间多于 2.4 小时，但少于 3.6 小时，则仅将事件写入事件日志。一旦站点使用 CPU 的时间超过 3.6 个小时，则站点上的所有进程外应用程序都将设置为“空闲”。如果服务器不是很忙并且应用程序继续使用处理器时间，最终达到在 24 小时间隔内使用 4.8 小时，则 Web 站点上的所有进程外应用程序都将停止。</p>
+
+<p>24 小时间隔结束时将重置进程帐号，站点返回正常状态。管理员可以早些使站点返回到正常状态，只需更改 Web 站点的百分比设置或停止并重新启动站点。Web 站点操作员没有权限更改该设置。关于设置进程限制的信息，请参阅<a href="iipfthd.htm">限制进程</a>。关于进程帐号的信息，请参阅<a href="iiabtlg.htm">关于站点活动日志</a>。关于如何使用脚本和配置数据库来启用其他结果级以及更改进程限制时间间隔的信息，请参阅<a href="../asp/aogu2wab.htm">使用 IIS 管理对象</a>。</p>
+
+<p>如果启用进程限制，则需要减少 CGI 超时间隔。默认情况下，时间间隔设置为 5 分钟。如果 CGI 应用程序失败，则在达到超时值之前线程不会释放。从程序失败到线程最终释放之间的时间应计算在应用程序使用处理器的时间之内。IIS 5.0 中的 CGI 超时是指定给 CGI 应用程序以便其完成的总时间，但不是等到 I/O 必须发生的时间。这是对以前 IIS 版本的更改。关于如何更改 CGI 超时的说明，请参阅<a href="iipoolc.htm">缓存应用程序</a>。关于 IIS 可以设置的所有超时值的列表，请参阅<a href="iitime.htm">超时参考</a>。</p>
+
+
+<hr class="iis" size="1"><p align=center><a href="../../../common/colegal.htm">(C) 1997-1999 Microsoft Corporation。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

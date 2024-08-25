@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html dir=ltr>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text-html; charset=gb2312">
+<title>高级多 Web 站点配置</title>
+<META NAME="ROBOTS" CONTENT="NOINDEX">
+
+<!--
+<SCRIPT LANGUAGE="JavaScript">
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/spidie4.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/spidie3.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/spidie4.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/spidie3.css">');
+</script>
+-->
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<BODY BGCOLOR=#FFFFFF TEXT=#000000> <font face="宋体"><p> <b>高级多 Web 站点配置</b></p>
+
+<p>使用此对话框可以配置 Web 站点的附加标识。</p>
+
+<p>单击“添加”或“删除”按钮可以添加或删除列出的标识。要编辑现有的标识，请选择 IP 地址并编辑相应的字段“IP 地址”、“TCP 端口”、“SSL 端口”或“主机头名”。</p>
+
+<p>每个 Web 站点必须有唯一的标识特性组合。因此，当多个 Web 站点可以共享三个标识特性（域或主机头名、IP 地址和端口）中的两个时，必须有一个不同的特性。而且，由于 SSL 证书包含域名，所以使用证书的 Web 站点不能与其它 Web 站点共享 IP 地址。</p>
+
+<p><b>SSL 端口</b></p>
+
+<p>决定用于建立安全套接字层 (SSL) 连接的端口。</p>
+
+<p>对于 Web 服务器的默认 Web 站点，此端口设置为 443。（如果创建新 Web 站点，必须显式设置此端口。）可以更改 SSL 端口为任何唯一的 TCP 端口号；不过，用户必须事先知道才能请求该端口号，否则，它们的请求不能连接到服务器。只有已经安装了服务器证书，此选项才可用。</p>
+
+<p><hr class="iis" size="1"></p>
+<p align="center"><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+</font>
+</BODY>
+</HTML>

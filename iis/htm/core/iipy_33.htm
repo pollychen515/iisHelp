@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html dir=ltr>
+<head>
+
+<title>ASP 调试属性表</title>
+<META NAME="ROBOTS" CONTENT="NOINDEX">
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+<BODY BGCOLOR=#FFFFFF TEXT=#000000> <font face="宋体"><p> <strong>ASP 调试属性表</strong></p>
+
+<p>使用此属性表可以为在所选应用程序中运行的 ASP 脚本设置调试选项。</p>
+
+<p><strong>调试标志</strong></p>
+
+<p><strong>启用 ASP 服务器端调试</strong></p>
+
+<p>选中此复选框，可以允许 Web 服务器在处理 ASP 脚本时进入 Microsoft 脚本调试器。随后即可使用调试器检查脚本。</p>
+
+<p>启用 ASP 服务器端调试将导致 ASP 在单一线程模式运行。由于性能方面的原因，建议您不要在产品环境中启用 ASP 调试。</p>
+
+<p><strong>启用 ASP 客户端调试</strong></p>
+
+<p>此复选框被保留，备以后使用，但并不影响当前版本的 ASP。</p>
+
+<p><strong>脚本错误消息</strong></p>
+
+<p><strong>传送详细 ASP 错误消息给客户</strong></p>
+
+<p>选中此选项可以发送特定调试信息（包括文件名、错误消息和行号）到浏览器。</p>
+
+<p><strong>传送文本错误消息给客户</strong></p>
+
+<p>如果选中此选项，当任何错误防止 Web 服务器处理 ASP 脚本时，将发送默认错误消息到浏览器。特定错误消息被写入错误日志通过在文本框中键入新消息，可以更改默认错误消息。</p>
+
+<p><hr class="iis" size="1"></p>
+<p align="center"><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>命名 Web 站点</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="关于为 Web 站点分配名称的过程信息。包括对 IP 地址、主机头支持以及在一台计算机上宿住多个站点的ISP 所遇问题的建议。">
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="H1_37716416">命名 Web 站点</a></h1>
+
+<p>每个 Web 站点（虚拟服务器）都有一个描述性名称，并支持一个或多个主机头名。主机头名使得在一台计算机上可维护多个域名。并不是所有浏览器都支持主机头名。Microsoft Internet Explorer 4.0 和 Netscape Navigator 4.0 浏览器以及它们的最新版本都支持主机头名的使用，但这两种浏览器的早期版本不支持。</p>
+
+<p>如果访问者试图使用不支持主机头的旧浏览器连接您的站点，则访问者将定向到分配给该 IP 地址的默认 Web 站点（如启用了默认站点），该站点没有必要是请求的站点。另外，如果浏览器请求的站点目前停止使用，则访问者将收到默认的 Web 页。因此，请仔细考虑默认 Web 站点显示的内容。通常，ISP 将其主页作为默认显示，而不是某个客户的 Web 站点。这可防止对已停止站点的请求转到错误的站点。此外，默认站点可以包含脚本，支持旧的浏览器使用主机头名。</p>
+
+<big>命名 Web 站点</big><!--</p>--><br>
+
+<ol>
+<li>在 <a href="javascript://" onclick="Activate(); return false">Internet 信息服务管理单元</a>中，选择 Web 站点并打开其属性页。</li>
+<li>在“Web 站点”属性页的“说明”框中，输入该站点的描述性名称。</li>
+</ol>
+
+<big><a name="host">分配主机头名</a></big><!--</p>--><br>
+
+<ol>
+
+<li> 询问系统管理员，将映射到静态 IP 地址的新站点名称添加到名称解析系统（通常是 DNS）。</li>
+<li>在“Web 站点”属性页中，单击“高级”按钮。</li>
+<li>在“高级多 Web 站点配置”属性页中，单击“添加”按钮分配 Web 站点的主机头文件、IP 地址以及端口。</li>
+<p><strong>注意</strong>  使用 SSL 时，仅可为每个 IP 地址分配一个主机头名，这是因为域名是在服务器证书中指定的。不过，每个 Web 站点可以拥有多个服务器证书、多个 IP 地址以及多个 SSL 端口。<br><!--</p>-->
+</ol>
+
+
+<p><strong>相关主题</strong></p>
+
+<ul>
+<li>关于使用主机头名的详细信息，请参阅<a href="iinmres.htm">关于名称解析</a>中的<a href="iinmres.htm#AssigningNamestoVirtualServers">通过分配端口、地址和主机头名维护多个站点</a>。</li>
+<li>关于为默认站点添加主机头支持脚本的过程信息，请参阅<a href="iisuphh.htm">在旧的浏览器中支持主机头名</a>。</li>
+<li>关于如何添加新站点的指导，请参阅<a href="iiaddvs.htm">添加站点</a>。</li>
+</ul> 
+
+<hr class="iis" size="1"><p align=center><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+<script language="javascript">
+<!--
+function Activate() {
+if (navigator.appName == "Microsoft Internet Explorer"){
+	window.open("iisnapin.htm", "NewWin", 'toolbar=no, left=200, top=200, scrollbars=no, resizeable=no,  width=350, height=350');
+	}
+	else if (navigator.appName == "Netscape") {
+		window.open("iisnapin.htm", "NewWin",  'toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=yes,resizable=0,width=350,height=350,top=200,left=200');
+	}
+}
+//-->
+</script>
+
+</font>
+</body>
+</html>

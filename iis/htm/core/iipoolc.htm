@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>高速缓存应用程序</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="该过程主题解释如何设置 CGI 脚本超时、缓存 ISAPI DLL 和更改 ASP 页的缓存大小。">
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="H1_37719647">高速缓存应用程序</a></h1>
+
+<p>通过调整与在服务器上运行的 Web 应用程序相关的几个设置，可以调整服务器的性能。记录使用情况数据，如请求数量和花费的时间，将有助于决定如何进行调整。关于服务器活动日志的详细信息，请参阅<a href="iilogsa.htm">记录 Web 站点活动</a>。关于性能问题的附加信息，请参阅<a href="iiabtpm.htm">关于性能调整</a>。</p>
+
+<p>包括下面的设置：</p>
+
+<ul>
+<li>设置 CGI 脚本超时</li>
+<li>高速缓存 ISAPI 扩展</li>
+<li>高速缓存 ASP 脚本文件</li>
+</ul>
+
+<h2><a name="H2_37720440">设置 CGI 脚本超时</a></h2>
+
+<p>除了与连接相关的超时外，还可以设置 CGI 脚本的超时值。此超时值是 CGI 脚本执行的时间数量。CGI 应用程序继承了整个 Web 站点的超时设置。可以更改整个 Web 站点或者单独应用程序的设置。</p>
+
+<big>要设置超时值</big><br>
+
+<ol>
+<li>在 <a href="javascript://" onclick="Activate(); return false">Internet 信息服务管理单元</a>中，选择计算机图标并打开其属性表。 </li>
+
+<li>在“主属性”下，选择“WWW 服务”，然后单击“编辑”按钮。</li>
+<li>单击“主目录”选项卡。</li>
+<li> 单击“配置”按钮。</li>
+<li>单击“<a href="iipy_35.htm">进程选项</A>”选项卡，然后在“CGI 脚本超时”框中键入超时值。</li>
+</ol>
+
+<h2><a name="H2_37722380">高速缓存 ISAPI 扩展</a></h2>
+
+<p>可以加载和缓存 ISAPI DLL，以便处理进一步的请求时不用再次调用它们。否则，DLL 将在运行之后被卸载。缓存减少了用户等待加载 DLL 的时间。大多数 ISAPI 扩展（包括 Active Server Pages）都受益于缓存。只有在特定环境下，如调试 ISAPI 扩展，才可以清除该选项。</p>
+
+<big>要启用高速缓存</big><br>
+
+<ol>
+<li>在 <a href="javascript://" onclick="Activate(); return false">Internet 信息服务管理单元</a>中，选择 Web 站点或应用程序的起始点目录。</li>
+<li>打开目录的属性表，然后单击“主目录”、“虚拟目录”或“目录”选项卡。</li>
+<li> 单击“配置”按钮。</li>
+<li>单击<a href="iipy_34.htm">应用程序映射</a>选项卡，然后选择“高速缓存 ISAPI 扩展”复选框。</li>
+</ol>
+
+<h2><a name="cachingaspscriptfiles">高速缓存 ASP 脚本文件</a></h2>
+
+<p> ASP 处理包含 ASP 脚本的文件，并在内存中缓存此文件以便提高性能。通过增加缓存文件数，可以进一步提高性能。可以为在 Web 站点上运行的所有应用程序设置高速缓存文件数，也可以更改单个应用程序的设置。</p>
+
+<ol>
+<li>在 <a href="javascript://" onclick="Activate(); return false">Internet 信息服务管理单元</a>中，选择 Web 站点或应用程序的起始目录。 </li>
+<li>打开目录的属性表，然后单击“主目录”、“虚拟目录”或“目录”选项卡。</li>
+<li> 单击“配置”按钮，然后单击“<a href="iipy_35.htm">进程选项</a>”选项卡。</li>
+<li> 要高速缓存所有请求的 .asp 文件，选择“所有请求的 ASP 文件放入高速缓存” 选项。</li>
+<li> 要设置高速缓存的脚本数，选择“放入高速缓存的最多 ASP 文件数”选项并在文本框中键入数值。</li>
+</ol>
+
+<hr class="iis" size="1"><p align=center><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+<script language="javascript">
+<!--
+function Activate() {
+if (navigator.appName == "Microsoft Internet Explorer"){
+	window.open("iisnapin.htm", "NewWin", 'toolbar=no, left=200, top=200, scrollbars=no, resizeable=no,  width=350, height=350');
+	}
+	else if (navigator.appName == "Netscape") {
+		window.open("iisnapin.htm", "NewWin",  'toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=yes,resizable=0,width=350,height=350,top=200,left=200');
+	}
+}
+//-->
+</script>
+
+</font>
+</body>
+</html>

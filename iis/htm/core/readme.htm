@@ -1,0 +1,264 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html><head><title>IIS 5.0 版本发布说明</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="../../../common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="../../../common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="../../../common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="../../../common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="IIS 5.0 版本发布说明。包括最新技术信息、疑难解答技巧以及如何获得技术支持的信息。">
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="ZH-CN">
+<META NAME="MS-IT-LOC" Content="Internet Information Services">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+
+<a name="top"></a><h1><A NAME="H1_448413885"></A>Internet 信息服务 5.0 版<br>的版本发布说明</h1>
+
+<p>欢迎阅读 Microsoft(R) Internet 信息服务 (IIS) 5.0 的版本发布说明。请参考这些注释以获得有关安装、文档编制和其他已知问题的最新信息。</p>
+
+<p><a href="#KnownProblemsandLimitations">已知问题和限制</a><br>
+<ul>
+<li><a href="#Security">安全</a></li>
+<li><a href="#Performance">性能和日志</a></li>
+<li><a href="#Clustering">多个站点和群集</a></li>
+<li><a href="#Misc">杂项</a></li>
+</ul>
+<a href="#Docs">文档附录</a><br> 
+<a href="#GettingHelp">获得帮助和提供反馈</a><br>
+</p>
+
+<hr>
+
+
+<h1><a name="KnownProblemsandLimitations">已知问题和限制</a></h1>
+
+
+<a name="Security"><h2>安全</h2></a>
+<ul>
+<li><h3>权限向导中的“继承所有安全设置”</h3>
+<p>如果运行 Web 站点的权限向导并选择继承所有安全设置，客户可能被拒绝访问该 Web 站点。要对此进行改正，请打开 Web 站点的“主目录”属性页并选择“读取”和“纯脚本”权限。当得到提示时，使所有虚拟目录和文件继承这些设置。</p></li>
+
+
+<li><h3>在 56 位的服务器上选择 128 位加密</H3>
+<p>如果在只有 56 位加密的服务器上选择“需要 128 位加密”复选框，那么用户将无法访问选择了此选项的资源。即使启用了 128 位加密复选框，也只能使用 56 位加密。要允许用户查看这些资源，请清除此复选框。</p></li>
+
+<li><h3>升级后不能删除和重新分配服务器证书</H3>
+<p>升级到 Microsoft(R) Windows 2000(R) 后不能删除和重新分配服务器证书，这是由于更改了 IIS 5.0 使用服务器证书的方式。要解决此问题，请使用下面的 Visual Basic 脚本更改 metabase 设置和删除证书。可以使用 IIS 中的“Web 站点证书向导”重新分配证书。</p>
+<code><STRONG>'Set Machinename to the name of the machine or localhost<br>
+Set PathObj = GetObject("IIS://" & MachineName & "/w3svc")<br>
+PathObj.PutEx 1, "SSLCertHash", ""<br>
+PathObj.PutEx 1, "SSLStoreName", ""<br>
+PathObj.Setinfo</STRONG></code></LI>
+
+<LI><H3>域名限制工作不正常</H3>
+<P>如果在 IIS 5.0 中使用 DNS 限制，并且某些用户访问服务器资源有困难，可以使用“*.domainname.com”语法，而不是“domainname.com”语法来解决此问题。</P></LI>
+
+</ul>
+
+<a name="Performance"><h2>性能和日志</h2></a>
+<ul>
+<li><h3>应用程序服务器与文件服务器</h3>
+<p>构建 Microsoft Windows 2000 和 IIS 5.0 以便可以从服务器获得尽可能多的内容。既可以将服务器当作应用程序服务器，也可以将其当作文件服务器来运行。这两种类型的服务器具有不同的内存需求，您所选择的设置可以影响服务器的性能。</p>
+<p>默认情况下，Windows 2000 Server 将作为文件服务器安装。建议将服务器配置成应用程序服务器（如果它主要作为 Web 服务器使用）：</p>
+
+<big><p>将服务器配置为应用程序服务器</p></big>
+<ol>
+<li>单击“开始”，指向“设置”，单击“网络和拨号连接”。</li>
+<li>选择“本地连接”并打开其属性。</li>
+<li>选择“Microsoft 网络上的文件和打印机共享”并打开其属性。</li>
+<li>在“服务器优化”选项卡中，选择“最大化网络应用程序数据吞吐量”。</li>
+</ol></li><br>
+
+
+<li><h3>套接字池、性能和安全问题</h3>
+<p>如果以下内容为真，则可能希望禁用套接字池：</p>
+<ul>
+<li>没有维护大量站点。</li>
+<li>有特殊安全考虑。</li>
+</ul>
+<p>套接字池将导致 IIS 5.0 侦听所有 IP 地址，这可能会使拥有多个网络的安全域有风险。另外，带宽限制和性能调整将应用于所有为相同端口（如端口 80）配置的 Web 站点。如果要在逐个站点的基础上使用带宽限制或进行性能调整，则需要禁用套接字池。</p>
+<p>要禁用套接字池，请在命令提示符下键入以下内容：</p> <strong>c:\inetpub\adminscripts\cscript adsutil.vbs set w3svc/disablesocketpooling true</strong><br>
+<p>命令提示符将应答：<P><code><strong>disablesocketpooling : (BOOLEAN)  True</strong></code></li></P><BR>
+
+
+<li><h3>终止 Internet 服务</h3>
+<p>如果 Inetinfo.exe 进程异常中断或使用 Windows 任务管理器或 Kill.exe 来终止 Internet 服务，则 Windows 2000 服务控制管理器的可靠重新启动功能将自动重新启动 Internet 服务。详细信息，请参阅<a href="iicodira.htm">重新启动 IIS</a>。如果要停止 Internet 服务，必须禁用“可靠重新启动”。</p>
+<p><big>禁用可靠重新启动</big></p>
+<ol>
+<li>单击“开始”，指向“设置”，单击“控制面板”，双击“管理工具”，然后双击“计算机管理”。</li>
+<li>在“系统工具”节点下，单击“服务”。</li>
+<li>打开“IIS 管理服务”的属性，选择“恢复”选项卡，而后选择每个下拉菜单中的“不做任何操作”。</li>
+</ol>
+<p>也可通过从命令行键入 <code><strong>Iisreset.exe disable </strong></code> 来禁用可靠重新启动功能。</p></li>
+
+<li><h3>升级后的 ASP 缓存和性能</H3>
+<p>在 IIS 4.0 中，“缓存”属性和“ASP Response”对象被默认设置为 FALSE。在新安装的 IIS 5.0 中，“缓存”属性被默认设置为 TRUE。在升级到 IIS 5.0 过程中，“缓存”属性不会从以前的设置更改。</P>
+<p>将“缓存”属性设置为 TRUE 后，可以显著提高大型 ASP 应用程序的性能，特别是用户靠调制解调器连接到应用程序。可以从 IIS 管理单元或在所选页面中添加 &lt;% Response.Buffer = True %&gt; 语句，来为应用程序启用缓存；也可以使用 IIS 管理单元来为整个应用程序更改属性。详细信息，请参阅 IIS 5.0 文档。</P></LI>
+</UL>
+
+<a name="Clustering"><h2>多个站点和群集</h2></a>
+<ul>
+<li><h3>卸载 Microsoft 群集服务之前从群集中删除所有 IIS 5.0 资源</h3>
+<p>卸载 Microsoft 群集服务前必须从群集中删除包括 NNTP 和 SMTP 资源在内的所有 IIS 资源。如果不删除它们，将无法终止或启动以前群集在一起的 IIS 站点。</p>
+
+<p>要对此进行修改，请在命令提示符下为所有以前群集在一起的 IIS 资源键入以下内容：</p> <P><code><strong>Inetpub\AdminScripts\adsutil.vbs set &lt;服务名称&gt;/&lt;实例 id&gt;/ClusterEnabled 0</strong></code></p></li>
+
+<li><h3>在 Microsoft 群集上不支持 FrontPage 服务器扩展</h3>
+<p>Microsoft 群集上的资源不支持 Microsoft FrontPage 服务器扩展。</p></li>
+
+<li><h3>在 Microsoft 群集中停止 Internet 服务</h3>
+<p>当在 IIS 管理单元中使用新的“重新启动 IIS” 选项或使用 Iisreset.exe （该功能的命令行版本）来终止 IIS 时，Microsoft 群集将尝试自动重新启动 IIS。
+<big><p>防止 Microsoft 群集自动重新启动 IIS</p></big>
+<ol>
+<li>打开 IIS 5.0 群集资源所在群集的连接并使所有 IIS 群集资源脱机。</li>
+<li>在 IIS 管理单元中，右键单击 “Web 服务”并单击“重新启动 IIS”来终止 IIS。</li></ol></p></li>
+
+<li><h3>ASP 和 FTP 会话将不会进行故障转移</h3>
+<p>ASP 和 FTP 会话不会将故障转移到 Microsoft 群集上的其他节点。如果会话超时之前受影响的计算机进行了故障转移或者原始故障不是由于 IIS 的意外终止，则不会丢失 ASP 会话信息。然而，FTP 会话丢失，必须重新启动。在两种情况下，如果在服务器上出现了故障转移，则客户需要重新建立连接。</p></li>
+
+
+<li><h3>必须通过使用群集管理器用户界面来终止群集化的 NNTP 和 SMTP 资源</h3>
+<p>必须使用群集管理用户界面终止作为 Microsoft 群集部分的 NNTP 和 SMTP 资源。使用 IIS 管理单元将无法终止这些资源。</p></li>
+
+<li><h3>使用群集化的主机头站点</H3>
+<p>如果使用群集化的 Web 站点，而该站点又使用了主机头，必须将这些站点的 ServerAutoStart metabase 属性设置为 TRUE。</p>
+<p>要设置该属性，请在命令提示符下键入：</p>
+<p><code><STRONG>%SystemDrive%\inetpub\adminscripts\adsutil.vbs set w3svc/&lt;实例 id&gt;/ServerAutoStart True</STRONG></code></p>
+其中 <code><STRONG>&lt;实例 id&gt;</STRONG></code> 是作为群集一部分的虚拟主机站点的实例 ID。</li>
+
+
+<LI><h3>删除群集资源</H3>
+<P>如果删除群集化的 IIS 5.0 资源，需要执行两个步骤。</P>
+<OL>
+<LI>在群集管理用户界面，从群集中删除资源。</LI>
+<LI>在 IIS 管理单元中，删除资源。</LI></OL>
+
+</ul>
+
+<a name="Misc"><h2>杂项</h2></a>
+<ul>
+<li><h3>升级后 Microsoft Proxy Server&nbsp;2.0 将不工作</h3>
+<p>如果在计算机中安装 Windows&nbsp;2000&nbsp;Beta&nbsp;2 或更高版本，同时安装 Microsoft(R) Proxy Server&nbsp;2.0，必须安装 Proxy Server&nbsp;2.0 更新。详细信息，请参阅 <a href="http://www.microsoft.com/isapi/redir.dll?PRD=Win2000&Sbp=IIS&Pver=5.0&Ar=releasenotes" target="_blank">http://www.microsoft.com/proxy</a>。不进行更新，Proxy Server 将不工作，并且无法启动 IIS。</p></li>
+
+
+<li><h3>从 Windows 98 升级后，无法访问 FrontPage Web</H3>
+<P>如果使用 Microsoft(R) FrontPage 98(R) 服务器扩展或更老版本，并使用 Microsoft Windows 98 和  Personal Web Server，在升级到 Windows 2000 后，FrontPage 服务器扩展将不在工作。这是因为 IIS 5.0 需要 Microsoft FrontPage 2000 服务器扩展。</p>
+<p><big>从默认 Web 站点升级到 FrontPage&nbsp;2000 服务器扩展：</big>
+<ol>
+<li>在控制面板中打开“添加/删除程序”。</li>
+<li>单击“添加/删除 Windows 组件”启动“Windows 组件向导”。</li>
+<li>单击“下一步”。</li>
+<li>选择“Internet 信息服务 (IIS)”并单击“详细资料”。</li>
+<li>选择“FrontPage&nbsp;2000 Server Extensions”并单击“确定”。</li>
+<li>单击“下一步”完成向导并安装 FrontPage 2000 服务器扩展。</li>
+</OL>
+</p>
+<p><big>在其他虚拟 Web 站点升级到 FrontPage&nbsp;2000 服务器扩展：</big>
+<ol>
+<li>在命令提示符下，转到 \Program Files\Common Files\Microsoft Shared\Web Server Extensions\40\bin 目录。</li>
+<li>在此目录，在命令提示符下键入：
+<code><STRONG>fpsrvadm -o upgrade -p all</STRONG></code></li></ol></P></li>
+
+<li><h3>更改帐户信息后，启动 Out&#150;of&#150;Process 应用程序出问题</H3>
+<p>这是由于用户帐户和密码信息在更改后没有同步。将会收到事件日志错误，告诉您  IWAM_<em>computername</em> 帐户不能登录。如果遇到此问题，请运行 synciwam 脚本同步密码：</p>
+<p>要运行脚本，请在命令提示符下键入 <code><STRONG>cscript synciwam.vbs [-v|-h]</STRONG></code>。 <code><STRONG>-v</STRONG></code> 使用 verbose 模式并打印脚本活动的日志。<code><STRONG>-h</STRONG></code> 打印脚本帮助信息。</p></li>
+
+<li><h3>升级后使用 MyInfo、PageCounter 和 Counters 对象</h3>
+<p>要在升级到 IIS 5.0 后使用这些对象的当前数据，必须将它们的数据文件移动到 %WINDIR%\inetsrv\Data 目录，该目录升级期间由 IIS 创建的。将 MyInfo.xml 和 Counters.txt 文件从 %WINDIR%\inetsrv\ 目录，以及 %WINDIR%HitCnt.cnt 文件移动到新目录 %WINDIR%\inetsrv\Data 中。（%WINDIR% 是 Windows 的安装目录。）
+组件就会将信息附加到文件中。</p></li>
+
+
+
+</ul>
+
+
+
+<a name="Docs"><h1>文档附录</h1></a>
+<ul>
+<li><h3>Site Server Express&nbsp;2.0 文档</h3>
+<p>如果从包含 Microsoft&(R) Site Server Express 组件的 Microsoft(R) Windows NT(R) 4.0 Option Pack 升级到 IIS&nbsp;5.0，可以通过在运行 IIS 计算机的浏览器地址栏中键入 <A HREF="http://localhost/iishelp/sse/misc/default.asp">http://localhost/iishelp/sse/misc/default.asp</A> 来访问 Site Server Express&nbsp;2.0 文档。</p></li>
+
+
+<LI><H3>在升级到 Windows&nbsp;2000 后，查看“欢迎使用 Microsoft(R) Windows NT(R)&nbsp;4.0 Option Pack”页</H3>
+<P>如果升级到 Windows&nbsp;2000，并且没有更改默认 Web 站点的 Default.asp 文件，当访问站点的用户在他们的浏览器中键入 http://&lt;servername&gt;/ 时，将看到旧的 IIS&nbsp;4.0 欢迎页。
+
+<big><p>设置 IIS 以便让用户看到新的 IIS&nbsp;5.0 欢迎页</P></big>
+<OL>
+<LI>在 IIS 管理单元中打开默认 Web 站点的“属性页”。</LI>
+<LI>单击“文档”选项卡。</LI>
+<LI>选择文件 <STRONG>default.asp</STRONG> 并单击“删除”。</LI>
+</OL>
+<P>如果想让访问者看到您创建的欢迎页，请将 IIS&nbsp;4.0 Default.asp 文件替换为自己的 Default.asp 文件。</P></LI>
+
+<LI><H3>主持多个 Web 站点</H3>
+<P>IIS 5.0 文档中讲到，如果使用多个 IP 地址来主持多个 Web 站点，每一个 IP 地址都需要一块网卡。实际上，可以将多个 IP 地址绑定到一块网卡上，尽管在 Internet 流量较大时，不推荐使用这种配置。</P> 
+<P><STRONG>注意</STRONG>&nbsp;&nbsp;&nbsp;带 IIS 5.0 的 Microsoft Windows 2000 Professional 可以在单一计算机上主持一个 Web 站点和一个 FTP 站点。如果想在单一计算机上主持多个 Web 或 FTP 站点，请考虑升级到 Microsoft Windows 2000 Server。</P></LI>
+
+<LI><H3>DisableSocketPooling 的文档纠正</H3>
+<P>IIS 文档中讲到，在站点之间共享的套接字使用相同的套接字号，但使用不同的 IP 地址。这是不对的。在站点之间共享的套接字使用相同的端口号，但使用不同的 IP 地址。</P></li>
+
+<LI><H3>示例中不包括 Adsutil.exe</H3>
+<P>文档中提到，示例中未包括 Adsutil.exe 实用程序。</P></LI>
+</ul>
+
+<hr>
+
+<h1><a name="GettingHelp">获得帮助和提供反馈</a></h1>
+
+<p>可使用对等新闻组帮助与使用我们产品的其他用户进行交互。可以使用任何新闻阅读软件访问这些新闻组，但是可能都需要对其进行配置才能阅读新闻组。当提示使用 News Server 时，请指定 msnews.microsoft.com。无须输入帐户名或密码。在进入到新闻组之前，请回顾一下 Microsoft 新闻组实施规则 (Newsgroup Rules of Conduct)。</p>
+
+
+<P>有关 IIS 5.0 的问题，请使用：<STRONG>microsoft.public.inetserver.iis</STRONG></P>
+
+<hr>
+
+<h1><a name="CopyrightInformation">版权信息</a></h1>
+
+<p>1998-1999 Microsoft 公司</p>
+
+<p>这些材料提供的只代表其所陈述的内容，仅仅用于信息目的。</p>
+
+<p>Microsoft 及其供应商在谈及这些材料的内容时以及在涉及此处包含的任何信息的准确性时不做任何明示或暗示的担保，包括，但不限于隐含的商销性和适用于特定用途的担保。由于某些州/管辖区不允许排除隐含的担保，因此以上限制可能并不适合于您。</p>
+
+<p>Microsoft 及其供应商不对任何损失承担任何责任，包括相因而生的、偶然性、直接性、间接性、特殊性损失和商业利润损失.由于某些州/管辖区不允许排除隐含的担保，因此以上限制可能并不适合于您。在任何情况下，Microsoft 及其供应商因这些材料引起的全部赔偿义务，不管是由于民事纠纷还是由于合同及其他原因引起的，无论如何都不应该超过这些材料的建议零售价。</p>
+
+<span style="display:none"><LAYER VISIBILITY=HIDE> （下列文字用于搜索；将不在页中显示。）自述文件、说明、最新的、当前、其他、附录、文档、改正、证明的、未证明的、已知问题、问题、帮助、获得帮助、支持、技术支持、产品支持、问题、疑难解答、错误、故障、崩溃、中断、断开、不工作、不断失败、失败、新的、升级、旧的 </layer></span> </font >
+<!-- Last updated 09/10/1999 -->
+</body>
+</html>

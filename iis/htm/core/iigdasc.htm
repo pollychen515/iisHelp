@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>授权和拒绝计算机的访问权限</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="description" CONTENT="关于配置 Web 服务器以便允许或拒绝特定计算机、计算机组或 Internet 域访问服务器 Web 站点、目录或文件的过程信息。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=gb2312">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="ZH-CN">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="H1_37699289">授权和拒绝计算机的访问权限</a></h1>
+
+<p>您可以配置 Web 服务器，以便允许或拒绝特定计算机、计算机组或域访问 Web 站点、目录或文件。例如，如果 Intranet 服务器已连接到 Internet，您可以防止 Internet 用户访问 Web 服务器，方法是仅授予 Intranet 成员访问权限而明确拒绝外部用户的访问。</p>
+
+<p><strong><span style="color: #0000FF"><font color="#0000FF">要点</font></span></strong></p>
+
+<ul>
+<li>当设置特定 Web 站点的安全属性时，自动为属于该站点的目录和文件设置同样的安全属性，除非某些单独目录和文件已经提前设置好了安全属性。</li>
+<li>您的 Web 服务器将在您试图设置您的 Web 站点安全属性时提示您允许重新设置该单独目录和文件的安全设置。如果您选择了重新设置这些属性，原先的安全设置将被这些新的设置所替代。同样的情况可应用于设置包含子目录和文件（已在先前设置好了安全属性）的目录的安全属性。关于设置安全属性的详细信息，请参阅位于<a href="iivsovr.htm">关于 Web 和 FTP 站点</a>的“站点的属性和属性继承”一节。</li>
+</ul>
+
+<p class="bigfix">&nbsp;</p>
+
+<big>要授予计算机、计算机组或域访问权限</big><!--</p>--><br>
+
+<ol>
+<li>在 IIS 管理单元中，选择 Web 站点、目录或文件，并打开其属性页。</li>
+<li>选择适当的“目录安全”或“文件安全”属性页。在“IP 地址及域名限制”中单击“编辑”。</li>
+<li>在“IP 地址及域名限制”对话框中，选择“拒绝访问”选项。当选择该选项时，将拒绝所有计算机和域的访问权限，但您特别授予访问权限的计算机除外。</li>
+<li>单击“添加”。</li>
+<li>在“授予以下访问”对话框中，选择“单机”、“一组计算机”或“域名”选项。关于这些选项的详细信息，请单击“帮助”。</li>
+<li>单击“DNS 查找”按钮来按名称而不是 IP 地址搜索计算机或域。键入名称，然后单击“确定”，关闭两个对话框。</li>
+</ol>
+
+<p class="bigfix">&nbsp;</p>
+
+<big>要拒绝计算机、计算机组或域的访问权限</big><!--</p>--><br>
+
+<ol>
+<li>在 IIS 管理单元中，选择 Web 站点、目录或文件，并打开其属性页。</li>
+<li>选择适当的“目录安全”或“文件安全”属性页。在“IP 地址及域名限制”中单击“编辑”。</li>
+<li>在“IP 地址及域名限制”对话框中，选择“授予访问”选项。当选择该选项时，将向所有计算机和域的授予访问权限，但您特别拒绝访问权限的计算机除外。</li>
+<li>单击“添加”。</li>
+<li>在“拒绝以下访问”对话框中，选择“单机”、“一组计算机”或“域名”选项。关于这些选项的详细信息，请单击“帮助”按钮。</li>
+<li>单击“DNS 查找”按钮来按名称而不是 IP 地址搜索计算机或域。IIS 将在当前域中搜索计算机，如果找到，将在“IP 地址”文本框输入它的 IP 地址。单击“确定”，关闭两个对话框。</li>
+</ol>
+
+<p><strong>注意</strong></p>
+<ul>
+<li>使用 DNS 查找将导致在查找 DNS 地址时服务器的性能降低。</li>
+<li>通过代理服务器访问 Web 服务器的用户将使用代理服务器的 IP 地址。</li>
+</ul>
+
+<h3>使用网络标识和子网掩码</h3>
+
+<p>使用网络标识和子网掩码，可以拒绝或授予一组计算机的访问权限。网络标识是主机的 IP 地址，通常是“子网”的路由器。子网掩码决定 IP 地址的哪一部分是子网标识而哪一部分是主机标识。在子网中的所有计算机有相同的子网标识和自己的主机标识。通过指定网络标识和子网掩码，可以选择一组计算机。</p>
+
+<p>例如，如果主机拥有 IP 地址 172.16.16.1 和子网掩码 255.255.0.0，那么子网中的所有计算机将拥有以 172.16 开头的 IP 地址。要选择子网中的所有计算机，可在“网络标识”文本框中输入 172.16.16.1，在“子网掩码”文本框中输入 255.255.0.0。详细信息，请参阅 Windows 2000 Server Resource Kit 或 TCP/IP 协议的参考。</p>
+
+
+
+<hr class="iis" size="1">
+<p align="center"><a href="../../../common/colegal.htm"> (C) 1997-1999 Microsoft Corporation。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

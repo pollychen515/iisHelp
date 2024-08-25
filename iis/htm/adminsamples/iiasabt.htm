@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>关于管理脚本</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<meta name="description" content="关于管理脚本的概念信息，以及指向 IIS Admin 对象的相关信息的链接。"><META HTTP-EQUIV="Content-Type" content="text/html; charset=gb2312">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="ZH-CN">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"> <font face="宋体">
+
+<h1><a name="abtadminscripts">关于管理脚本</a></h1>
+
+<p>本主题包含关于管理脚本（包括 IIS Admin 对象、Cscript.exe 命令行脚本实用程序以及管理脚本的默认安装位置）的概念信息。</p>
+
+<ul>
+<li><a href="#iiaso">IIS Admin 对象</a></li>
+<li><a href="#cscript.exe">Cscript.exe</a></li>
+</ul>
+
+<h2><a name="iiaso">Internet 信息服务 Admin 对象 </a></h2>
+
+<p>管理脚本自动操作一些最普通的管理任务并演示 IIS Admin 对象的功能。可以用它们来创建和控制 Web 站点、应用程序、目录等等。</p>
+<p>可以在使用默认安装到 Inetpub\adminscripts 目录中的 VBScript 文件的过程中运行“管理脚本”，还可以使用 adsutil.vbs 的一个可执行版本（即 adsutil.exe，该文件也是默认安装到目录 Inetpub\adminscripts 中的），以便接受与 adsutil.vbs 同样的参数。 Adsutil.exe 是一个用 C/C++ 编写的示例，它演示如何使用 Microsoft 活动目录服务接口 (ADSI) 处理 metabase。Adsutil.exe 可以从文件中读取命令，而 adsutil.vbs 则没有这个功能。</p>
+<h2><a name="cscript.exe">Cscript.exe</a></h2>
+
+<p>VBScript 管理脚本必须与 Cscript.exe 命令行脚本实用程序一起使用，如果 Cscript 已注册运行 .vbs 文件，则效果更佳。要注册 Cscript，运行 <a href="adsutil.htm">adsutil.vbs</a> 示例。它将为您注册 Cscript.exe。</p>
+
+<p>也可以通过在命令提示中运行下列命令，将 Cscript.exe 注册为默认脚本主机：</p>
+
+<P><strong>cscript //H:cscript</strong></P>
+
+
+<hr class="iis" size="1">
+<p align="center"><a href="../../../common/colegal.htm">(C) 1997-1999 Microsoft Corporation。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

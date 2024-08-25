@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>特性</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="介绍此版本 Internet 信息服务的新增功能。包括对安全性、管理、可编程性以及 Internet 标准支持等方面的改进。">
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="H1_37672043">特性</a></h1>
+
+<p>Internet 信息服务 5.0 版新增了许多功能，有助于 Web 管理员创建可升级的、灵活的应用程序。
+
+<p><strong><a href="#security">安全性</a><br> <a href="#administration">管理</a><br> <a href="#programmability">可编程性</a><br> <a href="#standards">Internet 标准</a></strong></p>
+
+<h2><a name="security">安全性</a></h2>
+
+<ul>
+
+<li><img src="iinew1.gif" alt="全新！"> <strong><a href="iiabasc.htm#digest">摘要式身份验证</a>：</strong>摘要式身份验证允许跨代理服务器和防火墙对用户进行安全和严格的身份验证。另外，还可进行匿名、HTTP 基本以及集成 Windows 身份验证（以前称为 Windows NT 质询/响应身份验证和 NTLM 身份验证）。  </li>
+
+<li><strong>安全通讯</strong> <a href="/iishelp/iis/htm/core/iiabtsc.htm">安全套接字协议层</a> (SSL) 3.0 和传输协议层安全 (TLS) 提供了一种客户端与服务器之间进行信息交换的安全方式。另外，SSL 3.0 和 TLS 还为服务器提供了一种在用户登录服务器之前对客户端进行验证的方法。在 IIS 5.0中，ISAPI 和 Active Server Pages 都可以访问客户证书，以便编程人员通过其站点跟踪用户。同时，IIS 5.0 还可以将客户证书映射为 Windows 用户帐户，以便管理员可以根据客户证书控制对系统资源的访问。</li>
+
+<li><img src="iinew1.gif" alt="全新！"> <strong><a href="iistesc.htm">服务器网关加密</a>：</strong>服务器网关加密 (SGC) 是 SSL 的扩展，允许使用 IIS 出口版的金融系统采取加密性能更高的 128 位加密。虽然 IIS 5.0 中已内置了 SGC 功能，但使用 SGC 时仍然需要特殊的 SGC 证书。</li>
+
+<li><strong><a href="iikeysc.htm">安全向导</a>：</strong>安全向导简化了服务器管理任务。</li>
+
+	<ul>
+	<li><img src="iinew1.gif" alt="全新！"> “Web 服务器证书向导”简化了证书管理任务，如创建证书请求以及管理证书生存期。 </li>
+
+	<li><img src="iinew1.gif" alt="全新！"> “权限向导”通过向虚拟目录和文件分配访问策略的方式，从而简化了配置 Web 站点访问的任务。“权限向导”还可以更新 NTFS 文件权限来反映 Web 访问策略。 </li>
+
+	<li><img src="iinew1.gif" alt="全新！"> <a href="iikeysc.htm">CTL 向导</a>可帮助您配置证书信任列表 (CTL)。CTL 是特定目录的可信证书颁发机构列表 (CA)。CTL 对于那些在服务器上有几个 Web 站点、并且要求每个站点拥有不同可信证书颁发机构列表的 Internet 服务提供商 (ISP) 尤其有用。</li>
+	</ul> 
+
+<li><strong><a href="iigdasc.htm"> IP 地址及 Internet 域限制</a>：</strong>可以授予或拒绝单台计算机、计算机组或者整个域对 Web 的访问。 </li>
+
+<li><img src="iinew1.gif" alt="全新！"> <strong><a name="kerb">Kerberos</a> 5 身份验证协议相容性：</strong>IIS 已完全集成了 Microsoft&reg Windows 2000 中实现的 Kerberos 5 验证协议，从而允许用户在运行 Windows 的计算机之间传递验证凭据。 </li>
+
+<li><img src="iinew1.gif" alt="全新！"> <strong>证书存储：</strong>IIS 证书存储目前已与 Windows CryptoAPI 存储集成在一起。Windows Certificate Manager 提供单一入口，允许用户存储、备份和配置服务器证书。</li>
+
+<li><img src="iinew1.gif" alt="全新！"> <strong><a href="iiabtsc.htm#standardsused">Fortezza</a>：</strong>IIS 5.0 支持通常称为 Fortezza 的美国政府安全标准。这一标准通过一种加密机制保证消息的安全性、完整性、验证以及对消息、组件和系统的访问控制，从而能满足美国国防部消息系统安全性结构的要求。可以通过服务器和浏览器软件或者 PCMCIA 卡硬件来实现这些功能。</li>
+
+</ul>
+
+<h2><a name="administration">管理 </a></h2>
+
+<ul>
+
+<li><img src="iinew1.gif" alt="全新！"> <strong><a href="iicodira.htm">重新启动 IIS</a>：</strong>现在不用重新启动计算机就可以重新启动 Internet 服务。 </li>
+
+<li> <strong><a href="iitasks.htm">备份和还原 IIS</a>：</strong>可以备份和存储 metabase 设置，以便更容易的返回已知的安全状态。 </li>
+
+<li><img src="iinew1.gif" alt="全新！"> <strong><a href="iiabtlg.htm#processaccounting">进程帐户</a>：</strong>提供关于单个 Web 站点如何使用服务器中 CPU 资源的信息。此信息在判断哪些站点正在不成比例地使用 CPU 资源或者具有不正常的脚本和 CGI 进程时非常有用。</li>
+
+<li><img src="iinew1.gif" alt="全新！"> <strong><a href="iiproov.htm">进程限制</a>：</strong>可以限制 CPU 在处理单个 Web 站点的进程外 ASP、ISAPI 以及 CGI 应用程序的时间百分比。另外，还可以终止和重新启动运行失常的进程。 </li>
+
+<li><img src="iinew1.gif" alt="全新！"> <strong><a href="iierrcst.htm">改进的自定义错误消息</a>：</strong>当 Web 站点出现 HTTP 错误时，目前管理员可以向用户发送消息。同时，通过使用 500-100.asp 自定义错误消息，还可以包含详细的 ASP 错误进程功能。可以使用 IIS 5.0 提供的自定义错误，也可创建自己的错误。</li>
+
+<li><strong>配置选项：</strong> 可以在站点、目录或文件级别设置“读取”、“写入”、“执行”、“脚本”以及 FrontPage Web 操作的权限。 </li>
+
+
+<li> <strong><a href="iivsovr.htm#RemoteAdministration">远程管理</a>：</strong>IIS 5.0 已经包含一些基于 Web 的管理工具，可以从任何平台的几乎所有浏览器上远程管理您的服务器。利用 IIS 5.0，可以设置称为<a href="iiwbsop.htm">操作员</a>的管理帐户，使之具备一定的 Web 站点管理权限，帮助分担一部分管理任务。</li>
+
+<li><img src="iinew1.gif" alt="全新！"> <strong><a href="iivsovr.htm#ts">终端服务</a></strong>：终端服务属于 Windows 2000 的一种功能，允许用户在终端以及在个人计算机和其它计算机桌面上运行的终端模拟程序上运行 32 位的 Windows 应用程序。终端服务事实上允许任何桌面运行服务器上的应用程序。这样，用户就可以远程管理 IIS 等 Windows 2000 服务，包括从旧的 PC、甚至从非 PC 设备（如安装了兼容客户软件的 UNIX 工作站 - 非 Windows 客户端设备要求第三方组件软件）进行管理，好象用户就在服务器控制台前一样。
+</li> 
+
+
+
+<li><strong>集中管理：</strong>IIS 使用 Microsoft Management Console (MMC) 时的管理工具。MMC 支持管理员用于管理服务器的程序，称为管理单元。可以从运行 Windows 2000 Professional 的计算机上使用 IIS 管理单元，管理在 Windows 2000 Server 上运行 Internet 信息服务的 Intranet 上的计算机。</li>
+
+</ul>
+
+<h2><a name="programmability">可编程性</a></h2>
+
+<ul>
+
+<li><strong>Active Server Pages：</strong>可以使用服务器端的脚本和组件创建动态内容，从而创建与浏览器无关的动态内容。由于 <a href="/iishelp/iis/htm/asp/iiwawelc.htm">Active Server Pages (ASP)</a> 允许内容开发者将任何脚本语言或服务器组件嵌入 HTML页中，从而提供了一种使用 CGI 和 ISAPI 的简便方法。ASP 提供对所有 HTTP 请求和应答流的访问，以及对标准数据库连接的访问，同时还允许自定义适合各种不同浏览器的内容。</li>
+
+<li><img src="iinew1.gif" alt="全新！"> <strong><a href="../asp/iiwanew.htm">新的 ASP 功能</a>：</strong>Active Server Pages 新增和改进了一些功能，这样有助于改善性能以及简化服务器端的脚本。</li>
+
+<li><img src="iinew1.gif" alt="全新！"> <strong><a href="iiwarndc.htm#app_2">应用程序保护</a>：</strong>IIS 5.0 为 Web 应用程序提供更大的保护以及更强的可靠性。默认情况下，IIS 在公共或“共用”进程（即与核心 IIS 进程隔离的进程）中运行应用程序。而且还可以<a href="iiisol.htm">隔离</a>执行关键任务的应用程序，这些程序应该在核心 IIS 以及共用进程之外运行。 </li>
+
+<li><img src="iinew1.gif" alt="全新！"> <strong>ADSI 2.0：</strong>在IIS 5.0 中，管理员和应用程序开发者可以向现有的 ADSI 提供者添加自定义对象、属性和方法，从而进一步增大了管理员配置站点的灵活性。</li>
+
+</ul>
+
+<h2><a name="standards">Internet 标准</a></h2>
+
+<ul>
+
+<li><strong>各种标准的基础：</strong>Microsoft Internet 信息服务 5.0 版符合 HTTP 1.1 标准，包括 PUT 和 DELETE 等功能以及自定义 HTTP 错误消息的能力，并支持自定义的 HTTP 头。 </li>
+
+<li><strong>多个站点，一个 IP 地址：</strong>由于支持主机头，因此，可以用一个 IP 地址在运行 Microsoft Windows 2000 Server 的单台计算机上维护多个 Web 站点。这对于 Internet 服务提供商以及维护多个站点的公司 Intranet 非常有用。</li>
+
+<li><img src="iinew1.gif" alt="全新！"> <strong><a href="wcwbdav.htm">Web 分布式创作与版本管理 (WebDAV)</a> </strong>允许远程作者通过 HTTP 连接创建、移动或删除服务器上的文件、文件属性、目录和目录属性。</li>
+
+<li><strong>新闻和邮件：</strong>可以使用 SMTP 服务以及 NNTP 服务设置与 IIS 一同工作的 Intranet 邮件和新闻服务。 </li>
+
+<li><strong>PICS 分级：</strong>可以将 Platform for Internet Content Selection (PICS) 分级应用于内容仅适合于成人的站点。 </li>
+
+<li><img src="iinew1.gif" alt="全新！"> <strong><a href="iivsovr.htm#ftpresume">FTP 重新启动</a>：</strong>如果在数据传输中出现中断，现在可以恢复“文件传输协议”文件下载，而不必再次下载整个文件。 </li>
+
+<li><img src="iinew1.gif" alt="全新！"> <strong><a href="iihttpc.htm">HTTP 压缩</a>：</strong>可以更快地在 Web 服务器与启用了压缩的客户之间进行页面传输。压缩和缓存静态文件并对动态生成的文件按需进行压缩。</li>
+
+</ul>
+
+<hr class="iis" size="1"><p align="center"><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

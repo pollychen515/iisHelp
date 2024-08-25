@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>限制进程</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="关于如何测量处理器利用率以及如何限制特定 Web 站点使用处理器时间的过程信息。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=gb2312">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="ZH-CN">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="H1_37719347">限制进程</a></h1>
+
+<p>如果在一台计算机上运行多个 Web 站点，或在作为 Web 服务器的计算机上运行其他应用程序，您可以限制允许 Web 站点外部进程应用程序使用的处理器时间。这样就可以确保其他 Web 站点或非 Web 应用程序的处理器使用时间。</p>
+
+<p><strong>注意</strong>  如果限制站点中的虚拟目录配置为进程内部或共用进程应用程序，则站点可能实际上超过了处理器使用限制。进程内部和共用进程应用程序不受处理器限制的影响，而且也不包含在进程帐号统计信息中。</p>
+
+<big>要决定是否应该使用处理器限制</big>
+
+<ol>
+<li>使用系统监视器检查 Processor 对象的“% Processor Time”计数器、以及 Web 服务对象中用于“最大 CGI 请求”和“总计 CGI 请求”的特定实例计数器。</li>
+<li>启用进程帐号，以便在 IIS 日志中包括“Job Object”计数器报告。</li>
+<li>检查 DLLhost 对象计数器以确定外部进程 WAM 和 ISAPI 请求的数量。</li>
+</ol>
+
+<big>要限制 Web 站点使用的处理器</big>
+
+<ol>
+<li>在 <a href="javascript://" onclick="Activate(); return false">Internet 信息服务管理单元中</a>，
+
+<script language="javascript">
+<!--
+function Activate() {
+if (navigator.appName == "Microsoft Internet Explorer"){
+	window.open("iisnapin.htm", "NewWin", 'toolbar=no, left=200, top=200, scrollbars=no, resizeable=no,  width=350, height=350');
+	}
+	else if (navigator.appName == "Netscape") {
+		window.open("iisnapin.htm", "NewWin",  'toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=yes,resizable=0,width=350,height=350,top=200,left=200');
+	}
+}
+//-->
+</script>
+
+选择要限制使用处理器的 Web 站点。</li>
+<li>打开 Web 站点的属性页，然后单击“性能”选项卡。</li>
+<li>选择“启用进程限制”并键入限制该站点占用 CPU 时间的百分比。</li>
+<li>如果要启用处理器时间超出限度的 Level 2 和 Level 3 结果，请选择“强制性限制”。</li>
+</ol>
+
+<p><strong>相关主题</strong></p>
+
+<ul>
+<li>关于超过处理器时间限制所产生结果的信息，请参阅<a href="iiabpro.htm">关于处理器的使用</a>。</li>
+<li>关于启用进程帐号的信息，请参阅<a href="iiabtlg.htm">关于记录站点活动</a>。</li>
+<li>关于应用程序特有的性能问题及其设置等方面的信息，请参阅<a href="iiwarndb.htm">配置应用程序</a>。</li>
+<li>有关 IIS 提供计数器的清单，请参阅<a href="iicntpm.htm">计数器参考</a>。</li>
+<li>有关可以在 IIS 中设置超时值的清单，请参阅<a href="iitime.htm">超时参考</a>。</li>
+</ul>
+
+<hr class="iis" size="1"><p align=center><a href="../../../common/colegal.htm">(C) 1997-1999 Microsoft Corporation。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

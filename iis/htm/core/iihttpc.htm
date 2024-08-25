@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>启用 HTTP 压缩</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="关于启用 HTTP 压缩的过程主题。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=gb2312">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="ZH-CN">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="enablinghttp">启用 HTTP 压缩</a></h1>
+
+<p>HTTP 压缩可用来在 Web 服务器和启用压缩的浏览器之间快速传送网页。如果服务器生成大量的动态内容，则需要考虑压缩带来的附加处理费用是否值得付出。如果“% Processor Time”已相当高（%80 或更多），那么压缩并不是一个好的选择。</p>
+
+<big>要测试 HTTP 压缩</big>
+
+<ol>
+<li>使用系统监视器记录几天内 Processor 对象“% Processor Time”计数器的值以建立一个基线。此计数器有一个 Total 实例以及系统中每个处理器的单独实例。（如果服务器有多个处理器，可能要同时观察总数和单独的处理器，以发现工作量的不平衡。）作为附件，可能也要记录 Network Interface 对象的“Bytes Sent/sec”计数器。</li>
+<li>启用压缩并继续在一段时间内记录这些计数器的值，最好是几天，这样就能得到好的对比依据。</li>
+<li>将未压缩的和压缩的值相比较。</li>
+</ol>
+
+<p><strong>注意</strong>  如果在测试期间看到阻塞或瓶颈信号，应迅速停止测试。任意一个计数器的值的显著下降都意味着与未启用压缩相比，启用压缩已经降低了性能。
+</p>
+
+
+<big>要启用 HTTP 压缩</big>
+
+<ol>
+<li>在 <a href="javascript://" onclick="Activate(); return false">Internet 信息服务管理单元中</a>，
+
+<script language="javascript">
+<!--
+function Activate() {
+if (navigator.appName == "Microsoft Internet Explorer"){
+	window.open("iisnapin.htm", "NewWin", 'toolbar=no, left=200, top=200, scrollbars=no, resizeable=no,  width=350, height=350');
+	}
+	else if (navigator.appName == "Netscape") {
+		window.open("iisnapin.htm", "NewWin",  'toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=yes,resizable=0,width=350,height=350,top=200,left=200');
+	}
+}
+//-->
+</script>
+
+选择计算机图标，并单击“属性”按钮显示其属性表。</li>
+<li>在“主属性”中选择“WWW 服务”。</li>
+<li>单击“编辑”按钮。</li>
+<li>在“服务”属性表上，选择“压缩静态文件”，以便仅压缩那些传送到客户端（启用压缩）的静态文件。</li>
+<li>要压缩应用程序文件，需同时选择“压缩静态文件”和“压缩应用程序文件”。</li>
+<li>在“临时文件夹”框中键入本地目录的路径，或使用“浏览”按钮定位要保存压缩文件的目录。</li>
+<p><strong>注意  </strong>目录必须在本地驱动器上，而且必须位于 NTFS 分区。此目录不应共享，也不能是压缩目录。<p>
+<li>设置最大值以允许文件夹为“无限”，或在“限制到”文本框中键入数值来限制大小。</li>
+</ol>
+
+<p><strong>相关主题</strong></p>
+
+<ul>
+<li>有关压缩问题的更深入讨论，请参阅<a href="iiprftn.htm">关于容量规划</a>。</li>
+<li>有关 IIS 中提供的计数器清单，请参阅<a href="iicntpm.htm">计数器参考</a>。</li>
+<li>有关可以在 IIS 中设置的所有超时值，请参阅<a href="iitime.htm">超时参考</a>。</li>
+</ul>
+
+
+
+<hr class="iis" size="1"><p align=center><a href="../../../common/colegal.htm">(C) 1997-1999 Microsoft Corporation。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

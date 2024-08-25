@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>关于群集</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="关于复制和群集的概念信息，它们可以在多服务器安装中提供容错和负载平衡。复制是指将内容或配置设置从一台服务器自动复制到另一台服务器。群集使得对于客户机来说，多个服务器看起来像是一个服务器。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=gb2312">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="ZH-CN">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="cluster2">关于群集</a></h1>
+
+<p><strong><span style="color: #0000FF"><font color="#0000FF">要点</font></span></strong> 本节描述的群集功能仅适用于 Windows 2000 Advanced Server。</p>
+
+<p>本节介绍群集、容错、负载平衡和复制的概念。对于多个服务器的站点，正确的容错和负载平衡将提高性能。</p>
+
+<p><strong>群集</strong></p>
+
+<p>群集允许多个服务器通过群集软件连接，这样在用户看来它们像是一个计算机。这种连接允许它们使用那些通过单独服务器节点不能实现的功能，例如故障转移和负载平衡。服务器群集也允许共享包含重要信息（例如数据库）的群集磁盘。</p>
+
+<p><strong>容错</strong></p>
+
+<p>容错是指如果一个服务器节点停止工作，另一个服务器节点可以立即接过请求负载，这样对用户产生的影响最小。一个服务器节点的工作量自动转移到另一节点的过程称为“故障转移”。当出故障的服务器重新联机后将负载恢复给该服务器的过程称为“故障回复”。</p>
+
+<p><strong>负载平衡</strong></p>
+
+<p>负载平衡是指两个或多个服务器可以支持数量更多的活动，方法是在它们之间分配请求负载，这样就没有服务器节点过载或未充分利用。服务器群集可提供静态负载平衡，方法是：通过人工或者编程手段将 Web 或 FTP 站点分配到特定的首选服务器节点。网络负载平衡群集通过在多个服务器节点之间分配客户连接来提供负载平衡。</p>
+
+<p><strong>注意</strong>  通常，群集配置为同时具有负载平衡和容错功能。</p>
+
+<p><strong>复制</strong></p>
+
+<p>复制包括将内容和配置设置从一个服务器复制到其他服务器，这样所有的服务器都可以给用户提供相同的资源。配置设置的复制对于所有群集都是必需的，无论它们是否共享内容。对于那些共享数据存储设备（例如磁盘驱动器）的群集来说，内容的复制不是必需的。许多群集应用程序同时支持内容和配置设置的复制。IIS 提供了一个实用程序，它可以将配置设置从一个计算机复制到任意数量的其他计算机上。有关使用这个实用程序的详细信息，请参阅 <a href="iiclusus.htm">IIS 中的复制和群集</a>。</p>
+
+<p><strong>基本服务器群集配置</strong></p>
+
+<p>下面图表显示基本服务器群集配置。每个服务器节点有一个本地磁盘，它可以包含该节点的特定信息。虽然在同一时间内只有一个节点可以访问磁盘上的资源，但两个节点可以共享硬盘上的资源。节点可以配置为使用一个专门用于群集通信的内部连接，或者所有网络通信（包含客户和内部群集通信）都使用相同的网络连接。要使配置在“服务器”群集中的 IIS 可以使用所有的复制和群集功能，这种配置（减去专门的内部连接）是必需的。群集结构使得负载平衡、故障转移和故障回复成为可能。</p>
+
+<p><center><img src="iiclusab.gif" width=320 height=205 border=0 alt="群集图表"></center><br>
+
+<hr class="iis" size="1"><p align=center><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

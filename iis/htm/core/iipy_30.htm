@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html dir=ltr>
+<HEAD>
+
+<title>性能属性表</title>
+<META NAME="ROBOTS" CONTENT="NOINDEX">
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<BODY BGCOLOR=#FFFFFF TEXT=#000000> <font face="宋体">
+
+<p><strong>性能属性表</strong></p>
+
+<p>使用该属性表可设置影响内存和带宽使用的属性。</p>
+
+<p><strong>调整</strong></p>
+<p>将该设置调节为所希望站点每日进行的连接数。如果该数字稍高于实际连接数量，则可加快连接速度并提高服务器性能。如果该数字比实际连接数量高得多，将造成服务器内存的浪费，从而降低服务器总体性能。</p>
+
+<p><strong>启用带宽限制</strong></p>
+
+<p>选择此选项可以限制 Web 站点使用的带宽。对于此 Web 站点，这里键入的带宽值将覆盖在计算机级设置的值，即使这个值比在计算机级设置的值大。</p>
+
+<p><strong>启用进程限制</strong></p>
+
+<p>选择该选项可限制 CPU 用于 Web 站点处理应用程序之外的处理时间百分比。如果只选中该框而未选中“强制性限制”，则当分配的限制超出时仅将事件写入“事件日志”。</p>
+
+<p>如果选择了“强制性限制”，可导致运行超出限制。如果站点超出所分配使用范围的 150%，应用程序进程将设置为空闲。如果站点超出所分配使用范围的 200%，Web 站点上的所有进程外应用程序都将停止。</p>
+
+<p><hr class="iis" size="1"></p>
+<p align="center"><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+</font>
+</BODY>
+</HTML>

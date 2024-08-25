@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>管理 WebDAV 安全</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+
+<META NAME="DESCRIPTION" CONTENT="讨论安全的不同级别以及如何调整它们以控制对 WebDAV 目录的访问，还将列出指向详细信息的链接。">
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=gb2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="ZH-CN">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="ManagingWebDAVSecurity">管理 WebDAV 安全</a></h1>
+
+<p>本节描述了推荐的设置安全远程发布的最好的习惯。您将学到如何通过协调安全的各个部分为一个统一的整体来保护您的服务器和内容。这些安全的各个部分包括：</p>
+
+<ul>
+<li><a href="#Authenticating">验证客户端</a></li>
+<li><a href="#ControllingAccess">控制访问</a></li>
+<li><a href="#FileSize">拒绝服务</a></li>
+</ul>
+
+<h2><a name="Authenticating"></a>验证客户端</h2>
+
+<p>IIS 提供下面几种验证级别：</p>
+
+<ul>
+<li>匿名</li>
+<li>基本</li>
+<li>集成 Windows</li>
+<li>摘要式</li>
+</ul>
+
+<p>配置 WebDAV 目录的最佳方法取决于要进行的发布的方法。当通过 IIS 5.0 来创建一个虚拟目录时。匿名和集成 Windows 验证都是打开的。虽然这种默认配置对于连接客户端到您的服务器、读取 Web 页上的内容以及运行脚本来说可以工作得很好，但要将客户端发布到目录以及操作该目录上的文件时就会无法胜任。</p>
+
+<p><strong>匿名访问</strong>授权任何人都可以访问目录，因此，您应当将 WebDAV 目录的“匿名访问”功能关闭。如果不控制对目录的访问，您的目录将会受到某些不知名客户的故意破坏。详细信息，请参阅<a href="iiabasc.htm#Anonymous">匿名验证</a>。</p>
+
+<p><strong>基本验证</strong>以明文形式在连接上发送密码。由于明文可轻松截获并阅读，您只可在通过安全套接字层 (SSL) 加密密码时才使用。详细信息，请参阅<a href="iiabasc.htm#basic">基本验证</a>和<a href="iisslsc.htm">在服务器上设置 SSL</a>。</p>
+
+<p><strong>集成 Windows 验证</strong>可以在 Itranet 上设置 WebDAV 目录时工作得非常好。详细信息，请参阅<a href="iiabasc.htm#challenge">匿名验证</a>。</p>
+
+<p><strong>摘要式验证</strong>是在将信息通过防火墙发布到 Internet 上的服务器中的最佳选择。详细信息，请参阅<a href="iiabasc.htm#digest">匿名验证</a>。</p>
+
+<h2><a name="ControllingAccess">控制访问</a></h2>
+
+本节描述了通过协调 IIS 5.0 和 Windows 2000 权限如何控制到您的 WebDAV 目录的访问，以及如何保护您的脚本文件。
+
+<h3><a name="Permissions">设置 Web 服务器权限</a></h3>
+
+<p>本节推荐了几种根据要发布的材料的用途来配置 Web 权限的不同方法。</p>
+
+<ul>
+<li><strong>启用读、写和目录浏览</strong> 打开这些权限允许客户查看资源列表并进行修改（除非这些资源没有写权限）、发布自己的资源并操作文件。</li>
+
+<li><strong>启用写，禁用读和目录浏览</strong> 如果只想让客户将私人信息发布到目录中，但不允许别人查看所发布的东西，可以设置写权限，但不设置读和目录浏览权限。该配置在客户端提交投票或性能检查时非常有用。</li>
+
+<li><strong>启用读和写，禁用目录浏览</strong> 如果想要依赖晦涩生僻的文件名作为一种安全方法，可设置该配置。然而也应当注意到，通过晦涩生僻的文件名来设置安全性是一种低级的安全防范措施，因为一个故意破坏者可通过试探和排错来猜测出文件名。</li>
+
+<li><strong>启用索引此资源</strong> 如果打算让客户端搜索目录资源，请确保启用了索引服务。</li>
+</ul>
+
+<p>详细信息，请参阅<a href="iiwspsc.htm">设置 Web 服务器权限</a>。</p>
+
+<h3><a name="ACLs">使用 DACL 控制访问</a></h3>
+
+<p>当在一个 NTFS 文件系统的驱动器上设置 WebDAV 发布点目录时，Windows 2000 Server 默认给所有人完全控制的权限。请更改此一级别的许可权限，使所有人“只”具读的权限。然后给某些个人或组授予写权限。</p>
+
+<p>有关 NTFS 权限的详细信息，请参阅 <a href="iiacnsc.htm#NTFSpermissions">NTFS 权限</a>。</p>
+
+<h3><a name="Script">保护脚本代码</a></h3>
+
+<p>如果在发布目录中有一些不想暴露给客户端的脚本文件，您可以很轻松地通过不授予“脚本源访问”来拒绝别人访问这些文件。脚本包含带有显示在应用程序映射列表中的扩展名的文件。所有其他的可执行文件将作为静态 HTML 文件来处理，包括带有 .exe 扩展名的文件，除非目录启用了“脚本和可执行”。</p>
+
+<p>要阻止 .exe 文件下载并作为 HTML 文件来查看，但允许它们运行，可在发布点目录的“虚拟目录”属性页中，将可执行权限更改为“脚本和可执行”。这一权限级别将使所有可执行文件服从“脚本源访问”设置。换句话说，如果选中了“脚本源访问”，有读权限的客户可看到所有的可执行文件，而有写权限的客户既可运行它们，还可以编辑它们。</p>
+
+<p>使用下面的权限，客户可写入没有出现在应用程序映射中的可执行文件：</p>
+
+<ul>
+<li>已授予写权限。</li>
+<li>可执行权限设置为“只限脚本”。</li>
+</ul>
+
+<p>使用下面的权限，客户也可以写入到一个可执行文件：</p>
+
+<ul>
+<li>已授予“脚本源访问”权限。</li>
+<li>可执行权限设置为“脚本和可执行”。</li>
+</ul>
+
+<h2><a name="FileSize">拒绝服务</a></h2>
+
+<p>将一个非常大的文件拖动并放置到 WebDAV 目录中可能占用大量的磁盘空间。要限制空间占用量，可设置限额磁盘使用。要了解有关磁盘限额的更多知识，请参阅 Windows?000 Server 文档中的“磁盘限额概述”。</p>
+
+<p>有关安全的详细信息，请参阅 <a href="iisckl.htm">IIS 安全检查表</a>。</p>
+
+
+<hr class="iis" size="1">
+<p align="center"><a href="/iishelp/common/colegal.htm">(C)1997-1999 Microsoft Corporation。保留所有权利。</a></p>
+
+
+</font>
+</body>
+</html>

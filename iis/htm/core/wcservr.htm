@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>创建发布目录</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="介绍如何在服务器上建立 WebDAV 发布目录。">
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=gb2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="ZH-CN">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="CreatingaPublishingDirectory">创建发布目录</a></h1>
+
+<p>下面逐步介绍建立发布目录，即 WebDAV 目录的步骤。</p>
+
+<big>建立发布目录</big><br>
+
+<ol>
+<li>在 Windows 2000 桌面上，单击“我的电脑”。</li>
+<li>在 Inetpub 目录下，创建一个实际的目录。</li>
+<p>例如，如果创建的目录称为 WebDAV，到该目录的路径就类似于：C:\Inetpub\WebDAV</p>
+<p>可以将该目录放到除 Wwwroot 目录以外的任何地方。Wwwroot 是一个例外，因为其默认 DACL 与其他目录上的不同。</p>
+<li>在 <a href="javascript://" onclick="Activate(); return false">IIS 管理单元</a>中，创建一个虚拟目录。</li>
+<p>有关信息，请参阅<a href="iicodirv.htm">创建虚拟目录</a>。</p>
+<li>键入“WebDAV”，作为虚拟目录的别名，并将该目录与在第 2 步中创建的实际目录链接。</li>
+<li>并授予该虚拟目录的“读”、“写”、“浏览”权限。</li>
+<p>这样就授予了用户在该虚拟目录上发布文档以及查看该目录下文件列表的权限。虽然因安全原因并不推荐这样做，但您可以将同样的访问权限授予整个 Web 站点并允许客户发布到整个 Web 服务器中。</p>
+</ol>
+
+<p><strong>注意</strong> 授予写访问权限并不授予客户修改 Active Server Pages (ASP) 或其他任何脚本映射文件的能力。要允许这些文件可以被修改，必须在创建虚拟目录之后授予写权限和脚本源访问权限。有关设置这些权限的信息，请参阅<a href="iiwspsc.htm">设置 Web 服务器权限</a>。</p>
+
+<p>一旦您完成了 WebDAV 虚拟目录的设置，就可以允许客户发布到上面。有关用户如何通过任意 Microsoft WebDAV 客户端连接到该目录的信息，请参阅<a href="wcwdpub.htm">发布和管理文件</a>。</p>
+
+
+<hr class="iis" size="1">
+<p align="center"><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft Corporation。保留所有权利。</a></p>
+
+<script language="javascript">
+<!--
+function Activate() {
+if (navigator.appName == "Microsoft Internet Explorer"){
+	window.open("iisnapin.htm", "NewWin", 'toolbar=no, left=200, top=200, scrollbars=no, resizeable=no,  width=350, height=350');
+	}
+	else if (navigator.appName == "Netscape") {
+		window.open("iisnapin.htm", "NewWin",  'toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=yes,resizable=0,width=350,height=350,top=200,left=200');
+	}
+}
+//-->
+</script>
+
+</font>
+</body>
+</html>

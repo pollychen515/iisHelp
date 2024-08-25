@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML dir=ltr>
+<HEAD>
+
+<TITLE>#exec</TITLE>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="Internet 信息服务参考信息。#exec 命令指示 Web 服务器运行指定的应用程序或外壳命令并将输出（标准输出或 ISAPI WriteClient 数据）发送到客户浏览器。">
+
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000"><font face="宋体">
+
+<H2><A NAME="_k2_exec"></A><SUP></SUP>#exec</H2>
+
+<P><STRONG>#exec</STRONG> 命令指示 Web 服务器运行指定的应用程序或外壳命令并将输出（标准输出或 ISAPI <STRONG>WriteClient</STRONG> 数据）发送到客户浏览器。必须使用 HTML 注释定界符将指令括起来。</P>
+
+<P>该指令仅可用于 HTML 页而无法用于 ASP 页。</P>
+
+<H4>语法</H4>
+
+<P><STRONG>&lt;!-- #exec </STRONG><em>CommandType</em><STRONG> = </STRONG><em>CommandDescription</em> <STRONG>--&gt;</STRONG></P>
+
+<H4>参数</H4>
+
+<P><em>CommandType</em></P>
+
+<P>指定命令类型。命令可为以下某种类型：</P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all width=100%>
+
+<TR VALIGN="top">
+<TD width=26%><STRONG>命令类型</STRONG></TD>
+<TD width=74%><STRONG>含义</STRONG></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=26%>CGI</TD>
+<TD width=74%>运行应用程序，例如 CGI 脚本、ASP 应用程序或 ISAPI 应用程序。CommandDescription 参数是一个包含应用程序虚拟路径的字符串，其后跟有问号 (?) 和传递给应用程序的参数。参数由加号 (+) 分隔。因为运行 ISAPI 应用程序只是处理 SSI 文档的一部分，所以 ISAPI 应用程序受到以下限制：
+<P>任何试图通过 <STRONG>ServerSupportFunction</STRONG> 发送 URL 或重定向的应用程序将导致在 HTML 流中放入消息，但不执行发送重定向。 </P>
+
+<P>SSI 解释器 (Ssinc.dll) 将不确定地等待应用程序返回HSE_STATUS_PENDING， 除非调用 <STRONG>ServerSupportFunction</STRONG> 完成会话。 </P>
+</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=26%>CMD</TD>
+<TD width=74%>运行外壳命令。CommandDescription 参数是一个包含 shell 程序完整物理路径的字符串，其后跟有由空格分隔的命令行参数。如果未指定完整路径，Web 服务器将搜索系统路径。默认情况下禁用该命令，因为它引起 Web 站点的安全问题；例如，用户可能运行 <STRONG>format</STRONG> 命令清除您的硬盘。要启用它，请把 SSIEnableCmdDirective 项添加到注册表并将其值设置为“TRUE”。关于使用注册表的一般信息，请参阅“注册表”。</TD>
+</TR>
+</TABLE><BR>
+<hr class="iis" size="1">
+<p align="center"><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+</font>
+</BODY>
+</HTML>

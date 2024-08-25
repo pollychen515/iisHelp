@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>计算连接性能</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	function Calculate() {
+		var selector = window.document.forms[0].elements[0]
+		var ConnType = selector.options[selector.selectedIndex].text;
+		var ConnSpeed = selector.options[selector.selectedIndex].value;
+		var ConnSpeedVal;
+		var PageSecVal;
+		var HitsDayVal;
+		var SimultUsersVal;
+		var Page = window.document.forms[0].elements[1].value
+		var Allow = window.document.forms[0].elements[2].value
+		if (ConnSpeed<= 0) {
+			ConnSpeed=31680;
+			}
+		if (Page<= 0) {
+			Page=42;
+			window.document.forms[0].elements[1].value = 42;
+			}
+		if (Page >= 9999999) {
+			Page=42;
+			window.document.forms[0].elements[1].value = 42;
+			}
+		if (Allow <= 0) {
+			Allow=5;
+			window.document.forms[0].elements[2].value = 5;
+			}
+		if (Allow >= 99999) {
+			Page=42;
+			window.document.forms[0].elements[2].value = 5;
+			}
+		ConnSpeedVal = Math.round(ConnSpeed / 1);
+		PageSecVal = Math.round(((ConnSpeed / Page) / 1536) +1);
+		SimultUsersVal = Math.round((ConnSpeed / ((Page * 1536) / Allow)) +1);
+		HitsDayVal = Math.round((ConnSpeedVal * 86400) / Page);
+		window.document.forms[0].elements[3].value = ConnType;
+		window.document.forms[0].elements[4].value = ConnSpeedVal;
+		window.document.forms[0].elements[5].value = PageSecVal;
+		window.document.forms[0].elements[6].value = SimultUsersVal;
+		window.document.forms[0].elements[7].value = HitsDayVal;
+		}
+
+//-->
+</script>
+<META NAME="DESCRIPTION" CONTENT="此实用程序计算每秒传送的大概的千字节数、每秒传送的页数以及指定的连接的每天点击数。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=gb2312">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="ZH-CN">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" onLoad="Calculate();"><font face="宋体">
+
+
+
+<h1><a name="calcform">计算连接性能</a></h1>
+
+<p>可以使用这个表单计算预期的连接性能。从列表中选择连接类型，键入估计的平均页大小，然后键入允许下载该页的最大时间值。当更改这些值时，计算器将自动重新计算。</p>
+
+<p><strong>注意</strong>  此实用程序显示的数值只是近似值，并不是基准信息。服务器的实际性能可能与这些值有差别。</p>
+
+<form name="TheForm">
+<table border=0>
+<tr>
+<td><strong>请输入：</strong></td>
+</tr>
+<tr>
+<td>连接类型</td>
+<td><select name="ConnType" onChange="Calculate();">
+		<option selected value=31680> 专用的 PPP / SLIP 28.8
+		<option value=37478> 专用的 PPP / SLIP 36,6
+		<option value=57024> 56K（帧中继）
+		<option value=128000> ISDN 双通道
+		<option value=1500000> T1
+		<option value=44985600> T3
+		<option value=150000> DS1
+		<option value=44640000> DS3
+		<option value=150000000> OC3
+		<option value=622000000> OC12
+		<option value=2400000000> OC48
+		<option value=10000000000> OC192
+		</select></td>
+</tr>
+<tr>
+<td>页大小（以千字节为单位）</td>
+<td><input type="TEXT" name="PageSize" size="6" value="42" onChange="Calculate();"></td>
+</tr>
+<tr>
+<td>允许的页加载时间（以秒为单位）</td>
+<td><input type="TEXT" name="AllowTime" size="6" Value="5" onChange="Calculate();"></td>
+</tr>
+<tr>
+<td><strong>结果</strong></td>
+</tr>
+<tr>
+<td bgcolor="#C0C0C0">连接类型</td>
+<td><input type="Text" name="ConnTypeText" value="专用的 PPP / SLIP 28.8" size="22" notab onfocus="javascript:blur(this)"></td>
+</tr>
+<tr>
+<td bgcolor="#C0C0C0">连接速度(以每秒千字节为单位)</td>
+<td><input type="Text" name="ConnSpeedText" value="31680" size="12" notab onfocus="javascript:blur(this)"></td>
+</tr>
+<tr>
+<td bgcolor="#C0C0C0" width=250>每秒的页数</td>
+<td><input type="Text" name="PageSecText" value="15" size="10" notab onfocus="javascript:blur(this)"></td>
+</tr>
+<tr>
+<td bgcolor="#C0C0C0">可能的同时用户数</td>
+<td><input type="Text" name="SimultUserText" size="10" value="100" notab onFocus="javascript:blur(this)"></td>
+</tr>
+<tr>
+<td bgcolor="#C0C0C0">每天的点击数</td>
+<td><input type="Text" name="HitsDayText" size="15" value="1000" notab onFocus="javascript:blur(this)"></td>
+</tr>
+</table>
+</form>
+
+<hr class="iis" size="1"><p align=center><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

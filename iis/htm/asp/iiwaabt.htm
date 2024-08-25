@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>Active Server Pages 简介</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="关于 Active Server Pages 的概述，以及 HTML 创作、脚本创作和应用程序开发等对 ASP 使用的基本说明。"><META HTTP-EQUIV="Content-Type" content="text/html; charset=gb2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+
+<body bgcolor="#FFFFFF" text="#000000"><FONT FACE="宋体">
+
+<h1><a name="H1_37763863">Active Server Pages 简介</a></h1>
+</span></font>
+
+<p>Microsoft&#174;  Active Server Pages (ASP) 是一个“服务器端脚本编写”环境，可用于创建和运行动态的交互式 Web 服务器应用程序。使用 ASP，可以合并 HTML 页、脚本命令以及 COM 组件创建交互式 Web 页和功能强大的 Web 应用程序，它们都可以轻松地开发并修改。</p>
+
+<h2><a name="H2_37764454">对于 HTML 作者</a></h2>
+
+<p>如果您是 HTML 创作者，将会发现用 ASP 编写服务器端脚本可使创建更为复杂、实用的 Web 应用程序变得十分简单。如果曾希望将 HTML 表单信息存储在数据库中、根据访问者的自选项自定义 Web 站点或对不同的浏览器使用不同的 HTML 功能，将会发现 ASP 提供了优异的解决方案。例如，从前要在 Web 服务器上处理用户输入，必须首先学习用 Perl 或 C 等语言建立传统的公共网关接口 (CGI) 应用程序。而使用 ASP 后，仅通过在 HTML 文档中直接嵌入的简单服务器端脚本,便可以收集 HTML 表单信息，并传递到数据库。如果已经熟悉 Microsoft VBScript 或 Microsoft&#174;  JScript&#174;（JScript 是 Microsoft 对 ECMA 262 语言规范的实现），那么学习 ASP 将不会感觉到有什么困难。
+
+<p>如果希望立即使用 ASP，请参阅 <a href="iiatovr.htm">ASP 教程</a>。关于编写服务器端脚本的更详细信息，还可以返回到这些主题。</p>
+
+<h2><a name="H2_37765707">对于高级 Web 脚本编写者</a></h2>
+
+<p>由于 ASP 使用了中性语言，因此如果您对 VBScript、JScript 或 PERL 等脚本语言十分熟悉，那么您已经了解了 Active Server Pages 的使用方法。再有，在 ASP 页中，您可以使用已经装有 COM 脚本兼容编辑引擎的任何脚本编辑语言。ASP 使用 VBScript 和 JScript 脚本引擎，但仍可安装用于 PERL、REXX 和 Python 的脚本引擎，它们可从第三方供应商获得。</p>
+
+<h2><a name="H2_37766314">对于 Web 开发和编程人员</a></h2>
+
+<p>如果您使用 Visual Basic、C++ 或 Java 等编程语言开发过后端 Web 应用程序，将会发现 ASP 是创建 Web 应用程序灵活而快速的方法。除了添加脚本为应用程序创建迷人的 HTML 界面之外，还可以建立自己的 COM 组件。可以将应用程序的商业逻辑封装在可重复使用的模块中，以便在脚本、其他组件或其他程序中调用。</p>
+
+<h2><a name="theactiveserverpagesmodel">Active Server Pages 模型</a></h2>
+
+<p>当浏览器向 Web 服务器请求 .asp 文件时，服务器端脚本便开始运行。Web 服务器于是调用 ASP，用它从头至尾处理所请求的文件、执行脚本命令，并将 Web 页发送到浏览器。</p>
+
+<p>因为脚本运行于服务器而不是客户端，所以生成发送到浏览器的 HTML 页等工作便由 Web 服务器负责。服务器端脚本无法被预先复制，因为返回到浏览器的只是脚本的运行结果。用户无法得知创建其所查看的页面使用的脚本命令。</p>
+
+<hr class="iis" size="1">
+<p align="center"><a href="/iishelp/common/colegal.htm">&copy; 1997-1999 Microsoft Corporation。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

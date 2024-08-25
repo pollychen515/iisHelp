@@ -1,0 +1,105 @@
+<!doctype html public "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>将请求重定向到目录</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META name="DESCRIPTION" content="有关如何将浏览器请求重定向到其他文件、其他目录或其他 Web 站点的步骤。">
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="H1_37693895">将请求重定向到目录</a></h1>
+
+<p>可以将目录上的文件请求重定向到其他目录、Web 站点或其他不同目录上的文件。当浏览器请求原始 URL 上的文件时，Web 服务器指导浏览器使用新的 URL 请求页。</p>
+
+<big>重定向请求到其他目录或 Web 站点</big><!--</p>--><br>
+
+<ol>
+
+<li>在 <a href="javascript://" onclick="Activate(); return false">Internet 信息服务管理单元</a>中，<script language="javascript">
+<!--
+function Activate() {
+if (navigator.appName == "Microsoft Internet Explorer"){
+	window.open("iisnapin.htm", "NewWin", 'toolbar=no, left=200, top=200, scrollbars=no, resizeable=no,  width=350, height=350');
+	}
+	else if (navigator.appName == "Netscape") {
+		window.open("iisnapin.htm", "NewWin",  'toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=yes,resizable=0,width=350,height=350,top=200,left=200');
+	}
+}
+//-->
+</script>选中 Web 站点或目录，然后打开其属性表。</li>
+<li>单击“主目录”、“虚拟目录”或“目录”选项卡。</li>
+<li>选中“重定向到 URL”。</li>
+<li>在“重定向到”框中，键入目标目录或 Web 站点的 URL。例如，要将 /Catalog 目录中的文件请求重定向到 /NewCatalog 目录中，请键入“/NewCatalog”。</li>
+</ol>
+
+<p class="bigfix">&nbsp;</p> <big>将所有请求重定向到单个文件中</big><!--</p>--><br>
+
+<ol>
+
+<li>在 <a href="javascript://" onclick="Activate(); return false">Internet 信息服务管理单元</a>中，<script language="javascript">
+<!--
+function Activate() {
+if (navigator.appName == "Microsoft Internet Explorer"){
+	window.open("iisnapin.htm", "NewWin", 'toolbar=no, left=200, top=200, scrollbars=no, resizeable=no,  width=350, height=350');
+	}
+	else if (navigator.appName == "Netscape") {
+		window.open("iisnapin.htm", "NewWin",  'toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=yes,resizable=0,width=350,height=350,top=200,left=200');
+	}
+}
+//-->
+</script>选中 Web 站点或目录，然后打开其属性表。</li>
+<li>单击“主目录”、“虚拟目录”或“目录”选项卡。</li>
+<li>选中“重定向到 URL”。</li>
+<li>在“重定向到”框中，键入目标文件的 URL。</li>
+<li>选中“上面输入的准确 URL”以防止 Web 服务器将原始文件名添加到目标 URL 中。</li>
+</ol>
+
+<p>可以在目标 URL 中使用通配符和重定向变量精确地控制如何将原始 URL 转化成目标 URL。详细信息，请参阅<A HREF="iiabdsk.htm">重定向参考</A>。</p>
+
+
+<hr class="iis" size="1"><p align="center"><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

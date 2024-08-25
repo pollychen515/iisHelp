@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>支持旧浏览器的主机头名</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="关于对无法使用主机头名的旧浏览器提供 URL 解析支持的程序上的信息。主机头名可用于区分使用同一 IP 地址的多个 Web 站点。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=gb2312">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="ZH-CN">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="H1_37757228">支持旧浏览器的主机头名</a></h1>
+
+<p> Microsoft Internet Explorer 3.0、Netscape Navigator 2.0 以及两个浏览器的更高版本都支持使用主机头名，两个浏览器的以前版本不支持。如果使用主机头名主持同一 IP 地址和端口上的多个地址，可以通过以下步骤让使用旧浏览器的访问者浏览到确切的站点。</p>
+
+<p><strong><font color="#FF0000">警告</font></strong>错误使用注册表编辑器会引起此问题，包括 Web 站点或 FTP 站点失败。如果犯此错误，可能损坏 Web 站点或 FTP 站点的配置。您应该只编辑和设置有关的注册表项，不能调整用户界面，在直接编辑注册表时请注意此警告。</p>
+
+<big>配置注册表</big><!--</p>--><br>
+
+<ol>
+<li>要打开所需编辑的注册表，请在命令行中键入 Regedt32.exe，然后按 ENTER 键。</li>
+<li>在以下位置启用或添加下列值</li>
+
+<pre>HKEY_LOCAL_MACHINE\SYSTEM
+ \CurrentControlSet
+  \Services
+   \W3SVC
+    \Parameters</pre>
+
+<p><strong>DLCSupport</strong> 将该参数值置为 1，使浏览器支持 cookies 的传递。</p>
+
+<p><strong>DLCMenuString</strong> 该参数可为使用主机菜单的 URL 提供特殊前缀。这是一个特殊的字符串，服务其根据它来检查所有下级请求（即不带真实主头的请求）。当 URL 由该字符串作为前缀时，将被作为主菜单项目处理。例如，DLCMenuString 可设置为“/HostMenu”。请记住字符串开始应带有斜线。</p>
+
+<p><strong>DLCMungeMenuDocumentString</strong>该参数为主菜单文档名称，该文档将发送给不支持 cookie 的浏览器。例如，该参数可设置为“/Scripts/Munge.asp”。</p>
+
+<p><strong>DLCHostNameString</strong>该参数可提供包含索引文件的 Web 站点的主机名称。例如，如果菜单页贮留于 www.server1.com，该参数便可设置为“www.server1.com”。请注意所有的图形和背景等文件都必须位于用一 Web 站点。</p>
+
+<p><strong>DLCCookieMenuDocumentString</strong> 该参数为要发送给支持 cookie 的旧浏览器的实际主菜单名称。例如，该参数可为“/Scripts/Cookies.asp”。</p>
+
+<p><strong>DLCCookieNameString</strong> 该参数指定特殊 cookie 的名称，服务器解释该名称，使其代表伪主机头名。例如，该参数可为“PseudoHost”。</p>
+
+<li>工作完成后，必须重新启动计算机。 </li>
+
+</ol>
+
+<p class="bigfix">&nbsp;</p> <big>重定向浏览器</big><!--</p>--><br>
+
+<ol>
+<li>将以下脚本置于 Mysite/Scripts 目录，这里 Mysite 是 DCLHostNameString 注册表设置中所标识的 Web 站点。</li>
+<li>将以下脚本复制到文本编辑器，然后将文件另存为 Munge.asp，并用站点的实际名称替换示例站点名称 www.example1.microsoft.com 和 www.example2.microsoft.com。 </li>
+
+<pre>&lt;HTML&gt;
+&lt;HEAD&gt;&lt;TITLE&gt;服务器选择页&lt;/TITLE&gt;&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+
+&lt;A HREF="http://www.example1.microsoft.com/*www.example1.microsoft.com/&lt;%=Request.QueryString()%&gt;"&gt;尝试 www.example1.microsoft.com&lt;/A&gt;&lt;BR&gt;
+&lt;A HREF="http://www.example2.microsoft.com/*www.example2.microsoft.com/&lt;%=Request.QueryString()%&gt;"&gt;尝试 www.example2.microsoft.com&lt;/A&gt;&lt;BR&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;</pre>
+
+<li>将以下脚本复制到文本编辑器，然后将文件另存为 Cookie.asp。</li>
+
+<pre>&lt;HTML&gt;
+&lt;HEAD&gt;&lt;TITLE&gt;服务器选择页&lt;/TITLE&gt;&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+
+&lt;A HREF="/HostMenu/Scripts/Redirect.asp?Host=www.example1.microsoft.com &amp; NewLocation = &lt;% = request.querystring()%&gt;"&gt;尝试 www.example1.microsoft.com&lt;/A&gt;&lt;BR&gt;
+&lt;A HREF="/HostMenu/Scripts/Redirect.asp?Host=www.example2.microsoft.com &amp; NewLocation = &lt;% = request.querystring()%&gt;"&gt;尝试 www.example2.microsoft.com&lt;/A&gt;&lt;BR&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;</pre>
+
+<li>将以下脚本复制到文本编辑器，然后将文件另存为 Redirect.asp。</li>
+
+<pre>&lt;%
+
+Option Explicit
+
+Dim DLCCookieNameString
+
+DLCCookieNameString = "PseudoHost"
+
+Response.Cookies(DLCCookieNameString) = Request.QueryString("Host")
+Response.Cookies(DLCCookieNameString).Domain = Request.QueryString("Host")
+Response.Cookies(DLCCookieNameString).Path = "/"
+
+Response.Redirect "http://" &amp; Request.Querystring("Host") &amp; Request.QueryString("NewLocation")
+
+%&gt;			</pre>
+
+</ol>
+
+<p><strong>相关主题</strong></p>
+
+<ul>
+<li>关于主持多个站点的详细信息，请参阅“关于名称解析”中的<a href="iinmres.htm#AssigningNamestoVirtualServers">通过分配端口、地址和主机头名主持多个站点</a>。</li>
+</ul>
+
+<hr class="iis" size="1"><p align=center><a href="../../../common/colegal.htm">(C) 1997-1999 Microsoft Corporation。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

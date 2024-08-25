@@ -1,0 +1,171 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>关于 Web 和 FTP 站点</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="关于 Web 和 FTP 站点（虚拟服务器）的概念信息。描述默认 Web 站点设置是如何继承的、远程管理选项以及默认情况下授予 Web 站点操作员组的有限管理特权。">
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="H1_37761870">关于 Web 和 FTP 站点</a></h1>
+
+<p>本主题包含关于站点（虚拟服务器）及其属性、管理特权和来自远程位置管理的概念信息。包括下列小节：</p>
+
+<ul>
+<li><a href="#virtualservers">Web 和 FTP 站点</a></li>
+<li><a href="#propertiesandinheritanceofpropertiesonvirtualservers">站点的属性和属性继承</a></li> <li><a href="#websiteoperators">Web 站点操作员</a></li>
+<li><a href="#RemoteAdministration">远程管理站点</a></li>
+<li><a href="#ftpresume">FTP 重新启动</a></li>
+<li><a href="#mimemap">MIME 映射</a></li>
+</ul>
+
+<h2><a name="virtualservers">Web 和 FTP 站点</a></h2>
+
+<p>无论是在 Intranet 还是在 Internet 上，都可以按三种方式在运行 Windows 2000 的单个计算机上创建多个 Web 和 FTP 站点：</p>
+
+<ul>
+<li>将端口号附加到 IP 地址。</li>
+<li>使用多个 IP 地址，每个都有自己的网络适配卡。</li>
+<li>通过使用主机头名将多个域名和 IP 地址指派给一个网络适配卡。</li>
+</ul>
+
+<p>以下示例说明了 Intranet 方案，此处系统管理员已将 Windows 2000 Server 和 IIS 一并安装在公司服务器上，这将导致产生一个默认的 Web 站点，即 http://CompanyServer。然后系统管理员将创建两个“额外的”Web 站点，分别对应于两个部门：市场部和人力资源部。</p>
+
+<img src="iivsovr1.gif" alt="在 Intranet 上维护三个 Web 站点的计算机。">
+
+<p>虽然位于同一计算机上，但“CompanyServer”、“市场部”和“人力资源部”看起来都象是唯一的 Web 站点。这些部门站点具有相同的安全选项，就好象它们存在于独立的计算机上那样，这是因为每个站点均有其自己的访问和管理权限设置。此外，管理任务可以分配给每个部门的成员。关于维护多个站点的详细信息，请参阅“关于名称解析”中的<a href="iinmres.htm#AssigningNamestoVirtualServers">将主机头名、地址和端口分配给 Web 站点</a>。</p>
+
+<p>当创建大量站点时，请一定考虑硬件的限制并根据需要进行升级。有关详细信息，请参考 Windows 2000 资源工具箱中的“IIS 资源指南”卷。 </p> 
+
+
+
+
+<h2><a name="propertiesandinheritanceofpropertiesonvirtualservers">站点的属性和属性继承</a></h2>
+
+<p>属性是可以在 Web 站点上设置的值。例如，可以使用 <a href="javascript://" onclick="Activate(); return false">Internet 信息服务管理单元</a>将指派到默认 Web 站点的 TCP 端口号从默认值 80 更改为另一个号。在属性页中显示站点属性并将其存储在称为“metabase”的数据库中。</p>
+
+<p>在 IIS 的安装过程中，将默认值指派给属性页中的各种属性。可以在 IIS 中使用默认设置，也可以自定义这些设置以适应自己 Web 发布的需要。通过调整默认设置，可以提供附加值、更好的性能以及更高的安全性。</p>
+
+<p>可以在站点级、目录级或文件级设置属性。将自动使用高级别（如站点级）设置，或由低级别（如目录级）设置“继承”但仍可以在低级别单独编辑。一旦在单独站点、目录或文件中更改了属性，日后对主默认值的更改将不会自动覆盖单独设置。相反，您将接收到询问是否要更改单独站点、目录或文件以使其与新默认值匹配的警告信息。</p>
+
+<p>某些属性具有采用列表形式的值。例如，当用户未在 URL 中指定文件时，默认文档值可以是要加载的文档列表。自定义错误消息、TCP/IP 访问控制、脚本映射和 MIME 映射是以列表格式存储的属性的其他实例。虽然这些列表有很多项，但 IIS 仍将整个列表作为一个单个属性来处理。如果在目录中编辑列表并在站点级进行了全局更改，则目录级的列表将被来自站点级的新列表所替换；列表不会合并。同样，具有列表值的属性只在主级别或默认值已更改的站点或目录显示其列表。如果列表值是继承的默认值，则将不显示。</p>
+
+<p><a href="iiwarndg.htm">筛选器</a>以列表格式显示，但不作为列表处理。如果在站点级添加筛选器，则新筛选器将与主级别的筛选器列表合并。如果两个筛选器具有相同的优先级设置，则主级别的筛选器将在站点级筛选器之前进行加载。</p>
+
+<p>如果需要修改默认属性并且正在创建几个 Web 或 FTP 站点，则可以编辑默认值以便所创建的每个站点都将继承自定义值。有关更改所有 Web 或 FTP 站点默认值的详细信息，请参阅<a href="iivspro.htm">更改继承的默认值</a>。</p>
+
+<p>以下图形说明了用于设置所有 Web 站点属性的属性页。</p>
+
+<img src="iivsovr3.gif" alt="Web 站点的属性页">
+
+<p>在 <a href="javascript://" onclick="Activate(); return false">Internet 信息服务管理单元</a>中，可以单击属性页中的“帮助”按钮获得有关单独属性设置的详细信息。</p>
+
+<h2><a name="websiteoperators">Web 站点操作员</a></h2>
+
+<p>Web 站点操作员是一组在单独 Web 站点上具有有限管理特权的特殊用户。操作员可以管理只影响其各自站点的属性。他们无权访问影响 IIS、维护 IIS 的 Windows 服务器计算机或网络的属性。</p>
+
+<p>例如，容留大量不同公司站点的 ISP 可以将每个公司的代表指派为每个单独公司 Web 站点的操作员。这种分布式服务器管理方法具有以下优点：</p>
+
+<ul>
+<li>每个操作员可以作为站点管理员并根据需要更改或重新配置 Web 站点。例如，操作员可以设置 Web 站点访问权限，启用记录，更改默认文档或页脚， 设置内容截止日期和启用内容分级特性。</li>
+<li>不允许 Web 站点操作员更改 Web 站点的标识、配置匿名用户名或密码、限制带宽、创建虚拟目录或更改其路径或更改应用程序隔离。</li>
+<li>由于操作员较 Web 站点管理员具有更多受限制的特权，故他们无法远程浏览文件系统，因此也就不能设置目录和文件中的属性，除非使用 UNC 路径。 </li>
+</ul>
+
+<p>有关如何将 Windows 用户帐户指派为 Web 站点操作员的指示，请参阅<a href="iiwbsop.htm">指派 Web 站点操作员</a>。</p>
+
+<h2><a name="RemoteAdministration">远程管理站点</a></h2>
+
+<p>由于不是总可以方便地在运行 IIS 的计算机上执行管理任务，因此可使用两个远程管理选项。如果通过 Internet 或代理服务器与您的服务器连接，就可以使用基于浏览器的 Internet 服务管理器 (HTML) 更改站点上的属性。如果处于“Intranet”上，就可以使用 Internet 服务管理器 (HTML) 或宿于 Microsoft 管理控制台 (MMC)上的 <a href="javascript://" onclick="Activate(); return false">Internet 信息服务管理单元</a>。
+
+虽然 Internet 服务管理器 (HTML) 提供很多与管理单元相同的特性，但却不能使用 Internet 服务管理器 (HTML) 对要求与 Windows 实用程序（如证书映射）协调的属性进行更改。</p>
+
+<p><strong>注意</strong> 在以前的版本中，Internet 信息服务管理单元称为 Internet 服务管理器。</p>
+
+<p>Internet 服务管理器 (HTML) 使用作为管理 Web 站点列出的 Web 站点访问 IIS 属性。但安装了 IIS 后，将随机选择一个介于 2,000 和 9,999 之间的端口号并将其指派给该 Web 站点。只要端口号附加到地址，站点将对安装在计算机上的所有域名的 Web 浏览器请求作出响应。如果使用基本验证，则将在到达站点时要求管理员提供用户名和密码。只有 Windows Administrators 组成员才可以使用该站点。Web 站点操作员还可以远程管理 Web 站点。有关如何使用 Internet 服务管理器 (HTML) 或 Internet 信息服务管理单元的详细信息，请参阅<a href="iiahttp.htm">远程管理</a>。</p>
+
+<p><strong>注意</strong>虽然 Internet 服务管理器的 HTML 版本与其管理单元版本具有很多相同的功能，HTML 版本是沿着 Web 页的线路设计的。不支持鼠标右键单击。很多熟悉的工具栏按钮或选项卡头将作为链接显示在左边的窗格中。由于这些差异，文档中的指示不可能总是准确地描述 Internet 服务管理器 (HTML) 中执行的步骤。</p>
+
+<p>当执行远程管理任务时，联机文档同样有效。要访问该文档，请启动浏览器并键入 <strong>http://<em>servername</em>/iishelp/iis/misc/default.asp</strong>，其中，<em>servername</em> 代表运行 IIS 的计算机的名称。</p>
+
+
+<p>可使用网络连接上（如LAN、PPTP 或拨号）的 <a name="ts"><strong>Microsoft 终端服务</a></strong>远程管理 IIS。终端服务不要求在远程计算机上安装 Microsoft 管理控制台 (MMC) 或 IIS 管理单元。有关详细信息，请参阅“终端服务文档”。默认情况下，终端服务文档安装在 C:\Winnt\Help\TermSrv.chm 和 C:\Winnt\Help\TermCli.chm 下。</p>
+
+
+
+
+<h2><a name="ftpresume">FTP 重新启动</a></h2>
+
+<p> FTP 重新启动说明下载文件时出现断开网络连接的问题。支持 FTP 重新启动的客户端只需使用 REST 命令重新建立其 FTP 连接，文件传输便能自动找到断点。 </p>
+
+<p><strong>注意</strong>当使用 FTP 来下载通配符请求 (MGET)、将文件上载到服务器 (PUT) 或下载大于 4G 字节的文件时，将不启用 IIS 5.0 的 FTP 重新启动执行。  </p>
+
+
+<h2><a name="mimemap">MIME 映射</a></h2>
+
+<p>多用途网际邮件扩充协议 (MIME) 是一个 Internet 标准，它给 Web 浏览器提供查阅多格式文件的方法。把在 Windows 2000 上默认安装的注册文件类型列于 <a href="iipx.htm">Internet 信息服务</a>属性页的“文件类型”对话框中。</p>
+
+<p>可以在计算机、Web 站点、虚拟目录、目录或文件级别配置 MIME 映射。要在计算机级别配置 MIME 映射，请使用 <a href="iipx.htm">Internet 信息服务</a>属性页。要在其他级别配置 MIME 映射，请使用 <a href="iipy_9.htm">HTTP 头</a>属性页。</p>
+
+<p><strong>注意</strong> 在计算机级配置的 MIME 映射不会自动覆盖在低级别设置的映射。</p>
+
+
+<hr class="iis" size="1"><p align=center><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+<script language="javascript">
+<!--
+function Activate() {
+if (navigator.appName == "Microsoft Internet Explorer"){
+	window.open("iisnapin.htm", "NewWin", 'toolbar=no, left=200, top=200, scrollbars=no, resizeable=no,  width=350, height=350');
+	}
+	else if (navigator.appName == "Netscape") {
+		window.open("iisnapin.htm", "NewWin",  'toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=yes,resizable=0,width=350,height=350,top=200,left=200');
+	}
+}
+//-->
+</script>
+
+</font>
+</body>
+</html>

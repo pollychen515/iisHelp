@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=Windows-1252">
+<TITLE>ProcessForm</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="Internet Information Services reference information">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="EN-US">
+<META NAME="MS-IT-LOC" Content="Internet Information Services"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_processform"></A>ProcessForm</H2>
+
+<P>The <B>ProcessForm </B>method processes the contents of a form that has been submitted by a visitor to the Web site.</P>
+
+<H6>Syntax</H6>
+
+<P><B>Tools.ProcessForm(OutputFileURL, TemplateURL, [InsertionPoint])</B></P>
+
+<P>&nbsp;</P>
+
+<H6>Parameters</H6>
+
+<DL>
+<DT><I>OutputFileURL</I></DT>
+
+<DD>A string containing the relative URL of the file to which the processed data is written. <BR>
+</DD>
+
+<DT><I>TemplateURL </I></DT>
+
+<DD>A string containing the relative URL of the file that contains the template, or instructions, for processing the data. <BR>
+</DD>
+
+<DT><I>InsertionPoint </I></DT>
+
+<DD>An optional parameter indicating where in the output file to insert the process data. This parameter has not been implemented. If you include a value for this parameter it will be ignored.</DD>
+</DL>
+
+<H6>Remarks</H6>
+
+<P>The template files can contain ASP scripts. A script between &lt;% and %&gt; delimiters is treated just like other text in the template and copied into the output file. If the output file is an ASP document, the script will run when the output file is accessed. Scripts in template files can also be put between special &lt;%% and %%&gt; delimiters which cause the script to execute while <B>Tools.ProcessForm </B>is executing. Since these scripts are executed before the template data is saved in the output file, the results get saved in the output file, usually as standard text. </P>
+
+<P>If the specified output file does not exist, the server creates it.</P>
+
+<P>If the <I>InsertionPoint</I> parameter does not exist, <B>Tools.ProcessForm</B> replaces the entire output file. If the <I>InsertionPoint</I> parameter exists, and does not begin with an asterisk (*), <B>Tools.ProcessForm</B> finds the <I>InsertionPoint</I> string in the output file and inserts the data immediately after it. If the <I>InsertionPoint</I> string begins with an asterisk (*), <B>Tools.ProcessForm</B> finds the <I>InsertionPoint</I> string in the output file and inserts the data immediately before it. If the <I>InsertionPoint</I> string exists, but is not found in the output file, the data is appended to the end of the file.</P>
+
+<H6>Example</H6>
+
+<P>The following code demonstrates calling an .asp file to process a form.</P>
+
+<PRE><CODE>&lt;% 
+Tools.processform("/$Received       Messages/default.asp","MessageInsert.process","&lt;SPAN&gt;*") 
+%&gt;
+ </CODE></PRE>
+
+<H6>See Also</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/comp1d9v.htm"><B>FileExists</B></A>, <A HREF="/iishelp/iis/htm/asp/comp8kdp.htm"><B>Random</B></A> </P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-1999 Microsoft Corporation. All rights reserved.</a></em></p>
+</BODY>
+</HTML>

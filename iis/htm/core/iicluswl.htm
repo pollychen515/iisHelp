@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>复制和群集</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="包含链接的导航页，这些链接指向关于复制和群集的主题。本主题包括关于 IIS 容错、负载平衡、复制和群集的信息。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=gb2312">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="ZH-CN">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"> <font face="宋体">
+
+<h1><A NAME="H1_20502203">复制和群集</A></h1>
+
+<p><strong><span style="color: #0000FF"><font color="#0000FF">要点</font></span></strong> 本节描述的群集功能仅适用于 Windows 2000 Advanced Server。</p>
+
+<p>复制和群集是一种技术，它使得多服务器的站点可以满足对其不断增长的要求。在本节中，“复制”定义为将内容和配置设置从一个服务器节点复制到另一个服务器节点；群集定义为将两台计算机连接起来以达到共享资源和请求负载的目的。当使用群集软件将计算机组合在一起并像单个计算机一样工作时，可以执行容错、负载平衡和复制。</p>
+
+<p>本部分包括：</p>
+
+<ul>
+<li><strong><A HREF="iiclusab.htm">关于群集</A>：</strong>介绍与群集相关的术语和概念。</li>
+<li><strong><A HREF="iiclusus.htm">IIS 中的复制和群集</A>：</strong>如何在服务器群集中安装 IIS 并使用 Iissync.exe 实用程序将配置设置从一台计算机复制到另一台计算机。</li>
+<li><strong><A HREF="iiclusup.htm">升级 IIS 群集资源</A>：</strong>如何通过标准升级或滚动升级来升级 IIS 群集资源。</li>
+</ul>
+
+<p>本节不包含：</p>
+<ul>
+<li>添加 Web 站点到服务器；请参阅<a href="iiaddvs.htm">添加站点</a>。</li>
+<li>优化 Web 或 FTP 服务器性能；请参阅<a href="iiptnov.htm">性能调整</a>。</li>
+</ul>
+
+<hr class="iis" size="1"><p align=center><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+<SPAN STYLE="visibility:hidden"><LAYER VISIBILITY=HIDE> （下列文字用于搜索；它们不显示在页上。）复制、副本、克隆、群集、配置、服务器、企业、负载平衡、多、web farm、备份、故障转移、故障回复、容错、容错的、节点、独立、本地、远程、磁盘驱动器、raid striping、过载、容量、共享、资源、内部连接、重新启动、同步、同步信号、iissync.exe 、metabase、注册表、ip、地址、实例、主、从、滚动升级、链接、详细信息 </LAYER></SPAN> </font>
+</body>
+</html>

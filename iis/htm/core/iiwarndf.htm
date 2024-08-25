@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>设置应用程序映射</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="关于如何设置应用程序映射的程序上的信息，该映射将文件扩展名与其各自的 ASP、ISAP 或 CGI 程序进行关联。预先配置 IIS 以支持公共应用程序映射。">
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="H1_37778069">设置应用程序映射</a></h1>
+
+<p>可以开发大量以编程和脚本语言写成的 Web 应用程序。Internet 信息服务 (IIS) 使用 Web 站点上请求资源的文件扩展名确定运行哪个 ISAPI 或 CGI 程序处理请求。例如，以 .asp 扩展名结束的文件请求将导致 Web 服务器调用 ASP 程序 (Asp.dll) 来处理请求。文件扩展名与 ISAPI 或 CGI 程序的关联称为“应用程序映射”。预先配置 IIS 以支持公共应用程序映射。可以添加或删除 Web 站点上所有应用程序或单个应用程序的映射。</p>
+
+<big>将扩展名映射到应用程序</big><br>
+
+<ol>
+<li>在 <a href="javascript://" onclick="Activate(); return false">Internet 信息服务管理单元</a>中，选择 Web 站点或应用程序的起始点目录。</li>
+<li>打开目录的属性表，然后单击“主目录”、“虚拟目录”或“目录”选项卡。</li>
+<li>单击“配置”按钮，然后单击<a href="iipy_34.htm">应用程序选项映射</a>选项卡。</li>
+<li>单击“添加”，而后在“可执行文件”框中键入将处理文件的 ISAPI 或 CGI 程序的路径。必须在 Web 服务器的本地目录中指定程序。</li>
+<li>在“扩展名”框中键入要与 ISAPI 或 CGI 程序相关联的文件扩展名。当 Web 服务器接收到标识带有该扩展名文件的 URL 时，它将调用相关程序来处理该请求。</li>
+<li> 要允许在具有脚本权限的目录中处理此类型文件，请选中“脚本引擎”复选框。当目录设置了脚本权限（而不是执行权限）后，只有与指定为脚本引擎的应用程序相关联的文件才能在该目录中进行处理。</li>
+
+<p><strong><span style="color: #0000FF"><font color="#0000FF">要点</font> </span></strong>在“应用程序映射”属性页中，有一个标题为“动作”的列。在 IIS 5.0 中，该列被赋予“排除”资格；对动作的更改将在更多新 HTTP 动作添加到超文本传输协议时从事今后的兼容性工作。 </p>
+
+</ol>
+
+<p class="bigfix">&nbsp;</p>
+
+<big>删除应用程序映射</big>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td valign="top"><IMG SRC="../../../common/onestep.gif" border="0" alt="项目符号"></td>
+<td>在“应用程序映射”属性页中，选择文件扩展名，而后单击“删除”按钮。将不在该 Web 站点或目录中处理对具有该扩展名文件的请求。</td>
+</tr>
+</table>
+
+<hr class="iis" size="1"><p align="center"><a href="/iishelp/common/colegal.htm">(C)1997-1999 Microsoft Corporation。保留所有权利。</a></p>
+
+<script language="javascript">
+<!--
+function Activate() {
+if (navigator.appName == "Microsoft Internet Explorer"){
+	window.open("iisnapin.htm", "NewWin", 'toolbar=no, left=200, top=200, scrollbars=no, resizeable=no,  width=350, height=350');
+	}
+	else if (navigator.appName == "Netscape") {
+		window.open("iisnapin.htm", "NewWin",  'toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=yes,resizable=0,width=350,height=350,top=200,left=200');
+	}
+}
+//-->
+</script>
+
+</font>
+</body>
+</html>

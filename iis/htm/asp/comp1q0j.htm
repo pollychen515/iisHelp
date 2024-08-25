@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=Windows-1252">
+<TITLE>Set</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="Internet Information Services reference information">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="EN-US">
+<META NAME="MS-IT-LOC" Content="Internet Information Services"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_set_counters"></A>Set</H2>
+
+<P>The <B>Set </B>method takes the name of a counter and an integer, sets the counter to the value of the integer, and returns the new value. If the counter doesn't exist, <B>Counters.Set </B>creates it and sets it to the value of the integer.</P>
+
+<P>To retrieve the value of a counter, use <B>Counters.Get</B>. To increment a counter by 1, use <B>Counters.Increment</B>. </P>
+
+<H6>Syntax</H6>
+
+<P><B>Counters.Set(CounterName, int)</B></P>
+
+<P>&nbsp;</P>
+
+<H6>Parameters</H6>
+
+<DL>
+<DT><I>CounterName</I></DT>
+
+<DD>A string containing the name of the counter.<BR>
+</DD>
+
+<DT><I>int</I></DT>
+
+<DD>The new integer value for <I>CounterName</I>.</DD>
+</DL>
+
+<H6>Example</H6>
+
+<P>The following code resets the hit counter <CODE>pageHits</CODE> to 0: </P>
+
+<PRE><CODE>&lt;% Counters.Set(pageHits, 0) %&gt; 
+ </CODE></PRE>
+
+<H6>See Also</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/comp1c37.htm">Get</A>, <A HREF="/iishelp/iis/htm/asp/comp46lv.htm">Increment</A>, <A HREF="/iishelp/iis/htm/asp/comp02cz.htm">Remove</A></P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-1999 Microsoft Corporation. All rights reserved.</a></em></p>
+</BODY>
+</HTML>

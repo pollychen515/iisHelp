@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>关于应用程序</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="有关 Web 应用程序的概念上的信息。包括应用程序目录结构图示和独立（进程外）应用程序的信息。">
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="H1_37777278">关于应用程序</a></h1>
+
+<p> IIS “应用程序”是在 Web 站点定义的一组目录中执行的任何文件。当创建一个应用程序时，在 Web 站点上使用 Internet 信息服务管理单元指定应用程序的“起点目录”（也称为“应用程序根”）。Web 站点起点目录下的每个文件和目录均被认为是应用程序的一部分直至找到另一个起点目录。因此可以使用目录边界来定义应用程序的范围。</p>
+
+<h2><a name="app_1">应用程序起点</a></h2>
+
+<p>在 Internet 信息服务管理单元中，应用程序起点由软件包图标表示。下列图形显示带有一个称为 /SiteAdmin 的起点目录的应用程序：</p>
+
+<img src="iiwarnd1.gif" alt="IIS 管理单元中应用程序目录结构的说明。用软件包标记应用程序起点。" align="bottom" width="144" height="100">
+
+<p>\Login、\Order 和 \SetupDB 目录中的文件被认为是 /SiteAdmin 应用程序的一部分。</p>
+
+
+<p>在每个 Web 站点上可以有多个应用程序。当安装 Internet 信息服务时所创建的默认 Web 站点是应用程序的起点。</p>
+
+<p>Internet 支信息服务支持 ASP、ISAPI、CGI、IDC 和 SSI 应用程序。应用程序可以共享应用程序文件中的信息；例如，ASP 应用程序共享上下文流、会话状态和应用程序页中的各种设置。</p>
+
+
+<h2><a name="app_2">应用程序保护</a></h2>
+
+
+<p>IIS 5.0 提供三种级别的应用程序保护。应用程序保护指的是应用程序在其中运行的进程。在 IIS 4.0 中，应用程序既可以设置在诸如 Web 服务的相同进程 (Inetinfo.exe) 中运行，也可以设置在 Web 服务独立的进程 (DLLHost.exe) 中运行。在 IIS 5.0 中，还有第三种选项：应用程序可以在共用进程中运行（DLLHost.exe 的另一实例）。</p>
+
+<p>这些不同选项为某些情况提供各种保护级别，这些情况是指不正常的应用程序失败并引起正在其间运行的进程终止响应。默认情况下，Web 服务 (Inetinfo.exe) 将在其自己的进程中运行，而其他应用程序将在单个共用进程 (DLLHost.exe) 中运行。而后，可以设置具有较高优先级的应用程序作为独立进程（DLLHost.exe 的另一实例）运行。由于性能原因，建议不要运行 10 个以上的独立应用程序。</p>
+
+<p>下面图形中描述的属性表可用来设置应用程序的保护属性。</p>
+
+<img src="iiwarnd4.gif" alt="主目录属性表">
+
+<p> 只能在应用程序的起始点目录设置应用程序保护。</p>
+
+<h2>应用程序性能</h2>
+
+<p>在性能和应用程序保护级别之间存在一个平衡点。在 Web 服务进程 (inetinfo.exe) 中运行的应用程序会导致在获得较高性能的同时伴随较大的风险以致不正常的应用程序可能使 Web 服务失效。建议配置是在其自己的进程中运行 inetinfo.exe 和关键任务的应用程序，而在共享、共用进程中运行其他应用程序。详细信息，请参阅<a href="../asp/eadg7lpv.htm">定义应用程序边界</a>。</p>
+
+<p> 您可以在组件服务管理工具中设置组件的进程选项。详细信息，请参阅组件服务文档。</p>
+
+<hr class="iis" size="1"><p align="center"><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

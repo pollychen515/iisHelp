@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html dir=ltr><head><title>启用和配置验证</title>
+
+<SCRIPT LANGUAGE=JavaScript>
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE=VBScript>
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<meta name="description" content="有关如何启用和配置 Web 服务器的匿名、基本、摘要式和集成 Windows 验证安全方法的程序上的信息。在授予受限制的 Web 站点、目录或文件访问权限之前，可以使用验证来证实用户的身份。">
+<META HTTP-EQUIV=Content-Type content="text/html；charset=GB2312">
+<META content='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))' http-equiv=PICS-Label>
+<META content=zh-cn name=MS.LOCALE>
+<META content="Internet Information Services" name=MS-IT-LOC>
+<META content="MSHTML 5.00.2516.1900" name=GENERATOR></HEAD>
+<BODY bgColor=#ffffff text=#000000><FONT face=宋体>
+
+<H1><A name=procedure>启用和配置验证</A></H1>
+
+<p>该主题包含用于启用验证的一般性程序以及配置匿名、基本、摘要式和集成 Windows 验证方法的详细信息。这包括对使用方法、特定配置事项以及其他方面的要求。如果不太熟悉这些验证方法，可能想要在服务器上启用和配置验证之前阅读更为详细的信息。关于这些方法的详细信息，请参阅<a href="iiabasc.htm">关于验证</a>。</p>
+
+<P><A href="iiauths.htm#selectauth">启用验证</A><BR> <A href="iiauths.htm#enableanon">配置匿名验证</A><BR> <A href="iiauths.htm#enablebasic">配置基本验证</A><BR> <A href="iiauths.htm#enabledigest">配置摘要式验证</A><BR> <A href="iiauths.htm#enableNTLM">配置集成 Windows 验证</A><BR></P>
+<H2><A name=selectauth>启用验证</A></H2>
+
+<p>任一验证方法或若干方法都可启用为 Web 或 FTP站点、虚拟目录或文件。</p>
+
+<h3>要启用 WWW 验证方法</h3>
+<ol>
+	<li>创建适用于验证方法的 Windows 用户帐户。如适当，可将帐户添加到 Windows 用户组。有关创建 Windows 用户帐户的详细信息，请参阅<a href="iintfsc.htm">使用 NTFS 保护文件</a>。
+	<li>为想要控制访问的目录或文件配置 NTFS 权限。详细信息，请参阅<a href="iidfpsc.htm">设置目录或文件的 NTFS 权限</a>。
+	<li>在 Internet 信息服务管理单元中，选择站点、目录或文件，然后打开其属性表。
+	<li>选择适当的“目录安全性”或“文件安全性”属性表。在“匿名访问和验证控制”下，单击“编辑”。
+	<li>在“验证方法”对话框中，选择一个或多个合适的方法。</li>
+</ol>
+
+
+
+<h3>启用 FTP 验证方法</h3>
+<ol>
+	<li>按照上面所说的第 1 步到第 3 步。
+	<li>选择“安全帐户”属性表。选择“允许匿名连接”复选框。
+
+<p><strong>注意</strong> 只有在 FTP 站点级别上方可设置验证。</p>
+
+	<li>在“用户名”和“密码”文本框中，分别输入所要使用的匿名登录用户名和密码。用户名是匿名用户帐户的名称，一般格式为 IUSR_computername。如果“允许 IIS 控制密码”复选框已经选中，需要将其清除以更改密码。
+<li>选中“允许 IIS 控制密码”复选框可同 Windows 用户帐户中的密码相匹配。
+
+<p><strong>注意</strong> 密码同步仅可用于本地计算机所定义的匿名用户帐户，而无法用于网络中其他计算机上的匿名帐户。</p>
+
+<li>选择“只允许匿名连接”复选框可要求所有用户作为匿名用户登录。
+<li>单击“确定”。
+<li>为匿名帐户设置适当的 NTFS 权限。详细信息，请参阅<a href="iidfpsc.htm">设置目录或文件的 NTFS 权限</a>。</li>
+</ol>
+
+<p><strong>注意</strong></p>
+<ul>
+<li>默认选择匿名和集成 Windows 验证。
+<li>摘要式和集成 Windows 验证优先于基本验证。要确保仅对用户进行基本验证，请清除所有其他复选框。
+<li>摘要式和集成 Windows 验证无法用于 FTP 站点。
+
+<li><p>仅在以下条件下，您的 Web 服务器将使用基本、摘要式或集成 Windows 验证方法：</p>
+
+<ul>
+	<li>未选择匿名访问。
+	<li>匿名访问失败或对文件和目录的访问受 NTFS 权限的限制。 </li>
+</ul>
+</li>
+</ul>
+<p><strong><font color="#0000FF">要点</font></strong> 当尝试更改 Web 站点或虚拟目录的属性时， Web 服务器将提示您输入权限，以便重置单个子目录和该站点或目录下文件的属性。如果选择了重新设置这些属性，先前的设置将被新的设置所替换。关于设置属性的详细信息，请参阅<a href="iivsovr.htm">关于 Web 和 FTP 站点</a>中的“站点属性和属性继承”。</p>
+
+
+<h2><a name="enableanon">配置匿名验证</a></h2>
+<p>默认情况下，IUSR_computername 帐户包含在 Windows 用户组 Guests 中。可以创建多个匿名帐户，分别用于每个 Web 或 FTP 站点、目录或文件。通过赋予这些帐户不同的访问权限，或将这些帐户分配给不同的 Windows 用户组，可以向用户授予公用 Web 和 FTP 内容不同区域的匿名权限。</p>
+
+<p>匿名帐户必须具有本地登录的用户权限。如果帐户没有本地登录的权限，IIS 将无法为任何匿名请求提供服务。默认情况下，域控制器的 IUSR_computername 帐户不分配该权限，必须更改为本地登录以允许匿名请求。</p>
+
+<p>也可以更改 Windows 中 IUSR_computername 帐户的安全权限。不过，如果匿名用户帐户不具有访问指定资源的权限，您的 Web 服务器将拒绝建立对该资源的匿名连接。详细信息，请参阅<a href="iiwspsc.htm">设置 Web 服务器权限</a>。</p>
+
+<h3><a name="changeanon">更改用于匿名验证的帐户</a></h3>
+<ol>
+	<li>在 Internet 信息服务管理单元中，选择站点、目录或文件，然后打开其属性表。
+	<li>选择适当的“目录安全性”或“文件安全性”属性表。在“匿名访问和验证控制”下，单击“编辑”。
+	<li>在“验证方法”对话框的“匿名访问”下单击“编辑”。
+<li>在“匿名用户帐户”对话框中，键入所用于匿名访问的有效 Windows 用户帐户或单击“浏览”进行定位。
+<li>清除“允许 IIS 控制密码”复选框以输入帐户密码。</li>
+</ol>
+
+<p><FONT COLOR="#0000ff"><strong>要点</strong></FONT> 如果更改 IUSR_computername 帐户，更改将影响由 Web 服务器提供服务的每一个匿名请求。如果要修改该账号，请使用警告。</p>
+
+
+
+<h2><a name="enablebasic">配置基本验证</a></h2>
+<p>启用基本验证“无法”自动配置 Web 服务器验证用户。必须按以上说明创建 Windows 用户帐户并适当设置 NTFS 权限。</p>
+
+<p>要通过基本验证正确验证用户身份，用于基本验证的 Windows 用户帐户必须具有“本地登录”用户权限。必须分配该权限，因为基本验证将“模仿”一个本地用户（即实际登录到服务器的用户）。默认情况下，Windows 主域控制器 (PDC) 中的用户帐户不授予“本地登录”用户的权限。</p>
+
+<P><STRONG>注意</STRONG> 可以通过使用活动目录服务接口 (ADSI) 来更改本地登录权限的必要条件。有关信息，请参阅“Active Server Pages 指南”中的 <A HREF="../asp/apro1zms.htm">LogonMethod</A>。</P>
+
+<p>必须选择默认的登录域。详细信息，请参阅<a href="iidlgsc.htm">设置默认登录域</a>。<p>
+
+<p><strong><font color="#FF0000">警告</font></strong> 基本验证方法在网络上传送用户名和密码使用的是非加密形式。计算机肆意破坏者可以使用网络监视工具截取这些信息。您可以使用 Web 服务器的加密功能，再结合基本验证，以确保用户帐户信息在网络中传送的安全。详细信息，请参阅<a href="iicrysc.htm">关于加密</a>。</p>
+
+
+
+<h2><a name="enabledigest">配置摘要式验证</a></h2>
+<p>Microsoft Internet Explorer 5 是目前唯一支持摘要式验证的浏览器。</p>
+
+<p>摘要式验证只能在带有 Windows 2000 域控制器的域中使用。域控制器必须具有所用密码的纯文本复件，因为必须执行散列操作并将结果与浏览器发送的散列值相比较。关于这些密码的存储位置和其他问题，请参阅 Windows 2000 Server 文档。</p>
+
+<P><p><strong><span style="color: #0000FF"><font color="#0000FF">要点</font></span></strong> 由于域控制器拥有所有密码的纯文本复件，因此必须保证其安全，免遭物理或网络攻击。有关服务器安全的详细信息，请参阅 Microsoft Windows 2000 Server Resource Kit。</P>
+
+
+
+<h2><a name="enableNTLM">配置集成 Windows 验证</a></h2>
+<p>集成 Windows 验证无法在代理服务器或其他防火墙应用程序后使用。</p>
+
+<p>如果集成 Windows 验证失败是由于不正确的用户证书或其他原因引起的，浏览器将提示用户输入其用户名和密码。</p>
+
+<p>只有 Microsoft Internet Explorer 4.0 或更高版本支持集成 Windows 验证。</p>
+
+
+<hr class=iis size=1><p align=center><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

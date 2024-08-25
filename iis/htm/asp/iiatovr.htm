@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>ASP 指南</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="介绍自调整的、交互式 ASP 指南"><META HTTP-EQUIV="Content-Type" content="text/html; charset=gb2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+
+<body bgcolor="#FFFFFF" text="#000000"><FONT FACE="宋体">
+
+<h1><a name="H1_37685983">ASP 指南</a></h1>
+</span></font>
+
+<p>Active Server Pages (ASP) 是服务器端设计环境，可用于创建逼真动人的 Web 应用程序。ASP 页是包含服务器端脚本的 HTML 页，Web 服务器先处理这些脚本然后再发送到用户浏览器。不同于以往较难创建的公用网关接口 (CGI) 应用程序，ASP 极大地简化了 Web 应用程序的开发过程。只需几行脚本，就可以将数据库连接或高级自定义功能添加到 Web 页。在以前，必须了解 PERL 或 C 才能添加这些功能，但有了 ASP 就可以使用普通的 Web 脚本语言，例如 Microsoft JScript（符合 ECMA 262 语言规范）、Microsoft Visual Basic VBScript），或者任何与 COM 兼容的脚本语言，包括 JavaScript、PERL 等等。
+
+<P>除了普通的脚本任务，也可以使用 ASP 将脚本扩展到 COM 组件。这些可重复使用的程序模块使您可以将脚本集成为完整的应用程序，以便执行复杂任务，如电子商务的事务处理。</p>
+
+<p>这包含三个模块的指南将逐步介绍一些有用的 Active Server Pages 功能。可以了解到如何使用 VBScript 或 JScript 实现这些功能。</p>
+
+<p>本节包括：</p>
+
+<ul>
+<li><strong><A HREF="iiatmd1.asp">创建 ASP 页</A>：</strong>在此模块中，将创建 ASP 页（.asp 文件），并在其中使用一些基本的 HTML 和 Active Server Pages 功能。在开始此模块之前，应该对创建 HTML 页有所了解。</li>
+<li><strong><A HREF="iiatmd2.asp">使用 COM 组件</A>：</strong>在此模块中，将使用一些 Active Server Pages 附带的 COM 组件。您将了解到如何使用组件旋转 Web 广告横幅、检测浏览器的性能以及在 Web 页中添加数据库功能。在开始此模块之前，最好已有一些使用 JScript 或 Microsoft Visual Basic Scripting Edition (VBScript) 的经验。</li>
+<li><strong><A HREF="iiatmd3.asp">编写自己的组件</A>：</strong>在此模块中，可以使用 Microsoft Visual Basic 或 Java 来创建自己的财务计算 COM 组件。对于这个模块，必须安装 32 位版本的 Visual Basic 5.0 专业版、Visual Basic 5.0 企业版或更新的版本，或者是 Visual J++ 1.1 或更新的版本，而且您应该有一些 Visual Basic 或 Java 的编程经验。</li>
+</ul>
+
+<p>本节不包含下列信息：</p>
+
+<ul>
+<li>关于编写 ASP 脚本的普通语言信息和主题，请参阅 <a href="iiwawelc.htm">Active Server Pages</a>。</li>
+<li>关于语言参考页，请参阅<a href="iiwaobb.htm">内置的 ASP 对象</a>。</li>
+</ul>
+
+<hr class="iis" size="1">
+<p align="center"><a href="/iishelp/common/colegal.htm">&copy; 1997-1999 Microsoft Corporation。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

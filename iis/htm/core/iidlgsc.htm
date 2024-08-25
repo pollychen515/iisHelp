@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>设置默认登录域</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="description" CONTENT="关于如何选择基本验证方法的默认域名的过程信息。在基本验证过程中，通过在用户输入的用户名前加上域名，用来识别 Web 服务器作为单个实体管理的计算机或计算机组。">
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="settingthedefaultlogondomain">设置默认登录域</a></h1>
+
+<p> 通过基本验证验证的用户必须使用有效的 Windows 用户名和密码登录。用户名通常包括：
+
+<ul>
+<li>Windows 域名。</li>
+<li>帐户用户名。</li>
+</UL>
+
+<p>这些用来识别 Web 服务器作为单个实体管理的计算机或计算机组。例如，使用 PhilSpencer 帐户登录 Sales1 域的用户将被登录为 Sales1\PhilSpencer。然而，如果用户不提供域名，您可以配置 Web 服务器来为基本验证假定一个默认登录域。</p>
+
+<big>设置默认登录域。</big><br>
+
+<ol>
+<li>在 Internet 信息服务管理单元中，选择 Web 站点、目录或文件，然后打开其属性表。</li>
+<li>选择适当的“目录安全性”或“文件安全性”属性表。在“匿名访问和验证控制”下，单击“编辑”。</li>
+<li>在“验证方法”对话框中，选择“基本验证”复选框。</li>
+
+<p><strong>注意</strong> 由于基本验证通过未加密的网络发送密码，因此，会出现一个对话框，询问是否希望继续。单击“确定”以便继续进行。</p>
+
+<li>单击“编辑”。</li>
+<li>在“基本验证”对话框中，键入或者浏览到新的默认登录域。单击“使用默认值”来使用 Web 服务器的默认域名。</li>
+</ol>
+
+
+<hr class="iis" size="1"><p align=center><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

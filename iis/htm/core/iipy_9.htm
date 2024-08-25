@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html dir=ltr>
+<head>
+
+<title>HTTP 标题属性表</title>
+<META NAME="ROBOTS" CONTENT="NOINDEX">
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+<BODY BGCOLOR=#FFFFFF TEXT=#000000> <font face="宋体">
+
+<p><strong>HTTP 头属性表</strong></p>
+
+<p>在 HTML 页的头部中使用 HTTP 头属性设置返回到浏览器的值。</p>
+
+<p><strong>启动内容失效</strong></p>
+
+<p>选择该复选框以包含截止日期信息。在对时间敏感的内容中包含日期，例如特别报价或事件声明。浏览器将当前日期与截止日期相比较以决定是显示一个高速缓存页，还是从服务器请求一个更新的页。</p>
+
+<p><strong>自定义 HTTP 头</strong></p>
+
+<p>使用该属性将一个自定义 HTTP 头从 Web 服务器发送到客户浏览器。例如，可以使用一个自定义 HTTP 头允许客户浏览器将页放入高速缓存而防止代理服务器将页放入高速缓存。自定义 HTTP 头在 metabase 中描述。</p>
+
+<p>要使 Web 服务器发送一个 HTTP 头，请单击“添加”，然后在文本框键入 HTTP 头的名称和值。</p>
+
+<p>要停止发送一个 HTTP 头，请选中它并单击“删除”。</p>
+
+<p><strong>内容分级</strong></p>
+
+<p>使用内容分级在 Web 页的 HTTP 头中嵌入描述性的标注。浏览器（例如 Microsoft Internet Explorer 3.0 或更高版本）可以检测内容分级以帮助用户识别潜在的令人反感的 Web 内容。</p>
+
+<p>要为 Web 站点、目录或文件设置内容分级，请单击“编辑”。</p>
+
+<p><strong>MIME 映射</strong></p>
+
+<p>单击“编辑”按钮以配置多用途网际邮件扩充协议 (MIME) 映射。这些映射设置 Web 服务返回给浏览器的不同文件类型。</p>
+
+<p>如果在主属性表中为您的计算机设置 MIME 映射，那么计算机上的 Web 站点和目录将使用同一映射。可以为一个 Web 站点或目录修改 MIME 映射。但是，如果重新应用主属性，为 Web 站点或目录修改的属性将被主属性完全替换。也就是说，属性并没有合并。</p>
+
+<p><hr class="iis" size="1"></p>
+<p align="center"><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

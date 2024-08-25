@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>估计通信量</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="用来设置站点每天将接收的预期连接数量的过程。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=gb2312">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="ZH-CN">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="H1_37699140">估计通信量</a></h1>
+
+<p>本主题解释了如何测算和设置站点每天的预期连接数量。如果该数量只是比实际连接的数量稍微高一点，连接将变得更快，而且服务器性能得到改善。如果该数量远远大于实际的连接尝试数量，既浪费了服务器内存，又降低服务器的总体性能。</p>
+
+<big>要确定服务器每天的连接数量</big>
+
+<ol>
+<li>使用系统监视器记录“总计连接请求数”计数器和“当前连接数”计数器的值，它们都在 Web 服务对象中。</li>
+<li>如果可能的话，收集几天的日志文件数据，以获得服务器运行状况的现实记录。</li>
+<p><strong>注意</strong>  一些连接请求可能失败，所以“总计连接请求数”计数器不一定十分精确。</p>
+</ol>
+
+<big>要设置估计每天的连接数量</big>
+
+<ol>
+<li>在 <a href="javascript://" onclick="Activate(); return false">Internet 信息服务管理单元中</a>，
+
+<script language="javascript">
+<!--
+function Activate() {
+if (navigator.appName == "Microsoft Internet Explorer"){
+	window.open("iisnapin.htm", "NewWin", 'toolbar=no, left=200, top=200, scrollbars=no, resizeable=no,  width=350, height=350');
+	}
+	else if (navigator.appName == "Netscape") {
+		window.open("iisnapin.htm", "NewWin",  'toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=yes,resizable=0,width=350,height=350,top=200,left=200');
+	}
+}
+//-->
+</script>
+
+选择 Web 站点，并单击“属性”按钮显示属性表。</li>
+<li>在“性能”属性表中，设置一个比在 24 小时期间内接收的连接数量估计值稍大的数值。</li>
+</ol>
+
+<p><strong>相关主题</strong></p>
+
+<ul>
+<li>关于性能监视工具的信息，请参阅<a href="iiabtpm.htm">关于性能调整</a>。</li>
+<li>关于性能日志的信息，请参阅<a href="iilogsa.htm">站点活动日志</a>。</li>
+<li>关于 IIS 提供的计数器列表，请参阅<a href="iicntpm.htm">计数器参考</a>。</li>
+<li>关于 IIS 可以设置的所有超时值，请参阅<a href="iitime.htm">超时参考</a>。</li>
+</ul>
+
+
+<hr class="iis" size="1"><p align=center><a href="../../../common/colegal.htm">(C) 1997-1999 Microsoft Corporation。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

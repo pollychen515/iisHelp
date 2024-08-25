@@ -1,0 +1,194 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr>
+<head>
+<title>变化内容</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="说明 IIS 4.0 和 IIS 5.0 之间的重要区别，如对默认设置的更改，新属性的添加以及安装文件新的默认位置等。">
+
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name ="whatschanged">变化内容</a></h1>
+
+<p> 该主题将说明 IIS 4.0 与 IIS 5.0 之间默认行为和设置的重要区别。</p>
+
+<p>关于 IIS 5.0 新特性的详细信息，请参阅<a href="iifeats.htm">特性</a>。</p>
+
+<p><a href="#administration">管理</a></p>
+<p><a href="#progadm">程序管理</a></p>
+<p><a href="#asp">Active Server Pages (ASP)</a></p>
+<p><a href="#regandmet">注册表</a></p>
+<p><a href="#security">安全</a></p> <p><a href="#Performance">性能</a></p>
+<p><a href="#docs">文档</a></p>
+
+<h2><a name="administration">管理</a></h2>
+
+<ul>
+<li>在 IIS 5.0 中，应用程序既可以运行于类似 Internet 服务的进程中，也可以在单独的进程中运行。在 IIS 5.0 中，应用程序现在可以分为若干缓冲进程以增强性能并提高伸缩性。详细信息，请参阅“关于应用程序”主题中的<a href="iiwarndc.htm#app_2">应用程序保护</a>。 </li>
+
+<li>“应用程序映射”属性表包含一个超文本传输协议 (HTTP) 动作列表，它们可由映射到某个文件类型的应用程序进行处理。该动作列表说明了对 IIS 4.0 中所做的变动，在 IIS 4.0 中，列表包含被排除的即不执行的动作。这个变动是为了适应新的 HTTP 动作，以便将其添加到协议中。关于应用程序映射的详细信息，请参阅<a href="iiwarndf.htm">设置应用程序映射</a>。</li>
+
+<li>自定义错误文件的位置已经更改。详细信息，请参阅<a href="iierrdtl.htm#custerrinstall">启用详细自定义错误消息</a>。</li>
+
+<li>基于 Web 的 Internet 服务管理 (HTML) 不再通过“开始”菜单打开。要使用 Internet 服务管理器 (HTML) 远程管理 IIS，请参阅<a href="iiahttp.htm">远程管理</a>。</li>
+</ul>
+
+<h2><a name="progadm">程序管理</a></h2>
+
+<p>请参阅 <a href="../asp/adsi5ga8.htm">ADSI 在 IIS 5.0 中所做的更改</a>。</p>
+
+<h2><a name="asp"></a>Active Server Pages (ASP)</h2>
+
+<p>请参阅 <A HREF="../asp/iiwachng.htm">ASP 中的重要变更</A>。</p>
+
+<h2><a name="regandmet">注册表</a></h2>
+
+<ul>
+<li>从上一版本的 IIS 安装程序升级时，将删除以下注册表键：</li>
+
+<p>HKEY_LOCAL_MACHINE\SOFTWARE <br>
+&nbsp;\Microsoft <br>
+&nbsp;&nbsp;\INetMgr <br>
+&nbsp;&nbsp;&nbsp;\InstalledBy </p>
+
+<p>HKEY_LOCAL_MACHINE\SOFTWARE <br>
+&nbsp;\Microsoft <br>
+&nbsp;&nbsp;\InetMgr <br>
+&nbsp;&nbsp;&nbsp;\Parameters <br>
+&nbsp;&nbsp;&nbsp;&nbsp;\AddOnTools <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\&Key Manager </p>
+
+<p>HKEY_LOCAL_MACHINE\SOFTWARE <br>
+&nbsp;\Microsoft <br>
+&nbsp;&nbsp;\INetMgr <br>
+&nbsp;&nbsp;&nbsp;\Parameters <br>
+&nbsp;&nbsp;&nbsp;&nbsp;\x </p>
+
+<p>HKEY_LOCAL_MACHINE\SOFTWARE <br>
+&nbsp;\Microsoft <br>
+&nbsp;&nbsp;\INetMgr <br>
+&nbsp;&nbsp;&nbsp;\Parameters <br>
+&nbsp;&nbsp;&nbsp;&nbsp;\AddOnServices <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\Gopher </p>
+
+<p>HKEY_LOCAL_MACHINE\SOFTWARE <br>
+&nbsp;\Microsoft <br>
+&nbsp;&nbsp;\INetStp <br>
+&nbsp;&nbsp;&nbsp;\SetupID </p>
+
+<p>HKEY_LOCAL_MACHINE\SOFTWARE <br>
+&nbsp;\Microsoft <br>
+&nbsp;&nbsp;\Windows <br>
+&nbsp;&nbsp;&nbsp;\CurrentVersion <br>
+&nbsp;&nbsp;&nbsp;&nbsp;\URL <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\Prefixes <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\ftp </p>
+
+<p>HKEY_LOCAL_MACHINE\SOFTWARE <br>
+&nbsp;\Microsoft <br>
+&nbsp;&nbsp;\Windows <br>
+&nbsp;&nbsp;&nbsp;\CurrentVersion <br>
+&nbsp;&nbsp;&nbsp;&nbsp;\Setup <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\OC Manager <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\mts_mmc </p>
+
+<p>HKEY_LOCAL_MACHINE\SOFTWARE <br>
+&nbsp;\Microsoft <br>
+&nbsp;&nbsp;\Windows <br>
+&nbsp;&nbsp;&nbsp;\CurrentVersion <br>
+&nbsp;&nbsp;&nbsp;&nbsp;\Setup <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\OC Manager <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\Subcomponents<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\iis_w3samp<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\iis_doc_common<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\iis_doc_ismcore<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\iis_doc_pwmcore<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\iis_doc_asp<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\iis_doc_sdk<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\iis_doc_mm</p>
+
+</ul>
+
+
+<h2><a name="security">安全</a></h2>
+<ul>
+<li>IIS 4.0 中提供的许多安全功能都在 IIS 5.0 中进行了简化，其中包含了新的安全任务向导：权限向导、Web 服务器证书向导和 CTL 向导。通过这三个向导，您可以同步 Web 和 NTFS 的安全设置、获得并安装服务器证书以及创建和修改证书信任列表。详细信息，请参阅<a href="iikeysc.htm">使用新的安全任务向导</a>。</li>
+<li>“索引此资源”现在已经是默认启用了。</li>
+<li>允许访问 ASP 页中脚本和其他脚本“源代码”的“脚本资源访问”是新增功能，默认情况下为禁用。它只有在选择了“读取”或“写入”权限时方可使用。</li>
+<li>允许使用 FrontPage 在所在服务器上管理站点的“FrontPage Web”将不再在 IIS 管理单元中设置，默认情况下为启用。</li>
+</ul>
+
+
+
+<h2><a name="Performance">性能</a></h2>
+
+<ul>
+<li>为了减少内存占用并增加性能，对所有站点默认启用“<a href="../asp/adsi1k1f.htm">套接字池</a>”，这些站点使用相同的端口，但拥有不同的 IP 地址。如果套接字池与其他非关键站点共享同一端口，则可以在关键任务站点中将其禁用。详细信息，请参阅<a href="iiabmem.htm#BalancingMemoryUse">关于内存管理</a>。</li>
+</ul> 
+
+<h2><a name="docs">文档</a></h2>
+
+<p>请参阅 <a href="iistpov.asp">Windows NT Option Pack 文档</a>。</p>
+
+
+<hr class="iis" size="1"><p align="center"><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+<script language="javascript">
+<!--
+function Activate() {
+if (navigator.appName == "Microsoft Internet Explorer"){
+	window.open("iisnapin.htm", "NewWin", 'toolbar=no, left=200, top=200, scrollbars=no, resizeable=no,  width=350, height=350');
+	}
+	else if (navigator.appName == "Netscape") {
+		window.open("iisnapin.htm", "NewWin",  'toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=yes,resizable=0,width=350,height=350,top=200,left=200');
+	}
+}
+//-->
+</script>
+
+</font>
+</body>
+</html>

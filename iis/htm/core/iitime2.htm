@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html><head><title>IIS 管理单元中超时设置的位置</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="ROBOTS" CONTENT="NOINDEX">
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+
+<h1><a name="time2">IIS 管理单元中超时设置的位置</a></h1>
+
+<p>该页是对<a href="iitime.htm">超时表</a>主题的补充。</p>
+
+<hr><!--1-->
+
+<big><a name="1">更改 AspScriptTimeout 值</a></big><!--</p>--><br>
+
+<ol>
+<li>在 <a href="javascript://" onclick="Activate(); return false">Internet 信息服务管理单元</a>中，选择 Web 站点或应用程序的起始点目录。</li>
+<li>打开目录的属性表，然后单击“主目录”、“虚拟目录”或“目录”选项卡。</li>
+<li> 单击“配置”按钮，然后单击“应用程序选项”选项卡。</li>
+<li> 在“ASP 脚本超时”中，键入期望值。</li>
+</ol>
+
+<pre><font face="arial">
+--或--
+IIS 管理单元|属性|配置按钮|应用程序选项|ASP 脚本超时
+</font></pre>
+
+<hr><!--2-->
+
+<big><a name="2">更改 AspSessionTimeout 值</a></big><!--</p>--><br>
+
+<ol>
+<li>在 <a href="javascript://" onclick="Activate(); return false">Internet 信息服务管理单元</a>中，选择 Web 站点或应用程序的起始点目录。</li>
+<li>打开目录的属性表，然后单击“主目录”、“虚拟目录”或“目录”选项卡。</li>
+<li> 单击“配置”按钮，然后单击“应用程序选项”选项卡。</li>
+<li> 在“会话超时”文本框中，键入期望值。</li>
+</ol>
+
+<hr><!--3-->
+
+<big><a name="3">更改 ConnectionTimeout 值</a></big><!--</p>--><br>
+
+<ol>
+<li>在 <a href="javascript://" onclick="Activate(); return false">Internet 信息服务管理单元</a>中，选择 Web 站点或应用程序的起始点目录。</li>
+<li>打开目录的属性页，然后单击“Web 站点”选项卡。</li>
+<li> 在“连接超时”文本框中，键入期望值。</li>
+</ol>
+
+<hr><!--4-->
+
+<big><a name="4">更改 CGITimeout 值</a></big><!--</p>--><br>
+
+<ol>
+<li>在 <a href="javascript://" onclick="Activate(); return false">Internet 信息服务管理单元</a>中，选择 Web 站点或应用程序的起始点目录。</li>
+<li>打开目录的属性表，然后单击“主目录”、“虚拟目录”或“目录”选项卡。</li>
+<li> 单击“配置”按钮，然后单击“进程选项”选项卡。</li>
+<li> 在“CGI 脚本超时”文本框中，键入期望值。</li>
+</ol>
+
+<hr><!--5-->
+
+<big><a name="5">记录 Web 站点的处理器使用情况 </a></big><!--</p>--><br>
+
+<ol>
+<li>在<a href="javascript://" onclick="Activate(); return false">Internet 信息服务管理单元</a>中，选择希望记录其处理器使用情况的 Web 站点。</li>
+<li>打开 Web 站点的属性页，然后单击“性能”选项卡。</li>
+<li>选择“启用进程限制”，然后键入希望该站点被限定的 CPU 时间的百分比。 </li>
+<li>如果希望启用 CpuLimitPriority 和 CpuLimitProcStop，请选择“强制性限制”。</li>
+</ol>
+
+<hr class="iis" size="1">
+<p align="center"><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+<script language="javascript">
+<!--
+function Activate() {
+if (navigator.appName == "Microsoft Internet Explorer"){
+	window.open("iisnapin.htm", "NewWin", 'toolbar=no, left=200, top=200, scrollbars=no, resizeable=no,  width=350, height=350');
+	}
+	else if (navigator.appName == "Netscape") {
+		window.open("iisnapin.htm", "NewWin",  'toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=yes,resizable=0,width=350,height=350,top=200,left=200');
+	}
+}
+//-->
+</script>
+
+</font>
+</body>
+</html>

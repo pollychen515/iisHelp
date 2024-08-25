@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>选择正确的连接</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="关于 Internet 连接类型和能力的概述。其中包含的公式可帮助估计 Web 页的平均大小、平均传送时间、特定网络连接所同时支持的用户数量等。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=gb2312">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="ZH-CN">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="H1_37748483">选择正确的连接</a></h1>
+
+<p>以数字形式表示内容文件的平均大小、发送这样大小的文件所用的时间以及希望同时支持的用户数量，以便在当前条件下选择正确的连接设置。该主题将说明如何执行选择正确连接所需的计算。为方便起见，这里为您提供了一个用于这些计算的实用程序。详细信息，请参阅<a href="iicalc.htm">计算连接性能</a>。</p>
+
+<h2><a name="H2_37748960">根据文件传送速度确定连接类型</a></h2>
+
+<p>可以根据要发送给用户的文件大小以及用户接收文件时所希望的等待时间来选择连接类型。通常，HTML 文本页的加载时间为 5 秒。图形或音频等外部文件的加载时间为 30 秒。如果使用调制解调器，务必将数据包往返于用户和服务器之间的时间考虑在内。调制解调器连接每连接一次就要花近一秒，这是很长的一段时间。快速专线连接的速度为 0.1 或 0.2 秒，所用时间不是太多，因此不必计算在内。</p>
+
+<big>估计文件大小</big><!--</p>--><br>
+
+<ol>
+<li>每个字符 8 位，每行 80 个字符，每页 66 行，由此得出每页为 42,240 位。</li>
+<li>每传送 8 位数据，将造成 4 位的系统开销。每页 42,240 位乘以 1.5（用于传送 1 位数据的开销），得出每页传送的位数为 63,360 位。</li>
+<p><strong>注意</strong>  这一计算方法假设页面完全由文本构成，不包含任何图形，一般常见于将文本文档转换为 HTML 格式。通常主页上的文字较少，约为 24,000 位/页（包括系统开销）。但主页通常会包含一个或多个图形文件，它们都需要在客户端和服务器间建立连接。 <!--</p>--><br>
+</ol>
+
+<p class="bigfix">&nbsp;</p>
+
+<big>估计传送时间</big><!--</p>--><br>
+
+<ol>
+<li>用估计的文件大小除以每秒的连接速度，便可得到以下结果：</li>
+
+<table border="1" cellpadding="4" cellspacing="1" width="60%">
+<caption align=top><strong>每秒传送的页数</strong></caption>
+<tr>
+<th bgcolor="#C0C0C0" align="Left" valign="top">连接类型</th>
+<th bgcolor="#C0C0C0" align="Left" valign="top">传送的页数</th>
+</tr>
+<tr><td>专用 PPP/SLIP</td><td>0.3 至 0.6 页</td></tr>
+<tr><td>56K（帧中继）</td><td>0.9</td></tr>
+<tr><td>ISDN (using PPP)</td><td>1.7</td></tr>
+<tr><td>T1</td><td>24</td></tr>
+<tr><td>T3</td><td>710</td></tr>
+</table>
+
+<li>对于调制解调器，还要加上用于打开连接的一秒钟。这意味着使用调制解调器传送网页的时间为 2.5 到 4 秒/页，这取决于调制解调器的速度。</li>
+</ol>
+
+<p class="bigfix">&nbsp;</p>
+
+<big>确定 T1 线路上每天可能的连接数目 </big><!--</p>--><br>
+
+<ol>
+<li>用连接速率 1,540,000 bps 除以（传送量）每字节 12 位，便得到每秒传送速率 125 KB。</li>
+<li>将 125 KB/秒乘以 86,000 秒/日，得到每日的传送量为 10,777,994 KB。</li>
+<li>10,777,994 KB/日除以 1,048,576 (1024 KB/MB X 1024 MB/GB)，得到每日传送量 10.3 GB。</li>
+<li>假设平均文件大小（文本和图形）为 25 Kb，10,777,994 KB 除以 25 KB 等于 431,000 采样数/日。</li>
+<p><strong>注意</strong> 该计算方法假设 T1 连接专门用于您的 Web 服务器。</p>
+<p>KB = Kilobytes，MB = Megabytes，GB = Gigabytes。<!--</p>--><br>
+</ol>
+
+<p class="bigfix">&nbsp;</p>
+
+<big>确定连接类型所同时支持的用户数目</big><!--</p>--><br>
+
+<ol>
+<li>假设希望文本网页的传送时间小于 5 秒，而传送给用户检索的网页文本文件大小为 63,360 位，则 63,360 位 / 5 秒 = 12,672 位/秒用户。</li>
+<li>再用连接速率除以每个用户每秒传输的位数。例如，对于 T1 线路，1,540,000 bps / 12,672 bps/用户 = 121（T1 线路上同时支持的用户数目）。</li>
+
+
+<p><strong>注意</strong> 这里假设网页为纯文本格式，不含任何图形，且整个网页的传送时间小于 5 秒。如果尝试连接的用户数目较多，虽然这些用户不会遭到拒绝，但文件传送速率将远低于推荐时间 5 秒。下表给出了达到连接类型所支持的理想用户数目的原则。<!--</p>--><br>
+
+<table border="1" cellpadding="4" cellspacing="1" width="60%">
+<caption align=top><strong>同时支持的用户数目</strong></caption>
+<tr>
+<th bgcolor="#C0C0C0" align="Left" valign="top">连接类型</th>
+<th bgcolor="#C0C0C0" align="Left" valign="top">支持的用户数目</th>
+</tr>
+<tr><td>专用 PPP/SLIP</td><td>2-3</td></tr>
+<tr><td>56K（帧中继）</td><td>10-20</td></tr>
+<tr><td>ISDN (using PPP)</td><td>10-50</td></tr>
+<tr><td>T1</td><td>100-500</td></tr>
+<tr><td>T3</td><td>5000+</td></tr>
+</table>
+</ol>
+
+<hr class="iis" size="1"><p align=center><a href="../../../common/colegal.htm">(C) 1997-1999 Microsoft Corporation。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

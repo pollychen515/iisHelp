@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html dir=ltr>
+
+<head>
+<style> a:link                  {font:9pt/11pt 宋体; color:FF0000} a:visited               {font:9pt/11pt 宋体; color:#4e4e4e}
+</style>
+
+<META NAME="ROBOTS" CONTENT="NOINDEX">
+
+<title>对 Internet 服务管理器 (HTML) 的访问仅限于 Localhost。</title>
+
+<META HTTP-EQUIV="Content-Type" Content="text-html; charset=gb2312">
+<META NAME="MS.LOCALE" CONTENT="ZH-CN">
+</head>
+
+<body bgcolor="FFFFFF">
+
+<table width="410" cellpadding="3" cellspacing="5">
+
+  <tr>
+    <td align="left" valign="middle">
+	<h1 style="COLOR:000000; FONT: 12pt/15pt 宋体"><!--Problem-->对 Internet 服务管理器 (HTML) 的访问仅限于 Localhost</h1>
+    </td>
+  </tr>
+
+  <tr>
+<td width="400" colspan="2"> <font style="COLOR:000000; FONT: 9pt/11pt 宋体">作为安全预防措施，安装程序将限制 Internet 服务管理器 (HTML) 以便仅允许从服务器计算机自身（Localhost，IP 地址 127.0.0.1）执行访问。</font></td>
+  </tr>
+
+  <tr>
+    <td width="400" colspan="2"> <font style="COLOR:000000; FONT: 9pt/11pt 宋体">
+	<hr color="#C0C0C0" noshade>
+
+<p>请尝试下列操作：</p>
+
+<p>要允许远程使用 Internet 服务管理器 (HTML) 来管理该服务器，请转到服务器并使用 IIS 管理单元来更新对 Web 站点 IISADMIN 的 IP 地址限制。</p>
+
+<p><strong><span style="color: #0000FF"><font color="#0000FF">要点</font> </span></strong>只有当服务器在 Windows 2000 Server 或 Windows 2000 Advanced Server 平台上运行 IIS 时，才可以修改 IP 地址限制。不能在 Windows 2000 Professional 平台上使用 IIS 来修改 IP 地址限制。</p>
+
+<p>在 Internet 信息服务管理单元中，</p>
+
+<ol>
+<li>展开您目前连接的 Web 站点。</li>
+<li>选择 IISADMIN 虚拟目录。</li>
+<li>在“动作”菜单中，选择“属性”。</li>
+<li>选择“目录安全性”选项卡。</li>
+<li>编辑 IP 地址和域名限制。</li>
+</ol>
+
+<h2 style="font:9pt/11pt 宋体; color:000000">HTTP 403 - 对 Internet 服务管理器 (HTML) 的访问仅限于 Localhost<br> Internet 信息服务</h2>
+
+    </font></td>
+  </tr>
+
+</table>
+</body>
+</html>

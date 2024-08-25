@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr>
+<head>
+<title>升级 IIS 群集资源</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>  
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="Reference information about IIS clustering upgrade configurations that are supported by IIS.">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="ZH-CN">
+<META NAME="MS-IT-LOC" Content="Internet Information Services">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1>升级 IIS 群集资源</a></h1>
+
+<p><strong><span style="color: #0000FF"><font color="#0000FF">要点</font></span></strong> 本节描述的群集功能仅适用于 Windows 2000 Advanced Server。</p>
+
+<p>IIS 支持升级和滚动升级群集服务资源。IIS 群集服务资源的升级要求在升级过程中所有的群集 IIS 资源处于脱机状态。相反，“滚动升级”允许客户在升级过程中使用群集 IIS 资源。</p>
+
+<p class="bigfix">&nbsp;</p> <big>要完成 IIS 群集服务资源的滚动升级</big><!--</p>--><br>
+
+<ol>
+<li>将所有资源从节点 A 移到节点 B。</li>
+<li>升级节点 A。</li>
+<li>升级成功后，将所有资源从节点 B 移到节点 A。</li>
+<li>升级节点 B。</li>
+</ol>
+
+<p><font color="#0000ff"><strong>要点</strong></font>  在尝试滚动升级之前，请查阅所有的关于群集资源的文档。</p>
+
+<p>在标准升级期间（也就是非滚动升级），IIS 资源必须被删除、脱机或更改可能的所有者列表，这样资源仅可以在支持的节点上联机。</p>
+
+<p>下表说明 IIS 支持的升级和滚动升级群集服务配置。</p>
+
+<p><strong>支持的升级</strong></p>
+
+<table border=1 cellpadding=4 cellspacing=1 >
+<tr>
+<th  bgcolor="#C0C0C0" align="Left" valign="top" ALIGN="Center">显示配置</th>
+<th  bgcolor="#C0C0C0" align="Left" valign="top">升级的配置</th>
+</tr>
+<tr>
+<td valign="Top">（节点 A） IIS 3.0 / Service Pack 3<br> （节点 B） IIS 3.0 / Service Pack 3</td>
+<td  valign="Top">（节点 A） IIS 4.0 / Service Pack 3<br> （节点 B） IIS 4.0 / Service Pack 3</td>
+</tr>
+<td valign="Top">（节点 A） IIS 3.0 / Service Pack 4<br> （节点 B） IIS 3.0 / Service Pack 4</td>
+<td  valign="Top">（节点 A） IIS 4.0 / Service Pack 4<br> （节点 B） IIS 4.0 / Service Pack 4</td>
+</tr>
+<td valign="Top">（节点 A） IIS 3.0 / Service Pack 4<br> （节点 B） IIS 3.0 / Service Pack 4</td>
+<td  valign="Top">（节点 A） IIS 5.0<br> （节点 B） IIS 5.0</td>
+</tr>
+</table>
+
+<p><strong>支持的滚动升级</strong></p>
+
+<table border=1 cellpadding=4 cellspacing=1 >
+<tr>
+<th  bgcolor="#C0C0C0" align="Left" valign="top" ALIGN="Center">显示配置</th>
+<th  bgcolor="#C0C0C0" align="Left" valign="top">升级的配置</th>
+</tr>
+<tr>
+<td valign="Top">（节点 A） IIS 3.0 / Service Pack 3<br> （节点 B） IIS 3.0 / Service Pack 3</td>
+<td  valign="Top">（节点 A） IIS 3.0 / Service Pack 4<br> （节点 B） IIS 3.0 / Service Pack 4</td>
+</tr>
+<td valign="Top">（节点 A） IIS 4.0 / Service Pack 3<br> （节点 B） IIS 4.0 / Service Pack 3</td>
+<td  valign="Top">（节点 A） IIS 4.0 / Service Pack 4<br> （节点 B） IIS 4.0 / Service Pack 4</td>
+</tr>
+</tr>
+<td valign="Top">（节点 A） IIS 4.0 / Service Pack 4<br> （节点 B） IIS 4.0 / Service Pack 4</td>
+<td  valign="Top">（节点 A） IIS 5.0<br> （节点 B） IIS 5.0</td>
+</tr>
+</table>
+
+<hr class="iis" size="1"><p align=center><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

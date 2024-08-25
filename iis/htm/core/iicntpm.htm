@@ -1,0 +1,611 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>计数器参考</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="列出 IIS 中可用的性能计数器并对其加以说明。这包括测量或记录带宽使用、吞吐量、错误、内存使用、高速缓存、会话管理以及事务处理的计数器。">
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name ="Webcounters">计数器参考</a></h1>
+
+<ul>
+<li><a href="#bandwidth">与带宽用法有关的计数器</a></li>
+<li><a href="#throughput">与吞吐量有关的计数器</a></li>
+<li><a href="#requests">与特定请求和错误有关的计数器</a></li>
+<li><a href="#users">与连接和用户有关的计数器</a></li>
+<li><a href="#Caching">与高速缓存和内存有关的计数器</a></li>
+<li><a href="#sessions">与会话有关的计数器</a></li>
+<li><a href="#transactions">与事务有关的计数器</a></li>
+<li><a href="#restarts">与重新启动相关的计数器</a></li></ul>
+
+<h2><a name="bandwidth">与带宽用法有关的计数器</a></h2>
+
+<table border="1" cellpadding="5" cellspacing="1" width="100%">
+<tr>
+<th width=30% bgcolor="#C0C0C0">可用性</th>
+<th width=70% bgcolor="#C0C0C0">计数器</th>
+</tr>
+
+<tr>
+<td valign="top">全局、Web、FTP</td>
+<td valign="top"><a href="iicshpm.htm#CurrentBlockedAsyncI/ORequests">当前堵塞的异步 I/O 请求数</a></td>
+</tr>
+
+<tr>
+<td valign="top">全局，Web</td>
+<td valign="top"><a href="iicshpm.htm#MeasuredAsyncI/OBandwidthusage">测量异步 I/O 带宽使用</a></td>
+</tr>
+
+<tr>
+<td valign="top">全局，Web</td>
+<td valign="top"><a href="iicshpm.htm#TotalAllowedAsyncI/ORequests">允许的异步 I/O 请求总数</a></td>
+</tr>
+
+<tr>
+<td valign="top">全局，Web</td>
+<td valign="top"><a href="iicshpm.htm#TotalBlockedAsyncI/ORequests">阻塞的异步 I/O 请求总数</a></td>
+</tr>
+
+<tr>
+<td valign="top">全局，Web</td>
+<td valign="top"><a href="iicshpm.htm#TotalRejectedAsyncI/ORequests">拒绝的异步 I/O 请求总数</a></td>
+</tr>
+</table>
+
+<h2><a name="throughput">与吞吐量有关的计数器</a></h2>
+
+<table border="1" cellpadding="5" cellspacing="1" width="100%">
+<tr>
+<th width = 30% bgcolor="#C0C0C0">可用性</th>
+<th width = 70% bgcolor="#C0C0C0">计数器</th>
+</tr>
+
+<tr>
+<td valign="top">Web，FTP</td>
+<td valign="top"><a href="iicshpm.htm#BytesReceived/sec">每秒接收的字节数</a></td>
+</tr>
+
+<tr>
+<td valign="top">Web，FTP</td>
+<td valign="top"><a href="iicshpm.htm#BytesSent/sec">每秒发送的字节数</a></td>
+</tr>
+
+<tr>
+<td valign="top">Web，FTP</td>
+<td valign="top"><a href="iicshpm.htm#BytesTotal/sec">每秒总字节数</a></td>
+</tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><a href="iicshpm.htm#Files/sec">每秒文件数</a></td>
+</tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><a href="iicshpm.htm#FilesReceived/sec">每秒接收的文件数</a></td>
+</tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><a href="iicshpm.htm#FilesSent/sec">每秒发送的文件数</a></td>
+</tr>
+
+<tr>
+<td valign="top">Web，FTP</td>
+<td valign="top"><a href="iicshpm.htm#TotalFilesReceived">接收的文件总数</a></td>
+</tr>
+
+<tr>
+<td valign="top">Web，FTP</td>
+<td valign="top"><a href="iicshpm.htm#TotalFilesSent">发送的文件总数</a></td>
+</tr>
+
+<tr>
+<td valign="top">Web，FTP</td>
+<td valign="top"><a href="iicshpm.htm#TotalFilesTransferred">传输的文件总数</a></td>
+</tr>
+
+</table>
+
+<h2><a name="requests">与特定请求和错误有关的计数器</a></h2>
+
+<table border="1" cellpadding="5" cellspacing="1" width="100%">
+<tr>
+	<th width = 30% bgcolor="#C0C0C0">可用性</th>
+	<th width = 70% bgcolor="#C0C0C0">计数器</th>
+</tr>
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><a href="iicshpm.htm#CGIRequests/sec">每秒 CGI 请求数</a></td>
+</tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><a href="iicshpm.htm#CurrentCGIRequests">当前 CGI 请求数</a></td>
+</tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><a href="iicshpm.htm#CurrentISAPIExtensionRequests">当前 ISAPI 扩充请求数</a></td>
+</tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a href="iicshpm.htm#DebuggingRequests">调试请求数</a></td>
+</tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><a href="iicshpm.htm#DeleteRequests/sec">每秒删除的请求数</a></td>
+</tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a href="iicshpm.htm#ErrorsDuringScriptRuntime">脚本运行期间出错数</a></td>
+</tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a href="iicshpm.htm#ErrorsFromASPPreprocessor">ASP 预处理器中的出错数</a></td>
+</tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a href="iicshpm.htm#ErrorsFromScriptCompiler">脚本编译器中的出错数</a></td>
+</tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a href="iicshpm.htm#Errors/Sec">每秒出错数</a></td>
+</tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><a href="iicshpm.htm#GetRequests/sec">每秒得到的请求数</a></td>
+</tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><a href="iicshpm.htm#HeadRequests/sec">每秒主要请求数</a></td>
+</tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><a href="iicshpm.htm#ISAPIExtensionRequests/sec">每秒 ISAPI 扩充请求数</a></td>
+</tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><a href="iicshpm.htm#MaximumCGIRequests">最大 CGI 请求数</a></td>
+</tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><a href="iicshpm.htm#MaximumISAPIExtensionRequests">最大 ISAPI 扩充请求数</a></td>
+</tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><a href="iicshpm.htm#NotFoundErrors/sec">每秒未找到的错误数</a></td>
+</tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><a href="iicshpm.htm#OtherRequestMethods/sec">每秒其他请求方法数</a></td>
+</tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><a href="iicshpm.htm#PostRequests/sec">每秒发送请求数</a></td>
+</tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><a href="iicshpm.htm#PutRequests/sec">每秒放入请求数</a></td>
+</tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a href="iicshpm.htm#RequestBytesInTotal">内部请求字节总数</a></td>
+</tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a href="iicshpm.htm#RequestBytesOutTotal">外部请求字节总数</a></td>
+</tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a href="iicshpm.htm#RequestExecutionTime">请求执行时间</a></td>
+</tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a href="iicshpm.htm#RequestWaitTime">请求等待时间</a></td>
+</tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a href="iicshpm.htm#RequestsDisconnected">断开连接的请求数</a></td>
+</tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a href="iicshpm.htm#RequestsExecuting">正在执行的请求数</a></td>
+</tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a href="iicshpm.htm#RequestsFailedTotal">失败的请求总数</a></td>
+</tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a href="iicshpm.htm#RequestsNotAuthorized">未授权的请求数</a></td>
+</tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a href="iicshpm.htm#RequestsNotFound">未找到的请求数</a></td>
+</tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a href="iicshpm.htm#RequestsQueued">队列中的请求数</a></td>
+</tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a href="iicshpm.htm#RequestsRejected">被拒绝的请求数</a></td>
+</tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a href="iicshpm.htm#RequestsSucceeded">成功的请求数</a></td>
+</tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a href="iicshpm.htm#RequestsTimedOut">超时的请求数</a></td>
+</tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a href="iicshpm.htm#RequestsTotal">请求总数</a></td>
+</tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a href="iicshpm.htm#Requests/Sec">每秒请求数</a></td>
+</tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><a href="iicshpm.htm#TotalCGIRequests">CGI 请求总数</a></td>
+</tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><a href="iicshpm.htm#TotalDeleteRequests">删除的请求总数</a></td>
+</tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><a href="iicshpm.htm#TotalGetRequests">得到的请求总数</a></td>
+</tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><a href="iicshpm.htm#TotalHeadRequests">主要请求总数</a></td>
+</tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><a href="iicshpm.htm#TotalISAPIExtensionRequests">ISAPI 扩充请求总数</a></td>
+</tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><a href="iicshpm.htm#TotalMethodRequests">方法请求总数</a></td>
+</tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><a href="iicshpm.htm#TotalMethodRequests/sec">每秒方法请求总数</a></td>
+</tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><a href="iicshpm.htm#TotalNotFoundErrors">未找到错误总数</a></td>
+</tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><a href="iicshpm.htm#TotalOtherRequestMethods">其他请求方法总数</a></td>
+</tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><a href="iicshpm.htm#TotalPostRequests">发送请求总数</a></td>
+</tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><a href="iicshpm.htm#TotalPutRequests">放入请求总数</a></td>
+</tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><a href="iicshpm.htm#TotalTraceRequests">跟踪请求总数</a></td>
+</tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><a href="iicshpm.htm#TraceRequests/sec">每秒跟踪请求数</a></td>
+</tr>
+</table>
+
+
+<h2><a name="users">与连接和用户有关的计数器</a></h2>
+<table border="1" cellpadding="5" cellspacing="1" width="100%">
+
+<tr>
+	<th width = 30% bgcolor="#C0C0C0">可用性</th>
+	<th width = 70% bgcolor="#C0C0C0">计数器</th>
+</tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><a href="iicshpm.htm#AnonymousUsers/sec">每秒匿名用户数</a></td>
+</tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><a href="iicshpm.htm#ConnectionAttempts/sec">每秒连接尝试次数</a></td>
+</tr>
+<tr>
+<td valign="top">Web，FTP</td>
+<td valign="top"><a href="iicshpm.htm#CurrentAnonymousUsers">当前匿名用户数</a></td>
+</tr>
+
+<tr>
+<td valign="top">Web，FTP</td>
+<td valign="top"><a href="iicshpm.htm#CurrentConnections">当前连接数</a></td>
+</tr>
+
+<tr>
+<td valign="top">Web，FTP</td>
+<td valign="top"><a href="iicshpm.htm#CurrentNonAnonymousUsers">当前非匿名用户数</a></td>
+</tr>
+
+<tr>
+<td valign="top">Web，FTP</td>
+<td valign="top"><a href="iicshpm.htm#MaximumAnonymousUsers">最大匿名用户数</a></td>
+</tr>
+
+<tr>
+<td valign="top">Web，FTP</td>
+<td valign="top"><a href="iicshpm.htm#MaximumConnections">最大连接数</a></td>
+</tr>
+
+<tr>
+<td valign="top">Web，FTP</td>
+<td valign="top"><a href="iicshpm.htm#MaximumNonAnonymousUsers">最大非匿名用户数</a></td>
+<td valign="top">
+</tr>
+
+<tr>
+<td valign="top">Web，FTP</td>
+<td valign="top"><a href="iicshpm.htm#TotalAnonymousUsers">匿名用户总数</a></td>
+</tr>
+
+<tr>
+<td valign="top">Web，FTP</td>
+<td valign="top"><a href="iicshpm.htm#TotalConnectionAttempts">连接尝试总数</a></td>
+</tr>
+
+<tr>
+<td valign="top">Web，FTP</td>
+<td valign="top"><a href="iicshpm.htm#TotalLogonAttempts">登录尝试总数</a></td>
+</tr>
+
+<tr>
+<td valign="top">Web，FTP</td>
+<td valign="top"><a href="iicshpm.htm#TotalNonAnonymousUsers">非匿名用户总数</a></td>
+</tr>
+</table>
+
+<h2><a name="Caching">与高速缓存和内存有关的计数器</a></h2>
+
+<!-- Global Caching Counters start here.  -->
+<table border="1" cellpadding="5" cellspacing="1" width="100%">
+<tr>
+<th width = 30% bgcolor="#C0C0C0">可用性</th>
+<th width = 70% bgcolor="#C0C0C0">计数器</th>
+</tr>
+
+<tr>
+<td valign="top">全局</td>
+<td valign="top"><a href="iicshpm.htm#CacheFlushes">高速缓存的刷新次数</a></td>
+</tr>
+
+<tr>
+<td valign="top">全局</td>
+<td valign="top"><a href="iicshpm.htm#CacheHits">高速缓存命中数</a></td>
+</tr>
+
+<tr>
+<td valign="top">全局</td>
+<td valign="top"><a href="iicshpm.htm#CacheHits%">高速缓存命中数 %</a></td>
+</tr>
+
+<tr>
+<td valign="top">全局</td>
+<td valign="top"><a href="iicshpm.htm#CacheMisses">高速缓存失误数</a></td>
+</tr>
+
+<tr>
+<td valign="top">全局</td>
+<td valign="top"><a href="iicshpm.htm#CachedFileHandles">高速缓存的文件句柄数</a></td>
+</tr>
+
+<tr>
+<td valign="top">全局</td>
+<td valign="top"><a href="iicshpm.htm#DirectoryListings">目录列表数</a></td>
+</tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a href="iicshpm.htm#MemoryAllocated">分配的内存数</a></td>
+</tr>
+
+<tr>
+<td valign="top">全局</td>
+<td valign="top"><a href="iicshpm.htm#Objects">对象数</a></td>
+</tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a href="iicshpm.htm#ScriptEngineCache">高速缓存的脚本引擎数</a></td>
+</tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a href="iicshpm.htm#TemplatesCached">高速缓存的模板数</a></td>
+</tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a href="iicshpm.htm#TemplateCacheHitRate">模板高速缓存命中率</a></td>
+</tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a href="iicshpm.htm#TemplateNotifications">模板通知数</a></td>
+</tr>
+</table>
+
+<h2><a name="sessions">与会话有关的计数器</a></h2>
+
+<table border="1" cellpadding="5" cellspacing="1" width="100%">
+<tr>
+	<th width = 30% bgcolor="#C0C0C0">可用性</th>
+	<th width = 70% bgcolor="#C0C0C0">计数器</th>
+</tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a href="iicshpm.htm#SessionDuration">会话持续时间</a></td>
+</tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a href="iicshpm.htm#SessionsCurrent">当前会话数</a></td>
+</tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a href="iicshpm.htm#SessionsTimedOut">超时会话数</a></td>
+</tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a href="iicshpm.htm#SessionsTotal">会话总数</a></td>
+</tr>
+
+</table>
+
+<h2><a name="transactions">与事务有关的计数器</a></h2>
+
+<table border="1" cellpadding="5" cellspacing="1" width="100%">
+<tr>
+	<th width=30% bgcolor="#C0C0C0">可用性</th>
+	<th width=70% bgcolor="#C0C0C0">计数器</th>
+</tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a href="iicshpm.htm#TransactionsAborted">放弃的事务数</a></td>
+</tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a href="iicshpm.htm#TransactionsCommitted">提交的事务数</a></td>
+</tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a href="iicshpm.htm#TransactionsPending">挂起的事务数</a></td>
+</tr>
+
+<tr><td valign="top">ASP</td>
+<td valign="top"><a href="iicshpm.htm#TransactionsTotal">事务总数</a></td>
+</tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a href="iicshpm.htm#Transactions/Sec">每秒事务数</a></td>
+</tr>
+</table>
+
+<h2><a name="restarts">与重新启动相关的计数器</a></h2>
+
+<table border="1" cellpadding="5" cellspacing="1" width="100%">
+<tr>
+	<th width = 30% bgcolor="#C0C0C0">可用性</th>
+	<th width = 70% bgcolor="#C0C0C0">计数器</th>
+</tr>
+
+<tr>
+<td valign="top">Web、FTP</td>
+<td valign="top"><a href="iicshpm.htm#ServiceUptime">服务正常运行时间</a></td>
+</tr>
+</table>
+
+<hr class="iis" size="1"><p align=center><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

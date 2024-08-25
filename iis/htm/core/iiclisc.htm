@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>获取客户证书</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="包含从受信的第三方机构（证书颁发机构）获取客户证书的程序方面的信息。颁发机构要求的标识信息取决于所要获取的证书类型。">
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="H1_37688504">获取客户证书</a></h1>
+
+<p>可以从称为“证书颁发机构”的、可信的第三方机构获取客户证书。在签发证书之前，颁发机构可能需要验证您的身份。颁发机构要求的标识信息取决于所要获取的证书类型。如何获取并执行这些证书取决于所使用的浏览器。本主题中的过程仅适用于 Internet Explorer 4.0 或更高版本。有关其他浏览器客户证书的颁发过程，请参阅浏览器文档。</p>
+
+<big>获取客户证书</big><br>
+
+<ol>
+<li>选择证书颁发机构。选择证书颁发机构时请考虑以下几方面的问题：</li>
+
+<ul>
+<li>该证书颁发机构是否知名可信？</li>
+<li>为验证您的身份，颁发结构需要从您处得到何种类型的信息？大多数证书颁发机构需要您提供详细的身份证明信息，例如姓名、地址、公司名和电子邮件地址等。</li>
+<li>证书颁发机构是否有 Web 站点可供申请客户证书？</li>
+<li>所签发的证书是否与所使用的浏览器和服务器兼容？</li>
+</ul>
+
+<p>要取得为 Internet 信息服务提供证书签发服务的证书颁发机构列表，请参阅<a href="iiocrsc.htm">获取服务器证书</a>。<br>
+
+<li>请参考由证书颁发机构提供的专门订购说明。</li>
+<li>订购您的证书。一些客户证书只对用来产生证书请求的计算机和 Web 浏览器有效：因此请确保联机请求是从所要安装证书的计算机上发出的。</li>
+<li>收到您的客户证书后，请使用 Web 浏览器的安全功能安装该证书。（有些浏览器可能会将客户证书视为“浏览器”或“个人”证书。）</li>
+</ol>
+
+<hr class="iis" size="1">
+<p align="center"><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

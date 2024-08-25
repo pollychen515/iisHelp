@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML dir=ltr>
+<HEAD>
+
+<TITLE>服务器端包含引用</TITLE>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT=" 包含链接的导航页，这些链接指向关于服务器端包含的参考信息。">
+
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_k2_server-side_includes_reference"></A><SUP></SUP>服务器端包含参考</H1>
+
+<P>欢迎访问服务器端包含命令的参考页。可以使用服务器端包含命令将文件内容包含在 HTML 页中，以及包含有关文件的信息（如文件大小）。也可以在 ASP 中使用某些服务器端包含命令。</P>
+
+<P>本节包含：
+
+<UL type=disc>
+	<LI><STRONG><A HREF="iisicfg.htm">#config</A>：</STRONG>指定用于返回客户浏览器的错误消息、日期和文件大小的格式。 </li>
+
+	<LI><STRONG><A HREF="iisieco.htm">#echo</A>：</STRONG>将环境变量值插入到 HTML 页中。 </li>
+
+	<LI><STRONG><A HREF="iisiexc.htm">#exec</A>：</STRONG>运行应用程序或外壳命令并将输出结果插入到 HTML 页中。 </li>
+
+	<LI><STRONG><A HREF="iisiflm.htm">#flastmod</A>：</STRONG>将文件修改时间插入到 HTML 页中。 </li>
+
+	<LI><STRONG><A HREF="iisifsz.htm">#fsize</A>：</STRONG>将文件大小插入到 HTML 页中。 </li>
+
+	<LI><STRONG><A HREF="iisiinc.htm">#include</A>：</STRONG>将文件包含在 HTML 或 ASP 页中。</li>
+</UL>
+<hr class="iis" size="1">
+<p align="center"><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+</BODY>
+</HTML>

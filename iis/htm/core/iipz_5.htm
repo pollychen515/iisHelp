@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+
+<title>主目录属性表</title>
+
+<META NAME="ROBOTS" CONTENT="NOINDEX">
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+<BODY BGCOLOR=#FFFFFF TEXT=#000000 dir=ltr> <font face="宋体">
+
+<p><a name="hidd_directory_properties"></a> <strong>主目录属性表</strong></p>
+
+<p>可以将主目录更改为以下某个位置：</p>
+
+<ul>
+<li>位于正在配置的服务器中的目录。</li>
+<li>另一计算机上的共享位置。</li>
+</ul>
+
+<p>根据提示键入访问该计算机所需的用户名和密码。</p>
+
+<p><strong>FTP 站点目录</strong></p>
+
+<p>在文本框中，键入目录或目标 URL 的路径。语法必须匹配所选路径类型：</p>
+
+<p>对于本地目录，应使用完整路径，例如，C:\Catalog\Shoes。也可以不键入路径而是单击“浏览”按钮选择本地目录。</p>
+
+<p>对于网络共享，应使用通用命名约定 (UNC) 服务器和共享名，例如，\\Webserver\Htmlfiles。</p>
+
+<p>要选择本地目录而不是在“本地路径”文本框中键入目录路径，请单击“浏览”。</p>
+
+<p><strong>读取</strong></p>
+
+<p>如果允许用户读取或下载存储在主目录或虚拟目录中的文件，请选择该选项。</p>
+
+<p><strong>写入</strong></p>
+
+<p>如果允许用户将文件上载到服务器上已启用的目录中，请选择该选项。仅对要接收用户文件的目录选择该权限。</p>
+
+<p><strong>日志访问</strong></p>
+
+<p>要将对该目录的访问记录到日志文件，请选中该复选框。只当该 FTP 站点启用日志记录时方可记录访问。默认情况下启用日志记录。</p>
+
+<p><hr class="iis" size="1"></p>
+<p align="center"><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

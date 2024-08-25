@@ -1,0 +1,355 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>日志记录属性参考</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="description" CONTENT="日志记录参考信息。包括属性列表以及 W3C 扩充日志记录格式的值。">
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+
+
+<h1><a name="H2_448399201"></a>日志记录属性参考</h1>
+
+<p>本主题列出了日志记录属性的定义和用于 W3C 扩充日志记录格式的值。分为下列部分：</p>
+
+<ul>
+<li><strong><a href="#W3CExtendedLoggingDefinitions">W3C 扩充日志记录定义</a>：</strong>W3C 扩充日志文件格式可用的常规属性。</li>
+<li><strong><a href="#ProcessAccountingLoggingDefinitions">处理帐户日志记录定义</a>：</strong>处理 W3C 扩充日志文件中出现的帐户的其他属性。</li>
+</ul>
+
+<p>有关 W3C 扩充日志格式的详细信息，请参阅位于 <a href="http://www.w3.org/" target="_blank">http://www.w3.org/</a> 的 W3C 的 Web 站点。</p>
+
+<h2><a name="extendedprops"><a name="W3CExtendedLoggingDefinitions">W3C 扩充日志记录定义</a></a></h2>
+<table border="1" cellpadding="2" cellspacing="0" width="50%">
+<tr>
+<th width="10%" bgcolor="#C0C0C0" align="Left" valign="top"><strong>前缀</strong></th>
+<th width="40%" align="CENTER" valign="TOP" bgcolor="#C0C0C0"><strong>含义</strong></th>
+</tr>
+<tr>
+<td valign="top"><strong>s-</strong></td>
+<td valign="top">服务器操作</td>
+</tr>
+<tr>
+<td valign="top"><strong>c-</strong></td>
+<td valign="top">客户机操作</td>
+</tr>
+<tr>
+<td valign="top"><strong>cs-</strong></td>
+<td valign="top">客户机到服务器的操作</td>
+</tr>
+<tr>
+<td valign="top"><strong>sc-</strong></td>
+<td valign="top">服务器到客户机的操作</td>
+</tr>
+</table> <br><br>
+
+
+<table border="1" cellpadding="5" cellspacing="1" width="90%">
+<tr>
+<th width="20%" bgcolor="#C0C0C0" align="Left" valign="top">字段</th>
+<th width="10%" bgcolor="#C0C0C0" align="Left" valign="top">出现</th>
+<th width="70%" bgcolor="#C0C0C0" align="Left" valign="top">说明</th>
+</tr>
+
+<tr>
+<td valign="top">日期</td>
+<td valign="top"><code>date</code></td>
+<td valign="top">执行操作的日期。</td>
+</tr>
+
+<tr>
+<td valign="top">时间</td>
+<td valign="top"><code>time</code></td>
+<td valign="top">活动发生的时间</td>
+</tr>
+
+<tr>
+<td valign="top">客户机 IP 地址</td>
+<td valign="top"><code>c-ip</code></td>
+<td valign="top">访问服务器的客户机 IP 地址。</td>
+</tr>
+
+<tr>
+<td valign="top">用户名</td>
+<td valign="top"><code>c-username</code></td>
+<td valign="top">访问服务器的已验证用户的名称。这不包括用连字符表示的匿名用户。</td>
+</tr>
+
+<tr>
+<td valign="top">服务名称和实例编号</td>
+<td valign="top"><code>s-sitename</code></td>
+<td valign="top">Internet 服务和在客户计算机上运行的实例编号。</td>
+</tr>
+
+<tr>
+<td valign="top">服务器名称</td>
+<td valign="top"><code>s-computername</code></td>
+<td valign="top">生成日志条目的服务器名称。</td>
+</tr>
+
+<tr>
+<td valign="top">服务器 IP</td>
+<td valign="top"><code>s-ip</code></td>
+<td valign="top">生成日志条目的服务器 IP 地址。</td>
+</tr>
+
+<tr>
+<td valign="top">方法</td>
+<td valign="top"><code>cs-method</code></td>
+<td valign="top">客户机试图执行的操作（例如 GET 方法）</td>
+</tr>
+
+<tr>
+<td valign="top">URI 词干</td>
+<td valign="top"><code>cs-uri-stem</code></td>
+<td valign="top">访问的资源；例如 Default.htm。</td>
+</tr>
+
+<tr>
+<td valign="top">URI 查询</td>
+<td valign="top"><code>cs-uri-query</code></td>
+<td valign="top">查询，如果有的话客户机将试图执行。</td>
+</tr>
+
+<tr>
+<td valign="top">Http 状态</td>
+<td valign="top"><code>sc-status</code></td>
+<td valign="top">以 HTTP 术语表示的操作的状态。</td>
+</tr>
+
+<tr>
+<td valign="top">Win32 状态</td>
+<td valign="top"><code>sc-win32-status</code></td>
+<td valign="top">以 Windows 2000 使用的术语表示的操作的状态。</td>
+</tr>
+
+<tr>
+<td valign="top">发送字节数</td>
+<td valign="top"><code>sc-bytes</code></td>
+<td valign="top">服务器发送的字节数。</td>
+</tr>
+
+<tr>
+<td valign="top">接收字节数</td>
+<td valign="top"><code>cs-bytes</code></td>
+<td valign="top">服务器接收的字节数。</td>
+</tr>
+
+<tr>
+<td valign="top">服务器端口</td>
+<td valign="top"><code>s-port</code></td>
+<td valign="top">客户机连接的端口号。</td>
+</tr>
+
+<tr>
+<td valign="top">所用时间</td>
+<td valign="top"><code>time-taken</code></td>
+<td valign="top">操作所占用的时间。</td>
+</tr>
+
+<tr>
+<td valign="top">协议版本</td>
+<td valign="top"><code>cs-protocol</code></td>
+<td valign="top">客户机使用的协议 (HTTP、FTP) 版本。HTTP 协议应为 HTTP 2.0 或 HTTP 2.1。
+</td>
+</tr>
+
+<tr>
+<td valign="top">用户代理</td>
+<td valign="top"><code>cs(User-Agent)</code></td>
+<td valign="top">客户机使用的浏览器。</td>
+</tr>
+
+<tr>
+<td valign="top">Cookie</td>
+<td valign="top"><code>cs(Cookie)</code></td>
+<td valign="top">发送或接收的 cookie 内容（如果有的话）。</td>
+</tr>
+
+<tr>
+<td valign="top">引用者</td>
+<td valign="top"><code>cs(Referer)</code></td>
+<td valign="top">用户访问的前一个站点。此站点提供与当前站点的链接。</td>
+</tr>
+</table>
+
+
+<h2><a name="cpuprops"><a name="ProcessAccountingLoggingDefinitions">处理帐户日志记录定义</a></a></h2>
+
+<table width="90%" border="1" cellspacing="1" cellpadding="5">
+<tr>
+<th width="20%" bgcolor="#C0C0C0" align="Left" valign="top">字段</th>
+<th width="10%" bgcolor="#C0C0C0" align="Left" valign="top">出现</th>
+<th width="70%" bgcolor="#C0C0C0" align="Left" valign="top">说明</th>
+</tr>
+
+<tr>
+<td valign="top">进程类型</td>
+<td valign="top"><code>s-proc-type7</code></td>
+<td valign="top">触发事件的进程类型，CGI 或进程外应用程序。类型可以是 CGI、应用程序或全部。</td>
+</tr>
+
+<tr>
+<td valign="top">进程事件</td>
+<td valign="top"><code>s-event</code></td>
+<td valign="top">触发的事件：Site-Stop、Site-Start、Site-Pause、Periodic-Log、Interval-Start、Interval-End、Interval-Change、Log-Change-Int/Start/Stop、Eventlog-Limit、Priority-Limit、Process-Stop-Limit、Site-Pause-Limit、Eventlog-Limit-Reset、Priority-Limit-Reset、Process-Stop-Limit-Reset 或 Site-Pause-Limit-Reset。有关这些值的说明，请<a href="#valuesdescription">单击这里</a>。</td>
+</tr>
+
+<tr>
+<td valign="top">用户时间总计</td>
+<td valign="top"><code>s-user-time</code></td>
+<td valign="top">站点在当前间隔使用的累计用户模式处理器时间总和（以秒为单位）。</td>
+</tr>
+
+<tr>
+<td valign="top">内核时间总计</td>
+<td valign="top"><code>s-kernel-time</code></td>
+<td valign="top">站点在当前间隔使用的累计内核模式处理器时间总和（以秒为单位）。</td>
+</tr>
+
+<tr>
+<td valign="top">页错误总计</td>
+<td valign="top"><code>s-page-faults</code></td>
+<td valign="top">导致内存页错误的内存引用总数。</td>
+</tr>
+
+<tr>
+<td valign="top">进程总计</td>
+<td valign="top"><code>s-total-procs</code></td>
+<td valign="top">在当前间隔内创建的 CGI 和进程外应用程序总数。</td>
+</tr>
+
+<tr>
+<td valign="top">活动进程</td>
+<td valign="top"><code>s-active-procs</code></td>
+<td valign="top">记录日志时运行的 CGI 和进程外应用程序的总数。</td>
+</tr>
+
+<tr>
+<td valign="top">终止进程总数</td>
+<td valign="top"><code>s-stopped-procs</code></td>
+<td valign="top">由于在当前间隔内的进程限制而停止的 CGI 和进程外应用程序的总数。</td>
+</tr>
+</table><br>
+
+
+<a name="valuesdescription"></a>
+<table width="70%" border="1" cellspacing="0" cellpadding="2">
+<tr>
+<th width="25%" bgcolor="#C0C0C0" align="Left" valign="top">值</th>
+<th width="75%" align="CENTER" valign="TOP" bgcolor="#C0C0C0">含义</th>
+</tr>
+<tr>
+<td valign="top">Site-Stop</td>
+<td valign="top">由于某种原因而停止的 Web 站点。</td>
+</tr>
+<tr>
+<td valign="top">Site-Start</td>
+<td valign="top">启动或重新启动的 Web 站点。</td>
+</tr>
+<tr>
+<td valign="top">Site-Pause</td>
+<td valign="top">暂停的 Web 站点。</td>
+</tr>
+<tr>
+<td valign="top">Periodic-Log</td>
+<td valign="top">这是一个有规律定义的日志条目，其间隔由管理员指定。</td>
+</tr>
+<tr>
+<td valign="top">Interval-Start</td>
+<td valign="top">重新设置的间隔已经开始。</td>
+</tr>
+<tr>
+<td valign="top">Interval-End</td>
+<td valign="top">已达到重新设置的间隔并重置。</td>
+</tr>
+<tr>
+<td valign="top">Interval-Change</td>
+<td valign="top">Web 站点管理员更改了重新设置间隔的值。</td>
+</tr>
+<tr>
+<td valign="top">Log-Change-Int/Start/Stop</td>
+<td valign="top">发生了下列事件之一：日志的间隔已经更改；发生了间隔事件或者站点停止、启动或暂停。</td>
+</tr>
+<td valign="top">Eventlog-Limit</td>
+<td valign="top">由于 CGI 或进程外应用程序达到管理员设置的事件日志限制，生成一个 Web 站点的事件日志。</td>
+</tr>
+</tr>
+<td valign="top">Priority-Limit</td>
+<td valign="top">由于 Web 站点达到了管理员设置的低优先级限制，该站点将 CGI 或进程外应用程序设置为低优先级。</td>
+</tr>
+</tr>
+<td valign="top">Process-Stop-Limit</td>
+<td valign="top">由于达到了管理员设置的进程停止限制，Web 站点停止 CGI 或进程外应用程序。</td>
+</tr>
+</tr>
+<td valign="top">Site-Pause-Limit</td>
+<td valign="top">由于 CGI 或进程外应用程序达到了管理员设置的站点暂停限制，Web 站点暂停。</td>
+</tr>
+</tr>
+<td valign="top">Eventlog-Limit-Reset</td>
+<td valign="top">已经达到“重新设置间隔”，或者手工重新设置了 Eventlog-Limit。</td>
+</tr>
+</tr>
+<td valign="top">Priority-Limit-Reset</td>
+<td valign="top">已经达到“重新设置间隔”，或者手工重新设置了 Priority-Limit。</td>
+</tr>
+</tr>
+<td valign="top">Process-Stop-Limit-Reset</td>
+<td valign="top">已经达到“重新设置间隔”，或者手工重新设置了 Process-Stop-Limit。</td>
+</tr>
+</tr>
+<td valign="top">Site-Pause-Limit-Reset</td>
+<td valign="top">已经达到“重新设置间隔”，或者手工重新设置了 Site-Pause-Limit。</td>
+</tr>
+</table>
+
+
+
+<hr class="iis" size="1"><p align=center><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

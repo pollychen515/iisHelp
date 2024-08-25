@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>全局注册表项目</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="注册表参考信息；包含关于全局注册表项的详细信息。">
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="H1_37745306">全局注册表项目</a></h1>
+
+<p>注册表路径：</p>
+
+<p>HKEY_LOCAL_MACHINE\SYSTEM<br>
+&nbsp;\CurrentControlSet<br>
+	&nbsp;&nbsp;\Services<br>
+		&nbsp;&nbsp;&nbsp;\InetInfo<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;\Parameters</p>
+
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td width=100% bgcolor="#C0C0C0"><strong> CacheSecurityDescriptor </strong><br>REG_DWORD</td></tr>
+<tr><td width=100%><strong>范围：</strong> 0、1<br><strong>默认：</strong>1（启用）</td></tr>
+<tr><td width=100%>指定是否安全描述作为文件对象进行高速缓存。如果启用（值为 1），IIS 在高速缓存文件对象时将检索安全权限，并不需要访问文件对象以检查新用户的访问权限。只有在有多个用户帐户（不仅仅使用匿名验证）时，该功能才有用。</td></tr>
+</table>
+<p>&nbsp;</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td width=100% bgcolor="#C0C0C0"><strong>CheckCertRevocation</strong><br>REG_DWORD</td></tr>
+<tr><td width=100%><strong>范围：</strong> 0、1<br><strong>默认：</strong>0（禁用）</td></tr>
+<tr><td width=100%>指定是否检查客户证书以便 IIS 撤消。默认情况下禁用，因为检查公用的证书发布者通常通过 Internet 进行并且对性能有很大的影响。但是，如果您发布自己的证书并且撤消过程是局部的，启用检查可能很有用。</td></tr>
+</table>
+<p>&nbsp;</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td width=100% bgcolor="#C0C0C0"><strong>DisableMemoryCache </strong><br>REG_DWORD</td></tr>
+<tr><td width=100%><strong>范围：</strong> 0、1 <br> <strong>默认：</strong>0（禁用）</td></tr>
+<tr><td width=100%>禁用服务器高速缓存。该键不能通过使用 IIS 管理单元来配置。</td></tr>
+</table>
+<p>&nbsp;</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td width=100% bgcolor="#C0C0C0"><strong>ListenBackLog </strong><br>REG_DWORD</td></tr>
+<tr><td width=100%><strong>范围：</strong> 1 - 250 <br> <strong>默认：</strong> 15 </td></tr>
+<tr><td width=100%>指定在等待服务器注意的队列中允许的活动连接的最大数目。增强的 IIS 功能性通常使得没必要使用或修改该项目，尽管极端情况下的使用可能将该值提高到 50。</td></tr>
+</table>
+<p>&nbsp;</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td width=100% bgcolor="#C0C0C0"><strong>MaxConcurrency </strong><br>REG_DWORD</td></tr>
+<tr><td width=100%><strong>范围：</strong> 0 - 未限定<br> <strong>默认：</strong> 0</td></tr>
+<tr><td width=100%>指定系统应该提供的并行操作的总数。完成端口被 IIS 用来处理输入输出 (I/O)。通常情况下，运行多个线程并不是一件好事，并可导致在共享的内存中产生冲突或锁定。该键指定当存在一个挂起的 I/O 操作时，每个处理器应该允许多少个进程同时运行。特定值 0 允许系统对要使用的进程的数目进行智能化选择。任何非零值指定系统应该允许每个处理器可同时运行对应该数目个数的进程。</td></tr>
+</table>
+<p>&nbsp;</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td width=100% bgcolor="#C0C0C0"><strong>MaxPoolThreads</strong><br> REG_DWORD</td></tr>
+<tr><td width=100%><strong>范围：</strong> 0 - 未限定<br> <strong>默认：</strong> 4</td></tr>
+<tr><td width=100%>指定每个处理器创建的共用线程的数目。各缓冲池线程负责检查网络请求并作出处理。<strong>MaxPoolThreads</strong> 数不包括 ISAPI 应用程序消耗的线程。默认情况下，只能同时运行四个 CGI 小程序。如果运行多个 CGI 应用程序，应该增加该值以提高吞吐率。另外，也可以将 <strong>UsePoolThreadForCGI</strong> 的值（在 ..\Services\W3SVC\Parameters 下）设置为 FALSE (0)，但这有点危险，因为在大量使用 CGI 应用程序时性能会明显降低。通常，每个处理器最好不要创建超过 20 个线程。</td></tr>
+</table>
+<p>&nbsp;</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td width=100% bgcolor="#C0C0C0"><strong>PoolThreadLimit </strong><br>REG_DWORD</td></tr>
+<tr><td width=100%><strong>范围：</strong> 0 - 未限定<br>
+<strong>默认：</strong>2 &#42 &#35 MB</td></tr>
+<tr><td width=100%>指定可以在系统中创建的共用线程的数量的最大值。各缓冲池线程负责检查网络请求并作出处理。<strong>PoolThreadLimit</strong> 是包括所有 IIS 线程的确定限制。<strong>PoolThreadLimit</strong> 总是大于或等于 <strong>MaxPoolThreads</strong>。</td></tr>
+</table>
+<p>&nbsp;</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td width=100% bgcolor="#C0C0C0"><strong> MinFileKbSec </strong><br>REG_DWORD</td></tr>
+<tr><td width=100%><strong>范围：</strong> 1 - 8192 <br> <strong>默认：</strong> 1000</td></tr>
+<tr><td width=100%>当一个 Web 服务器发送文件到客户时，将建立超时以表示服务器在结束传送之前允许它持续多长的时间。选择的超时是 IIS 管理单元中指定的连接超时和被指定为 MinFileKbSecs 的值所除的文件大小两者中的最大值。例如，给大小为 100 KB 的文件的超时为 100 秒，或者为连接超时（如果后者更大）。请注意注册表名称容易令人误解，因为值是以字节表示的，而不是以名称表示的 KB。</td></tr>
+</table>
+<p>&nbsp;</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td width=100% bgcolor="#C0C0C0"><strong>ObjectCacheTTL </strong><br>REG_DWORD</td></tr>
+<tr><td width=100%><strong>范围：</strong> 0 - 未限定<br>
+<strong>默认：</strong>30 秒</td></tr>
+<tr><td width=100%>注册表项目控制生存时间 (TTL) 设置（用于定义对象保存在高速缓存中的时间长度）。如果高速缓存中的对象未被定义的周期所引用，该对象将被清除出高速缓存。如果系统内存受到限制，或者服务器的内容是动态的，就可以使用一个较低的 TTL 来防止系统内存被用于缓存大量的可变的对象。将值设置为 0xFFFFFFFF 将禁用对象缓存清理程序并允许缓存对象保留在缓存中，直到它们被覆盖为止。如果服务器有足够的系统内存而且数据是相对静态的，禁用缓存 scavenger 将很有用。</td></tr>
+</table>
+<p>&nbsp;</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td width=100% bgcolor="#C0C0C0"> <strong>ThreadTimeout</strong><br>REG_DWORD</td></tr>
+<tr><td width=100%><strong>范围：</strong> 0 - 未限定<br> <strong>默认：</strong>24 &#42 60 &#42 60 (24 小时)</td></tr>
+<tr><td width=100%>指定在系统中即使没有 I/O 活动的情况下，输入输出处理线程也应该维持的时间总量。通常，没有 I/O 活动和明显的请求时，服务器是空闲的并且不消耗内存。但如果这种现象持续并超过 ThreadTimeout 间隔，那么该线程将停止。以秒为单位。</td></tr>
+</table>
+<p>&nbsp;</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td width=100% bgcolor="#C0C0C0"><strong>UserTokenTTL </strong><br>REG_DWORD</td></tr>
+<tr><td width=100%><strong>范围：</strong> 0 - 0x7FFFFFFF <br><strong><strong>默认：</strong></strong>15 &#42 60 （15 分钟）</td></tr>
+<tr><td width=100%>当请求服务器时，请求（或配置的匿名用户）的安全凭据将用来在服务器上创建一个用户符号。当访问文件或其他系统资源时，服务器将模仿该用户符号（请参阅 <strong>CacheSecurityDescriptor</strong>）。该符号放入高速缓存，这样仅在用户第一次访问系统或用户符号不在高速缓存中时 Windows 登录。集成 Windows 验证符号不放入高速缓存。以秒为单位。</td></tr>
+</table>
+
+
+<hr class="iis" size="1"><p align=center><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html dir=ltr>
+<head>
+
+<title>日志记录 - 常规属性</title>
+<META NAME="ROBOTS" CONTENT="NOINDEX">
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+<BODY BGCOLOR=#FFFFFF TEXT=#000000> <font face="宋体">
+
+<p><strong>日志记录 - 常规属性</strong></p>
+
+<p>在此对话框中，指示如何创建和保存日志文件。</p>
+
+<p><strong>新日志时间间隔</strong></p>
+
+<ul>
+<li><strong>每小时</strong> 日志文件每小时创建一个。</li>
+<li><strong>每天</strong> 日志文件每天创建一个，从午夜之后发生的第一个项目开始。</li>
+<li><strong>每周</strong> 日志文件每周创建一个，从星期六午夜之后发生的第一个项目开始。</li>
+<li><strong>每月</strong> 日志文件每月创建一个，从每月最后一天午夜之后发生的第一个项目开始。</li>
+
+<p><strong>注意</strong> 对于 W3C 扩充格式以外的所有日志文件格式，"Midnight"都意味着当地时间午夜。对于 W3C 格式，“午夜”默认是格林尼治标准时间午夜，但可指定为本地时间午夜。</p>
+
+<li><strong>文件大小无限</strong> 数据总是附加到同一日志文件。只有停止服务器后才能访问日志文件。</li>
+<li><strong>当文件大小达到</strong> 当前日志文件达到指定大小时，创建新的日志文件；指定所需的文件大小。</li>
+</ul>
+
+<p><strong>日志文件目录</strong></p>
+
+<p>键入保存日志文件的目录，或单击“浏览”定位目录。</p>
+
+<p>文件名显示在“日志文件目录”框下面；此名称由日志文件格式和开始新日志文件的标准决定。</p>
+
+<p><hr class="iis" size="1"></p>
+<p align="center"><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

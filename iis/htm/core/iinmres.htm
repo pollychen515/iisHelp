@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>关于名称解析</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="关于名称解析系统的概念信息，包括 DHCP、WINS 和 DNS ；也包括使用端口号、多个 IP 地址或主机头名在一台计算机上维护多个站点的信息。">
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="H1_37717004">关于名称解析</a></h1>
+
+<p>为了人们可以访问 Intranet 或 Internet 上的站点，必须具有唯一的 IP 地址以便标识网络上的计算机。该地址由一长串数字组成，中间用圆点分隔（例如，172.16.255.255）。由于数字地址难以记忆，所以使用文本名称和“友好名称”向访问者提供容易记忆的地址，如www.microsoft.com。名称解析将为在客户浏览器中键入的友好名称提供正确的数字地址。本节描述不同的名称解析系统。</p>
+
+<ul>
+<li><a href="#IntranetNameResolutionSystems">Intranet 名称解析系统</a></li>
+<li><a href="#InternetNameResolutionSystems">Internet 名称解析</a></li>
+<li><a href="#AssigningNamestoVirtualServers">通过分配端口、地址和主机头名维护多个站点</a></li>
+</ul>
+
+<p>要查看详细信息，请单击“开始”菜单上的“帮助”来参阅 Windows 文档。</p>
+
+<h2><a name="IntranetNameResolutionSystems">Intranet 名称解析系统</a></h2>
+
+<p>Intranet 是使用 Internet 技术的专用局域网 (LAN)。要成功地接收和发送信息包，每个计算机的 IP 地址必须成功映射为文本名称。通过使用几种名称到地址解析系统中的任何系统，都可以分配名称和地址。应该根据 Intranet 的规模、添加或移动计算机的频率以及在 Microsoft&reg Windows 2000&reg Server上安装的软件来作出选择。下面部分描述 Intranet 上的计算机如何接收名称和地址。</p>
+
+<h3><a name="H3_37718937">IP 地址分配</a></h3>
+
+<p>IP 地址有两种分配方式：静态或动态。网络可以只使用一种方式，或两种方式混合使用。</p>
+
+<ul>
+<li><strong>Static 静态 </strong>系统管理员分配并跟踪 Intranet 上每台计算机的 IP 地址。对于小型和很少变化的网络，或者想在一个 IIS 安装上运行多个站点（每个站点对应于不同的 IP 地址），使用静态分配最有利。 </li>
+<li><strong>Dynamic 动态 </strong>当客户登录到网络时，动态主机配置协议 (DHCP) 服务器临时“租用”一个  IP 地址给客户。当客户登录时，DHCP 服务器从当前可用地址池中分配一个IP 地址。当租用快到期时，如果必要，客户计算机将与服务器协商以便继续租用。当客户注销时，该地址重新释放并可分配给新的客户。DHCP 服务器减轻了系统管理员跟踪 IP 地址分配的负担，对于大型的或经常变化的网络非常有用。DHCP 服务器只允许分配一个 IP 地址给网络上的每台计算机。</li>
+</ul>
+
+<p><strong>注意</strong>  如果要分配多个 IP 地址给一个网卡，则必须对计算机使用静态地址分配。</p>
+
+<h3><a name="H3_37720420">名称解析系统</a></h3>
+
+<p>Windows 网络组件遵循 NetBIOS 命名约定，相反，TCP/IP 组件遵循所谓的域名系统 (DNS) 命名约定。在 Windows 中，DNS 主机名默认值与 NetBIOS 计算机名相同。计算机名到 IP 地址的映射可以按两种方式实现：</p>
+
+<ul>
+<li><strong>Static 静态 </strong>系统管理员创建一个文本文件，叫做 HOSTS 文件（对于 DNS 名称）或 LMHOSTS 文件 (对于 NetBIOS 名称)，并输入每个计算机的名称和地址。然后在网络上发布此文件。当产生要连接到其他计算机的请求时，此文件用来将名称解析为正确的 IP 地址。此系统适用于不经常改变的简单网络。</li>
+<li><strong>Dynamic 动态 </strong>当客户计算机登录时，DHCP 服务器分配一个地址，并将 IP 地址分配发送给 Windows Internet Name Service (WINS) 服务器。WINS 服务器注册计算机名，当产生对 NetBIOS 计算机名的请求时，WINS 服务器将该名称解析为正确的 IP 地址。这种自动识别以及计算机名到地址的映射简化了大型或经常改变的网络的管理负担。</li>
+</ul>
+
+<p>DNS 名称通常使用静态信息解析。DNS 服务器包含一部分静态数据库，其中列有主机名和地址。如果请求的名称不在 DNS 服务器的数据库中，它将向其它 DNS 服务器发送查询以便获得请求的信息。在 Windows 上运行的 DNS 服务器可以配置成查询 WINS 服务器，以便解析 DNS 名称层次结构中更低层的名称。因为 WINS 动态分配计算机名，这有效地将 DNS 从静态系统变为动态系统。</p>
+
+<p>如果要在单个服务器上设置多个 Web 或 FTP 站点，并且每个站点都具有自己的 IP 地址，则可能遇到自动 DNS 注册问题。要确保准确的 IP 绑定和 DNS 注册，需禁用 Windows 2000 Server 自动 DNS 注册，并手工配置这些站点的 DNS 注册。关于禁用自动 DNS 注册和手工配置 DNS 注册的详细信息，请参阅 Windows 2000 Server 文档。</p>
+
+
+
+
+<p>如果要分配多个名称给一台计算机，则必须对计算机使用静态名称分配。在一台计算机上可以映射多个名称到一个 IP 地址；或者使用多个名称，每个名称都映射到其自身的 IP 地址。关于命名站点的详细概念信息，请参阅本节后面的<a href="#AssigningNamestoVirtualServers">通过分配端口、地址和主机头名维护多个站点</a>。关于过程帮助，请参阅<a href="iinamvs.htm">命名 Web 站点</a>。</p>
+
+<h2><a name="InternetNameResolutionSystems">Internet 名称解析</a></h2>
+
+<p>在 Internet 上，域名系统 (DNS) 用于将文本（“友好”）名称解析为站点的 IP 地址。本节描述名称解析的工作原理。</p>
+
+<p>DNS 名称由 <a href="http://www.internic.net/" target="_new">InterNIC</a> 记录，它是管理 Internet 上名称和地址分配的组织。InterNIC 操作着一个包含所有注册域名的分布式数据库。当客户计算机通过域名请求连接站点时，此请求被传送到称为域名服务器的一系列计算机。</p>
+
+<p>域名服务器位于世界上成千上万的组织中。域名服务器返回与请求的域名对应的 IP 地址，接着客户请求被路由到相应的站点。<a href="iinmadd.htm">获取 Internet 名称和地址</a>包含如何注册站点域名的信息。</p>
+
+<h2><a name="AssigningNamestoVirtualServers">通过分配端口、地址和主机头名维护多个站点</a></h2>
+
+<p>本节解释如何为 Web 站点分配标识信息。每个 Web 站点都具有唯一的、由三个部分组成的标识，用来接收和响应请求：</p>
+
+<ul>
+<li>端口号。</li>
+<li>IP 地址。</li>
+<li>主机头名。</li>
+</ul>
+
+<p>通过更改其中的一个标识，可以在一台计算机上维护多个站点。 </p>
+
+<h3><a name="portnumbers">端口号</a></h3>
+
+<p>通过使用附加端口号，站点只需一个 IP 地址即可维护多个站点。客户要访问站点时，需在静态 IP 地址后面附加端口号（默认 Web 站点除外，它使用端口 80）。下面图形描绘了使用端口号维护多个 Web 站点的计算机。</p>
+
+<img src="iivsovr4.gif" alt="计算机通过使用端口号维护三个 Web 站点。">
+
+<p>使用此方法维护多个站点要求客户在端口号前键入实际的数字 IP 地址。不能使用主机名和“友好名称”。 </p>
+
+<h3><a name="multi_ip">多 IP 地址</a></h3>
+
+<p>要使用多 IP 地址，必须将主机名及其对应的 IP 地址添加到名称解析系统（通常是 DNS）。此后客户只需在浏览器中键入文本名称即可访问 Web 站点。如果使用多 IP 地址，则需要为每个 IP 地址附加一块网卡。下面图形描绘了使用多 IP 地址维护多个 Web 站点的计算机。</p>
+
+<img src="iivsovr5.gif" alt="计算机通过使用多 IP 地址维护三个 Web 站点。">
+
+<p><strong>注意</strong>  如果使用此方法在 Internet 上维护多个站点，也需使用 <a href="http://www.internic.net/" target="_new">InterNIC</a> 注册文本名称。</p>
+
+<h3><a name="hostheader">主机头名</a></h3>
+
+<p>最后，也可以使用具有单个静态 IP 地址的主机头名维护多个站点。与以前的方法类似，也需要将主机名添加到名称解析系统（通常是 DNS）。区别在于，一旦请求到达计算机，IIS 将使用在 HTTP 头中传递的主机名来确定客户请求哪个站点。下面图形描绘了使用主机头名维护多个 Web 站点的计算机。 </p>
+
+<img src="iivsovr6.gif" alt="计算机通过使用主机头名维护三个 Web 站点。">
+
+<p> 如果使用此方法在 Internet 上维护多个站点，也需使用 <a href="http://www.internic.net/" target="_new">InterNIC</a> 注册友好名称。</p>
+
+<p> <strong>注意</strong>  当使用安全套接字层 (SSL) 时，不能使用主机头，这是因为使用 SSL 的 HTTP 请求有加密保护。主机头是加密请求的一部分，不能被解释和路由到正确的站点。 </p>
+
+<p> 注意，旧的浏览器不能将主机头名传回 IIS。Microsoft&reg Internet Explorer 3.0 和 Netscape Navigator 2.0 浏览器以及它们的最新版本都支持主机头名的使用，但这两种浏览器的早期版本不支持。 </p>
+
+<p> 使用旧浏览器的访问者将到达该 IP 地址的默认 Web 站点，并需要附加支持才能到达正确站点。关于对旧浏览器启用主机头支持的说明，请参阅<a href="iisuphh.htm">在旧浏览器中支持主机头名</a>。有关如何分配名称的说明，请参阅 <a href="iinamvs.htm">命名 Web 站点</a>。要了解如何添加附加站点到 IIS 安装，请参阅<a href="iiaddvs.htm">添加站点</a>。 </p>
+
+<hr class="iis" size="1"><p align=center><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

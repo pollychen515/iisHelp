@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>身份验证方法</title>
+
+<META NAME="ROBOTS" CONTENT="NOINDEX">
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+<BODY BGCOLOR=#FFFFFF TEXT=#000000 dir=ltr> <font face="宋体">
+
+<p><a name="hidd_authentication"></a><strong>身份验证方法</strong></p>
+
+<p>使用该对话框配置 Web 服务器来检验用户的标识，也叫“验证”，以防止未经授权的用户建立到受限制的内容的 Web (HTTP) 连接。验证过程包括确定用户是否拥有访问特定 Web 站点、目录或文件的适当的 Windows 文件系统 (NTFS) 权限的有效 Windows 用户帐户。</p>
+
+<p><strong>匿名访问</strong></p>
+
+<p>要允许用户建立匿名连接，请选择该选项。匿名或 Guests 帐户是有效的 Windows 用户帐户，服务器将登录使用这些帐户的用户。</p>
+
+<p><strong>验证访问</strong></p>
+
+<p><strong>基本验证</strong></p>
+
+<p>要启用 Web 服务器的基本验证方法（它是一种广泛用于识别用户的工业标准方法），请选择该选项。</p>
+
+<p><font color="#0000FF"><strong>要点</strong></font> 基本验证使得密码以未加密的形式通过网络传送。一个计算机肆意破坏者使用网络监视工具就可以截取用户名和密码。</p>
+
+<p><strong>编辑</strong></p>
+
+<p>要为那些没有明确提供给他们域名的用户将 Web 服务器配置为假设默认登录域，而不是本地域，请单击“编辑”。</p>
+
+<p><strong>摘要式验证：</strong></p>
+
+<p>该方法在 IIS 5.0 中是新的，它通过网络发送散列值而不是密码。这个方法越过了代理服务器和其他防火墙。</p>
+
+<p><strong>集成 Windows 验证</strong></p>
+
+<p>在集成 Windows 验证过程中，Web 服务器从事于使用用户的 Internet Explorer Web 浏览器进行密码信息交换。</p>
+
+<p>一旦启用，Web 服务器在下列情况下将仅使用集成 Windows 验证：</p>
+
+<ul>
+<li>禁用匿名访问。</li>
+<li>拒绝匿名访问，因为 Windows 文件系统权限已设置，要求用户在建立与受限制的内容的连接之前提供 Windows 用户名和密码。</li>
+</ul>
+
+<p><hr class="iis" size="1"></p>
+<p align="center"><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

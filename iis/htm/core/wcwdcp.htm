@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>关于 WebDAV</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="有关 WebDAV、工作原理和它具有强有力 Web 发布能力的概念上的信息。">
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=gb2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="ZH-CN">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+
+<h1><a name="AboutWebDAV">关于 WebDAV</a></h1>
+
+<p>Web 分布式创作和版本管理 (WebDAV) 扩展了 HTTP/1.1 协议，允许客户端发布、锁定和管理 Web 上的资源。集成进 IIS 中，WebDAV 允许客户端进行下面的操作：</p>
+
+<ul>
+<li>服务器上 WebDAV 发布目录中的<strong>处理资源</strong>。例如，使用该功能，具有正确权限的用户可以在 WebDAV 目录附近复制和移动文件。</li>
+<li><strong>修改属性</strong>与某些资源相关联。例如，用户可写入并检索文件的属性信息。</li>
+<li><strong>锁定并解锁资源</strong>以便多个用户可同时读取一个文件，但在此时，只可有一个人能够修改该文件。</li>
+<li><strong>搜索</strong>位于 WebDAV 目录中的文件的的内容和属性。</li>
+</ul>
+
+<p>在服务器上设置 WebDAV 发布目录与通过 <a href="javascript://" onclick="Activate(); return false">IIS 管理单元</a>设置虚拟目录一样的简单。设置好了您的发布目录后，具有正确权限的用户就可以将文档发布到服务器上，并处理目录中的文件。在可以设置 WebDAV 目录之前，您必须安装 Windows 2000 Professional、Windows 2000 Server 或 Windows 2000 Advanced Server。</p>
+
+<h2>WebDAV 客户软件</h2>
+
+<p>您可以通过下面列表中描述的任意一种 Microsoft 产品或通过其他任意的支持工业标准 WebDAV 协议的客户软件来访问 WebDAV 发布目录。</p>
+
+<ul>
+<li><strong>Windows 2000</strong> 通过“添加网络位置向导”连接到一个 WebDAV 服务器，并显示 WebDAV 目录中的内容，好象它就是属于本地计算机同一文件系统上的一部分。连接上之后，就可以进行拖放文件、检索和修改文件属性以及许多其他文件系统任务。</li>
+<li><strong>Internet Explorer 5.0</strong> 连接到 WebDAV 目录并允许您在整个 Windwos 2000 中执行同样的文件系统任务。</li>
+<li><strong>Office 2000</strong> 通过其中的任意应用程序创建、发布、编辑并直接将文档保存到 WebDAV 目录中。</li>
+</ul>
+
+<h2>在 WebDAV 中搜索</h2>
+
+<p>一旦连接上 WebDAV 目录，就可以快速搜索位于该目录上文件的内容和属性。例如，您可以搜索内容中包含 <em>table</em> 一词的所有文件或所有由 <em>Fred</em> 编写的文件。</p>
+
+<h2>集成安全</h2>
+
+<p>由于 WebDAV 是集成到 Windows 2000 和 IIS 5.0 中的，它将借用这两者提供的安全特性。这些特性包括在 <a href="javascript://" onclick="Activate(); return false">IIS 管理单元</a>的 IIS 权限和 NTFS 文件系统中的自由选择访问控制列表 (DACL)。有关 IIS 5.0 安全的信息，请参阅<a href="iisecsa.htm">安全</a>。</p>
+
+<p> 由于具有正确权限的用户可以写入 WebDAV 目录，在任何时刻，控制对您的目录的访问就显得至关重要。为了帮助对访问的控制，IIS 5.0 通过构建对 Kerberos? 验证协议的支持，已经增强了集成 Windows 验证的功能。通过选择集成 Windows 验证，您可以确保只有一个具有权限的客户可访问并写入到您的 Intranet 上的 WebDAV 中。有关 Kerberos? 验证协议如何与 IIS 集成 Windows 验证一起工作的详细信息，请参阅<a href="iiabasc.htm#challenge">集成 Windows 验证</a>。有关常规情况下 Kerberos 协议如何工作的信息，请参阅 Microsoft Windows 2000 Server 文档中的“Kerberos v5 Authentication”。</p>
+
+<p>另外，IIS 5.0 还引入了一种新的验证类型，称为“摘要式验证”。为 Windows 域服务器创建，该验证类型为密码和通过 Internet 传输的信息提供了更加紧密的安全性。有关摘要式验证的信息，请参阅<a href="iiabasc.htm#digest">摘要式验证</a>和<a href="iiauths.htm#enabledigest">配置摘要式验证</a>。</p>
+
+
+<hr class="iis" size="1"><p align="center"><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft Corporation。保留所有权利。</a></p>
+
+<script language="javascript">
+<!--
+function Activate() {
+if (navigator.appName == "Microsoft Internet Explorer"){
+	window.open("iisnapin.htm", "NewWin", 'toolbar=no, left=200, top=200, scrollbars=no, resizeable=no,  width=350, height=350');
+	}
+	else if (navigator.appName == "Netscape") {
+		window.open("iisnapin.htm", "NewWin",  'toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=yes,resizable=0,width=350,height=350,top=200,left=200');
+	}
+}
+//-->
+</script>
+
+</font>
+</body>
+</html>

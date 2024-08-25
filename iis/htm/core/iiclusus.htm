@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>IIS 中的复制和群集</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="关于如何在群集环境中复制内容或配置设置以及配置 IIS 服务器的过程信息。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=gb2312">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="ZH-CN">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="cluster1">IIS 中的复制和群集</a></h1>
+
+<p><strong><span style="color: #0000FF"><font color="#0000FF">要点</font></span></strong> 本节描述的群集功能仅适用于 Windows 2000 Advanced Server。</p>
+
+<p>Windows 群集提供了两种可用于 IIS 的群集技术：“网络负载平衡”群集和“服务器”群集。“网络负载平衡”群集提供多达 32 个服务器的可伸缩性和可用性。“服务器”群集通过由两个相连服务器组成的故障转移群集提供高可用性。根据需求和可用资源，可以在多节点“网络负载平衡”群集（高可用性和可伸缩性）或两节点“服务器”群集（高可用性）中设置 IIS。</p>
+
+<p>本文档描述“网络负载平衡”群集和“服务器”群集的概念，但仅提供在两节点“服务器”群集配置中安装 IIS 的过程信息。有关网络负载平衡、服务器群集和普通的 Windows 群集的详细信息，请参阅 Windows2000 Advanced Server 文档。</p>
+
+<p>Internet 信息服务 (IIS) 是设计成与 Windows2000 Advanced Server 的群集服务功能和 Microsoft 站点服务器的 Microsoft 内容复制系统 (CRS) 功能集成使用。IIS 也提供命令行实用程序 (Iissync.exe)，用于将 IIS metabase 和其他配置设置（例如应用程序）从一个服务器节点复制到其他节点。此实用程序提供了复制这些设置的手工方法。</p>
+
+<h2><a name="H2_20505397">群集 Web 或 FTP 服务</a></h2>
+
+<p>下列信息描述了如何在“服务器”群集中设置 IIS。关于“服务器”群集的详细信息，包括如何使用“群集管理员”，请参阅 Windows2000 Advanced Server 文档。</p>
+
+<p>每个群集的 IIS Web 或 FTP 站点包括：</P>
+
+<ol>
+<li>IIS 群集资源。</li>
+<li>IIS Web 或 FTP 站点资源所依赖的 IP 地址群集资源。</li>
+</ol>
+
+<p class="bigfix">&nbsp;</p> <big>在“服务器”群集中设置 IIS</big><!--</p>--><br>
+
+<ol>
+<li>在群集管理员中，选择要在其中添加新资源的组。“组”是在群集环境中故障转移的单位。对于第一个 IIS 资源，这通常是群集组。对于其他 IIS 资源，这通常是一个新组。选择新组将导致新组中的资源独立地故障转移。</li>
+
+<li>在“文件”菜单中，指向“新建”，然后指向“资源”。在对话框中，键入新资源的名称和描述，并从下拉列表框中选择资源类型“IIS 服务器实例”。单击“下一步”。</li>
+
+<li>从选择字段中，选择群集中的节点以使资源在该节点可用。要提供故障转移，必须选择两个节点；这是默认设置。单击“下一步”。</li>
+
+<li>在导航窗格上，为新资源选择依存。IIS 群集资源要求至少有一个群集 IP 地址依存，例如“群集 IP 地址”。单击“添加”选择依存。单击“下一步”。</li>
+
+<p><strong>注意</strong></p>
+
+<ul>
+<li>为了故障转移成功，IP 地址依存是必需的。IIS 服务器实例必须有 IP 地址依存，这样当 IIS 故障转移到群集中的第二个节点时，需要绑定到 IIS 服务器实例的 IP 地址也将故障转移到第二个节点。</li>
+
+<li>如果内容存储在群集中的群集磁盘上，需确保已将 IIS 服务器实例配置为依赖群集磁盘。如果不这样做，群集 IIS 服务器将有可能在一个不能访问群集磁盘的节点上联机，而导致故障转移后 IIS 无法访问内容。</li>
+
+<pli>确保在 Web 站点配置中使用的所有匿名用户名和密码都可以在群集中的所有节点上使用。所有的虚拟目录路径必须指向共享磁盘（也就是 UNC 或群集硬盘）或同样的本地磁盘（也就是在群集中所有节点上的盘符和目录结构都相同）。</li>
+</ul>
+
+<li>选择“FTP”或“WWW”。从下拉列表中选择服务器。单击“确定”。</li>
+</ol>
+
+<p>如果 Web 或 FTP 站点绑定到 IP 地址，则使用“群集 IP 地址”资源，并使 IIS 群集资源依赖于“群集 IP 地址”资源。</p>
+
+<p><strong><span style="color: #0000FF"><font color="#0000FF">要点</font></span></strong> 必须使用 IIS 管理单元来设置 Web 或 FTP 站点属性。也可以通过使用 IIS 管理单元来启动和停止非群集计算机上的 Web 和 FTP 站点，但是必须使用群集管理员来启动和停止群集计算机上的 Web 或 FTP 站点。</p>
+
+<h2>复制配置设置</h2>
+
+<p class="bigfix">&nbsp;</p> <big>将配置设置从一个 Web 或 FTP 服务器复制到另一个服务器</big><!--</p>--><br>
+
+<ul>
+<li> 在源（主）服务器上，在命令提示符下转到实用程序文件夹， <EM>%SystemRoot%</EM>\system32\inetsrv。</li>
+
+<li>复制配置设置，键入：<strong>iissync</strong> <em> destination </em>，其中 destination 是要复制配置设置的服务器的计算机名。</li>
+
+<li>要将配置设置从主计算机同时复制到其他几台计算机，可在<STRONG>iissync</STRONG> 命令后列出它们的名称，并用空格分隔。例如 <strong>iissync</strong> <em>clusternode_2 clusternode_3 ... </em>等等。</li>
+</ul>
+
+<p><strong>注意</strong></p>
+
+<ul>
+<li>为了在两个服务器节点间维持配置设置的可靠复制，必须运行这个实用程序。此实用程序不会自动使配置设置同步或当配置更改发生时识别更改。</li>
+
+<li>如果目标服务器已经包含了绑定到主机名和端口的 IP 地址，则复制配置时 IP 地址不会改变。</li>
+
+<li>要运行 Iissync.exe 实用程序，群集必须已经存在。如果使用的计算机名不正确，将返回一个错误，并且不会进行复制。</li>
+</ul>
+
+<h2>卸载群集服务</h2>
+
+<p>在卸载群集服务之前，必须从群集中删除所有的 IIS 资源。如果 IIS 资源未删除，将不能停止或启动先前群集的 IIS 站点。</p>
+
+<p>为此，为所有先前群集的 IIS 资源在命令提示符后键入：</p>
+
+<p><strong>adsutil set</strong> &lt;<em>服务名</em>&gt;<strong>/</strong>&lt;<em>实例 id</em>&gt;<strong>/ClusterEnabled 0</strong></p>
+
+<hr class="iis" size="1"><p align=center><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

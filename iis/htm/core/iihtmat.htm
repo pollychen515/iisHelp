@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>关于 Web 站点管理</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="管理 Web 站点概述及其步骤。其中包括对目录结构、重定向、服务器端包含程序和服务器端脚本的基本建议。">
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="webmanage">关于 Web 站点管理</a></h1>
+
+<P>如果您正在配置一个高成本的新 Web 站点，却忽然发现该站点的所有网页中都遗漏了公司的徽标。或者，试想由于技术人员忙着为计算机排除故障，您突然需要将成千上万个用户转移到另一个 Web 站点。这些棘手的日常问题已经开始说明，成功管理 Web 站点是多么的重要。尽管有效的 Web 站点管理根本上取决于管理员的能力,但还是可以使用一些基本的工具和步骤来应付普通的管理任务和突发事件。</P>
+
+<H2><A NAME="H2_448401500"></A>入门</H2>
+
+<p>首先应建立 Web 站点，同时指明哪些目录包含要发布的文档。Web 服务器无法发布未在这些指定目录中的文档。所以，配置 Web 站点第一步是确定文件的组织方式。可以使用 <a href="javascript://" onclick="Activate(); return false">Internet 信息服务管理单元</a><script language="javascript">
+<!--
+function Activate() {
+if (navigator.appName == "Microsoft Internet Explorer"){
+	window.open("iisnapin.htm", "NewWin", 'toolbar=no, left=200, top=200, scrollbars=no, resizeable=no,  width=350, height=350');
+	}
+	else if (navigator.appName == "Netscape") {
+		window.open("iisnapin.htm", "NewWin",  'toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=yes,resizable=0,width=350,height=350,top=200,left=200');
+	}
+}
+//-->
+</script>确定哪些目录是站点的一部分。</p>
+
+<p>如果希望马上开始而不创建特殊的目录结构，并且文件全部位于运行 Internet 信息服务的计算机上，便可以立刻将 Web 文件复制到默认的主目录 C:\InetPub\Wwwroot 来发布文档。（对于 FTP 站点，应将文件复制到 C:\InetPub\Ftproot。）内部网用户可以键入以下 URL 访问到这些文件：http://<EM>服务器名</EM>/<EM>文件名</EM>。要了解如何维护多个站点或者如何组织各式各样的 Web 内容，请参阅本节中的步骤。它们将说明如何更改文件的默认位置、如何添加其他硬盘或网络中其他计算机上的目录等事项。</P>
+
+<h2><a name="homedirectories">定义主目录</a></h2>
+
+<p>每个 Web 或 FTP 站点必须有一个主目录。主目录位于发布的网页的中央位置。它包含带有欢迎内容的主页或索引文件，并且包含到所在站点其他网页的链接。主目录映射为站点的域名或服务器名。例如，如果站点的 Internet 域名是 www.microsoft.com 并且主目录是 C:\Website\Microsoft，浏览器将使用 URL http://www.microsoft.com 访问主目录中的文件。在内部网上，如果服务器名是 AcctServer，浏览器将使用 URL http://acctserver 访问主目录上的文件。</p>
+
+<p>在安装 Internet 信息服务或创建新的 Web 站点时将创建默认的主目录。可以更改主目录，有关指令，请参阅<a href="iicodirh.htm">更改主目录</A>。</p>
+
+<h2><a name="virtualdirectories">什么是虚拟目录？</a></h2>
+
+<p>要从主目录以外的其他目录中进行发布，就必须创建虚拟目录。“虚拟目录”不包含在主目录中，但在显示给客户浏览器时就象位于主目录中一样。</p>
+
+<p>虚拟目录有一个“别名”，供 Web 浏览器用于访问此目录。别名通常要比目录的路径名短，更便于用户输入。使用别名更安全，因为用户不知道文件是否真的存在于服务器上，所以便无法使用这些信息来修改文件。使用别名可以更方便地移动站点中的目录。一旦要更改目录的 URL，只需更改别名与目录实际位置的映射。</p>
+
+<p>例如，假设您在公司的内部网上为销售部门建立了一个 Web 站点。下表说明文件的实际位置与访问文件的 URL 之间的映射关系。</p>
+
+<table border="1" cellpadding="5" cellspacing="1" width="100%">
+<tr>
+<th align=middle width="33%" bgcolor="#C0C0C0">实际<br>位置</th>
+<th align=middle width="33%" bgcolor="#C0C0C0">别名</th>
+<th align=middle width="34%" bgcolor="#C0C0C0">URL <br>路径</th></tr>
+<tr>
+<td valign="top" width="33%">C:\Wwwroot</td>
+<td valign="top" width="33%">主目录（没有）</td>
+<td valign="top" width="34%">http://Sales</td></tr>
+<tr>
+<td valign="top" width="33%">\\Server2\SalesData\ProdCustomers</td>
+<td valign="top" width="33%">客户</td>
+<td valign="top" width="34%">http://Sales/Customers</td></tr>
+<tr>
+<td valign="top" width="33%">C:\Wwwroot\Quotes</td>
+<td valign="top" width="33%">无</td>
+<td valign="top" width="34%">http://Sales/Quotes</td></tr>
+<tr>
+<tr>
+<td valign="top" width="33%">C:\Wwwroot\OrderStatus</td>
+<td valign="top" width="33%">无</td>
+<td valign="top" width="34%">http://Sales/OrderStatus</td></tr>
+<tr>
+<td valign="top" width="33%">D:\Mktng\PR</td>
+<td valign="top" width="33%">PR</td>
+<td valign="top" width="34%"> http://Sales/PR</td></tr>
+</table>
+
+<p>虚拟目录和实际目录（不带别名的目录）都显示在 Internet 服务管理器中。虚拟目录由角上带有地球的文件夹图标来表示。下图说明了上面的 Web 站点示例；/Customers 和 /PR 就是虚拟目录：</p>
+
+<img src="iicodir1.gif" alt="示例中的 Web 站点显示在 Internet 服务管理器中时，虚拟目录由角上带有地球的文件夹图标表示" align=bottom width="144" height="100">
+
+<p>对于简单的 Web 站点，可能不需要添加虚拟目录。可以将所有文件放置在站点的主目录中。如果站点比较复杂或者需要为站点的不同部分指定不同的 URL，可以按需要添加虚拟目录。有关信息，请参阅<a href="iicodirv.htm">创建虚拟目录</a>。</p>
+
+<h2><a name="browserredirects">使用重定向转发请求</a></h2>
+
+<p>当浏览器请求您的 Web 站点的网页，Web 服务器将通过 URL 来定位这个网页，然后将其返回浏览器。如果您移动了 Web 站点中的网页，无法完全纠正指向网页的旧 URL 的所有链接。要确保浏览器能够使用新的 URL 找到网页，必须通知 Web 服务器为浏览器提供新的 URL。浏览器使用新的 URL 再次请求网页。该过程称为“重定向浏览器请求”或“重定向到其他 URL”。重定向网页请求与邮政服务中的转发地址很相似。转发地址可以保证将接收地址为原居住地址的信件和邮包投递到新的居住地址。</p>
+
+<p>当您更新了 Web 站点并希望其中的部分内容暂时不被用户访问，或者当您更改了虚拟目录的名称，希望使到原虚拟目录中文件的链接访问新的虚拟目录中相同的文件时，重定向 URL 非常有用。有关信息，请参阅<a href="iicodirr.htm">将请求重定向到目录</a>。</p>
+
+
+<H2><A NAME="otherfeatures">其他有用的工具</A></H2>
+
+<P>通常，在 Web 内容被请求之后但返回浏览器之前动态地更改 Web 内容将十分有用。Internet 信息服务中包括两个可以提供该功能的特性：服务器端包含 (SSI) 和 Microsoft Active Server Pages (ASP) 脚本环境。  </P>
+
+<P>通过 SSI，每次得到文件请求后，便可以执行整套 Web 站点管理活动，从添加动态时间标记到运行特定的 shell 命令。SSI 命令称为“指令”，在设计时被添加到 Web 页中。当请求网页时，Web 服务器解析在 Web 页上发现的所有指令，然后执行这些指令。通常的 SSI 指令将文件的内容插入或“包含”到 Web 页中。例如，如果需要不断更新一个 Web 页广告，可以使用 SSI 将广告的 HTML 源代码包含到网页中。要更新广告，则仅需要修改包含广告的 HTML 源代码的文件。您无需了解使用 SSI 的脚本语言；只需遵循正确的指令语法。</P>
+
+<P>有关步骤和参考的详细信息，请参阅<A HREF="iisiwelc.htm">服务器端包含</A>。</P>
+
+<P>ASP 是可以用来动态更改 Web 内容的“服务器端”脚本环境。尽管 ASP 主要用于 Web 应用程序的开发，但它所具有的许多功能可以用来更容易地管理 Web 站点。例如，使用 ASP 可以跟踪用户对 Web 站点的访问，或者可以按照浏览器性能自定义 Web 内容。但与 SSI 不同，ASP 不要求使用 VBScript 或 JScript 等脚本语言。 </P>
+
+<P>详细信息，请参阅<A HREF="iiaspat.htm">使用 ASP 管理 Web 站点内容</A>。</P>
+
+<hr class="iis" size="1"><p align=center><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>注册表</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="导航页链接到配置注册表中关于 IIS 项目的信息。">
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="registry">注册表</a></h1>
+
+<p>配置注册表保存的值定义了 Windows 操作系统和安装在运行 Windows 的计算机上的服务的工作环境。可以使用图形工具，例如控制面板、Windows 安装或 IIS 管理单元来改变这些值，也可以使用包含在 Windows 中的注册表编辑器 (Regedt32.exe) 实用程序来直接修改配置注册表。 </p>
+
+<p>本节包括：</p>
+
+<ul>
+<li><strong><A HREF="iiregovr.htm">关于注册表</A>：</strong>与注册表相关的概念上的主题。</li>
+<li><strong><A HREF="iiregglo.htm">全局注册表项目</A>：</strong>用于 Internet 服务全局控制的参数。</li>
+<li><strong><A HREF="iiregssp.htm">服务特有的注册表项目</A>：</strong>通过 Internet 服务保存在注册表中的参数，用于特定的服务行为。</li>
+<li><strong><A HREF="iiregwww.htm">WWW 服务注册表项目</A>：</strong>仅用于 WWW 服务的参数。</li>
+<li><strong><A HREF="iiregftp.htm">FTP 服务注册表项目</A>：</strong>仅用于 FTP 服务的参数。</li>
+</ul>
+
+<p>本节<b>不</b>包含：</p>
+
+<ul>
+<li>metabase；请参阅 <a href="iimbstop.htm">Metabase</a>。</li>
+<li>例行服务器管理；请参阅<a href="iisvadm.htm">服务器管理</a>。</li>
+</ul>
+
+<hr class="iis" size="1"><p align=center><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

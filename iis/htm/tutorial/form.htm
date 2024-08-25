@@ -1,0 +1,55 @@
+<html dir=ltr><HEAD>
+
+<TITLE>Order</TITLE>
+<META NAME="ROBOTS" CONTENT="NOINDEX">
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+
+<META NAME="ROBOTS" CONTENT="NOINDEX">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=gb2312">
+<META NAME="MS.LOCALE" CONTENT="ZH-CN">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<H2><A NAME="H2_37674928">订单示例</A></H2>
+
+<P>请先填写以下信息，再按“提交”按钮：</P>
+
+<FORM METHOD="POST" ACTION="response.asp">
+<P>&#160;</P>
+名 <INPUT NAME="FirstName" SIZE="48">
+<P>&#160;</P>
+姓 <INPUT NAME="LastName" SIZE="48">
+<P>&#160;</p>
+称谓： <INPUT NAME="Title" TYPE=RADIO VALUE="mr">先生
+        <INPUT NAME="Title" TYPE=RADIO VALUE="ms">女士
+
+
+<P><INPUT TYPE=SUBMIT><INPUT TYPE=RESET></P>
+</FORM>
+
+</FONT>
+</BODY>
+</HTML>

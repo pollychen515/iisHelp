@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>处理器的利用</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="带有与处理器 (CPU) 性能问题信息链接的导航页。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=gb2312">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="ZH-CN">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="procutil">处理器的利用</a></h1>
+
+<p>随着 Web 服务器的逐渐成熟，其性能已变得日益重要。今天，由于数据库发布、内容检索以及协作计算等 Web 应用的不断发展，如何最大限度地利用硬件和软件性能已经成为了首要的课题。本节将集中讨论处理器各个方面的性能，并根据性能监视测试所得到的反馈对其升级提出一些建议。</p>
+
+<p>本节包含：</p>
+
+<ul>
+<li><strong><a href="iiabpro.htm">关于处理器的使用</a>：</strong>性能问题的概念性信息。</li>
+<li><strong><a href="iipfthd.htm">限制进程</a>：</strong>对 Web 站点所用 CPU 时间总量实施限制。</li>
+</ul>
+
+<p>本节不包含：</p>
+
+<ul>
+<li>有关创建事务和隔离程序的性能方面的问题。请参阅<a href="iiwarndb.htm">配置应用程序</a>。</li>
+<li>有关跟踪 Web 站点通信量，请参阅<a href="iilogsa.htm">记录站点活动</a>。</li>
+</ul>
+
+
+<hr class="iis" size="1"><p align=center><a href="../../../common/colegal.htm">(C) 1997-1999 Microsoft Corporation。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

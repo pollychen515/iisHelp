@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>关于注册表</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="有关系统注册表的概念上的信息；包含关于仅能通过直接编辑注册表配置的 IIS 设置的概述信息。">
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="H1_37746072">关于注册表</a></h1>
+
+<p>可以使用 IIS 管理单元配置许多 Internet 服务。注册表中未使用 IIS 管理单元配置的配置参数或是为某一特定服务的，或是为 IIS 和所有服务的。</p>
+
+<p>只要有可能，应该使用 IIS 管理单元对 Internet 服务器设置进行更改。要使注册表更改生效，必须重新启动该更改所影响的服务。对于全局项目，应该重新启动所有服务。</p>
+
+<p><strong><font color="#FF0000">警告</font></strong> 不正确地使用注册表编辑器将产生问题，包括 Web 站点或 FTP 站点故障。如果出错，Web 站点或 FTP 站点的配置将损坏。应该仅为不能在用户界面中调整的设置编辑注册表项目，并且在直接编辑注册表时小心使用。</p>
+
+<p>IIS 的早期版本中存在的许多注册表键已经移植到一个称为 <em>metabase</em> 的快速访问的、层次结构的数据库中。其余的注册表键用来开始 Internet 服务并保证与 IIS 的早期版本的向后兼容性。任何写入的新信息都必须写入 metabase 中。详细信息，请参阅 <a href="iimbstop.htm">Metabase</a>。</p>
+
+<h2><a name="H2_37748139">注册表属性表的主键</a></h2>
+
+<p>注册表的属性以表的形式出现。配置信息组织如下：</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td width=100% bgcolor="#C0C0C0"><strong>标识符：</strong>  代表注册表属性的名称 (DWORD)。<br> <strong>数据类型：</strong>  指出数据的变量类型的 DWORD。</td></tr>
+<tr><td width=100%><strong>范围：</strong>  属性可以取值的范围。<br><strong>默认：</strong>  用户未更改时属性所保持的值。</td></tr>
+<tr><td width=100%>关于属性和对它所做的修改的含义的说明。</td></tr>
+</table>
+
+
+<hr class="iis" size="1"><p align=center><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

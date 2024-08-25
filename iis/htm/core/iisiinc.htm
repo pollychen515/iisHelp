@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML dir=ltr>
+<HEAD>
+
+<TITLE>#include</TITLE>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="Internet 信息服务参考信息。#include 命令指示 Web 服务器将文件内容插入到 HTML 页中。所包括的文件可以包含在 HTML 文档中有效的任何内容。">
+
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_k2_include"></A><SUP></SUP>#include</H2>
+
+<P><STRONG>#include</STRONG> 命令指示 Web 服务器将文件内容插入到 HTML 页中。所包括的文件可以包含在 HTML 文档中有效的任何内容。必须使用 HTML 注释定界符将指令括起来。</P>
+
+<P>该命令既可用在 ASP 页中，也可用在 HTML 页中。</P>
+
+<H4>语法</H4>
+
+<P><STRONG>&lt;!-- #include </STRONG><em>PathType</em><STRONG> = </STRONG><em>FileName</em> <STRONG>--&gt;</STRONG></P>
+
+<H4>参数</H4>
+
+<P><em>PathType</em></P>
+
+<P>将 <em>FileName</em> 的路径类型。路径可为以下某种类型：</P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all width=100%>
+
+<TR VALIGN="top">
+<TD width=20%><STRONG>路径类型</STRONG></TD>
+<TD width=80%><STRONG>含义</STRONG></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=20%>文件</TD>
+<TD width=80%>该文件名是带有 <STRONG>#include</STRONG> 命令的文档所在目录的相对路径。被包含文件可位于相同目录或子目录中；但它不能处于带有 <STRONG>#include</STRONG> 命令的页的上层目录中。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=20%>虚拟</TD>
+<TD width=80%>文件名为 Web 站点上虚拟目录的完整虚拟路径。</TD>
+</TR>
+</TABLE><BR>
+
+<P><em>FileName</em></P>
+
+<P>指定要包含的文件名。FileName 必须包含文件名扩展，而且必须将文件名用引号 (<font face="arial">"</font>) 引起来。</P>
+
+<H4>注释</H4>
+
+<P>包含 <STRONG>#include</STRONG> 命令的文件必须使用映射到 SSI 解释器的文件扩展名；否则，Web 服务器将不处理该命令。默认情况下，扩展名 .stm、.shtm 和 .shtml 将映射到解释器 (Ssinc.dll)。如果安装了 Internet 服务管理器，则可以修改默认扩展映射并添加新的映射。请参阅<A HREF="iiwarndf.htm">设置应用程序映射</A>。被包含的文件可具有任何文件扩展名，但建议赋予它们 .inc 扩展名。 </P>
+
+<H4>示例</H4>
+
+<PRE><CODE>&lt;!--被包含文件与父文件存在于相同目录中。 --&gt;
+&lt;!-- #include file = "myfile.inc" --&gt;
+
+&lt;!--被包含文件位于脚本虚拟目录中。 --&gt;
+&lt;!-- #include virtual = "/scripts/tools/global.inc" --&gt;</CODE></PRE>
+<hr class="iis" size="1">
+<p align="center"><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+</BODY>
+</HTML>

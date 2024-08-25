@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>使用 IIS 快速建立站点</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="关于如何通过使用 Internet 信息服务安装的默认设置和文件夹快速方便地设置一个或多个 Web 或 FTP 站点的过程信息。">
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="quickstart">使用 IIS 快速建立站点</a></h1>
+
+<p> 当安装 Windows 2000 Server 时，IIS 将创建默认的 Web 和 FTP 站点。本主题描述了如何在那些默认站点上发布信息。 </p>
+
+<big>在 Web 站点上发布内容</big><!--</p>--><br>
+
+<ol>
+<li>为 Web 站点创建主页。关于 Web 站点创建过程中可使用的工具的详细信息，请参阅<a href="iihowat.htm">选择创作工具</a>。</li>
+
+<li>将主页文件命名为 Default.htm 或 Default.asp。
+
+<li>将主页复制到 IIS 的默认 Web 发布目录中。默认 Web 发布目录也称为主目录，安装程序提供的位置是 \Inetpub\Wwwroot。</li>
+
+<li>如果网络具有名称解析系统（通常为 DNS)，那么访问者可以简单地在其浏览器地址栏中键入计算机名到达站点。如果网络没有名称解析系统，那么访问者必须键入计算机的数字 IP 地址。详细信息，请参阅<a href="iinmres.htm">关于名称解析</a>。</li>
+</ol>
+
+<big>在 FTP 站点上发布内容</big><!--</p>--><br>
+
+<ol>
+<li>将文件复制或移动到默认的 FTP 发布目录。安装程序提供的默认目录是 \Inetpub\Ftproot。</li>
+
+<li>如果网络具有名称解析系统（通常为DNS），那么访问者可以在其浏览器地址栏中键入后面跟有计算机名的 <strong>ftp://</strong> 到达站点。如果没有，那么访问者必须键入 <strong>ftp://</strong> 和计算机的数字 IP 地址。要自定义 FTP 站点的外观，请参阅<a href="iiprsovr.htm">设置 FTP 消息和目录输出样式</a>。</li>
+</ol>
+
+ <big>将额外的 Web 或 FTP 站点添加到计算机</big><!--</p>--><br>
+
+<ol>
+<li>查阅<a href="iinmres.htm">关于名称解析</a>主题中<a href="iinmres.htm#AssigningNamestoVirtualServers">通过分配端口、地址和主机头名维护多个站点</a>一节描述的在一台计算机上维护多个站点的概念信息。
+
+<li>关于如何添加站点的过程信息，请参阅<a href="iiaddvs.htm">添加站点</a>。 </li>
+</ol> 
+
+<hr><p align=center><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

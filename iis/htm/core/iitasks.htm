@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>备份和还原 IIS</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="description" CONTENT="备份和还原 IIS">
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="bak">备份和还原 IIS</a></h1>
+
+<p> 可以备份 IIS 配置以便能够容易地返回以前的状态。恢复配置的步骤根据是否删除和重新安装了 IIS 而不同。 </p>
+
+<big>备份 IIS 配置</big><br>
+
+<ol>
+<li> 在本地计算机上的 <a href="javascript://" onclick="Activate(); return false">IIS 管理单元</a>中，选择“Internet 消息服务器”下的“计算机”图标。</li>
+<li>单击“动作”按钮并选择“备份/恢复设置”。</li>
+<li> 单击“创建备份”按钮，选择备份文件的名称，然后单击“确定”。默认情况下，备份文件将保存在 \Winnt\system32\inetsrv\MetaBack 目录中。 </li>
+<li>单击“关闭”。</li>
+
+<p><strong><span style="color: #0000FF"><font color="#0000FF">要点</font> </span></strong></p>
+
+<ul>
+<li>该备份方法提供了一种只还原 IIS 设置而不还原内容文件的方法。</li>
+<li>如果重新安装操作系统，该备份方法将不起作用。</li>
+<li>备份文件不能用于还原运行 Windows 2000 的其他计算机上的IIS 配置。</li>
+</ul>
+
+</ol>
+
+<p class="note"><strong>注意</strong>  可以通过使用基于浏览器的 Internet 服务管理器 (HTML) 备份 IIS，但必须使用<a href="javascript://" onclick="Activate(); return false"> IIS 管理单元</a>还原配置。 </p>
+
+<big>还原 IIS 配置</big><br>
+
+<ol>
+
+<li> 在本地计算机上的 <a href="javascript://" onclick="Activate(); return false">IIS 管理单元</a>中，选择“Internet 消息服务器”下的“计算机”图标。</li>
+
+<li>单击“动作”按钮并选择“备份/恢复设置”。</li>
+
+<li> 选择备份文件并单击“还原”按钮。当被询问是否还原配置设置时，请单击“是”。</li>
+
+</ol>
+
+<big>删除和重新安装 IIS 之后还原 IIS 配置</big><br>
+
+<ol>
+
+<li> 在本地计算机上的 <a href="javascript://" onclick="Activate(); return false">IIS 管理单元</a>中，选择“Internet 消息服务器”下的“计算机”图标。</li>
+
+<li>单击“动作”按钮并选择“备份/恢复设置”。</li>
+
+<li>在“配置备份名”对话框中，选择创建的备份文件，单击“还原”按钮。尽管错误消息声明还原已失败，备份配置的一部分仍将得到还原。 </li>
+
+<li>在命令提示符下，键入 <strong>cscript.exe </strong><em>X</em><strong>:\InetPub\AmdinScripts\Adsutil.vbs enum w3svc</strong>，此处“X”是安装了 IIS 的驱动器号。从列出的设置中，查找 WamUserName 和相关的 WAMUserPass 的值。 </li>
+
+<p><strong>注意</strong>  要使用 Adsutil.vbs 实用程序，必须安装 Windows 脚本主机。</p>
+
+<li>单击“开始”，指向“设置”，单击“控制面板”，双击“管理工具”，然后双击“计算机管理”。</li>
+
+<li>选择“本地用户管理器”，然后单击“用户”。双击“IWAM_<em>computername</em>”用户帐户。键入从以前步骤找到的 WAMUserPass 值，并单击“确定”。</li>
+
+<li>在“配置备份名”对话框中，选择创建的备份文件，然后单击“还原”。此时配置将得到完全还原。</li>
+
+<p><strong>注意</strong>  如果更改了进程外应用程序的标识，那些应用程序将回复到以前的 IWAM 用户名。 </p>
+
+</ol>
+
+<p><strong>相关主题</strong></p>
+<ul>
+<li>关于删除和重新安装 IIS 的详细信息，请参阅</li><a href="iiiisin.htm">安装 IIS</a>。</li>
+<li>关于备份内容文件的详细信息，请通过单击“开始”菜单上的“帮助”来参阅“Windows 文档”。</li>
+</ul>
+
+<hr class="iis" size="1"><p align=center><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+<script language="javascript">
+<!--
+function Activate() {
+if (navigator.appName == "Microsoft Internet Explorer"){
+	window.open("iisnapin.htm", "NewWin", 'toolbar=no, left=200, top=200, scrollbars=no, resizeable=no,  width=350, height=350');
+	}
+	else if (navigator.appName == "Netscape") {
+		window.open("iisnapin.htm", "NewWin",  'toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=yes,resizable=0,width=350,height=350,top=200,left=200');
+	}
+}
+//-->
+</script>
+
+</font>
+</body>
+</html>

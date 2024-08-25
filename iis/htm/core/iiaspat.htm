@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><HEAD><TITLE>使用 ASP 管理 Web 站点内容</TITLE>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+
+<META NAME="DESCRIPTION" CONTENT="这里将讨论如何使用 ASP 对内容更新加以集中管理和自动常规化处理、确保 Web 站点所有页面的外观一致性、将源于多个作者的内容进行合并、支持各种类型和版本的 Web 浏览器，以及帮助执行其他站点管理任务。">
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><A NAME="H1_448394830"></A>使用 ASP 管理 Web 站点内容</h1>
+
+<p>在学习 HTML 和创建 Web 页后，便可着手设计 Web 站点。不过在进行下一步之前，需要认真考虑以下问题：</p>
+
+<ul>
+	<li>如何使整个站点的外观保持一致？</li>
+	<li>如何更新每页中的出现的内容，如版权信息或徽标图像等？</li>
+	<li>如何合并源于多个作者的 Web 内容？</li>
+</ul>
+
+<p>即使站点规模不大，诸如此类的 Web 管理问题也将使工作变得耗时而令人生畏。幸好您的 Web 服务器中装有 Microsoft Active Server Pages (ASP)，这是一个“服务器端”脚本编辑环境，可以用来自动处理和集中管理诸多 Web 站点管理任务。</p>
+
+<h2><A NAME="H2_448395770"></A>发现脚本编辑</h2>
+<p>“脚本”是一系列指令和命令，用以通过程序方式变换 Web 页中的内容。如果您参观过能够搜索并查看产品的在线商店，那么一定会遇到某些类型的脚本。如果对脚本编辑有较为深入的了解，您将更好地认识 Web 发布的潜力。</P>
+
+<P>首先，脚本有两种类型：客户端和服务器端。</p>
+
+<p>客户端脚本在 Web 浏览器中运行，并通过 HTML 的 &lt;SCRIPT&gt; 和 &lt;/SCRIPT&gt; 标签嵌入到 Web 页中。您如果查看极富动感的 Web 页 HTML 源文件，多半会发现客户端脚本。</p>
+
+<p>服务器端脚本只在 Web 服务器上运行，常用于在将 Web 页传递到浏览器之前对它们进行修改。服务器端脚本能够指导 Web 服务器去执行处理用户输入或记录用户访问 Web 站点的频率等操作。您可以认为服务器端脚本是在变换将 Web 页传送到浏览器之前的“装配”方式。服务器端脚本有助于自动处理数据并更新 Web 页，因此能够极大地简化对 Web 内容的管理。</p>
+
+<h2><A NAME="H2_448397151"></A>ASP：概述</h2>
+<p>就象编写自定义宏自动处理重复性电子表格或字处理任务一样，您可以创建服务器端脚本自动处理难度较大或重复性的 Web 管理任务。试想您需要更新由几十个页面组成的 Web 站点，这些页面中又包含相同的格式信息（如标题署名、公司徽标、版权信息等等）。这类工作通常非常耗时，需要手工更新（并测试）每个页面。而现在，您可以使用 ASP 自动完成这些工作。</p>
+
+<p>ASP 是一个功能强大的服务器端脚本编辑环境，只需使用标准文本编辑器（如记事本等）便可编写脚本。例如，使用 ASP，您可以创建包含 Web 中所有页面公用信息的中心文件。设计 Web 站点时，可以在每个页面中添加一行脚本命令，将中心文件的内容插入其中。例如，当需要更新站点的导航菜单时，只需更新中心文件，下次用户重载并查看 Web 内容时，更改将自动出现。</p>
+
+<p>ASP 使用“分隔符”将脚本命令与普通文本和 HTML 内容区分开来。特别地，&lt;% 和 %&gt; 分隔符将把由服务器执行的脚本命令包围起来，它们相对于由 HTML 使用的 &lt; 和 &gt; 分隔符，用来表示由 Web 浏览器进行解析的标签。</p>
+
+<p>以下示例将说明 ASP 的工作原理：</p>
+
+<pre>&lt;%
+author = "Kim Yoshida"
+department= "质检"
+%&gt;
+
+本页&lt;B&gt;今日&lt;/B&gt;由 &lt;%= department %&gt; 部的
+&lt;%= author %&gt; 进行更新。
+</pre>
+
+<p>在 Web 浏览器中查看时，包含该脚本的页面出现为：</p>
+
+<pre>本页<strong>今日</strong>由质检部的 Kim Yoshida 进行更新。
+</pre>
+
+<p>但是，如果用户查看该页的源文件，将只能看到以下文本和 HTML：</p>
+
+<pre>本页&lt;B&gt;今日&lt;/B&gt;由质检部的 Kim Yoshida 进行更新。</pre>
+
+<p>脚本在服务器上运行（也就是说分隔符 &lt;% 和 %&gt; 之间的命令在服务器上执行）并仅将 HTML 返回到用户的浏览器。</p>
+
+<p>至少，所有 ASP 文件必须具有 .asp 扩展名并包含以 Microsoft Visual Basic&reg Scripting Edition (VBScript) 或 Microsoft Jscript 等脚本编辑语言编写的脚本命令。如果您对脚本编辑还不太熟悉，需要进行一些基础学习，那么当地的书店或位于 <a href="http://msdn.microsoft.com/isapi/redir.dll?prd=scripting&ar=home&pver=4.0" target="_blank">http://msdn.microsoft.com/scripting/</a> 的 Microsoft Windows Script Technologies Web 站点都是不错的地方。</p>
+
+<p>在对脚本编辑较为熟悉之后，可参阅 <a href="../asp/iiwawelc.htm">Active Server Pages</a> 学习 ASP 服务器端脚本编辑基础。本部分还包含内行的指导教程。详细信息，请参阅 <a href="../asp/iiatovr.htm">ASP 教程</a>。</p>
+
+<h2><A NAME="H2_448400575"></A>ASP 解决方案</h2>
+
+<p>下面列出 Web 管理任务和建议使用的 ASP 解决方案： </p>
+
+<table border="1" cellpadding="5" cellspacing="1" width="100%">
+<tr>
+<th width=20% bgcolor="#c0c0c0">Web 任务</th>
+<th width=80% bgcolor="#c0c0c0">ASP 解决方案</th>
+</tr>
+<tr>
+	<td valign="top">更新 Web 页格式</td>
+	<td valign="top"><p>使用 ASP 服务器端 <strong>#include</strong> 指令将信息从一个中心文件插入每一页。例如，在设计站点时，可 Web 页模板中插入以下语句：</p><pre>&lt;!-&nbsp;- #include file="Logo.txt"  -&nbsp;-&gt;</pre>
+<p>在部署站点后需要更新徽标图像时，只需更新包含图像信息的 Logo.txt 文件。详细信息，请参阅<a href="../asp/iiwainc.htm">包含文件</a>。</p></td>
+</tr>
+<tr>
+	<td valign="top">提醒用户注意重新部署的 Web 内容</td>
+	<td valign="top">不但提醒用户，还将对其进行“重定向”。使用 ASP“重定向”方法自动将浏览器重定向或发送到其他 Web 页或 Web 站点。例如，可在 Web 页顶端插入以下语句以便将用户重定向到另一页：<pre>&lt;% Response.Redirect（新 Web 页的 URL） %&gt;</pre>  详细信息，请参阅<a href="../asp/iiwacont.htm">将内容发送到浏览器</a>。</td>
+</tr>
+<tr>
+	<td valign="top">支持不同版本和品牌的 Web 浏览器</td>
+	<td valign="top">使用“ASP Browser Capabilities”组件特性可根据浏览器的功能剪裁 Web 内容。例如，可以确定用户的浏览器是否支持帧，如不支持，则将替换相应的 Web 内容。详细信息，请参阅 ASP 教程的<a href="../asp/iiatmd2.asp">使用 COM 组件</a>模块。
+</td>
+</tr>
+<tr>
+	<td valign="top">监视用户参数选择和行为</td>
+	<td valign="top">可以使用 ASP 放置 cookies（由服务器置于用户浏览器的小型文本文件）以确定用户在查看 Web 站点的哪一部分，以及用户在该 Web 页所逗留的时间。详细信息，请参阅<a href="../asp/iiapsess.htm">管理会话</a>。</td>
+</tr>
+<tr>
+	<td valign="top">获取用户反馈</td>
+	<td valign="top">使用 ASP 的“Form”和“QueryString”集合可收集用户从 HTML 表格中输入的内容。这些集合简化了创建可处理用户反馈（如部门公告牌、在线调查或数据检索系统等）的 Web 站点的工作。详细信息，请参阅<a href="../asp/iiwaform.htm">处理用户输入</a>。</td>
+</tr>
+</table>
+
+
+<hr class="iis" size="1"><p align="center"><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p> </font>
+</BODY>
+</HTML>

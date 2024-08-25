@@ -1,0 +1,280 @@
+<!doctype html public "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>计数器说明</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<meta name="DESCRIPTION" content="列出并说明由 IIS 安装的所有用于性能监视的计数器。计数器分为以下类别：带宽使用、吞吐量、错误、连接、高速缓存，等等。">
+
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name ="globalcounters">计数器说明</a></h1>
+
+<!-- Counters Related to Bandwidth Usage -->
+
+<p><a name="CurrentBlockedAsyncI/ORequests"><strong>当前阻塞的异步 I/O 请求数</strong></a> 由于带宽限制设置而受到临时阻塞的当前请求数。块请求存放在缓冲区中，如果具有更大的带宽，将对块请求进行解除块的操作，直到出现超时限制。</p>
+
+<p><a name="MeasuredAsyncI/OBandwidthusage"><strong>测量异步 I/O 带宽使用</strong></a> 由 Web 服务器接收和发送的字节数，一分钟的平均数。这是对服务器上用户通信总数的量度。</p>
+
+<p><a name="TotalAllowedAsyncI/ORequests"><strong>允许的异步 I/O 请求总数</strong></a> 服务启动后由 Web 和 FTP 服务允许的用户请求数。限制带宽时，允许的用户请求数也将受到限制。</p>
+
+<p><a name="TotalBlockedAsyncI/ORequests"><strong>阻塞的异步 I/O 请求总数</strong></a> 服务启动后由于带宽限制设置而临时阻塞的请求总数。块请求存放在缓冲区中，如果具有更大的带宽，将对块请求进行解除块的操作，直到出现超时限制。</p>
+
+<p><a name="TotalRejectedAsyncI/ORequests"><strong>拒绝的异步 I/O 请求总数</strong></a> 服务启动后（由于带宽限制设置）而被拒绝的用户请求总数。当请求被拒绝时，它不象阻塞的请求一样保存在缓冲区中。</p>
+
+
+<!-- Counters related to throughput -->
+
+<p><strong><a name="BytesReceived/sec">每秒接收的字节数</a></strong> 服务在应用层接收数据字节的比率，不包括协议标题和控制字节。</p>
+
+<p><strong><a name="BytesSent/sec">每秒发送的字节数</a></strong> 服务发送数据字节的比率。</p>
+
+<p><strong><a name="BytesTotal/sec">每秒总字节数</a></strong> 每秒由 Web 服务传输的总字节数速率（发送字节数/秒和接收字节数/秒的总和）。</p>
+
+<p><strong><a name="Files/sec">每秒文件数</a></strong> Web 服务启动后服务器传输的文件数速率。</p>
+
+<p><strong><a name="FilesReceived/sec">每秒接收的文件数</a></strong> Web 服务启动后由 Web 服务接收（或上载到 Web 服务）的文件数速率。</p>
+
+<p><strong><a name="FilesSent/sec">每秒发送的文件数</a></strong> Web 服务启动后由 Web 服务发送（或从 Web 服务中下载）的文件数速率。</p>
+
+<p><strong><a name="TotalFilesReceived">接收的文件总数</a></strong> Web 服务启动后由 Web 服务接收的文件总数。</p>
+
+<p><strong><a name="TotalFilesSent">发送的文件总数</a></strong> Web 服务启动后由 Web 服务发送的文件总数。</p>
+
+<p><strong><a name="TotalFilesTransferred">传输的文件总数</a></strong> Web 服务启动后由 Web 服务传输的文件总数。文件传输总数是发送文件总数和接收文件总数之和。</p>
+
+<!-- Counters related to specific requests and to errors. -->
+
+<p><strong><a name="CGIRequests/sec">每秒 CGI 请求数</a></strong> 被 Web 服务同时处理的 CGI 请求数速率。</p>
+
+<p><strong><a name="CurrentCGIRequests">当前 CGI 请求数</a></strong> 当前被 Web 服务同时处理的 CGI 请求数速率。</p>
+
+<p><strong><a name="CurrentISAPIExtensionRequests">当前 ISAPI 扩充请求数</a></strong> 当前被 Web 服务同时处理的 ISAPI 扩充请求数速率。</p>
+
+<p><strong><a name="DeleteRequests/sec">每秒删除的请求数</a></strong> 使用 DELETE 方法删除的 HTTP 请求数速率。</p>
+
+<p><strong><a name="GetRequests/sec">每秒得到的请求数</a></strong> 使用 GET 方法得到的 HTTP 请求数速率。GET 请求通常用于基本文件检索或图形映射，但它们可以与表格一起使用。</p>
+
+<p><strong><a name="HeadRequests/sec">每秒主要请求数</a></strong> 使用 HEAD 方法得到的 HTTP 请求数速率。HEAD 请求通常表明客户正在查询现有文档的状态，查看该文档是否需要刷新。</p>
+
+<p><strong><a name="ISAPIExtensionRequests/sec">ISAPI 每秒扩充请求数</a></strong> 被 Web 服务同时处理的 ISAPI 扩充请求数速率</p>
+
+<p><strong><a name="MaximumCGIRequests">最大 CGI 请求数</a></strong> Web 服务启动后被该服务同时处理的最大 CGI 请求数。</p>
+
+<p><strong><a name="MaximumISAPIExtensionRequests">最大 ISAPI 扩充请求数</a></strong> Web 服务启动后被该服务同时处理的最大 ISAPI 扩充请求数。</p>
+
+<p><strong><a name="NotFoundErrors/sec">每秒未找到错误数</a></strong> 由于未找到请求文档，请求无法满足服务器而导致的错误数速率。这些通常以 HTTP 错误代码 404 报告客户端。</p>
+
+<p><strong><a name="OtherRequestMethods/sec">每秒其他请求方法数</a></strong> 
+在不使用 GET、POST、PUT、DELETE、TRACE 或 HEAD 方法的情况下得到的 HTTP 请求数速率。这些可能包括 LINK 或其他一些受网关应用程序支持的方法。</p>
+
+<p><strong><a name="PostRequests/sec">每秒发送请求数</a></strong> 使用 POST 方法的 HTTP 请求数速率；通常用做表单或网关请求。</p>
+
+<p><strong><a name="PutRequests/sec">每秒放入请求数</a></strong> 使用 PUT 方法得到的 HTTP 请求数速率。</p>
+
+<p><strong><a name="TotalCGIRequests">CGI 请求总数</a></strong> 服务启动后所执行的通用网关接口 (CGI) 请求总数。CGI 请求是自定义的网关可执行文件 (.exe files)，管理员可安装它以添加表单处理或其他动态数据源。CGI 请求将处理分散到服务器上，这样可能会大大消耗服务器的资源。</p>
+
+<p><strong><a name="TotalDeleteRequests">删除的请求总数</a></strong> 使用 DELETE 方法删除的 HTTP 请求数。</p>
+
+<p><strong><a name="TotalGetRequests">得到的请求总数</a></strong> 由服务接收的 HTTP GET 请求的总数。GET 请求通常用于基本文件检索或图象映射，但它们可以使用表单。</p>
+
+<p><strong><a name="TotalHeadRequests">主要请求总数</a></strong> 由服务接收的 HTTP HEAD 请求总数。HEAD 请求通常表明客户正在查询现有文档的状态，看该文档是否需要刷新。</p>
+
+<p><strong><a name="TotalISAPIExtensionRequests">ISAPI 扩充请求总数</a></strong> 由服务接收的 HTTP ISAPI 扩展请求总数。ISAPI 扩展请求是自定义的网关动态链接库 (DLL)，管理员可以安装以添加表单处理或其他动态数据源。</p>
+
+<p><strong><a name="TotalMethodRequests">方法请求总数</a></strong> HTTP GET、POST、PUT、DELETE, RACE、HEAD 以及其他方法请求的总数。</p>
+
+<p><strong><a name="TotalMethodRequests/sec">每秒方法请求总数</a></strong> 使用 GET、POST、PUT、DELETE, RACE 或 HEAD 方法所做出的 HTTP 请求数速率。</p>
+
+<p><strong><a name="TotalNotFoundErrors">未找到错误总数</a></strong> 由于未找到请求的文档，请求无法满足 Web 服务而导致的错误数；通常在客户端报告 HTTP 404 错误代码。</p>
+
+<p><strong><a name="TotalOtherRequestMethods">其他请求方法总数</a></strong> 不是 GET、POST、PUT、DELETE、TRACE 或 HEAD 方法中的 HTTP 请求数。这些可能包括 LINK 或其他一些受网关应用程序支持的方法。</p>
+
+<p><strong><a name="TotalPostRequests">发送请求总数</a></strong> 使用 POST 方法的 HTTP 请求数。Post 请求通常用做表单或网关请求。</p>
+
+<p><strong><a name="TotalPutRequests">放入请求总数</a></strong> 使用 PUT 方法的 HTTP 请求数。</p>
+
+<p><strong><a name="TotalTraceRequests">跟踪请求总数</a></strong> 使用 TRACE 方法的 HTTP 请求数。</p>
+
+<p><strong><a name="TraceRequests/sec">每秒跟踪请求数</a></strong> 使用 TRACE 方法做出的 HTTP 请求数速率。</p>
+
+
+
+
+<!-- Web and FTP connection and users -->
+<p><strong><a name="AnonymousUsers/sec">每秒匿名用户数</a></strong> 使用 Web 服务进行匿名连接的用户速率。</p>
+
+<p><strong><a name="ConnectionAttempts/sec">每秒连接尝试次数</a></strong> 使用 Web 服务进行连接尝试的次数速率。该数是所有连接在一起的 Web 站点的平均值，而不考虑您为“实例”选择的是什么。</p>
+
+<p><a name="CurrentAnonymousUsers"><strong>当前匿名用户数</strong></a> 当前使用 Web 或 FTP 服务建立匿名连接的用户个数。如果客户请求匿名连接被拒绝并且客户用有效的验证数据来响应，则该连接将被视为非匿名连接。</p>
+
+<p><a name="CurrentConnections"><strong>当前连接数</strong></a> 当前使用 Web 或 FTP 服务建立的连接数（是匿名用户数和非匿名用户数之和）。该数是当前所有连接在一起的 Web 站点或 FTP 站点的总数，而不考虑您为了“举例”选择的是什么。</p>
+
+<p><a name="CurrentNonAnonymousUsers"><strong>当前非匿名用户数</strong></a> 当前使用 Web 或 FTP 服务建立非匿名连接的用户个数。如果客户请求匿名连接被拒绝并且客户用有效的验证数据来响应，则该连接将被视为非匿名连接。</p>
+
+<p><a name="MaximumAnonymousUsers"><strong>最大匿名用户数</strong></a> 使用 Web 或 FTP 服务（启动服务之后）建立当前匿名连接的最大用户个数。</p>
+
+<p><a name="MaximumConnections"><strong>最大连接数</strong></a> 启动服务后使用 Web 或 FTP 服务建立的同时连接的最大个数。该数是当前所有连接在一起的 Web 站点或 FTP 站点的最大个数，而不考虑您为了“举例”选择的是什么。</p>
+
+<p><a name="MaximumNonAnonymousUsers"><strong>最大非匿名用户数</strong></a> 使用 Web 或 FTP 服务（启动服务之后）建立当前非匿名连接的最大用户个数。如果客户请求匿名连接被拒绝并且客户用有效的验证数据来响应，则该连接将被视为非匿名连接。</p>
+
+<p><a name="TotalAnonymousUsers"><strong>匿名用户总数</strong></a> 使用 Web 或 FTP 服务（启动服务之后）建立当前匿名连接的用户总数。如果客户请求匿名连接被拒绝并且客户用有效的验证数据来响应，则该连接将被视为非匿名连接。</p>
+
+<p><a name="TotalConnectionAttempts"><strong>连接尝试总数</strong></a> 启动服务后试图连接到 Web 或 FTP 服务的连接总数。该数是当前所有连接在一起的 Web 站点或 FTP 站点的最大个数，而不考虑您为“实例”选择的是什么。该数不包含在 TCP （传输）或 IP （网络）层失败的连接尝试次数。要监视所有的连接尝试，请使用 TCP 性能对象上的连接计数器。有关获取和查看该对象的详细信息，请参阅 Windows 2000 Resource Kit。要监视当前活动的连接，请使用“当前连接”。</p>
+
+<p><a name="TotalLogonAttempts"><strong>登录尝试总数</strong></a> 启动服务后成功登录到 Web 或 FTP 服务的总次数；不包括登录尝试失败的次数。计算失败的尝试次数（这时客户机可以连接但无法登录），将连接尝试次数减去登录尝试次数就是失败尝试次数。</p>
+
+<p><a name="TotalNonAnonymousUsers"><strong>非匿名用户总数</strong></a> 使用 Web 或 FTP 服务（启动服务之后）建立非匿名连接的用户总数。如果客户请求匿名连接被拒绝并且客户用有效的验证数据来响应，则该连接将被视为非匿名连接。</p>
+
+<!-- Counters Related to Caching -->
+
+<p><a name="CacheFlushes"><strong>高速缓存的刷新次数</strong></a> 启动服务后刷新高速缓存的次数。</p>
+
+<p><a name="CacheHits"><strong>高速缓存命中数</strong></a> 服务启动后在 IIS 高速缓存中找到文件打开、目录列表或特定服务对象请求的次数总计。</p>
+
+<p><a name="CacheHits%"><strong>高速缓存命中数 %</strong></a> 所有高速缓存请求中高速缓存命中数速率。</p>
+
+<p><a name="CacheMisses"><strong>高速缓存失误数</strong></a> 服务启动后在 IIS 高速缓存中未找到文件打开、目录列表或特定服务对象请求的次数总计。</p>
+
+<p><a name="CachedFileHandles"><strong>高速缓存的文件句柄数</strong></a> 当前由所有 Internet 信息服务器服务高速缓存的打开文件句柄数。</p>
+
+<p><a name="DirectoryListings"><strong>目录列表数</strong></a> 当前由所有 Internet 信息服务器服务高速缓存的高速缓存目录列表数。</p>
+
+<p><a name="Objects"><strong>对象数</strong></a> 当前由所有 Internet 信息服务器服务高速缓存的对象数（包括文件句柄跟踪对象数、目录列表对象数和特定服务对象数）。</p>
+
+<!-- Counters Related to ASP Error messages -->
+
+
+<p><a name="DebuggingRequests"><strong>调试请求数</strong></a> 调试文档请求数。</p>
+
+
+<p><a name="ErrorsDuringScriptRuntime"><strong>脚本运行期间出错数</strong></a> 由于运行时错误导致请求失败的次数。</p>
+
+
+<p><a name="ErrorsFromASPPreprocessor"><strong>ASP 预处理器中的出错数</strong></a> 由于预处理错误导致请求失败的次数。</p>
+
+
+<p><a name="ErrorsFromScriptCompiler"><strong> 脚本编译器中的出错数</strong></a> 由于脚本编译错误导致请求失败的总次数。</p>
+
+
+<p><a name="Errors/Sec"><strong>每秒出错数</strong></a> 每秒的出错数。</p>
+
+
+<!-- Counters Related to Requests -->
+
+
+<p><a name="RequestBytesInTotal"><strong>内部请求字节总数</strong></a> 所有请求以字节为单位的总的大小。</td></p>
+
+<p><a name="RequestBytesOutTotal"><strong>外部请求字节总数</strong></a> 所有发送到客户端的响应以字节为单位的总的大小。但不包括标准 HTTP 响应标题。</p>
+
+<p><a name="RequestExecutionTime"><strong>请求执行时间</strong></a> 用来执行最近的请求所花费的时间（以毫秒为单位）。</p>
+
+<p><a name="RequestWaitTime"><strong>请求等待时间</strong></a> 最近的请求在队列中等待的时间（以毫秒为单位）。</p>
+
+<p><a name="RequestsDisconnected"><strong>断开连接的请求数</strong></a> 由于通信失败而断开连接的请求数。</p>
+
+<p><a name="RequestsExecuting"><strong>正在执行的请求数</strong></a> 当前正在执行的请求数。</p>
+
+<p><a name="RequestsFailedTotal"><strong>失败的请求总数</strong></a> 由于错误、授权失败和拒绝而导致失败的请求总数。</p>
+
+<p><a name="RequestsNotAuthorized"><strong>未授权的请求数</strong></a> 由于访问权限不够导致的失败的请求数。</p>
+
+<p><a name="RequestsNotFound"><strong>未找到的请求数</strong></a> 未找到文件的请求数。</p>
+
+<p><a name="RequestsQueued"><strong>队列中的请求数</strong></a> 在队列中等待服务的请求数。 </p>
+
+<p><a name="RequestsRejected"><strong>被拒绝的请求数</strong></a> 由于没有足够的资源进行处理而没有执行的请求总数。</p>
+
+<p><a name="RequestsSucceeded"><strong>成功的请求数</strong></a> 成功执行的请求数。</p>
+
+<p><a name="RequestsTimedOut"><strong>超时的请求数</strong></a> 已经超时的请求数。</p>
+
+<p><a name="RequestsTotal"><strong>请求总计</strong></a> 服务启动后所有请求的总数。</p>
+
+<p><a name="Requests/Sec"><strong>每秒请求数</strong></a> 每秒执行的请求数。 </p>
+
+<!-- Counters Related to Sessions -->
+
+
+<p><strong><a name="SessionDuration">会话持续时间</a></strong> 最近进行的会话所持续的时间（以毫秒为单位）。</p>
+
+<p><strong><a name="SessionsCurrent">当前会话数</a></strong> 正在服务的会话数。</p>
+
+<p><strong><a name="SessionsTimedOut">超时会话数</a></strong> 已超时的会话数。</p>
+
+<p><strong><a name="SessionsTotal">会话总数</a></strong> 服务启动后所有会话的总数。</p>
+
+
+<!-- Counters Related to Transactions -->
+
+
+<p><strong><a name="TransactionsAborted">放弃的事务数</a></strong> 已放弃的事务数。</p>
+
+<p><strong><a name="TransactionsCommitted">提交的事务数</a></strong>已提交的事务数。</p>
+
+<p><strong><a name="TransactionsPending">挂起的事务数</a></strong> 正在进行的事务数。</p>
+
+<p><strong><a name="TransactionsTotal">事务总数</a></strong> 服务启动后所有的事务总数。</p>
+
+<p><strong><a name="Transactions/Sec">每秒事务数</a></strong> 每秒进行的事务数。</p>
+
+<!-- Counters Related to Other Issues -->
+
+<p><strong><a name="MemoryAllocated">分配的内存数</a></strong> 当前由 Active Server Pages 分配的内存总数（以字节为单位）。</p>
+
+<p><strong><a name="ScriptEngineCache">高速缓存的脚本引擎数</a></strong> 高速缓存中的脚本引擎的数目。</p>
+
+<p><strong><a name="TemplatesCached">高速缓存的模板数</a></strong> 当前高速缓存的模板数目。</p>
+
+<p><strong><a name="TemplateCacheHitRate">模板高速缓存命中率</a></strong> 在模板高速缓存中找到的请求数的百分比。</p>
+
+<p><strong><a name="TemplateNotifications">模板通知数</a></strong> 由于更改通知导致高速缓存中无效模板的数目。</p>
+
+<p><strong><a name="ServiceUptime">服务正常运行时间</a></strong> 服务或实例已经运行的秒数。当服务器或实例停止后，该值回到零。暂停不会影响该计数器。</p>
+
+<hr class="iis" size="1"><p align=center><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

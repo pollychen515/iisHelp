@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html dir=ltr>
+<head>
+
+<title>扩充日志记录属性</title>
+<META NAME="ROBOTS" CONTENT="NOINDEX">
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+<BODY BGCOLOR=#FFFFFF TEXT=#000000> <font face="宋体">
+
+<p><strong>扩充日志记录属性</strong></p>
+
+<p>通过选择记录在日志中的字段，可以自定义 W3C 扩充日志。要限制日志大小，可忽略不需要的域。</p>
+
+<p>字段包括：</p>
+<ul>
+<li><strong>日期</strong> 活动发生的日期。</li>
+<li><strong>时间</strong> 活动发生的时间。</li>
+</ul>
+
+<p><strong>扩充属性</strong></p>
+
+<ul>
+<li><strong>客户 IP 地址</strong> 访问服务器的客户 IP 地址。</li>
+<li><strong>用户名</strong> 访问服务器的用户名。</li>
+<li><strong>服务名</strong> 在客户计算机上运行的 Internet 服务的名称。</li>
+<li><strong>服务器名</strong> 生成日志条目的服务器的名称。</li>
+<li><strong>服务器 IP</strong> 生成日志条目的服务器的 IP 地址。</li>
+<li><strong>服务器端口</strong> 客户连接的端口号。</li>
+<li><strong>方法</strong> 客户试图执行的活动（如，GET 命令）。</li>
+<li><strong>URI 资源</strong> 访问的资源：例如，HTML 页、CGI 程序或脚本。</li>
+<li><strong>URI 查询</strong> 客户试图执行的查询；即，客户为其寻找匹配项目的一个或多个搜索字符串。</li>
+<li><strong>HTTP 状态</strong> 用 HTTP 术语表示的活动状态。</li>
+<li><strong>Win32 状态</strong> 用 Windows 术语表示的活动状态。</li>
+<li><strong>发送的字节数</strong> 服务器发送的字节数量。</li>
+<li><strong>接收字节数</strong> 服务器接收的字节数量。</li>
+<li><strong>所花时间</strong> 活动花费的时间长度。</li>
+<li><strong>协议版本</strong> 客户使用协议（HTTP、FTP）版本。对于 HTTP，这将是 HTTP 1.0 或 HTTP 1.1。</li>
+<li><strong>用户代理</strong> 客户使用的浏览器。</li>
+<li><strong>Cookie</strong> 发送或接收的 cookie 内容，如果存在。</li>
+<li><strong>参照</strong> 一种站点，用户单击其上面的链接就将用户带入该站点。</li>
+</ul>
+
+<p><strong>CPU 帐户</strong></p>
+
+<ul>
+<li><strong>事件</strong> 触发事件的进程类型：CGI 或进程外的应用程序。类型可以是 CGI、应用程序或全部。</li>
+<li><strong>进程类型</strong> 触发的事件：Site-Stop、Site-Start、Site-Pause、Periodic-Log、Interval-Start、Interval-End、Interval-Change、Update、Eventlog-Limit、Priority-Limit、Process-Stop-Limit、Site-Pause-Limit、Eventlog-Limit-Reset、Priority-Limit-Reset、Process-Stop-Limit-Reset 或 Site-Pause-Limit。</li>
+
+<ul>
+<li><strong>Site-Stop</strong> 停止 Web 站点。</li>
+<li><strong>Site-Start</strong> 启动或重启动 Web 站点。</li>
+<li><strong>Site-Pause</strong> 暂停 Web 站点。</li>
+<li><strong>Periodic-Log</strong> 这是一个有规律地定义的日志条目，其间隔由管理员指定。</li>
+<li><strong>重置 Interval-Start</strong> 开始“重置间隔”。</li>
+<li><strong>重置 Interval-End</strong> 到达“重置间隔”并重置。</li>
+<li><strong>重置 Interval-Change</strong> Web 站点管理员更改“重置间隔”的值。</li>
+<li><strong>Update</strong> 发生了下列某个事件：更改日志间隔、发生间隔事件、站点停止、启动或暂停。</li>
+<li><strong>Eventlog-Limit</strong> 因为 Web 站点的 CGI 和外部进程应用程序所用 CPU 资源达到了管理员设置的事件日志限制，所以生成该站点的事件日志。</li>
+<li><strong>Priority-Limit</strong> 对 Web 站点中达到管理员设置的低优先级限制的 CGI 或外部进程应用程序设置低优先级。</li>
+<li><strong>Process-Stop-Limit</strong> 停止 Web 站点的某个 CGI 或外部进程应用程序，因为它达到了管理员设置的进程停止限制。</li>
+<li><strong>Site-Pause-Limit</strong> 暂停 Web 站点，因为它的某个 CGI 或外部进程应用程序达到了管理员设置的站点暂停限制。</li>
+<li><strong>Eventlog-Limit-Reset</strong> 达到“重置间隔”或者手工更改了 Eventlog-Limit。</li>
+<li><strong>Priority-Limit-Reset</strong> 达到“重置间隔”或者手工更改了 Priority-Limit。</li>
+<li><strong>Process-Stop-Limit-Reset</strong> 达到“重置间隔”或者手工更改了 Process-Stop-Limit。</li>
+<li><strong>Site-Pause-Limit</strong> 达到“重置间隔”或者手工更改了 Site-Pause-Limit。</li>
+</ul>
+
+<li><strong>用户时间</strong> 站点在当前间隔使用的总计用户模式处理器时间，以秒为单位。</li>
+<li><strong>内核时间</strong> 站点在当前间隔使用的总计内核模式处理器时间，以秒为单位。</li>
+<li><strong>页面错误</strong> 导致内存页面错误的内存参照总数。</li>
+<li><strong>进程总计</strong> 在当前间隔内创建的 CGI 或外部进程应用程序的总数。</li>
+<li><strong>活动进程</strong> 当记录日志时正在运行的 CGI 或外部进程应用程序的总数。</li>
+<li><strong>终止进程</strong> 在当前间隔中由于进程限制而停止的 CGI 和进程外应用程序的总数。</li>
+</ul>
+
+<p><hr class="iis" size="1"></p>
+<p align="center"><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

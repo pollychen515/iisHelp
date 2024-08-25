@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>关于 Metabase</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="本节包含有关 metabase 的概述信息。">
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="H1_37713458">关于 Metabase</a></h1>
+
+<p>通过使用 IIS 管理单元和 Internet 服务管理器 (HTML) 等管理工具配置值，可以修改 metabase。还可以通过使用 IIS Admin 对象和 IIS Admin Base 对象配置值，从而以程序方式修改 metabase。</p>
+
+<p>关于 metabase 结构、metabase 键和路径、属性继承以及 metabase 安全的详细信息，请参阅 <a href="../asp/aint1aud.htm">IIS Metabase 简介</a>。</p>
+
+<p>关于使用 IIS Admin 对象和 IIS Admin Base 对象以程序方式管理 IIS 的信息，请参阅<a href="../asp/aint7e9l.htm">以程序方式管理 IIS</a>。</p>
+
+<p>关于 metabase 所有可配置属性的综合参考信息，请参阅<a href="../asp/apro3usl.htm">管理属性参考</a>。</p>
+
+<ul>
+<li><a href="#namespace">Namespace</a></li>
+<li><a href="#inheritance">继承</a></li>
+</ul>
+
+<p><strong><font color="#FF0000">警告</font></strong>  在 metabase 中属性配置不当可能导致故障（包括 Web 站点或 FTP 站点失效）。如果出错，Web 站点或 FTP 站点的配置将损坏。仅可对无法在 IIS 管理单元或 Internet 服务管理器 (HTML) 中调整的设置编辑 metabase 属性，并应在直接编辑 metabase 时加以注意。
+</p>
+
+<h2><a name="namespace">Namespace</a></h2>
+
+<p>命名空间指定 metabase 属性的位置。其组织如下：</p>
+
+<p>LM/<em>Service</em>/<em>Website</em>/Root/<em>virtual directory</em>/<em>dir</em>/<em>file</em><p> 其中 LM = 本机<br> <em>Service</em> = Internet 服务 （W3SVC 或 MSFTPSVC)<br> <em>Website</em> = Web 站点<br> Root = 虚拟目录根<br> <em>virtual directory</em> = 虚拟目录<br> <em>dir</em> = 目录<br> <em>file</em> = 文件
+</p>
+
+<p>例如，如果 metabase 路径的命名空间<br> LM/W3SVC/Website1/Root</p>
+
+<p>与以下路径相关<br> C:\Inetpub\wwwroot</p>
+
+<p>则 URL<br> http://domain.com/default.htm</p>
+
+<p>将映射到物理文件路径<br> C:\Inetpub\wwwroot\default.htm。</p>
+
+<h2><a name="inheritance">继承</a></h2>
+
+<p>在较高级别（如 Web 站点级）上配置的 Metabase 属性可以传递或继承给较低的级别，如目录级。这些继承属性也可在较低级别上单独编辑。如果在单独的服务器、目录或文件上更改了属性，则在较高级别上更改的设置将不会自动覆盖较低级别的独立设置。</p>
+
+<hr class="iis" size="1"><p align=center><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

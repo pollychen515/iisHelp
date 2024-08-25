@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>添加自定义错误消息</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="关于如何添加自定义 HTTP 错误消息的过程信息。">
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="H1_37701508">添加自定义错误消息</a></h1>
+
+<p>自定义错误消息可为两种形式：即映射为文件或者映射为 URL。这两种形式都可通过使用 IIS 管理单元中的“自定义错误”属性页实现。</p>
+
+<p><big>采用映射为文件的形式自定义错误消息。</big></p>
+
+<ol>
+<li>创建包含自定义错误消息的文件并将其放入某个目录中。</li>
+<li>在 <a href="javascript://" onclick="Activate(); return false">Internet 信息服务管理单元</a>中，<script language="javascript">
+<!--
+function Activate() {
+if (navigator.appName == "Microsoft Internet Explorer"){
+	window.open("iisnapin.htm", "NewWin", 'toolbar=no, left=200, top=200, scrollbars=no, resizeable=no,  width=350, height=350');
+	}
+	else if (navigator.appName == "Netscape") {
+		window.open("iisnapin.htm", "NewWin",  'toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=yes,resizable=0,width=350,height=350,top=200,left=200');
+	}
+}
+//-->
+</script>选择想在上面自定义 HTTP 错误的 Web 站点、虚拟目录、目录或文件，然后单击“属性”按钮。</li>
+<li>选择“自定义错误”属性表。</li>
+<li>选择想要更改的 HTTP 错误。</li>
+<li>单击“编辑属性”按钮。</li>
+<li>从“消息类型”框中选择“文件”。</li>
+<li>键入指向自定义错误消息的路径和文件名，或使用“浏览...”。按钮定位计算机硬盘上的文件。</li>
+<li>单击“确定”。</li>
+</ol>
+
+<p><big>采用映射为 URL 的方式自定义错误消息。</big></p>
+
+<ol>
+<li>创建包含自定义错误消息的文件并将其放入虚拟目录中。</li>
+<li>在 <a href="javascript://" onclick="Activate(); return false">Internet 信息服务管理单元</a>中，<script language="javascript">
+<!--
+function Activate() {
+if (navigator.appName == "Microsoft Internet Explorer"){
+	window.open("iisnapin.htm", "NewWin", 'toolbar=no, left=200, top=200, scrollbars=no, resizeable=no,  width=350, height=350');
+	}
+	else if (navigator.appName == "Netscape") {
+		window.open("iisnapin.htm", "NewWin",  'toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=yes,resizable=0,width=350,height=350,top=200,left=200');
+	}
+}
+//-->
+</script>选择想在上面自定义 HTTP 错误的 Web 站点、虚拟目录、目录或文件，然后单击“属性”按钮。</li>
+<li>选择“自定义错误”属性表。</li>
+<li>选择想要更改的 HTTP 错误。</li>
+<li>单击“编辑属性”按钮。</li>
+<li>从“消息类型”框中选择“文件”。</li>
+<li>键入指向自定义错误信息的 URL，方式是输入以虚拟目录开头的 URL 路径。</li>
+<li>单击“确定”。</li>
+</ol>
+
+<p><strong>注释</strong></p>
+
+<ul>
+<li>如果定义了用于处理自定义错误的 ASP 文件，脚本将作为传送上下文的 URL 被调用。例如，如果有一个定义好的用于处理 HTTP 405 错误的 .asp 文件 Handle405.asp，一旦用户试图访问 Example.htm 时出现 405 错误，就会调用此.asp 文件，好象用户已经在 Web 浏览器中键入了 <strong>http://example.microsoft.com/handle405.asp?405;http://example.microsoft.com/example.htm</strong>。</li>
+
+<li>如果使用静态自定义错误文件（HTML 文件），应该总是使用“文件”选项。如果打算开发一个应用程序（使用 ISAPI 或 ASP）来处理错误，则应使用 URL 选项。应该注意，错误状态是用 URL 参数传递给应用程序的，而设置 HTTP 头状态则是应用程序的职责；否则，HTTP 的反应状态就是“HTTP 1.1 200 OK”。</li>
+
+<li>如果使用 Windows 随带的 Internet Explorer 5.0 ，则 Internet Explorer 将使用自己的 HTTP 错误代替以下自定义错误。如果自定义错误的文件小于列出的大小，就不会使用自定义错误：
+
+<p>403、405 以及 410 - 必须大于 256 字节<br> 400、404、406、 408、409、500、500.12、500.13、500.15、501 以及 505 - 必须大于 512 字节</p></li>
+</ul>
+
+<hr class="iis" size="1"><p align=center><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

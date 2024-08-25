@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>服务特有的注册表项目</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="有关系统注册表的参考信息；包含关于服务特有的注册表项目的详细信息。">
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="H1_37746497">服务特有的注册表项目</a></h1>
+
+<p>下列参数由服务保存在注册表中，它们用于特定服务行为，但对于每个服务有相同的名称。</p>
+
+<p>注册表路径：</p>
+
+<p>HKEY_LOCAL_MACHINE\SYSTEM<br>
+  \CurrentControlSet<br>
+    &nbsp;\Services<br>
+     &nbsp;&nbsp;\<em>ServiceName</em><br>
+         &nbsp;&nbsp;&nbsp;\Parameters</p>
+
+<p>此处 <em>ServiceName</em> 为</p>
+
+<p>MSFTPSVC （FTP 服务）<br>W3SVC （WWW 服务）</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td width=100% bgcolor="#C0C0C0"><strong>AllowGuestAccess </strong><br>REG_DWORD</td></tr>
+<tr><td width=100%> <strong>范围：</strong> 1、0 <br><strong>默认：</strong>1（启用）</td></tr>
+<tr><td width=100%>该参数指定 Internet 服务是否允许以来宾身份登录。当一个新用户登录，服务器检查该用户是否作为 Windows 来宾用户登录。对于来宾连接，根据该参数的值，Internet 服务将拒绝或接受这个新的连接。在缺乏管理的站点允许来宾访问容易引起问题。在 Windows 系统的默认安装下，来宾帐户被授予系统的所有类型的访问的权限。因为默认情况很容易危及安全，您应该通过将值更改为 0 来避免。</td></tr>
+</table>
+<p>&nbsp;</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td width=100% bgcolor="#C0C0C0"><strong>EnableSvcLoc </strong><br>REG_DWORD</td></tr>
+<tr><td width=100%><strong> 范围：</strong> 1、0 <br><strong>默认：</strong>1（启用）</td></tr>
+<tr><td width=100%>IIS 服务使用服务定位器将自己注册，这样服务可通过 IIS 管理单元找到。该参数控制这些注册。如果设置为 0，服务将不会注册自己。如果设置为 1，将服务注册为服务位置。</td></tr>
+</table>
+<p>&nbsp;</p>
+
+<p>下面的注册表键， <strong>LanguageEngines</strong>, 默认情况下并不安装。要使用该键，必须在下列位置创建它。</p>
+
+<p>HKEY_LOCAL_MACHINE\SYSTEM<br>
+&nbsp;\CurrentControlSet<br>
+&nbsp;&nbsp;\Services<br>
+ &nbsp;&nbsp;&nbsp;\W3SVC<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;\ASP<br>
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\LanguageEngines<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\<em>LanguageName</em><br></p>
+
+<p>值：写入 REG_SZ：Response.WriteEquiv |<br> 值：WriteBlock REG_SZ:Response.WriteBlockEquiv |</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td width=100% bgcolor="#C0C0C0"><strong>LanguageEngines </strong><br>REG_STRING</td></tr>
+<tr><td width=100%><strong> 范围：</strong>字符串<br><strong>默认：</strong>不可应用的</td></tr>
+<tr><td width=100%>该参数指定一种脚本语言，它不支持“对象.方法” 这样的语法，就像 Active Server Pages 主脚本语言（ASP 脚本分隔符中使用的语言 &lt;% ...&gt;）。%<code><em>LanguageName</em></code> 是所选择的语言的名称，<code>Response.WriteEquiv</code> 相当于 <strong>Response.Write</strong>，而 <code>Response.WriteBlockEquiv</code> 相当于 <strong>Response.WriteBlock</strong>。管道符号 (|) 是一个插入符，ASP 用它来发送通常用 <strong>Response.Write</strong> 和 <strong>Response.WriteBlock</strong> 方法处理的表达式和 HTML 块。当安装其他脚本语言时，这些将自动完成。如果脚本语言对空格符或换行符敏感，那么，可能不可以用它来作为主要的脚本语言，尽管注册表值设置如此。作为一种选择，可以手工地将 HTML 块写到浏览器或将该语言函数写入标记的脚本块中 (&lt;SCRIPT&gt; ...&lt;/SCRIPT&gt; )， 并从其他语言调用它们。</td></tr>
+</table>
+
+
+<hr class="iis" size="1"><p align=center><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=Windows-1252">
+<TITLE>Designing High-Performance ISAPI Applications</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="Internet Information Services reference information">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="EN-US">
+<META NAME="MS-IT-LOC" Content="Internet Information Services"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_k2_designing_high_performance_isapi_applications"></A><SUP></SUP>Designing High-Performance ISAPI Applications</H1>
+
+<P>ISAPI is the highest-performance interface for Web applications. If you create an ISAPI extension or filter, chances are that it will outperform ASP scripts or even components performing similar tasks.</P>
+
+<P>However, the inherent speed of the ISAPI interface does not mean that you can ignore performance and scalability considerations. Indeed, ISAPI cannot utilize much of the application support services provided by ASP and COM. If you would like your ISAPI application to maintain session state, for instance, much of that session-state functionality would have to be implemented by you.</P>
+
+<P>Here are some suggestions for improving the scalability and performance of your ISAPI extensions:
+
+<UL type=disc>
+	<LI><B>Avoid ISAPI filters</B>,<B> </B>unless adding an ISAPI filter is absolutely necessary to your application architecture. You should especially avoid filters that perform processing on raw incoming or outgoing data. If you determine that a filter is absolutely necessary, be sure to carefully optimize the main code paths through the filter event notification code.</li>
+
+	<LI><B>Create your own worker thread pool</B>, so that the main I/O threads can be freed to accomplish other tasks. This option is available only for ISAPI extensions, and not for ISAPI filters. For more information about how IIS processes requests, see <A HREF="/iishelp/iis/htm/asp/eadg346f.htm">IIS Request Processing</A>. A sample that demonstrates a worker thread pool, implemented in an ISAPI extension, is available in the Platform SDK.</li>
+
+	<LI><B>Consider using asynchronous operations and I/O completion ports, </B>when feasible. IIS supports asynchronous reading and writing by using the I/O completion ports, available in Windows NT 4.0, and Windows 2000 or later. Depending on the type of I/O operations being performed, asynchronous operations can make better use of the CPU time available, and generally work particularly well when implemented using a worker thread pool. For more information, see the Platform SDK.</li>
+
+	<LI><B>ISAPI extensions should use the Win32 TransmitFile function, </B>exposed by the <B>HSE_REQ_TRANSMIT_FILE ServerSupportFunction</B>. See the Platform SDK<B> </B>for more details.</li>
+
+	<LI><B>Use Connection: Keep-Alive headers</B>. Keeping persistent HTTP connections will provide better performance than using non-persistent connections, in most cases. For more details, see the Platform SDK.</li>
+
+	<LI><B>Minimize need for thread synchronization</B> by maintaining state information with the request context. If thread synchronization is required, make sure that critical sections are kept short.</li>
+
+	<LI><B>If your ISAPI application uses the heap intensively, consider other heap alternatives</B>. Intensive use of the Windows<sup>&reg;</sup> heap can cause resource contention. Several memory allocation alternatives are worth exploring, including:
+<UL type=disc>
+	<LI><B>Heap Partitioning</B>, accomplished by creating multiple custom heaps, in addition to the default process heap. Each custom heap would then be controlled by a separate, non-global lock, and lock contention would be reduced.</li>
+
+	<LI><B>Cached Allocation</B>, which involves using custom allocation operations that operate at a middle layer between the object users and the heap. Calls to the Win32 heap are made infrequently, and only for large memory blocks. These blocks are then subdivided and managed by the custom allocator.</li>
+
+	<LI><B>Stack Allocation</B>, using the C run-time function <B>_alloca</B> to allocate memory for your objects on the stack instead of the heap. This method is feasible only for relatively small objects, because the space available on the stack is limited. In addition, your newly allocated object will be available only within the current functions, or functions called by that function. Once the current function returns, the storage allocated on the stack will be lost.</li>
+
+	<LI><B>Object Encapsulation</B>, accomplished by simply incorporating a buffer as a member data structure of a class. This buffer is then used for tasks that would otherwise require accesses to the Win32 heap.</li>
+</UL>
+</li>
+
+	<LI><B>Avoid using global locks within your ISAPI</B>, if possible. Global locks can often adversely affect scalability.</li>
+</UL>
+
+<P>For more information about ISAPI extensions and filters, see the ISAPI documentation in the Platform SDK.</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-1999 Microsoft Corporation. All rights reserved.</a></em></p>
+</BODY>
+</HTML>

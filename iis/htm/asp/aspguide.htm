@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR><HEAD><title>Active Server Pages 指南</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META HTTP-EQUIV="Content-Type" Content="text-html; charset=gb2312">
+<META NAME="MS.LOCALE" CONTENT="ZH-CN">
+</HEAD>
+
+<BODY BGCOLOR=#FFFFFF TEXT=#000000><FONT FACE="宋体">
+
+<h1><a name="_Active_Server_Pages_Guide">Active Server Pages 指南</a></h1>
+</span></font>
+
+<p>欢迎使用 Active Server Pages 指南。本节提供关于如何创建 ASP 网页和开发 Web 应用程序的详细信息。还将讲述可用的与事件相关的方法和接口，它们可用来创建组件供 ASP 或 ISAPI 扩展访问。在本节中，您将找到关于如何存储自定义的 IIS 配置数据以及如何使用内建的对象来管理该数据的信息。最后，指南将提供脚本和程序范例库，用来说明与 IIS 进行交互的各种方式。</p>
+
+<p>本节包括：</p>
+
+<ul>
+<li><strong><a href="iiwawelc.htm">Active Server Pages</a>：</strong>介绍如何创建 Active Server Pages，并解释许多关键概念以便理解 IIS 编程平台。</li>
+<li><strong><a href="eadg01v7.htm">开发 Web 应用程序</a>：</strong>概述关于 IIS 如何适合 Microsoft 分布式应用程序结构的概念，同时提供如何设计和实施应用程序以便通过 HTTP 进行部署的特定详细资料。</li>
+<li><strong><a href="aint7e9l.htm">程序化管理 IIS</a>：</strong>提供概述和参考资料以便帮助您程序化管理 IIS 配置。</li>
+<li><strong><a href="vbob6zkv.htm">ASP 内建的对象</a>：</strong>讲述 ASP 内建对象的属性和方法。</li>
+
+<li><strong><a href="comp275c.htm">可安装的 ASP 组件</a>：</strong>概述可以安装并能与 ASP 一起工作的各种组件。</li>
+<li><strong><a href="scri8mcl.htm">脚本参考</a>：</strong>包含各种参考资料，包括 @ 指令和 Global.asa 参考。</li>
+<li><strong><a href="asps6hmb.htm">ASP 示例</a>：</strong>提供演示脚本以便解释指南中提出的许多概念。</li>
+
+</ul>
+
+<hr class="iis" size="1">
+<p align="center"><a href="/iishelp/common/colegal.htm">&copy; 1997-1999 Microsoft Corporation。保留所有权利。</a></p>
+
+</font>
+</BODY>
+</HTML>

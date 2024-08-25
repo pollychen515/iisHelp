@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>跟踪处理器使用</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="description" CONTENT="关于如何启用进程帐号记录 Web 站点上 CPU 利用率的步骤。进程帐号无法用于 FTP 站点。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=gb2312">
+<META NAME="MS.LOCALE" CONTENT="ZH-CN">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><A NAME="H1_198124640"></A>跟踪处理器使用</h1>
+
+<p>进程帐号是 IIS 5.0 的一项新功能，该功能可以记录 Web 站点使用服务器上 CPU 资源的情况。进程帐号只能在单个服务器上分别启用，同时也只能记录各自服务器上的信息，但这些信息不提供单个应用程序或 CGI 应用程序的使用情况。要启用进程帐号，必须选择 W3C 扩展日至文件格式。进程帐号无法用于 FTP 站点。</p>
+
+<big>启用过程记帐</big><!--</p>--><br>
+
+<ol>
+<li>选择 Web 站点并打开其属性页</li>
+<li>在“Web 站点”属性页中，单击“属性”。</li>
+<li>在“扩充属性”页中，选择“进程帐号”复选框。</li>
+<li>单击“确定”。</li>
+</ol>
+
+<p><strong>相关主题</strong></p>
+
+<ul>
+<li>关于进程帐号的详细信息，请参阅<a href="iiabtlg.htm">关于记录站点活动</a>。</li>
+<li>有关设置 W3C 扩展日志记录字段的详细信息，请参阅<a href="iiconlg.htm">自定义 W3C 扩展日志记录</a>。</li>
+</ul>
+
+
+<hr class="iis" size="1"><p align=center><a href="../../../common/colegal.htm">(C) 1997-1999 Microsoft Corporation。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

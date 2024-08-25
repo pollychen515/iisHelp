@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>IIS 的 Windows 事件</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="链接到关于 IIS 的 Windows 事件主题的导航页。">
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="registry">IIS 的 Windows 事件</a></h1>
+
+<p>IIS 在“事件查看器”中生成事件，以便用户验证 IIS 服务执行是否正确。“事件查看器”跟踪（按重要程度）信息、警告和错误事件。“事件查看器”中的日志提供所有 Windows 服务和进程的审核记录，如登录时间和连接时间。</p>
+
+<p>本节包括：</p>
+
+<ul>
+<li><strong><a href="iievtabt.htm">关于 Windows 事件</a>：</strong>与 Windows 事件相关的主题。</li>
+<li><strong><a href="iievwwws.htm">Web 服务事件</a>：</strong>Web 服务生成的事件列表。</li>
+<li><strong><a href="iievftps.htm">FTP 服务事件</a>：</strong>FTP 服务生成的事件列表。</li>
+<li><strong><a href="iievtasp.htm">Active Server Pages 事件</a>：</strong>ASP 生成的事件列表。</li>
+</ul>
+
+<p>本节<b>不</b>包含：</p>
+
+<ul>
+<li>错误消息；请参阅<a href="iierrcst.htm">自定义错误消息</a>。</li>
+<li>日志记录；请参阅<a href="iilogsa.htm">记录站点活动</a>。</li>
+</ul>
+
+<hr class="iis" size="1"><p align=center><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

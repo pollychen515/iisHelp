@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>ASP 的新特性</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="讲述本版本的 Active Server Pages 中的新特性。"><META HTTP-EQUIV="Content-Type" content="text/html; charset=gb2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><FONT FACE="宋体">
+
+<h1><a name="H1_37775030">ASP 的新特性</a></h1>
+</span></font>
+
+<p>Active Server Pages (ASP) 新增了许多特性，有助于轻松编写脚本和开发 Web 应用程序。</p>
+
+<ul>
+
+<li><strong>新的流控制能力</strong>  ASP 的 Server 对象具有两种可用来控制程序流的新方法：“Server.Transfer”和“Server.Execute”。与重定向请求（需要往返于客户端）不同，可以使用这些方法将请求直接传送到 .asp 文件，而不需要离开服务器。详细信息，请参阅<a href="iiwacont.htm">将内容发送到浏览器</a>。</li>
+
+<li><strong>错误处理</strong>  ASP 具有新的错误处理能力，可以使用自定义的错误消息 .asp 文件来捕捉错误。可以使用新的“Server.GetLastError”方法来显示有用信息，如错误描述或发生错误的行号。详细信息，请参阅 <a href="vbob1dtg.htm">ASPError 对象</a>。</li>
+
+<li><strong>无脚本 ASP</strong>  由于静态内容的处理速度通常快于服务器端内容，因此以前只将 .asp 文件扩展名指派给包含 ASP 功能性的文件。无论何时，如果需要在静态 .html 文件中添加 ASP，只能手工添加 .asp 文件扩展名并修正相关超级链接。不过，在 ASP 的最新版本中，不包含服务器端功能性的 .asp 文件的处理速度比以前快了许多。因此，如果正在创建展开的 Web 应用程序并且其中的文件最终可能需要 ASP 功能性，现在就可以很方便地为这些文件指派 .asp 文件扩展名，而不必考虑它们是否包含静态或服务器端内容。详细信息，请参阅<a href="iiwabasi.htm">创建 ASP 页</a>。</li>
+
+<li><strong>性能增强了的对象</strong>   ASP 现在提供流行的可安装组件的性能增强版本。这些对象能够可靠地适用于各种 Web 发布环境。详细信息，请参阅 <a href="comp275c.htm">ASP 的可安装组件</a>。</li>
+
+<li><strong>XML 集成</strong>  扩展标记语言 (XML) 允许描述复杂的数据结构或文档。可以在各种应用程序、客户端和服务器之间共享此信息。使用 Microsoft Internet Explorer 4.0 或更高版本附带的 Microsoft XML Parser，可以创建服务器端应用程序，该应用程序允许 Web 服务器与 Internet Explorer 4.0 （或更高版本）或任何包含 XML 解析能力的服务器交换 XML 格式的数据。详细信息，请参阅位于 <a href="http://msdn.microsoft.com/isapi/redir.dll?prd=xml" target="_blank">http://msdn.microsoft.com/xml/</a>的 Microsoft XML Web 站点。</li>
+
+<li><strong>Windows 脚本组件</strong>  ASP 支持 Microsoft 强大的脚本新技术 - Windows 脚本组件。现在可以将商业逻辑脚本过程转换为可重复使用的 COM 组件，该组件可用于 Web 应用程序和其他 组件对象模型 (COM) 适用的程序。详细信息，请参阅<a href="iiwacomu.htm#scriptlets">使用组件和对象</a>。</li>
+
+<li><STRONG>确定浏览器能力的新方法</STRONG>  ASP 具有可确定浏览器准确能力的新特性。当浏览器发送能描述其能力的 cookie（可通过使用简单的客户端脚本来安装这样的 cookie）时，可以创建一个“浏览器能力组件”实例，以便检索随 cookie 返回的浏览器属性。可以使用此特性来确定浏览器能力并对应用程序作相应调整。详细信息，请参阅<A HREF="comp1vol.htm">根据 Cookie 检索浏览器能力</A>。</li>
+
+<li><STRONG>ASP 自调整</STRONG>  ASP 现在可以检测执行请求何时被外部资源阻断，并自动提供更多线程以便同时执行附加请求和继续正常处理。如果 CPU 负担过重，ASP 将减少线程数量，以便减少因太多非阻断请求同时执行而产生的持续不断的交换。详细信息，请参阅 <A HREF="apro4s9w.htm"><STRONG>AspThreadGateEnabled</STRONG></A> 的 metabase 属性参照。</li>
+
+
+<li><STRONG>服务器端包含（使用 SRC 属性）</STRONG></li>  现在可以使用 HTML &lt;SCRIPT&gt;&lt;/SCRIPT&gt; 标签的 SRC 属性来完成服务器端包含。当使用 SRC 属性指定虚拟或相对路径并使用 RUNAT=SERVER 属性表示服务器端执行时，可以完成与“#Include”命令一样的功能性。（详细信息，请参阅<A HREF="iiwainc.htm">包含文件</A>。）
+
+<li><STRONG>编码的 ASP 脚本</STRONG>  以前，Web 开发人员无法禁止他人查看隐藏在脚本后面的逻辑。ASP 现在支持 Microsoft Visual Basic Scripting Edition (VBScript) 和 Microsoft JScript 5.0 附带的新的脚本编码实用程序。Web 开发人员可以对客户端和服务器端脚本应用编码方案，以便使程序逻辑（使用标准 ASCII 字符）不可读。已编码的脚本在运行时由脚本引擎解码，因此不需要单独的实用程序。。虽然此特性不是专门的安全加密解决方案，但可防止大多数用户无意中查看或复制脚本。详细信息，请访问 Microsoft Windows 脚本技术 Web 站点 <A HREF="http://msdn.microsoft.com/isapi/redir.dll?prd=scripting&ar=home&pver=4.0" target="_blank">http://msdn.microsoft.com/scripting/</A>。</LI>
+
+</ul>
+
+
+<hr class="iis" size="1">
+<p align="center"><a href="/iishelp/common/colegal.htm">&copy; 1997-1999 Microsoft Corporation。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>

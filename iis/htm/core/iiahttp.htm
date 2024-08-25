@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>远程管理</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="关于如何使用基于浏览器的 Internet 服务管理器 (HTML) 通过 Internet 执行远程管理的程序化信息。另外，可以使用 MMC 上的 Internet 信息服务管理单元来管理 intranet 上的 IIS。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=gb2312">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="ZH-CN">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="H1_37680532">远程管理</a></h1>
+
+<p> 有两个选项可用来远程管理 IIS。要通过 Internet 或代理服务器远程管理 IIS，应使用基于浏览器的 Internet 服务管理器 (HTML)。要通过 intranet 远程管理 IIS，可以使用基于浏览器的 Internet 服务管理器 (HTML) 或 Microsoft 管理控制台 (MMC) 上的 <a href="javascript://" onclick="Activate(); return false">IIS 管理单元</a>。</p>
+
+<p><strong>注意</strong> 可以使用 <a href="iivsovr.htm#ts">Microsoft 终端服务</a>通过网络连接（如 LAN、PPTP 或拨号）来远程管理 IIS。</p>
+
+<big>要启用基于浏览器的 Internet 服务管理器 (HTML)</big>
+
+<ol>
+<li> 在本地计算机的 <a href="javascript://" onclick="Activate(); return false">IIS 管理单元</a>中，打开“管理 Web 站点”的属性页。</li>
+<li> 请留意“Web 站点”属性页上的 TCP 端口号。</li>
+<li> 在“目录安全”属性页中，单击“IP 地址和域名限制”下的“编辑”按钮，以便设置将用来远程管理 IIS 的计算机的权限。</li>
+</ol>
+
+<p class="bigfix">&nbsp;</p>
+
+<big>启动基于浏览器的 Internet 服务管理器 (HTML)</big><br>
+
+<ul>
+<li>启动浏览器并键入管理站点的域名和指定的端口号。例如，<strong>http://www.microsoft.com:</strong><em>端口号</em>/。</li>
+<p><strong>注意</strong> 在启动 <a href="javascript://" onclick="Activate(); return false">IIS 管理单元</a>之前，Internet 服务管理器 (HTML) 中不会安装日志模块。 </p>
+</ul>
+
+<big>作为 <a  href="iivsovr.htm#websiteoperators">Web 站点操作员</a></big>远程访问 Internet 服务管理器 (HTML)<!--</p>--><br>
+
+<ul>
+<li>启动浏览器并键入 Web 站点的域名，后面接“/iisadmin/”。例如，<strong>http://www.microsoft.com/iisadmin/</strong>。 </li>
+</ul>
+
+<p class="bigfix">&nbsp;</p>
+
+<big>要使用 IIS 管理单元管理 Intranet 上的远程站点</big><br>
+
+<ol>
+<li>在网络中任何运行 Windows 的计算机上启动 <a href="javascript://" onclick="Activate(); return false">IIS 管理单元</a>。 </li>
+<li>要查找所管理网络中安装的 IIS，请单击工具栏上的“计算机”图标。</li>
+<p><strong>注意</strong>  如果没有安装 TCP/IP 和 Windows Internet 命名服务 (WINS)，则只能看到与当前使用计算机所在的相同子网中安装的 IIS。<br>
+</ol>
+
+<p class="bigfix">&nbsp;</p>
+
+<big>访问本地或远程联机文档</big><br>
+<ul>
+<li>启动浏览器并连接到 http://<em>servername</em>/iishelp/iis/misc/default.asp，其中 <em>servername</em> 是运行 IIS 的计算机。</li>
+</ul>
+
+<p><strong>相关主题</strong></p>
+<ul>
+<li>关于基于浏览器的管理的详细信息，请参阅“关于 Web 和 FTP 站点”中的<a href="iivsovr.htm#RemoteAdministration">远程管理站点</a>。</li>
+<li>关于使用 SSL 的信息，请参阅<a href="iisslsc.htm">在服务器上设置 SSL</a>。</li></ul>
+
+<hr class="iis" size="1">
+<p align="center"><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft Corporation。保留所有权利。</a></p>
+
+<script language="javascript">
+<!--
+function Activate() {
+if (navigator.appName == "Microsoft Internet Explorer"){
+	window.open("iisnapin.htm", "NewWin", 'toolbar=no, left=200, top=200, scrollbars=no, resizeable=no,  width=350, height=350');
+	}
+	else if (navigator.appName == "Netscape") {
+		window.open("iisnapin.htm", "NewWin",  'toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=yes,resizable=0,width=350,height=350,top=200,left=200');
+	}
+}
+//-->
+</script>
+
+</font>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=ltr><head><title>验证</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="description" CONTENT="带有链接到验证主题的导航页是标识用户尝试连接 Web 服务器内容的过程，通常需要它们来提交用户名称和密码。">
+<META HTTP-EQUIV="Content-Type" content="text/html；charset=GB2312">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="zh-cn">
+<META NAME="MS-IT-LOC" Content="Internet 信息服务">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="宋体">
+
+<h1><a name="Authentication">验证</a></h1>
+
+<p>可以配置 IIS 进行“验证”，或在允许该用户与服务器建立网络连接前确定用户的 Windows 用户帐户标识。但是，用户验证仅在禁用匿名访问，或在 NTFS 权限要求用户通过有效 Windows 用户帐户、用户名和密码证明身份时进行。</p>
+
+<p>凭借 IIS 提供的验证选项，您可以选择同时满足安全需要和所用 Web 浏览器能力的验证方法。</p>
+
+<p>本节包括：</p>
+
+<ul>
+<li><strong><a href="iiabasc.htm">关于验证</a>：</strong> 对验证的概述。</li>
+<li><strong><a href="iiauths.htm">启用和配置验证</a>：</strong> 启用和配置基本、摘要式和集成 Windows 三种验证方法的过程。</li>
+<li><strong><a href="iidlgsc.htm">设置默认登录域</a>：</strong> 配置基本验证登录域的过程。</li>
+<li><strong><a href="iiftzsc.htm">在 IIS 中使用 Fortezza 安全机制</a>：</strong>在 IIS 中配置 Fortezza 安全功能的过程。</li>
+</ul>
+
+<p>本节<b>不</b>包含：</p>
+
+<ul>
+<li>控制用户访问您的 Web 服务器文件和目录的方法；请参阅<a href="iiaclsc.htm">访问控制</a>。</li>
+<li>使用 SSL 或证书，请参阅<a href="iicerts.htm">证书</a>。</li>
+</ul>
+
+
+<hr class="iis" size="1"><p align=center><a href="/iishelp/common/colegal.htm">(C) 1997-1999 Microsoft 公司。保留所有权利。</a></p>
+
+</font>
+</body>
+</html>
